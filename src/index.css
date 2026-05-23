@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Study Mode (📖) */
+  --color-study-bg: #F8F7F4;
+  --color-study-surface: #FFFFFF;
+  --color-study-text: #1A1A1A;
+  --color-study-muted: #6B7280;
+  --color-study-accent: #2563EB;
+
+  /* Stealth Mode (🥷) */
+  --color-stealth-bg: #0D0B08;
+  --color-stealth-surface: #1A1714;
+  --color-stealth-text: #B8860B;
+  --color-stealth-muted: #5C4A1E;
+  --color-stealth-accent: #D4A017;
+
+  /* Shared */
+  --radius-card: 12px;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Mode-driven theming via data-mode attribute on <body> */
+body[data-mode="study"] {
+  background-color: var(--color-study-bg);
+  color: var(--color-study-text);
+}
+
+body[data-mode="stealth"] {
+  background-color: var(--color-stealth-bg);
+  color: var(--color-stealth-text);
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}

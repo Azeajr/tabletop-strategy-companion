@@ -1,0 +1,24 @@
+{
+  "name": "tabletop-strategy-companion",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.16.1",
+    "@tailwindcss/vite": "^4.3.0",
+    "solid-js": "^1.9.12",
+    "tailwindcss": "^4.3.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12",
+    "vite-plugin-solid": "^2.11.12"
+  }
+}
