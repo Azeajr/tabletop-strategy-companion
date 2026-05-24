@@ -17,6 +17,7 @@ export default defineConfig([
   },
   {
     files: ['src/**/*.{ts,tsx}'],
+    ignores: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/test-setup.ts'],
     languageOptions: {
       parserOptions: {
         project: './tsconfig.app.json',

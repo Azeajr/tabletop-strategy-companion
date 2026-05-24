@@ -36,33 +36,12 @@ export default defineConfig({
     tailwindcss(),
     solid(),
     VitePWA({
-      // 'prompt' = show update prompt rather than auto-activating.
-      // Aligns with session lock: new SW won't claim clients until user
-      // is on the landing page and explicitly accepts the update.
       registerType: 'prompt',
-      workbox: {
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.ts',
+      injectManifest: {
         globPatterns: ['**/*.{js,css,ico,png,svg,wasm}'],
-        cleanupOutdatedCaches: true,
-        clientsClaim: false,
-        skipWaiting: false,
-        runtimeCaching: [
-          {
-            urlPattern: /\.wasm$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'wasm-cache',
-              expiration: { maxEntries: 4, maxAgeSeconds: 60 * 60 * 24 * 365 },
-            },
-          },
-          {
-            urlPattern: /\/data\/seeds\/.*\.json$/,
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'seed-data-cache',
-              expiration: { maxEntries: 200, maxAgeSeconds: 60 * 60 * 24 * 30 },
-            },
-          },
-        ],
       },
       manifest: {
         name: 'Tabletop Strategy Companion',

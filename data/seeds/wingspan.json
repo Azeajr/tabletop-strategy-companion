@@ -1,0 +1,139 @@
+{
+  "game_id": "wingspan",
+  "game_name": "Wingspan",
+  "game_description": "Build a wildlife preserve by attracting birds with unique abilities.",
+  "filter_1_label": "Leading on points after round 1?",
+  "filter_1_yes_context": "leading",
+  "filter_1_no_context": "trailing",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Bonus Card",
+      "condition": "Choosing a bonus card",
+      "strategy_detailed": "Prioritize bonus cards that match birds you're likely to draft — Anatomist (egg birds), Cartographer (grassland birds), or Historian (prairie birds) score reliably. Avoid bonus cards requiring rare habitat combos you may not hit.",
+      "strategy_stealth": ["Match bonus to likely bird types", "Anatomist/Cartographer/Historian safe", "Avoid rare habitat combos"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Starting Birds",
+      "condition": "Selecting birds from initial hand",
+      "strategy_detailed": "Keep birds that cost 1-2 food total unless they have a powerful 'when played' or 'once between turns' ability. High-cost birds (4+ food) are only worth keeping if they chain directly into your bonus card or end-of-round goal.",
+      "strategy_stealth": ["Keep 1-2 food cost birds", "High-cost only for bonus synergy", "Check once-between-turns ability"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Food Engine",
+      "condition": "Planning your food production habitat",
+      "strategy_detailed": "Your forest habitat produces food. Start with at least 2 forest birds that give extra food dice rerolls or cached food. A strong food engine in rounds 1-2 unlocks expensive birds in rounds 3-4 when end-of-round goals intensify.",
+      "strategy_stealth": ["2+ forest birds for food engine", "Cached food = future flexibility", "Food engine fuels late game"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Egg Engine",
+      "condition": "Building toward egg production",
+      "strategy_detailed": "Eggs pay the cost to play new birds. Budget 1-2 eggs per bird you expect to play per round. Grassland birds with 'lay eggs' activations are your most reliable engine. Aim for 3+ egg-laying birds by end of round 2.",
+      "strategy_stealth": ["Budget 1-2 eggs per new bird", "3+ grassland egg layers by R2", "Eggs = bird deployment currency"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "End-of-Round Goals",
+      "condition": "Round 1 goal within reach",
+      "strategy_detailed": "Round 1 goals reward the most points (5, 4, 3, 2, 1). If the round 1 goal aligns with your plan — eggs, birds in a specific habitat — pivot fully toward it. Sharing 1st place beats solo 2nd place in points per action.",
+      "strategy_stealth": ["Round 1 goal = most points (5-4)", "Pivot if goal aligns with plan", "Tie for 1st beats solo 2nd"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Defense",
+      "condition": "Opponent rushing your end-of-round goal",
+      "strategy_detailed": "When another player is clearly optimizing for the same end-of-round goal, evaluate whether racing is worth it. Often better to shift to a secondary goal or focus on engine building — races reduce efficiency for both players.",
+      "strategy_stealth": ["Race reduces both players' efficiency", "Shift to secondary goal", "Engine > race in most cases"],
+      "tags": ["Defense"],
+      "context": "leading"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Bird Drawing",
+      "condition": "Choosing birds to draw",
+      "strategy_detailed": "When drawing birds, look for low-cost birds that fit your active habitats and bonus card. Ignore high-power birds that require a completely different food mix. A focused cheap engine beats an expensive unfocused collection.",
+      "strategy_stealth": ["Low-cost + matches active habitats", "Ignore off-focus high-power birds", "Focused cheap engine wins"],
+      "tags": ["Economy"],
+      "context": "trailing"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Habitat Focus",
+      "condition": "Choosing which habitat to activate",
+      "strategy_detailed": "By round 3, activate your most powerful habitat every turn if possible. Count the cumulative power of each activation — a forest with 5 birds producing 3+ food dice beats spreading actions across all habitats. Depth beats breadth.",
+      "strategy_stealth": ["Activate best habitat every turn", "Depth beats breadth in R3+", "Count cumulative power per activation"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Bird Caching",
+      "condition": "Birds with 'cache food' abilities",
+      "strategy_detailed": "Cached food on birds converts to 1 point each at game end. Birds that cache food as part of their activation are double-dipping: they produce food when activated and store victory points. Prioritize these in round 3-4 drafting.",
+      "strategy_stealth": ["Cached food = 1 pt each at end", "Cache birds: food + VP in one action", "Draft cache birds R3-4"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "End-of-Round Goals",
+      "condition": "Behind on current round goal",
+      "strategy_detailed": "If you're 3+ units behind the leader on the current goal, redirect to a competing goal or bonus card. Catching up from far behind costs 2-3 actions. Those actions are worth more toward your engine or a goal where you're already competitive.",
+      "strategy_stealth": ["3+ behind: redirect actions", "Catching up costs 2-3 actions", "Compete where you're already close"],
+      "tags": ["Defense"],
+      "context": "trailing"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Defense",
+      "condition": "Protecting end-of-round goal lead",
+      "strategy_detailed": "When leading a goal, take the minimum actions needed to maintain that lead and redirect surplus actions to bonus card completion or bird placement. Overinvesting in a goal you'll win anyway wastes efficiency.",
+      "strategy_stealth": ["Min actions to hold goal lead", "Surplus actions to bonus/birds", "Overinvesting in won goals wastes turns"],
+      "tags": ["Defense"],
+      "context": "leading"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Point Maximization",
+      "condition": "Final round — choosing last action",
+      "strategy_detailed": "In the final round, count exact points from each action option: bird card points + eggs on it vs. eggs laid vs. food cached vs. tucked cards. The bird with the highest point density per remaining action slot wins. Don't auto-play — calculate.",
+      "strategy_stealth": ["Count exact pts per action option", "Bird density = pts + eggs + cache", "Calculate, don't auto-play"],
+      "tags": ["TLDR", "Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Bonus Card",
+      "condition": "Bonus card near completion threshold",
+      "strategy_detailed": "If your bonus card requires one more bird to complete, play that bird before any other action in the final round even if it costs extra eggs. Bonus card points are often 5-8 — worth two full turns of engine output.",
+      "strategy_stealth": ["Complete bonus card first action", "5-8 pts = 2 turns of engine output", "Pay extra eggs to finish it"],
+      "tags": ["Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Point Maximization",
+      "condition": "Trailing by 5-10 points entering final round",
+      "strategy_detailed": "If 5-10 points behind, focus on maximum-density plays: high-point birds, egg accumulation on high-capacity nests, and completing bonus cards. Don't try to catch up on end-of-round goals — they give too few points per action at this stage.",
+      "strategy_stealth": ["High-density plays only: birds + eggs", "Complete bonus cards now", "Ignore end-of-round goals R4"],
+      "tags": ["Closing"],
+      "context": "trailing"
+    }
+  ]
+}

@@ -38,6 +38,18 @@ jobs:
 
       - run: npm run build
 
+      - name: Check bundle size (15 MB cap)
+        run: |
+          node -e "
+            const {readdirSync, statSync} = require('fs');
+            const walk = d => readdirSync(d, {withFileTypes:true})
+              .flatMap(f => f.isDirectory() ? walk(d+'/'+f.name) : [d+'/'+f.name]);
+            const bytes = walk('dist').reduce((s,f) => s + statSync(f).size, 0);
+            const mb = (bytes / 1_000_000).toFixed(2);
+            console.log('Bundle size:', mb + ' MB');
+            if (bytes > 15_000_000) { console.error('Exceeds 15 MB cap'); process.exit(1); }
+          "
+
       - name: Deploy to Cloudflare Pages
         run: npx wrangler pages deploy dist --project-name tabletop-companion
         env:

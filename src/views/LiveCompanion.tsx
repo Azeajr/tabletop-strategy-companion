@@ -24,18 +24,17 @@ export default function LiveCompanion() {
   const mode = useAppMode()
 
   const [currentPhase, setCurrentPhase] = createSignal<Phase>('Setup')
-  const [filter1, setFilter1] = createSignal<'yes' | 'no'>('no')
-  const [filter2, setFilter2] = createSignal<'yes' | 'no'>('no')
+  const [filter1, setFilter1] = createSignal<'yes' | 'no' | null>(null)
+  const [filter2, setFilter2] = createSignal<'yes' | 'no' | null>(null)
+  const [searchQuery, setSearchQuery] = createSignal('')
 
   let wakeLock: WakeLockSentinel | null = null
 
   onMount(async () => {
-    // Prevent screen sleep during active gameplay
     try {
       wakeLock = (await navigator.wakeLock?.request('screen')) ?? null
     } catch { /* unsupported or page hidden — non-fatal */ }
 
-    // Tell SW not to activate waiting updates mid-session
     navigator.serviceWorker?.controller?.postMessage({ type: 'SESSION_ACTIVE' })
   })
 
@@ -66,21 +65,33 @@ export default function LiveCompanion() {
     if (!g) return []
     const contexts: (string | null)[] = []
     if (g.filter_1_label) {
-      contexts.push(
-        filter1() === 'yes' ? g.filter_1_yes_context : g.filter_1_no_context,
-      )
+      const f1 = filter1()
+      if (f1 === null) {
+        // Unset: include both context values so no filtering occurs
+        if (g.filter_1_yes_context) contexts.push(g.filter_1_yes_context)
+        if (g.filter_1_no_context) contexts.push(g.filter_1_no_context)
+      } else {
+        contexts.push(f1 === 'yes' ? g.filter_1_yes_context : g.filter_1_no_context)
+      }
     }
     if (g.filter_2_label) {
-      contexts.push(
-        filter2() === 'yes' ? g.filter_2_yes_context : g.filter_2_no_context,
-      )
+      const f2 = filter2()
+      if (f2 === null) {
+        if (g.filter_2_yes_context) contexts.push(g.filter_2_yes_context)
+        if (g.filter_2_no_context) contexts.push(g.filter_2_no_context)
+      } else {
+        contexts.push(f2 === 'yes' ? g.filter_2_yes_context : g.filter_2_no_context)
+      }
     }
     return contexts
   })
 
-  const phaseStrategies = createMemo(() =>
-    (allStrategies() ?? []).filter((s) => s.phase === currentPhase()),
-  )
+  const phaseStrategies = createMemo(() => {
+    const q = searchQuery().toLowerCase().trim()
+    const byPhase = (allStrategies() ?? []).filter((s) => s.phase === currentPhase())
+    if (!q) return byPhase
+    return byPhase.filter((s) => s.condition.toLowerCase().includes(q))
+  })
 
   return (
     <div
@@ -126,6 +137,16 @@ export default function LiveCompanion() {
                   onFilter2Change={setFilter2}
                 />
               </Show>
+
+              <div class="px-4 pt-2 pb-1">
+                <input
+                  type="search"
+                  placeholder="Filter strategies…"
+                  value={searchQuery()}
+                  onInput={(e) => setSearchQuery(e.currentTarget.value)}
+                  class="w-full h-[40px] px-3 rounded-[8px] bg-[var(--surface)] text-[var(--text)] border border-[var(--muted)]/30 outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)] text-sm"
+                />
+              </div>
 
               <main
                 class={`flex-1 ${

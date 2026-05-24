@@ -8,6 +8,7 @@ class MockWorker {
   onmessage: ((e: MessageEvent) => void) | null = null
 
   constructor() {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   postMessage(_data: unknown) {}
   terminate() {}
 }

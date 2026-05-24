@@ -1,0 +1,121 @@
+{
+  "game_id": "7-wonders",
+  "game_name": "7 Wonders",
+  "game_description": "Build an ancient civilization through three ages of card drafting.",
+  "filter_1_label": "Neighbor to your left stronger?",
+  "filter_1_yes_context": "strong-left",
+  "filter_1_no_context": "weak-left",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Wonder Selection",
+      "condition": "Choosing which side of wonder board",
+      "strategy_detailed": "Wonder A sides are more forgiving for new players. Side B sides (Alexandria, Halikarnassos, Babylon) offer stronger abilities that reward deliberate play — especially Halikarnassos's ability to draft from discards. Choose B only if you know the card pool.",
+      "strategy_stealth": ["Side A: forgiving and consistent", "Side B: stronger but card-pool dependent", "Halikarnassos B: draft from discard"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Resource Planning",
+      "condition": "Evaluating starting resource access",
+      "strategy_detailed": "Identify which raw resources your wonder provides. Plan to draft complementary resources in Age I to minimize coin spending on neighbors. A self-sufficient resource base lets you build freely in Ages II-III without relying on neighbors.",
+      "strategy_stealth": ["Self-sufficient resource = full freedom", "Draft to fill wonder's gaps in Age I", "Coins spent on neighbors = lost tempo"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Resource Drafting",
+      "condition": "Age I — choosing first card",
+      "strategy_detailed": "Prioritize brown and gray resource cards in Age I. Two brown cards plus one gray covers most Age II building costs. Avoid over-drafting science cards in Age I — they're strong but only payoff if you commit the entire game to science.",
+      "strategy_stealth": ["2 brown + 1 gray covers Age II", "Science only if committing fully", "Resources > points in Age I"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Military",
+      "condition": "Left neighbor building shields in Age I",
+      "strategy_detailed": "Military defeat to the left costs 1 VP per age. If your left neighbor is building a 2-shield card, match with 2+ shields this age or accept the loss and pivot to points. Losing all three military ages costs 6 VP — usually game-losing.",
+      "strategy_stealth": ["Match left neighbor's shields", "Losing all 3 ages = -6 VP", "Pivot to points only vs dedicated militarists"],
+      "tags": ["Defense"],
+      "context": "strong-left"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Military",
+      "condition": "Left neighbor not building military",
+      "strategy_detailed": "A weak-military left neighbor is a free +1 VP per age. Build one shield card per age to win against them, then use remaining draft picks for your core strategy. Don't over-invest in military beyond what beats your weaker neighbors.",
+      "strategy_stealth": ["1 shield per age beats weak left", "+1 VP per age = free points", "Over-investing in military wastes picks"],
+      "tags": ["Offense"],
+      "context": "weak-left"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Science",
+      "condition": "Science path viable in Age I",
+      "strategy_detailed": "Science scoring is exponential — three complete symbol sets score 7 bonus points plus the squares. To pursue science, draft at least 2 science cards in Age I and pass science cards to opponents last. A full science win requires 7+ science cards total.",
+      "strategy_stealth": ["2 science cards in Age I to commit", "Pass science to opponents last", "7+ total science for full win"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Wonder Stages",
+      "condition": "Completing a wonder stage in Age II",
+      "strategy_detailed": "Wonder stages provide VP, resources, or special abilities that cascade into Age III. Burying a low-value card from the draft to advance your wonder is usually correct if the stage gives 3+ VP or an ability. Never bury a card that directly counters a neighbor's strength.",
+      "strategy_stealth": ["Bury weak cards to advance wonder", "3+ VP stage worth burying for", "Don't bury counter to neighbor"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Guild Denial",
+      "condition": "Strong guild card available in Age III",
+      "strategy_detailed": "In Age III, guilds score based on neighbors' achievements. The Spy (shields), Scientist, and Magistrate guilds can give opponents huge points if they pass through the draft. Bury or build guild cards that benefit your board or deny strong opponents.",
+      "strategy_stealth": ["Bury guilds that benefit opponents", "Spy/Scientist/Magistrate = deny first", "Build guilds matching your strategy"],
+      "tags": ["TLDR", "Defense"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Coin Generation",
+      "condition": "Low on coins in Age II",
+      "strategy_detailed": "Commercial cards in Age II generate coins for each resource card your neighbors play. If you're coin-starved, prioritize one commercial card that pays on neighbor resources. Coins at game end score 1 VP per 3 coins — but more importantly, they unlock buying neighbors' resources.",
+      "strategy_stealth": ["Commercial: coins per neighbor resource", "Coins unlock neighbor purchases", "1 VP per 3 coins at game end"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Final Scoring",
+      "condition": "Calculating military before last picks",
+      "strategy_detailed": "Before your final Age III picks, calculate military outcomes. A +5 vs -1 military swing is 6 VP — often more than any single Age III card. Spending one last pick on a shield can win or lose the game. Count exact shields on neighbors.",
+      "strategy_stealth": ["Count neighbor shields exactly", "+5 vs -1 swing = 6 VP", "Last shield pick can decide game"],
+      "tags": ["Memory", "Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Final Scoring",
+      "condition": "Tied on points entering final picks",
+      "strategy_detailed": "Tiebreakers go to coin count (1 VP per 3 coins), then... there is no second tiebreaker — it's a true tie. Maximize coins in your final picks if points are equal. A commercial card that generates 3+ coins is worth an effective +1 VP in a close race.",
+      "strategy_stealth": ["Tiebreaker = most coins", "3 coins = +1 VP in tiebreaker", "Commercial card as tiebreaker pivot"],
+      "tags": ["Closing", "Memory"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Science",
+      "condition": "Completing a science triplet in Age III",
+      "strategy_detailed": "If you have 2 of any science symbol and can complete a triplet in Age III, that card is worth 7 bonus VP plus the 9 base squares. Draft it above almost anything else. The progress tokens (if playing with Duel rules) amplify this further.",
+      "strategy_stealth": ["Triplet = 7 bonus + 9 base = 16 pts", "Draft science triplet above all else", "Science compounds exponentially"],
+      "tags": ["Closing", "Economy"],
+      "context": null
+    }
+  ]
+}

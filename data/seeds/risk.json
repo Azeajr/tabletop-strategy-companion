@@ -1,0 +1,121 @@
+{
+  "game_id": "risk",
+  "game_name": "Risk",
+  "game_description": "Conquer territories and continents through dice combat and strategy.",
+  "filter_1_label": "Do you hold a continent bonus?",
+  "filter_1_yes_context": "bonus",
+  "filter_1_no_context": "no-bonus",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Territory Selection",
+      "condition": "Claiming territories in initial draft",
+      "strategy_detailed": "Prioritize claiming the chokepoints of a continent before filling it — enter from one gate, exit from another. Australia is the easiest continent (one gate: Siam). South America has two gates. Avoid spreading across multiple continents during setup.",
+      "strategy_stealth": ["Claim continent chokepoints first", "Australia: one gate at Siam", "Don't spread across continents"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Army Placement",
+      "condition": "Reinforcing territories after draft",
+      "strategy_detailed": "Concentrate initial armies at your continent's entry gate and at your internal hub. A strong gate deters early attacks. Spreading 1 army per territory is the most common mistake — it invites attack everywhere and wins nowhere.",
+      "strategy_stealth": ["Stack armies at entry gate", "Internal hub as reserve", "Never 1 army per territory"],
+      "tags": ["Defense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Continent Bonus",
+      "condition": "One territory short of a continent",
+      "strategy_detailed": "Completing a continent for its bonus is almost always the right move, even at a cost of 3-4 armies. The bonus compounds every turn — Australia's +2 pays back in one turn. Opponents who deny your continent must spend armies to do it, weakening themselves elsewhere.",
+      "strategy_stealth": ["Complete continent even at 3-4 army cost", "Bonus repays in 1-2 turns", "Denial costs opponent armies too"],
+      "tags": ["TLDR", "Economy"],
+      "context": "no-bonus"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Defense",
+      "condition": "Protecting a continent entry gate",
+      "strategy_detailed": "Stack 5+ armies at your continent's gate to deter attackers. A 5-army territory is statistically unlikely to fall to fewer than 8 attackers — making the attack unprofitable. Refresh the gate each turn if combat thinned it below 4.",
+      "strategy_stealth": ["5+ armies at gate deters attacks", "Refresh to 4+ after combat", "Below 4 = attackable profitably"],
+      "tags": ["Defense"],
+      "context": "bonus"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Card Strategy",
+      "condition": "Collecting territory cards",
+      "strategy_detailed": "In standard Risk, you must attack and hold at least one territory to earn a card. Pursue exactly one attack per turn to earn a card without overextending. Card sets (early in game) may not be worth cashing unless you need armies to defend or expand quickly.",
+      "strategy_stealth": ["1 attack per turn for card", "Don't overextend chasing cards", "Cash sets only when armies needed"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Army Concentration",
+      "condition": "Considering a large offensive",
+      "strategy_detailed": "Mass a minimum 3:1 ratio before attacking a fortified territory. Dice variance means 2:1 attacks lose roughly 40% of the time. A 3:1 attack expects to advance while retaining 60%+ of your forces. Never split your attack force between two fronts simultaneously.",
+      "strategy_stealth": ["Attack at 3:1 minimum ratio", "2:1 attacks lose 40% of time", "Never split attack across two fronts"],
+      "tags": ["TLDR", "Offense"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Card Strategy",
+      "condition": "Card set ready to cash",
+      "strategy_detailed": "Cash card sets when the value exceeds what you'd gain from waiting AND you can immediately place armies in a contested area. Late-game card sets skyrocket in value (every 5 cards adds more armies). Holding sets too long lets others cash first and snowball.",
+      "strategy_stealth": ["Cash when armies needed urgently", "Late sets worth more — don't cash early", "Opponents cashing first = snowball"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Diplomacy",
+      "condition": "Two opponents in a tense standoff",
+      "strategy_detailed": "When two large powers are at war, use the distraction to consolidate your territories and reinforce your gates. Do not join the fight until one power clearly wins — then strike the weakened victor immediately. The kingmaker position is the strongest in Risk mid-game.",
+      "strategy_stealth": ["Let two powers fight", "Reinforce while they exhaust", "Strike weakened victor after war"],
+      "tags": ["Bluff", "Pivot"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Defense",
+      "condition": "Continent bonus under threat",
+      "strategy_detailed": "When an opponent threatens your continent entry point, reinforce it immediately — even if it means skipping an offensive turn. Losing the continent bonus often costs more armies than it would take to defend. Surrender the gate only if the continent itself is indefensible.",
+      "strategy_stealth": ["Reinforce gate over offense", "Bonus loss costs more than defense", "Surrender only if continent indefensible"],
+      "tags": ["Defense"],
+      "context": "bonus"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Elimination",
+      "condition": "Eliminating a player for their cards",
+      "strategy_detailed": "Eliminating a player transfers all their cards to you. If they hold 5+ cards, plan the elimination carefully — you'll be forced to cash a set immediately, gaining armies. Time the elimination at the start of your turn to use the cashed armies in the same turn.",
+      "strategy_stealth": ["5+ cards = high-value elimination target", "Elimination forces card cash", "Time to start of your turn"],
+      "tags": ["Offense", "Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "World Domination",
+      "condition": "Holding 50%+ of territories",
+      "strategy_detailed": "When you control more than half the territories, shift to consolidation. Bring all exposed territories above 3 armies before attacking. Opponents will form a last-ditch coalition — absorb their attacks without overextending, then clean up the weakest player first.",
+      "strategy_stealth": ["Consolidate before attacking at 50%+", "3+ armies on every exposed territory", "Clean up weakest player first"],
+      "tags": ["Closing"],
+      "context": "bonus"
+    },
+    {
+      "phase": "End-Game",
+      "category": "World Domination",
+      "condition": "Trailing as game nears end",
+      "strategy_detailed": "If you're far behind, become the unpredictable actor. Ally openly with the second-place player against the leader. Offer territories as buffer zones. Your goal is to survive long enough to outlast other weak players and capitalize when the leader overextends.",
+      "strategy_stealth": ["Ally second-place vs leader", "Offer territories as buffer zones", "Survive to outlast weak players"],
+      "tags": ["Bluff", "Pivot"],
+      "context": "no-bonus"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { createResource, createSignal, For, Show, Suspense } from 'solid-js'
+import { useRegisterSW } from 'virtual:pwa-register/solid'
 import { db } from '../db'
 import { seedsReady } from '../db/seed'
 import StickyTopBar from '../components/StickyTopBar'
@@ -8,6 +9,8 @@ import NetworkIndicator from '../components/NetworkIndicator'
 
 export default function GameLibrary() {
   const [query, setQuery] = createSignal('')
+  const { needRefresh: needRefreshSignal, updateServiceWorker } = useRegisterSW()
+  const [needRefresh] = needRefreshSignal
 
   const [games] = createResource(async () => {
     await seedsReady
@@ -33,6 +36,19 @@ export default function GameLibrary() {
         }
         right={<ModeToggle />}
       />
+
+      {/* PWA update banner — only shown on library page, never mid-game */}
+      <Show when={needRefresh()}>
+        <div class="sticky top-[56px] z-50 flex items-center justify-between gap-4 px-4 py-2 bg-[var(--accent)] text-white text-sm">
+          <span>Update available</span>
+          <button
+            onClick={() => updateServiceWorker(true)}
+            class="font-semibold underline shrink-0"
+          >
+            Reload
+          </button>
+        </div>
+      </Show>
 
       {/* Search bar — sticky below top bar */}
       <div class="sticky top-[56px] z-40 px-4 py-3 bg-[var(--bg)]">

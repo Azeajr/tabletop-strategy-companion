@@ -2,17 +2,17 @@ import { Show } from 'solid-js'
 
 interface Props {
   filter1Label: string
-  filter1Value: 'yes' | 'no'
-  onFilter1Change: (v: 'yes' | 'no') => void
+  filter1Value: 'yes' | 'no' | null
+  onFilter1Change: (v: 'yes' | 'no' | null) => void
   filter2Label?: string
-  filter2Value: 'yes' | 'no'
-  onFilter2Change: (v: 'yes' | 'no') => void
+  filter2Value: 'yes' | 'no' | null
+  onFilter2Change: (v: 'yes' | 'no' | null) => void
 }
 
 function FilterRow(props: {
   label: string
-  value: 'yes' | 'no'
-  onChange: (v: 'yes' | 'no') => void
+  value: 'yes' | 'no' | null
+  onChange: (v: 'yes' | 'no' | null) => void
 }) {
   return (
     <div class="flex items-center justify-between gap-4 min-h-[44px]">
@@ -22,7 +22,7 @@ function FilterRow(props: {
         role="group"
       >
         <button
-          onClick={() => props.onChange('yes')}
+          onClick={() => props.onChange(props.value === 'yes' ? null : 'yes')}
           class={`px-4 h-[36px] min-w-[44px] text-sm transition-colors ${
             props.value === 'yes'
               ? 'bg-[var(--accent)] text-white font-semibold'
@@ -33,7 +33,7 @@ function FilterRow(props: {
           Yes
         </button>
         <button
-          onClick={() => props.onChange('no')}
+          onClick={() => props.onChange(props.value === 'no' ? null : 'no')}
           class={`px-4 h-[36px] min-w-[44px] text-sm transition-colors ${
             props.value === 'no'
               ? 'bg-[var(--accent)] text-white font-semibold'

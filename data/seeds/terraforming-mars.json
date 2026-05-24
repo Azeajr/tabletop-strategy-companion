@@ -1,0 +1,121 @@
+{
+  "game_id": "terraforming-mars",
+  "game_name": "Terraforming Mars",
+  "game_description": "Compete to terraform Mars through engine-building and card combos.",
+  "filter_1_label": "Trailing on TR (below average)?",
+  "filter_1_yes_context": "trailing-tr",
+  "filter_1_no_context": "leading-tr",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Corporation Selection",
+      "condition": "Choosing a starting corporation",
+      "strategy_detailed": "Corporations define your engine. Ecoline, Inventrix, and Teractor are strong general-purpose picks. Avoid corporations that depend on specific project card combos unless you're experienced — their power spikes are hard to set up under time pressure.",
+      "strategy_stealth": ["Ecoline/Inventrix/Teractor are safe picks", "Avoid combo-dependent corps early", "Corp defines your engine"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Starting Hand",
+      "condition": "Selecting projects from initial hand",
+      "strategy_detailed": "Keep projects that cost 10 MC or less and directly produce resources or TR. Expensive projects (20+ MC) are only worth keeping if they're central to your corporation's synergy. Average keep rate is 3-4 cards from 10.",
+      "strategy_stealth": ["Keep projects under 10 MC", "20+ MC only for corp synergy", "Keep 3-4 from initial 10"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "TR Advancement",
+      "condition": "TR below 22 after generation 2",
+      "strategy_detailed": "TR is both your score and your production ceiling. Falling behind on TR means fewer MC per generation. Prioritize green projects (plants, oceans, temperature) that advance TR even if they're slightly expensive. A 2-TR bump is worth more than 6 MC saved.",
+      "strategy_stealth": ["TR = score AND production ceiling", "Green projects advance TR", "2 TR > 6 MC saved"],
+      "tags": ["TLDR", "Economy"],
+      "context": "trailing-tr"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Production Engine",
+      "condition": "Building resource production",
+      "strategy_detailed": "Prioritize cards that increase steel, titanium, or energy production in generation 1-3. Steel and titanium discount building and space projects respectively — a 5-production boost saves 5+ MC per turn. Compound production gains over energy or heat.",
+      "strategy_stealth": ["Steel/titanium first, then energy", "Production gains compound each turn", "5 production = 5+ MC saved per gen"],
+      "tags": ["Economy"],
+      "context": "leading-tr"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Milestones",
+      "condition": "Milestone within 2 projects of reach",
+      "strategy_detailed": "Milestones give 5 VP for 8 MC — the best point-per-credit purchase in the game. Terraformer (TR 25), Gardener (5 greeneries), and Builder (8 building tags) are most achievable. If you're within 2 projects of a milestone, prioritize it over almost everything.",
+      "strategy_stealth": ["Milestone: 5 VP for 8 MC (best ratio)", "Terraformer/Gardener/Builder easiest", "Within 2 projects = claim now"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "TR Advancement",
+      "condition": "Oxygen or temperature stalled",
+      "strategy_detailed": "When the global parameters stall, your TR gain drops sharply. Force progress with greenery placements (raises oxygen) or thermal capacity projects. Don't let the game end too slowly — stalled parameters let opponents engine-build and catch up on VP.",
+      "strategy_stealth": ["Greeneries advance oxygen + TR", "Stalled parameters let opponents catch up", "Force thermal projects to unstall"],
+      "tags": ["Offense"],
+      "context": "trailing-tr"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Awards",
+      "condition": "Funding an award in mid-game",
+      "strategy_detailed": "Fund the award you're currently leading by the widest margin. Awards cost 8-24 MC depending on order — the first funder pays 8 MC for 5 VP if they win. Banker (MC production), Landlord (tiles), and Scientist (tags) are reliably contestable.",
+      "strategy_stealth": ["Fund award you lead by most", "First funder pays 8 MC for 5 VP", "Banker/Landlord/Scientist easiest to lead"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Tile Placement",
+      "condition": "Placing greenery or city tile",
+      "strategy_detailed": "Greeneries placed adjacent to your cities score 1 VP per adjacent city at game end. Plan city and greenery placements to cluster — each adjacency is worth 1 VP to you. Opponent cities adjacent to your greeneries score them 1 VP too, so block if cheap.",
+      "strategy_stealth": ["Cluster cities + greeneries for VP", "Each adjacency = 1 VP", "Block opponent adjacencies cheaply"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Card Engine",
+      "condition": "Low on cards — drawing frequently",
+      "strategy_detailed": "If you're drawing 3+ cards per generation through research actions, evaluate your hand quality. A full hand of unplayable expensive projects is worse than a smaller focused hand. Use the standard action to buy 1 card only if it completes a combo or hits a milestone.",
+      "strategy_stealth": ["Don't draw if hand unplayable", "Buy 1 card only for combo/milestone", "Quality hand beats large hand"],
+      "tags": ["Economy"],
+      "context": "leading-tr"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Game End Timing",
+      "condition": "Controlling when the game ends",
+      "strategy_detailed": "Count remaining parameter steps. If ahead on VP, slow the game — skip parameters you don't benefit from. If trailing, accelerate: place greeneries, raise temperature, trigger oceans to end before opponents complete their engines.",
+      "strategy_stealth": ["Ahead: slow parameters you don't need", "Trailing: accelerate all parameters", "Count steps to end game"],
+      "tags": ["Closing", "Memory"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "TR Advancement",
+      "condition": "Final 2 generations, TR gap over 5",
+      "strategy_detailed": "A TR gap of 5+ in the final two generations is nearly unrecoverable through projects alone. Pivot to VP actions: awards, milestones, tile placement, and high-VP projects. Chasing TR at this point costs more MC than it returns in points.",
+      "strategy_stealth": ["TR gap 5+: pivot to VP actions", "Awards/milestones/tiles > TR catch-up", "Chasing TR too expensive now"],
+      "tags": ["Closing"],
+      "context": "trailing-tr"
+    },
+    {
+      "phase": "End-Game",
+      "category": "VP Calculation",
+      "condition": "Evaluating projects vs TR in final gen",
+      "strategy_detailed": "In the last generation, each MC is worth exactly (VP per MC) of its best use. Compare: 1 greenery = 1 TR + 1 potential VP adjacency. A 12 MC project giving 3 VP = 0.25 VP/MC. Standard greenery is often the highest VP-per-MC play in the final generation.",
+      "strategy_stealth": ["Final gen: greenery = TR + adjacency VP", "Compare VP per MC for each action", "Greenery often highest VP/MC ratio"],
+      "tags": ["Closing", "Memory"],
+      "context": "leading-tr"
+    }
+  ]
+}

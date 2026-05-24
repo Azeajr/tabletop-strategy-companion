@@ -1,0 +1,166 @@
+{
+  "game_id": "ticket-to-ride",
+  "game_name": "Ticket to Ride",
+  "game_description": "Claim railway routes across North America, 2-5 players.",
+  "filter_1_label": "Going for Longest Train bonus?",
+  "filter_1_yes_context": "longest",
+  "filter_1_no_context": "tickets",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Ticket Selection",
+      "condition": "Choosing initial destination tickets",
+      "strategy_detailed": "Keep at least 2 tickets that share a geographic cluster. Overlapping routes mean fewer cards are needed to complete multiple tickets simultaneously, compounding your efficiency.",
+      "strategy_stealth": ["Keep 2+ tickets in same region", "Overlapping routes = card efficiency", "Discard outlier tickets"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Ticket Selection",
+      "condition": "Long vs short ticket tradeoff",
+      "strategy_detailed": "Long-distance tickets (10+ points) are high-risk, high-reward. Keep one big ticket paired with two shorter ones. Completing the long route also builds the path for the short ones.",
+      "strategy_stealth": ["1 long ticket + 2 shorts", "Long route builds short route path", "10+ pts justify the risk"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Card Draw Strategy",
+      "condition": "Wild card visible at game start",
+      "strategy_detailed": "Take the face-up wild card on turn 1 if available. Wilds are worth 2 draws in card value and give maximum route flexibility. This advantage compounds over the entire game.",
+      "strategy_stealth": ["Take wild on turn 1", "Wild = 2-card value", "Provides route flexibility"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Route Claiming",
+      "condition": "Opponent building toward your route",
+      "strategy_detailed": "If an opponent is collecting cards of the color you need for a critical route, claim that route immediately even if you planned to wait. Losing a bottleneck route can invalidate multiple tickets.",
+      "strategy_stealth": ["Claim threatened routes early", "Bottleneck loss = ticket failure", "React to opponent card draws"],
+      "tags": ["Defense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Route Claiming",
+      "condition": "Choosing between two adjacent routes",
+      "strategy_detailed": "When two routes connect the same cities, claim the one that also extends toward your next ticket destination. Efficiency compounds: each route should serve at least two purposes.",
+      "strategy_stealth": ["Routes should serve 2 purposes", "Extend toward next ticket", "Avoid pure connector routes"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Card Collection",
+      "condition": "Choosing face-up vs blind draw",
+      "strategy_detailed": "Take face-up cards when they match a color you need 3+ of. Take blind when you need wild cards or when face-up cards don't match any active route. Never take two face-up non-wilds in one turn unless both match the same route.",
+      "strategy_stealth": ["Face-up if color needed 3+", "Blind draw for wilds", "Avoid mismatched face-up pairs"],
+      "tags": [],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Longest Train",
+      "condition": "Building toward longest train bonus",
+      "strategy_detailed": "Plan a connected spine through your ticket network. Longest Train is 10 bonus points — worth more than most individual tickets. Extend routes at every opportunity rather than building isolated segments.",
+      "strategy_stealth": ["Build a connected spine", "10 pts = Longest Train bonus", "Extend vs isolated segments"],
+      "tags": ["TLDR", "Offense"],
+      "context": "longest"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Ticket Focus",
+      "condition": "Prioritizing ticket completion over length",
+      "strategy_detailed": "Skip routes that don't directly complete tickets. Short efficient paths to ticket completions beat a long sprawling network. Draw new tickets at mid-game once initial set is nearly done.",
+      "strategy_stealth": ["Only routes that complete tickets", "Efficient paths beat long chains", "Draw new tickets mid-game"],
+      "tags": ["Economy"],
+      "context": "tickets"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Blocking",
+      "condition": "Opponent clearly needs a specific route",
+      "strategy_detailed": "Block opponent's critical bottleneck routes when the block costs you little (gray routes, short segments). Blocking is rarely worth building a whole detour, but snapping up a contested 2-3 car route is often correct.",
+      "strategy_stealth": ["Block bottlenecks cheaply", "2-3 car blocks most efficient", "Don't detour just to block"],
+      "tags": ["Defense", "Bluff"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Card Collection",
+      "condition": "Holding 6+ cards of same color",
+      "strategy_detailed": "Claim the route immediately. Holding large color sets invites discard if you draw tickets you don't need or if the game ends faster than expected. Cards in hand are not points.",
+      "strategy_stealth": ["Claim route at 6+ same color", "Cards in hand are 0 pts", "Don't hoard — spend"],
+      "tags": [],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "New Tickets",
+      "condition": "Drawing new destination tickets",
+      "strategy_detailed": "Draw new tickets only when your primary network is 70%+ complete. New tickets that share cities with existing routes are worth keeping. Discard tickets that would require a wholly new network branch.",
+      "strategy_stealth": ["Draw tickets at 70%+ complete", "Keep tickets sharing cities", "Discard isolated new routes"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Longest Train",
+      "condition": "Opponent approaching your train length",
+      "strategy_detailed": "When another player is within 3-4 cars of your current length, extend aggressively. The Longest Train can only be claimed by one player. A 10-point swing is often game-deciding.",
+      "strategy_stealth": ["Extend when rival within 4 cars", "10-pt swing is game-deciding", "Longest Train: winner-take-all"],
+      "tags": ["Offense"],
+      "context": "longest"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Ticket Focus",
+      "condition": "One ticket away from completion",
+      "strategy_detailed": "When you're one route away from completing a ticket, protect it by claiming adjacent routes first if they're contested. A blocked final segment loses the ticket's entire point value plus the negative penalty.",
+      "strategy_stealth": ["Secure adjacent contested routes", "Blocked last route = full penalty", "Finish tickets before new ones"],
+      "tags": ["Defense"],
+      "context": "tickets"
+    },
+    {
+      "phase": "End-Game",
+      "category": "End-Game Timing",
+      "condition": "Deciding when to trigger end game",
+      "strategy_detailed": "Trigger end game (go to 2 or 0 trains) only when all your tickets are complete or you cannot complete remaining tickets regardless. Triggering early robs opponents of turns but also limits your own options.",
+      "strategy_stealth": ["Trigger only when tickets done", "2-0 trains = end trigger", "Early trigger limits your turns"],
+      "tags": ["Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "End-Game Timing",
+      "condition": "Opponent is about to trigger end game",
+      "strategy_detailed": "When an opponent has 2 or fewer trains left, you get one more turn after they place their last train. Prioritize completing your highest-value incomplete ticket this turn — even a partial completion may not be worth it.",
+      "strategy_stealth": ["1 turn after opponent's last train", "Finish highest-value ticket now", "Partial completion rarely worth it"],
+      "tags": ["Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Longest Train",
+      "condition": "Longest Train race in final turns",
+      "strategy_detailed": "If Longest Train is contested in the final turns, calculate exact car counts before committing. One opponent's double route can overtake your length instantly. Having 2-3 extra cars of buffer is the minimum safe margin.",
+      "strategy_stealth": ["Count exact cars before committing", "Buffer: 2-3 cars minimum", "Double routes overtake instantly"],
+      "tags": ["Closing", "Memory"],
+      "context": "longest"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Ticket Focus",
+      "condition": "Final turns: incomplete ticket",
+      "strategy_detailed": "If a ticket is still incomplete in the last 2 turns, evaluate whether completion is possible. If not, the penalty subtracted is fixed — maximize other sources of points (route lengths, other completed tickets) instead of chasing a doomed ticket.",
+      "strategy_stealth": ["Evaluate completion vs penalty", "Chasing doomed ticket loses", "Maximize other point sources"],
+      "tags": ["Closing"],
+      "context": "tickets"
+    }
+  ]
+}

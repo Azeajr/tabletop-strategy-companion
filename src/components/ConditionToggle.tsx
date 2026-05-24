@@ -8,10 +8,25 @@ interface Props {
 }
 
 export default function ConditionToggle(props: Props) {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+    e.preventDefault()
+    const all = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('[data-condition-toggle]'),
+    )
+    const i = all.indexOf(e.currentTarget as HTMLButtonElement)
+    const next = e.key === 'ArrowDown'
+      ? Math.min(i + 1, all.length - 1)
+      : Math.max(i - 1, 0)
+    all[next]?.focus()
+  }
+
   return (
     <div class="border-b border-[var(--muted)]/10 last:border-0">
       <button
+        data-condition-toggle
         onClick={props.onToggle}
+        onKeyDown={handleKeyDown}
         class="w-full text-left min-h-[44px] py-3 px-4 text-[var(--text)] flex justify-between items-start gap-3"
         aria-expanded={props.isOpen}
       >

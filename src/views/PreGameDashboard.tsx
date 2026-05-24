@@ -2,6 +2,7 @@ import { createResource, createSignal, For, Show, Suspense } from 'solid-js'
 import { useNavigate, useParams } from '@solidjs/router'
 import { db } from '../db'
 import { seedsReady } from '../db/seed'
+import { useAppMode } from '../store/appState'
 import { PHASES } from '../lib/strategy'
 import StickyTopBar from '../components/StickyTopBar'
 import ModeToggle from '../components/ModeToggle'
@@ -10,6 +11,7 @@ import type { Phase } from '../types/domain'
 export default function PreGameDashboard() {
   const params = useParams()
   const navigate = useNavigate()
+  const mode = useAppMode()
   const [activeTab, setActiveTab] = createSignal<Phase>('Setup')
 
   const [game] = createResource(
@@ -60,7 +62,22 @@ export default function PreGameDashboard() {
           <p class="text-[var(--muted)] text-sm py-12 text-center">Loading…</p>
         }
       >
-        <Show when={game()}>
+        <Show
+          when={game()}
+          fallback={
+            <Show when={!game.loading}>
+              <div class="px-4 py-16 text-center flex flex-col items-center gap-4">
+                <p class="text-[var(--text)] font-semibold">Game not found</p>
+                <button
+                  onClick={() => navigate('/')}
+                  class="text-[var(--accent)] text-sm"
+                >
+                  ← Back to library
+                </button>
+              </div>
+            </Show>
+          }
+        >
           {(g) => (
             <>
               {/* Game header + Start Game FAB */}
@@ -95,7 +112,16 @@ export default function PreGameDashboard() {
                           <span>
                             <span class="font-medium">{s.condition}</span>
                             {' — '}
-                            {s.strategy_detailed}
+                            <Show
+                              when={mode() === 'study'}
+                              fallback={
+                                <span class="text-[var(--text)]/80">
+                                  {s.strategy_stealth[0]}
+                                </span>
+                              }
+                            >
+                              {s.strategy_detailed}
+                            </Show>
                           </span>
                         </li>
                       )}
@@ -142,9 +168,25 @@ export default function PreGameDashboard() {
                           <div class="font-medium text-[var(--text)]">
                             {s.condition}
                           </div>
-                          <div class="text-[var(--text)]/80 mt-1 leading-relaxed">
-                            {s.strategy_detailed}
-                          </div>
+                          <Show
+                            when={mode() === 'study'}
+                            fallback={
+                              <ul class="space-y-1 list-none m-0 p-0 mt-1">
+                                <For each={s.strategy_stealth}>
+                                  {(bullet) => (
+                                    <li class="flex gap-2 text-[var(--text)]/80">
+                                      <span class="text-[var(--accent)] shrink-0">›</span>
+                                      <span>{bullet}</span>
+                                    </li>
+                                  )}
+                                </For>
+                              </ul>
+                            }
+                          >
+                            <div class="text-[var(--text)]/80 mt-1 leading-relaxed">
+                              {s.strategy_detailed}
+                            </div>
+                          </Show>
                         </div>
                       )}
                     </For>

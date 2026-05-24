@@ -1,0 +1,139 @@
+{
+  "game_id": "pandemic",
+  "game_name": "Pandemic",
+  "game_description": "Cooperate to cure four diseases before they overwhelm the world.",
+  "filter_1_label": "Outbreak track at 4 or above?",
+  "filter_1_yes_context": "crisis",
+  "filter_1_no_context": "stable",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Role Synergy",
+      "condition": "Assigning roles at game start",
+      "strategy_detailed": "Always include a Medic or Scientist in your team for faster curing. Pair with an Operations Expert or Dispatcher for mobility. Four-player games can afford a Quarantine Specialist to lock down hotspots.",
+      "strategy_stealth": ["Include Medic or Scientist", "Pair with Operations/Dispatcher", "QS locks hotspots at 4p"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Research Stations",
+      "condition": "Placing starting research station",
+      "strategy_detailed": "The starting research station is placed at Atlanta. Identify which cities cluster near high-infection-rate cards early. Plan your second station for the densest cluster — ideally where 3+ cities can be reached within 2 moves.",
+      "strategy_stealth": ["Atlanta is your starting hub", "2nd station near dense cluster", "Within 2 moves of 3+ cities"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Infection Priority",
+      "condition": "Reading initial infection cards",
+      "strategy_detailed": "The 9 initial infection cards define your first crisis zone. Cities infected with 3 cubes on turn 1 are outbreak threats — prioritize getting a Medic or Scientist into those regions within the first 2 rounds.",
+      "strategy_stealth": ["3-cube cities = turn-1 priority", "Medic in crisis zone by round 2", "Track initial 9 infection cities"],
+      "tags": ["TLDR", "Defense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Cure Priority",
+      "condition": "Deciding which disease to cure first",
+      "strategy_detailed": "Cure the disease with the most cards already in hand first. Then pivot to the disease spreading fastest (most cards in the infection discard). Never stockpile cards hoping for a perfect hand — partial cures fall behind the spread rate.",
+      "strategy_stealth": ["Cure what you have cards for", "Then cure fastest-spreading", "Don't stockpile — cure early"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Card Sharing",
+      "condition": "Transferring city cards between players",
+      "strategy_detailed": "Card sharing requires both players to be in the same city. Plan routes so the card passer ends their turn adjacent to the receiver's next city. The Researcher can share from anywhere — route your team around them.",
+      "strategy_stealth": ["Both players same city to share", "Route receiver toward passer", "Researcher shares from anywhere"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Outbreak Management",
+      "condition": "Single city about to outbreak",
+      "strategy_detailed": "Remove cubes from a 3-cube city before the next epidemic card flips it. One outbreak chains to neighbors — if neighbors also have 2 cubes, a chain reaction can jump the outbreak track 3-4 spaces in one turn.",
+      "strategy_stealth": ["Clear 3-cube cities preemptively", "Chain outbreaks jump 3-4 spaces", "Neighbors at 2 cubes = danger"],
+      "tags": ["Defense"],
+      "context": "stable"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Crisis Response",
+      "condition": "Outbreak track at 4, chain risk high",
+      "strategy_detailed": "Stop all curing activity and commit every action to cube removal. One more chain outbreak may be unrecoverable. Split the team: one player clears the hotspot, another blocks the chain nodes. Curing can wait one round.",
+      "strategy_stealth": ["Halt curing — clear cubes now", "Split team: hotspot + chain nodes", "Curing can wait one round"],
+      "tags": ["TLDR", "Defense"],
+      "context": "crisis"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Research Stations",
+      "condition": "Building a second research station",
+      "strategy_detailed": "Place your second research station where the team converges most often for curing. Ideally a city that appears on multiple player cards so it's easy to reach. Never use an Operations Expert card for a station in a city you'll rarely visit.",
+      "strategy_stealth": ["Place at team convergence point", "Easy to reach = high-value city", "Don't waste OE card on low-traffic"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Epidemic Management",
+      "condition": "Epidemic card drawn this round",
+      "strategy_detailed": "After an epidemic: the infection discard is shuffled and placed on top. The next 2-3 infection draws will be from previously infected cities. Immediately scan which cities are already at 2-3 cubes — those are imminent outbreak threats.",
+      "strategy_stealth": ["Discard goes to top after epidemic", "Next draws = previously infected", "Scan for 2-3 cube cities now"],
+      "tags": ["TLDR", "Memory"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Cure Priority",
+      "condition": "Two diseases spreading simultaneously",
+      "strategy_detailed": "Split the team geographically but keep one cure closer to completion. Finishing any cure removes an entire threat category — the first cure is a major inflection point. Don't chase 50/50 on two cures and finish neither.",
+      "strategy_stealth": ["Finish one cure, then pivot", "First cure = major inflection", "50/50 split often loses"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Crisis Response",
+      "condition": "Multiple outbreak clusters emerging",
+      "strategy_detailed": "Designate one player as the 'fireman' to handle outbreaks while others push toward a cure. A completed cure means the Medic auto-treats that color — dramatically reducing the fireman's workload in subsequent turns.",
+      "strategy_stealth": ["One fireman, rest cure", "Cured disease = Medic auto-treats", "First cure eases fireman load"],
+      "tags": ["Defense"],
+      "context": "crisis"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Cure Rush",
+      "condition": "Player deck running low",
+      "strategy_detailed": "Count remaining player deck cards. If fewer cards remain than needed to cure remaining diseases, you must cure on the next available turn or lose. Sacrifice outbreak management temporarily if needed — a cure now beats perfect board state.",
+      "strategy_stealth": ["Count remaining deck cards", "Cure or lose if deck runs out", "Sacrifice board state for cure"],
+      "tags": ["TLDR", "Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Cure Rush",
+      "condition": "Final disease 4 cards away from cure",
+      "strategy_detailed": "Once you're 4 cards away from the last cure, every action that isn't advancing toward it is a risk. Use charter flights, dispatcher moves, and role abilities to compress distance. Win condition is one turn away — play as if every wasted action loses the game.",
+      "strategy_stealth": ["Every action advances last cure", "Use all mobility abilities", "One wasted action can lose"],
+      "tags": ["Closing"],
+      "context": "stable"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Crisis Response",
+      "condition": "Outbreak track at 6, one remaining",
+      "strategy_detailed": "One more outbreak and the game ends. Every action by every player must either prevent an outbreak or cure a disease. Station the Quarantine Specialist adjacent to the most likely outbreak city. Eradicate a cured disease immediately if possible — it removes the outbreak threat entirely.",
+      "strategy_stealth": ["QS adjacent to outbreak threat", "Eradicate cured disease now", "One outbreak = game over"],
+      "tags": ["Defense", "Closing"],
+      "context": "crisis"
+    }
+  ]
+}

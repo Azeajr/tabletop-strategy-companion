@@ -10,12 +10,28 @@ interface Props {
 
 export default function PhaseStepper(props: Props) {
   const mode = useAppMode()
+  let touchStartX = 0
+
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartX = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStartX
+    if (Math.abs(dx) < 50) return
+    const i = PHASES.indexOf(props.currentPhase)
+    if (dx < 0 && i < PHASES.length - 1) props.onPhaseChange(PHASES[i + 1])
+    if (dx > 0 && i > 0) props.onPhaseChange(PHASES[i - 1])
+  }
+
   return (
     <nav
       class={`flex w-full bg-[var(--bg)] ${
         mode() === 'stealth' ? 'sticky top-[56px] z-40' : ''
       }`}
       aria-label="Game phases"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <For each={PHASES}>
         {(phase) => (
