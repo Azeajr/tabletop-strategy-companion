@@ -94,8 +94,8 @@
       "phase": "End-Game",
       "category": "Sequence Completion",
       "condition": "One sequence complete, one needed",
-      "strategy_detailed": "After completing your first sequence, pivot immediately to your second. Opponents will now use One-Eyed Jacks to break your first sequence if it's in a vulnerable spot. Position your second sequence to cross the first — a crossing sequence cannot have both lines broken simultaneously.",
-      "strategy_stealth": ["Pivot immediately after first sequence", "Opponents will OEJ your first", "Crossing sequences resist double-break"],
+      "strategy_detailed": "Per rules, chips in a completed sequence are locked — opponents cannot OEJ them. Position your second sequence to share one chip with the first (allowed: one shared chip per cross). That shared chip is locked, giving your second sequence an unbreakable anchor and effectively a head start.",
+      "strategy_stealth": ["Completed sequence chips are locked", "Share 1 chip across both sequences", "Locked chip = unbreakable anchor"],
       "tags": ["TLDR", "Closing"],
       "context": null
     },
