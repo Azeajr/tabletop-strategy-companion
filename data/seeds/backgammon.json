@@ -49,7 +49,7 @@
       "phase": "Early Game",
       "category": "Priming",
       "condition": "Building a prime (4+ consecutive points)",
-      "strategy_detailed": "A full 6-prime (six consecutive closed points) traps opponent checkers completely — no roll escapes. Build from the 5/6-point backward toward the bar-point (7) and 4-point. A 5-prime is strong but escapable on the gap-matching roll: opponent must roll the exact gap number to jump. Maintain prime integrity while bringing back checkers around it.",
+      "strategy_detailed": "A 6-prime (six consecutive closed points) traps opponent checkers — no roll escapes. Build from the 5/6-point backward to the bar (7) and 4-point. A 5-prime is strong but escapable on the exact gap-matching roll. Maintain prime integrity while bringing back checkers around it.",
       "strategy_stealth": ["6-prime: opponent fully trapped", "Build 5,6 → bar (7) → 4-point", "5-prime: escapable on gap-roll only"],
       "tags": ["Offense"],
       "context": "pip-trail"
@@ -76,7 +76,7 @@
       "phase": "Mid-Game",
       "category": "Blitz",
       "condition": "Opponent has checker(s) on bar",
-      "strategy_detailed": "While opponent dances on the bar, race to close home points. With 5 of 6 home points closed (1 open), opponent dances 25/36 rolls (enters only on the 11/36 with a matching die). Closeout (all 6 closed) is automatic dance. Slot and cover aggressively — hits while building are usually correct since opponent already lost tempo.",
+      "strategy_detailed": "While opponent dances on the bar, race to close home points. With 5 of 6 home points closed, opponent dances 25/36 rolls (enters only on the 11/36 with a matching die). Closeout = automatic dance. Slot and cover aggressively — hits while building are usually correct.",
       "strategy_stealth": ["5 closed: opponent dances 25/36", "Closeout = automatic dance", "Slot and cover aggressively"],
       "tags": ["Offense"],
       "context": "pip-trail"
