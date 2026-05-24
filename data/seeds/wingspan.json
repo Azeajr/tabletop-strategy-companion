@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Bonus Card",
       "condition": "Choosing a bonus card",
-      "strategy_detailed": "Prioritize bonus cards that match birds you're likely to draft — Anatomist (egg birds), Cartographer (grassland birds), or Historian (prairie birds) score reliably. Avoid bonus cards requiring rare habitat combos you may not hit.",
-      "strategy_stealth": ["Match bonus to likely bird types", "Anatomist/Cartographer/Historian safe", "Avoid rare habitat combos"],
+      "strategy_detailed": "Pick bonus cards aligned with birds you're likely to draft. 'Counting' bonuses (X+ birds with a specific trait — wingspan range, name pattern, food type) score reliably when your engine matches them. Skip bonuses requiring rare combos or specific late-game triggers that may never fire.",
+      "strategy_stealth": ["Match bonus to your draft direction", "Counting bonuses score reliably", "Skip rare-combo or late-trigger bonuses"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
