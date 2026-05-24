@@ -31,7 +31,7 @@
       "phase": "Early Game",
       "category": "Continent Bonus",
       "condition": "One territory short of a continent",
-      "strategy_detailed": "Completing a continent for its bonus is almost always the right move, even at a cost of 3-4 armies. The bonus compounds every turn — Australia's +2 pays back in one turn. Opponents who deny your continent must spend armies to do it, weakening themselves elsewhere.",
+      "strategy_detailed": "Complete the continent even at a cost of 3-4 armies. Australia (+2) and South America (+2) repay in ~2 turns; Africa (+3) in ~1-2; North America/Europe (+5) faster. Bonuses compound every turn afterward. Opponents who deny your continent spend armies to do so, weakening themselves elsewhere.",
       "strategy_stealth": ["Complete continent even at 3-4 army cost", "Bonus repays in 1-2 turns", "Denial costs opponent armies too"],
       "tags": ["TLDR", "Economy"],
       "context": "no-bonus"
