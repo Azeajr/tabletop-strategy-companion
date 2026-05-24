@@ -22,8 +22,8 @@
       "phase": "Early Game",
       "category": "Question Strategy",
       "condition": "Choosing your first question",
-      "strategy_detailed": "Best first question splits the board near 50/50. In classic Guess Who (24 cards), 'Do they have brown hair?' splits ~12/12; 'Do they have facial hair?' splits ~10/14. Gender questions are usually skewed (~19M/5F in original) — poor binary split. Quality = closeness to 50/50.",
-      "strategy_stealth": ["First Q targets 12/12 split", "Hair color splits well, gender skewed", "Specific features = low early value"],
+      "strategy_detailed": "Best first question splits the board near 12/12 (optimal binary search). In classic Guess Who, hair-related questions usually split well; gender questions are skewed (~19M/5F in the 1979 original — only ~8 elims/question). Avoid specific features early (mustache, hat) — they eliminate 2-3 only.",
+      "strategy_stealth": ["First Q targets 12/12 split", "Hair color usually near balanced", "Gender often skewed; specific = poor"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -67,8 +67,8 @@
       "phase": "Mid-Game",
       "category": "Guess Timing",
       "condition": "Down to 3-4 characters remaining",
-      "strategy_detailed": "With 3-4 characters left, weigh guessing vs. asking. One more question costs a turn — opponent may guess correctly first if they're also at 3-4. If you're confident one character fits all answers so far, guess now. 1-in-3 odds beat losing the initiative.",
-      "strategy_stealth": ["3-4 left: guess vs ask tradeoff", "Opponent at 3-4 too = race to guess", "1-in-3 beats losing initiative"],
+      "strategy_detailed": "Asking one more question then guessing wins ~75% (narrow to 1-2, then guess). Guessing now wins 33% at 3 chars, 25% at 4. Only race-guess when opponent is also at 3-4 and might guess first this round. Without that pressure, always ask — the odds favor patience by 2-3×.",
+      "strategy_stealth": ["Ask first wins ~75% if unpressured", "Guess race only if opponent at 3-4", "Guess odds: 33% (3 left), 25% (4 left)"],
       "tags": ["TLDR", "Closing"],
       "context": null
     },
