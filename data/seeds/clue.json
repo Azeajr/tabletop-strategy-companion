@@ -22,8 +22,8 @@
       "phase": "Setup",
       "category": "Starting Position",
       "condition": "Choosing your first room target",
-      "strategy_detailed": "Move toward rooms adjacent to your starting position that you don't hold. Suggesting rooms you can reach in 1-2 turns lets you make suggestions every round. Players stranded in hallways for 3 turns while others collect information fall badly behind.",
-      "strategy_stealth": ["Target adjacent rooms first", "Suggest every round if possible", "Hallway turns = wasted information"],
+      "strategy_detailed": "Move toward rooms adjacent to your starting position you don't hold. Use the diagonal secret passages (Lounge↔Conservatory, Kitchen↔Study) to swap corners in one turn — free travel that ignores dice. Players stranded in hallways while others gather information fall badly behind.",
+      "strategy_stealth": ["Adjacent rooms first; suggest each round", "Secret passages link corner rooms", "Hallway turns = wasted information"],
       "tags": ["Economy"],
       "context": null
     },
@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Information Hiding",
       "condition": "Showing a card to another player",
-      "strategy_detailed": "When showing a card, choose which card to reveal carefully if you hold multiple matching cards. Show the card least useful to the asker — the one they likely already know or can infer. Show a weapon card instead of the suspect if both match; weapons are often harder to eliminate.",
-      "strategy_stealth": ["Show least useful card when multiple match", "Prefer showing weapons over suspects", "Make them work for each deduction"],
+      "strategy_detailed": "Canonical rule: if you've already shown a specific card to the asker before, show it again. They learn nothing new. If no prior reveal applies, pick the card the asker is least likely to deduce via other suggestions — usually the one tied to the smallest unknown pool.",
+      "strategy_stealth": ["Repeat cards already shown to asker", "Same card = zero new information", "Else show card with smallest pool"],
       "tags": ["Bluff"],
       "context": null
     },
@@ -85,8 +85,8 @@
       "phase": "End-Game",
       "category": "Accusation Timing",
       "condition": "Ready to make a final accusation",
-      "strategy_detailed": "Accuse from a room adjacent to the center to minimize travel. Don't telegraph readiness — opponents will race to accuse first. If two elements are certain and one ambiguous, guess anyway; 3-of-3 guessing beats being pre-empted.",
-      "strategy_stealth": ["Accuse from near center room", "Don't telegraph readiness", "Guess 3rd element rather than be pre-empted"],
+      "strategy_detailed": "Accusations don't require being in a room — only suggestions do. So once certain, accuse on your turn from wherever you stand. Don't telegraph readiness; opponents will race to accuse first. If 2 elements are certain and 1 is 50/50, guess — being pre-empted is worse than a coin-flip wrong call.",
+      "strategy_stealth": ["Accuse from anywhere — not a room", "Don't telegraph readiness", "50/50 guess beats being pre-empted"],
       "tags": ["TLDR", "Closing"],
       "context": null
     },
