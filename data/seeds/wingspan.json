@@ -49,8 +49,8 @@
       "phase": "Early Game",
       "category": "End-of-Round Goals",
       "condition": "Round 1 goal within reach",
-      "strategy_detailed": "Round 1 goals reward the most points (5, 4, 3, 2, 1). If the round 1 goal aligns with your plan — eggs, birds in a specific habitat — pivot fully toward it. Sharing 1st place beats solo 2nd place in points per action.",
-      "strategy_stealth": ["Round 1 goal = most points (5-4)", "Pivot if goal aligns with plan", "Tie for 1st beats solo 2nd"],
+      "strategy_detailed": "End-of-round goals score 5/4/3/2/1 in 5-player (1st through 5th). Scoring tiles are the same all rounds; round 1 is special only because it has the most turns (8 vs 5 in round 4) — most opportunity to compete. If your engine aligns with a goal, pivot toward it. Tied 1st beats solo 2nd.",
+      "strategy_stealth": ["Goals: 5/4/3/2/1 in 5-player", "Round 1 = 8 turns, most chances", "Tie for 1st beats solo 2nd"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
