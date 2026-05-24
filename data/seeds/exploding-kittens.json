@@ -58,8 +58,8 @@
       "phase": "Mid-Game",
       "category": "Defuse Management",
       "condition": "You have only one Defuse left",
-      "strategy_detailed": "With one Defuse, protect it at all costs. Play Skips and Attacks aggressively to avoid drawing. When you do draw and survive without using the Defuse, that's ideal. If forced to draw, bury the Exploding Kitten near the bottom to buy time for others to shuffle.",
-      "strategy_stealth": ["One Defuse: avoid drawing at all costs", "Bury kitten near bottom if used", "Aggressive Skips protect last Defuse"],
+      "strategy_detailed": "With one Defuse, protect it: play Skips and Attacks aggressively to avoid drawing. If forced to draw and defuse the EK, place it near the bottom of the deck — statistically you'll be the last to encounter it again. Burning your last Defuse means the next EK draw eliminates you.",
+      "strategy_stealth": ["Last Defuse: avoid all drawing", "Bury defused EK near bottom", "Next EK = elimination after"],
       "tags": ["Defense"],
       "context": null
     },
@@ -67,8 +67,8 @@
       "phase": "Mid-Game",
       "category": "Peek Usage",
       "condition": "Using a See the Future card",
-      "strategy_detailed": "Peek gives you the top 3 cards' order. Note if an Exploding Kitten appears and its position. Keep this information private — don't react visibly. Use it to decide: Skip if kitten is top 3, draw normally if safe. Share with allies only if it benefits you.",
-      "strategy_stealth": ["Peek: don't react visibly", "Skip if kitten in top 3", "Share peek only if it benefits you"],
+      "strategy_detailed": "Peek shows the top 3 cards' order. EK at position 1: Skip immediately (you'd draw it). EK at position 2 or 3: drawing normally is safer for you — the EK passes downstream. Watch for opponent Skips/Attacks that could bounce it back to you. Keep peeked info private; don't react visibly.",
+      "strategy_stealth": ["Position 1 EK: Skip immediately", "Pos 2-3: draw, EK passes downstream", "Hide reaction; watch for bounces"],
       "tags": ["Memory", "Bluff"],
       "context": null
     },
