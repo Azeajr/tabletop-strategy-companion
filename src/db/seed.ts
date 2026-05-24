@@ -22,7 +22,7 @@ function computeVersion(seeds: unknown[]): string {
   return hash.toString(16)
 }
 
-async function runSeedInit(database: TabletopDBType): Promise<void> {
+export async function runSeedInit(database: TabletopDBType): Promise<void> {
   const rawSeeds = Object.values(seedModules)
   if (rawSeeds.length === 0) return
 

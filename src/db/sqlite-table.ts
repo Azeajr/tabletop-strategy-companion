@@ -154,6 +154,7 @@ class WhereClause<T> {
   }
 
   anyOf(values: unknown[]): Query<T> {
+    if (values.length === 0) return new Query<T>(this.table)._setWhere('1 = 0', [])
     const placeholders = values.map(() => '?').join(',')
     return new Query<T>(this.table)._setWhere(`"${this.field}" IN (${placeholders})`, values)
   }
