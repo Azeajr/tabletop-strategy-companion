@@ -22,8 +22,8 @@
       "phase": "Setup",
       "category": "Clue Safety",
       "condition": "First clue of the game",
-      "strategy_detailed": "Your first clue should be your safest high-number clue — 2 or 3 cards with minimal risk of hitting the assassin or opponent cards. Opening with a risky 4-card clue that backfires often costs the game. Establish momentum, then take bigger swings.",
-      "strategy_stealth": ["First clue: safe 2-3 card clue", "No risky high-number openers", "Momentum > ambition early"],
+      "strategy_detailed": "First clue: 2-3 cards with crystal-clear connections. Avoid 4+ card clues until your team has shown they parse your style. Opening with a risky high-number clue that backfires often costs the game. Establish trust through clean early hits, then escalate to bigger swings.",
+      "strategy_stealth": ["First clue: 2-3 cards, clear links", "Avoid 4+ until team in sync", "Backfire on opener often loses"],
       "tags": ["Economy"],
       "context": "spymaster"
     },
@@ -57,7 +57,7 @@
     {
       "phase": "Mid-Game",
       "category": "Clue Strategy",
-      "condition": "Opponent one clue from winning",
+      "condition": "Opponent one card from winning",
       "strategy_detailed": "When opponent is one card away from winning, prioritize a clue that covers 2+ cards even if one connection is weaker than ideal. Speed beats elegance. A slightly risky 2-card clue that wins this turn is better than a perfect 1-card clue that arrives too late.",
       "strategy_stealth": ["2-card clue beats perfect 1-card", "Speed > elegance when opponent close", "Risky connection OK to finish fast"],
       "tags": ["Offense", "Closing"],
