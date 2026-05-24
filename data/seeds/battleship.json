@@ -94,11 +94,11 @@
       "phase": "Mid-Game",
       "category": "Targeting",
       "condition": "All 2-square ships have been sunk",
-      "strategy_detailed": "When the last 2-square ship is sunk, upgrade to 3-stride parity: fire only where (row + column) % 3 == 0. Covers ~34% of the board and still guarantees a hit — every remaining ship is 3+ squares and must span at least one target square. Cuts ~16% more shots with zero information loss.",
+      "strategy_detailed": "Once the 2-square ship is sunk, switch to 3-stride parity: fire only where (row + col) % 3 == 0. Coverage drops from 50% (checkerboard) to 34% of the board, but every 3+ cell ship still must span a target cell. On a 10x10 grid: 34 cells instead of 50 — 16 fewer shots with zero info lost.",
       "strategy_stealth": [
-        "2-sq ships gone → switch to 3-stride parity",
-        "Fire where (row + col) % 3 == 0",
-        "~16% fewer shots, no info lost"
+        "3-stride: (row + col) % 3 == 0",
+        "Coverage drops 50% → 34%",
+        "34 cells vs 50 — no info lost"
       ],
       "tags": ["Economy", "Offense"],
       "context": null
