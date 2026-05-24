@@ -49,8 +49,8 @@
       "phase": "Early Game",
       "category": "Blocking",
       "condition": "Opponent building a sequence",
-      "strategy_detailed": "Block an opponent sequence when they have 3 chips in a row and you hold the blocking card. In 2-player, block early — a 4-chip sequence requires a One-Eyed Jack to stop and you may not have one. In 3-player, let one opponent block another if possible.",
-      "strategy_stealth": ["Block at 3-chip before it's 4", "4-chip needs OEJ to stop", "3-player: let opponents block each other"],
+      "strategy_detailed": "Block opponent at 3 in a row if you hold the 5th-cell card. At 4 chips, blocking options: play your own chip on the open 5th cell (matching card or TEJ) OR remove one of their chips with OEJ. Both require specific cards or jacks — don't delay; every turn they extend further.",
+      "strategy_stealth": ["Block at 3-chip with matching card", "4-chip: block 5th cell OR OEJ removal", "3-player: let opponents block each other"],
       "tags": ["Defense"],
       "context": "two-player"
     },
@@ -97,14 +97,14 @@
       "strategy_detailed": "Per rules, chips in a completed sequence are locked — opponents cannot OEJ them. Position your second sequence to share one chip with the first (allowed: one shared chip per cross). That shared chip is locked, giving your second sequence an unbreakable anchor and effectively a head start.",
       "strategy_stealth": ["Completed sequence chips are locked", "Share 1 chip across both sequences", "Locked chip = unbreakable anchor"],
       "tags": ["TLDR", "Closing"],
-      "context": null
+      "context": "two-player"
     },
     {
       "phase": "End-Game",
       "category": "Jack Usage",
       "condition": "Opponent one chip from winning",
-      "strategy_detailed": "If an opponent has a 4-chip sequence with one gap, use a One-Eyed Jack to remove their most central chip — not the gap chip. Removing from the middle forces them to play two more cards, not one. Time the jack to your own winning turn if possible.",
-      "strategy_stealth": ["Remove central chip, not gap chip", "Central removal needs 2 more plays", "Time OEJ to coincide with your win"],
+      "strategy_detailed": "Use OEJ to remove any chip from their 4-chip line — they'll need to refill plus extend, minimum 2 plays to recover. Pick the chip that sits on the most potential future sequences (often a central one in multi-line positions). Time the OEJ to coincide with your own winning move when possible.",
+      "strategy_stealth": ["OEJ removes chip = 2 plays to recover", "Pick chip in most potential sequences", "Time OEJ to your winning turn"],
       "tags": ["Closing", "Defense"],
       "context": null
     },
@@ -112,8 +112,8 @@
       "phase": "End-Game",
       "category": "Coalition Play",
       "condition": "Leader near winning in 3-team game",
-      "strategy_detailed": "When the leader has both sequences nearly complete in 3-team play, both remaining teams must burn their One-Eyed Jacks to stall. Discard winning your own sequences temporarily and coordinate two-team defense. One team blocking one sequence, other team blocking the other.",
-      "strategy_stealth": ["Both teams burn OEJ to stall leader", "Split: each team blocks one sequence", "Delay your own win to prevent leader"],
+      "strategy_detailed": "3-team rule: only 1 sequence needed to win. When leader has 4 chips toward their first sequence, both other teams must immediately OEJ-remove or block the 5th cell. Coordinate which team handles the block. Pause your own sequence attempts — leader's first completion wins outright.",
+      "strategy_stealth": ["1 sequence wins in 3-team", "Coordinate OEJ to break leader's 4th", "Pause own attempts to block leader"],
       "tags": ["Closing", "Defense"],
       "context": "three-player"
     }
