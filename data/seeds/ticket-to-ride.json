@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Ticket Selection",
       "condition": "Choosing initial destination tickets",
-      "strategy_detailed": "Keep at least 2 tickets that share a geographic cluster. Overlapping routes mean fewer cards are needed to complete multiple tickets simultaneously, compounding your efficiency.",
-      "strategy_stealth": ["Keep 2+ tickets in same region", "Overlapping routes = card efficiency", "Discard outlier tickets"],
+      "strategy_detailed": "Rule: you must keep at least 2 of your 3 initial tickets. Pick tickets that share a geographic cluster — overlapping routes mean fewer cards complete multiple tickets simultaneously. Discard outliers when allowed; the penalty for failing each ticket = its full point value.",
+      "strategy_stealth": ["Must keep 2 of 3 initial tickets", "Cluster tickets share route paths", "Fail penalty = full ticket value"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -121,8 +121,8 @@
       "phase": "Mid-Game",
       "category": "Ticket Focus",
       "condition": "One ticket away from completion",
-      "strategy_detailed": "When you're one route away from completing a ticket, protect it by claiming adjacent routes first if they're contested. A blocked final segment loses the ticket's entire point value plus the negative penalty.",
-      "strategy_stealth": ["Secure adjacent contested routes", "Blocked last route = full penalty", "Finish tickets before new ones"],
+      "strategy_detailed": "Secure your last route immediately even if adjacent contested ones cost more. Failing a ticket subtracts its full point value AND denies the gain you would have earned — net swing is 2× the ticket value vs completing. Blocked final segments are catastrophic.",
+      "strategy_stealth": ["Secure last route immediately", "Fail = 2× ticket value swing", "Blocked final = catastrophic"],
       "tags": ["Defense"],
       "context": "tickets"
     },
