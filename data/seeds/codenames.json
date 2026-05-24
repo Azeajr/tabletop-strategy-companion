@@ -49,8 +49,8 @@
       "phase": "Early Game",
       "category": "Operative Guessing",
       "condition": "Unsure about a guess",
-      "strategy_detailed": "When unsure, say so aloud. Your spymaster can only confirm with facial expressions — read them carefully. A subtle reaction often signals you're on the right track. If genuinely uncertain between two cards, pick the one that doesn't connect to opponent colors at all.",
-      "strategy_stealth": ["Say unsure aloud — read SM's face", "Pick card not near opponent colors", "Uncertainty = stop after first guess"],
+      "strategy_detailed": "When unsure, talk it out with the team — spymaster must stay silent (rules). Eliminate any card weakly connected to opponent colors or the assassin. If 2 candidates remain, prefer the one fitting the clue word literally over the popular pop-culture interpretation. Stop after the first wrong guess.",
+      "strategy_stealth": ["Discuss aloud — SM stays silent", "Eliminate cards near opponent colors", "Prefer literal over popular meaning"],
       "tags": ["Memory"],
       "context": "operative"
     },
@@ -71,6 +71,15 @@
       "strategy_stealth": ["Leftover guess = previous missed card", "Prior clue still valid — use it", "Never guess randomly on extra turn"],
       "tags": ["Economy"],
       "context": "operative"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Clue Strategy",
+      "condition": "Team missed cards from prior clues",
+      "strategy_detailed": "Give a '0' clue (e.g., 'fishing, 0') to redirect operatives to prior unsolved cards. The 0 grants unlimited guesses but signals 'none of my current cards relate to fishing — revisit earlier targets'. Use sparingly: it leaks information to opponents about words you don't own.",
+      "strategy_stealth": ["'word, 0' = unlimited guesses", "Redirects team to prior misses", "Leaks what you don't own"],
+      "tags": ["Pivot"],
+      "context": "spymaster"
     },
     {
       "phase": "Mid-Game",
