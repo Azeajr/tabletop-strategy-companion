@@ -58,7 +58,7 @@
       "phase": "Early Game",
       "category": "Card Collection",
       "condition": "Choosing face-up vs blind draw",
-      "strategy_detailed": "Take face-up cards only when they match colors you need. If two different needed colors appear face-up, take both — multi-route flexibility wins. Don't grab useless face-ups; blind draw has ~10% wild chance and usually beats a junk colored card. Refresh: 3 visible locomotives reshuffle all 5 face-ups.",
+      "strategy_detailed": "Take face-up cards only when they match colors you need. If two different needed colors appear face-up, take both. Don't grab useless face-ups — blind draw has ~10% wild chance and usually beats a junk colored card. Refresh: 3 visible wilds reshuffle all 5 face-ups.",
       "strategy_stealth": ["Face-up only if color needed", "Different needed colors: take both", "Blind draw = ~10% wild chance"],
       "tags": [],
       "context": null
