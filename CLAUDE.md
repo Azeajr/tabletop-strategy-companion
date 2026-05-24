@@ -19,8 +19,8 @@
 ## Quick Start Commands
 
 ```bash
-npm run dev          # dev server (Vite)
-npm test             # unit tests (Vitest)
+npm run dev          # dev server (Vite, port 5173)
+npm test             # unit tests (Vitest — 10 tests)
 npm run check        # build + test
 npm run build        # tsc + vite build
 npm run lint         # ESLint
@@ -35,6 +35,20 @@ npm run lint         # ESLint
 - **Common Mistakes**: `.claude/COMMON_MISTAKES.md` ⚠️
 - **Architecture**: `.claude/ARCHITECTURE_MAP.md`
 - **Quick Start**: `.claude/QUICK_START.md`
+
+---
+
+## Current State
+
+App is fully implemented and deployed.
+
+- All 3 views live: GameLibrary, PreGameDashboard, LiveCompanion
+- SQLite layer complete: ORM, Worker client, test client (Vite alias), seed loader
+- Study ↔ Stealth mode toggle wired end-to-end
+- Catan seed data bundled (16 strategies, 4 phases, context filters)
+- 10 tests passing, build clean
+
+To add a new game: drop `data/seeds/<game-id>.json`, run `npm test`, commit.
 
 ---
 
