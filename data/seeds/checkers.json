@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Opening Development",
       "condition": "Choosing your first moves",
-      "strategy_detailed": "Checkers is a solved game — perfect play by both sides always draws. Develop center pieces first: the center four squares control the most diagonals and maximize mobility. Edge pieces become targets. Classic openings like Old Faithful (11-15, 23-19) contest the center immediately.",
-      "strategy_stealth": ["Checkers solved: perfect play = draw", "Develop center pieces first", "Classic: 11-15, 23-19 openings"],
+      "strategy_detailed": "Checkers is solved — perfect play always draws (Chinook). Develop toward the center squares (14, 15, 18, 19) for maximum diagonal control. Edge pieces have fewer attack lanes and become easy targets. The opening 11-15 contests the center on move 1 and is the most-played tournament line.",
+      "strategy_stealth": ["Solved: perfect play = draw", "Develop center (squares 14/15/18/19)", "11-15 opens center immediately"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -76,8 +76,8 @@
       "phase": "Mid-Game",
       "category": "Defense",
       "condition": "Down 2+ pieces, avoiding loss",
-      "strategy_detailed": "When behind in material, seek positions where your pieces are mutually protected and hard to attack. Aim for the double-corner defense (pieces on squares 1, 2, 3, 4) — it's nearly impenetrable even against two kings. Draw is a good result when down in material.",
-      "strategy_stealth": ["Mutual protection of all pieces", "Double-corner defense = near-draw", "Draw is good when behind material"],
+      "strategy_detailed": "Down material, retreat to mutually-protecting formations. Head for the double-corner area — your back-row corner where two diagonals exit gives extra retreat options. Aim for a fortress where every piece defends another and the attacker can't break in. Draw is the win condition when behind.",
+      "strategy_stealth": ["Mutual protection of all pieces", "Retreat to double-corner area", "Draw is good when behind"],
       "tags": ["Defense"],
       "context": "behind"
     },
@@ -94,8 +94,8 @@
       "phase": "End-Game",
       "category": "King Endgame",
       "condition": "You are the lone king vs two",
-      "strategy_detailed": "Stay on the long diagonal (squares 1-5-9-14-18-23-27-32) and keep moving. Avoid corners. The long diagonal gives maximum mobility and is hardest to corner you on. Force draws by maintaining central squares and refusing to be trapped.",
-      "strategy_stealth": ["Stay on the long diagonal", "Avoid corners — seek center", "Refuse to be pushed to edge squares"],
+      "strategy_detailed": "Stay on the long diagonal — the 8-square corner-to-corner line is the hardest place to be cornered. If attackers break opposition, slide back toward center. Avoid the single-corner area at all costs (only one exit). Force the chasers to maintain perfect opposition for many moves; one slip = draw.",
+      "strategy_stealth": ["Stay on the long diagonal", "Avoid the single corner", "Slide to center if attackers slip"],
       "tags": ["Defense", "Closing"],
       "context": "behind"
     }
