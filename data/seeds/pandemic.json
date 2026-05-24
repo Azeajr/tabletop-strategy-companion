@@ -49,8 +49,8 @@
       "phase": "Early Game",
       "category": "Card Sharing",
       "condition": "Transferring city cards between players",
-      "strategy_detailed": "Card sharing requires both players to be in the same city. Plan routes so the card passer ends their turn adjacent to the receiver's next city. The Researcher can share from anywhere — route your team around them.",
-      "strategy_stealth": ["Both players same city to share", "Route receiver toward passer", "Researcher shares from anywhere"],
+      "strategy_detailed": "Both players must be in the same city to share — no exceptions. Plan routes so the passer ends their turn where the receiver will be. The Researcher's edge isn't location-free trading; it's that she can give any card from her hand (not just matching her city). Still requires same-city presence.",
+      "strategy_stealth": ["Both players same city — no exceptions", "Researcher: any card, still same city", "Plan routes for shared end-of-turn"],
       "tags": ["Economy"],
       "context": null
     },
