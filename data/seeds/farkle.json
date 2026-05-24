@@ -22,8 +22,8 @@
       "phase": "Early Game",
       "category": "Risk Calibration",
       "condition": "Deciding whether to roll again",
-      "strategy_detailed": "With 3+ dice remaining, rolling again is statistically favorable — farkle probability is low enough that expected value favors rolling. With 2 dice, farkle risk jumps to ~44%. With 1 die, only a 1 or 5 scores; farkle risk is 67%. One die = almost always bank.",
-      "strategy_stealth": ["3+ dice: expected value favors rolling", "2 dice: 44% farkle risk — caution", "1 die: 67% farkle risk — bank it"],
+      "strategy_detailed": "Farkle rates: 3 dice=28%, 2 dice=44%, 1 die=67%. Roll-vs-bank depends on both dice and accumulated score. EV thresholds: roll 3 dice while under ~350 banked, 4 dice under ~600, 5+ dice under ~800. Above those numbers the expected value flips negative — bank.",
+      "strategy_stealth": ["3 dice: roll under 350 banked", "4 dice: roll under 600 banked", "5+ dice: roll under 800 banked"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -58,8 +58,8 @@
       "phase": "Mid-Game",
       "category": "Triplet Strategy",
       "condition": "Rolling triplets on first roll",
-      "strategy_detailed": "Triplets on the first roll are high-value sets (1s = 1000, 2s = 200, 3s = 300, etc.). Bank all 6 dice as a triplet pair when possible — that's 1000+ points. After banking a triplet, reroll remaining dice only if 3+ dice remain. Triplets are your primary scoring engine.",
-      "strategy_stealth": ["Triplet pair on first roll = 1000+ pts", "Reroll remaining only if 3+ dice left", "Triplets are primary scoring engine"],
+      "strategy_detailed": "Triplet scoring: triple-1s = 1000; other triples = 100× face (3s=300, 6s=600). If two triplets fill all 6 dice (e.g., 1-1-1 + 3-3-3 = 1300), that's hot dice — score them and reroll all 6 per the hot-dice rule, don't bank and stop. Triplets are the primary scoring engine.",
+      "strategy_stealth": ["1s=1000, others=100× face", "Two triplets = hot dice — reroll", "Don't bank if hot dice triggered"],
       "tags": ["Economy"],
       "context": null
     },
