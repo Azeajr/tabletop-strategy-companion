@@ -1,0 +1,103 @@
+{
+  "game_id": "checkers",
+  "game_name": "Checkers",
+  "game_description": "Capture all opponent pieces or block them from moving, 2 players.",
+  "filter_1_label": "Equal or ahead on piece count?",
+  "filter_1_yes_context": "ahead",
+  "filter_1_no_context": "behind",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Opening Development",
+      "condition": "Choosing your first moves",
+      "strategy_detailed": "Develop center pieces first. The center four squares control the most diagonals and give your pieces maximum mobility. Pieces on the edges have fewer options and become targets. Classic openings like the Old Faithful (11-15, 23-19) contest the center immediately.",
+      "strategy_stealth": ["Develop center pieces first", "Edge pieces have fewer options", "Classic: 11-15, 23-19 openings"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "King Row Defense",
+      "condition": "Protecting your back row",
+      "strategy_detailed": "Keep at least 2 pieces on your king row for the first 4-5 moves. Surrendering the king row lets opponent pieces pass unchallenged into kings. A piece that reaches king row changes game tempo dramatically — delay that at low cost.",
+      "strategy_stealth": ["Keep 2 back-row pieces early", "Undefended king row = free kings", "Delay king row breach cheaply"],
+      "tags": ["Defense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Forced Jumps",
+      "condition": "You can set up a forced jump",
+      "strategy_detailed": "Offer a piece as bait where taking it exposes the capturing piece to a counter-jump. Double jumps are powerful — sacrifice one piece to capture two. The exchange is favorable if the second capture leaves you with a better position or piece advantage.",
+      "strategy_stealth": ["Bait capture to enable counter-jump", "1-for-2 exchange = material gain", "Position after capture matters more"],
+      "tags": ["TLDR", "Offense"],
+      "context": "ahead"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Forced Jumps",
+      "condition": "Opponent setting up a forced jump",
+      "strategy_detailed": "When facing a forced jump that costs material, check if you can make a different move that removes the threat. Avoid mandatory jumps that give opponent a double take unless your position improves. Piece deficit is very hard to recover from in checkers.",
+      "strategy_stealth": ["Find alternative moves to avoid bad jumps", "Mandatory jumps can be refused by retreat", "Piece deficit rarely recovers"],
+      "tags": ["Defense"],
+      "context": "behind"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Piece Mobility",
+      "condition": "Pieces becoming cramped or blocked",
+      "strategy_detailed": "Blocked pieces are effectively removed from the game. Keep your pieces spread across 2-3 diagonals so they can support each other and retreat if attacked. A cluster of 3 adjacent pieces is easily isolated and captured in sequence.",
+      "strategy_stealth": ["Spread across 2-3 diagonals", "Clustered pieces = easy targets", "Each piece needs a retreat square"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "King Promotion",
+      "condition": "Opportunity to promote a piece",
+      "strategy_detailed": "Kings move in both directions and are worth roughly 1.5 regular pieces. Race to king when promotion doesn't cost material. Avoid promoting pieces that immediately get captured — wait for a safe lane. First player to king usually controls tempo.",
+      "strategy_stealth": ["King = 1.5× regular piece value", "Race to king without losing material", "First king usually controls tempo"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Exchange Strategy",
+      "condition": "Even material, trading pieces",
+      "strategy_detailed": "When even on pieces, avoid exchanges unless they improve your position. Trade pieces that are blocked or poorly placed for opponent pieces that are active. Force exchanges only when they result in a passed piece or a king promotion threat.",
+      "strategy_stealth": ["Trade weak pieces for opponent's active", "Even trades favor better position", "Force trade only for promotion threat"],
+      "tags": ["Economy"],
+      "context": "ahead"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Defense",
+      "condition": "Down 2+ pieces, avoiding loss",
+      "strategy_detailed": "When behind in material, seek positions where your pieces are mutually protected and hard to attack. Aim for the double-corner defense (pieces on squares 1, 2, 3, 4) — it's nearly impenetrable even against two kings. Draw is a good result when down in material.",
+      "strategy_stealth": ["Mutual protection of all pieces", "Double-corner defense = near-draw", "Draw is good when behind material"],
+      "tags": ["Defense"],
+      "context": "behind"
+    },
+    {
+      "phase": "End-Game",
+      "category": "King Endgame",
+      "condition": "Kings only remain on board",
+      "strategy_detailed": "King vs King endgames often draw. To win, you need 2 kings vs 1 or material advantage. Force the lone king into a corner using opposition — approach diagonally to limit its moves. A cornered king can be captured or stalemated.",
+      "strategy_stealth": ["2 kings vs 1 usually wins", "Force lone king to corner diagonally", "Cornered king = capture or stalemate"],
+      "tags": ["TLDR", "Closing"],
+      "context": "ahead"
+    },
+    {
+      "phase": "End-Game",
+      "category": "King Endgame",
+      "condition": "You are the lone king vs two",
+      "strategy_detailed": "Stay on the long diagonal (squares 1-5-9-14-18-23-27-32) and keep moving. Avoid corners. The long diagonal gives maximum mobility and is hardest to corner you on. Force draws by maintaining central squares and refusing to be trapped.",
+      "strategy_stealth": ["Stay on the long diagonal", "Avoid corners — seek center", "Refuse to be pushed to edge squares"],
+      "tags": ["Defense", "Closing"],
+      "context": "behind"
+    }
+  ]
+}

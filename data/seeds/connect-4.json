@@ -1,0 +1,103 @@
+{
+  "game_id": "connect-4",
+  "game_name": "Connect 4",
+  "game_description": "Drop discs to connect four in a row before your opponent, 2 players.",
+  "filter_1_label": "Did you go first this game?",
+  "filter_1_yes_context": "first-mover",
+  "filter_1_no_context": "second-mover",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Center Control",
+      "condition": "Choosing your first move",
+      "strategy_detailed": "The center column (column 4) is the only correct first move. It participates in more potential four-in-a-row combinations than any other column — horizontal, vertical, and both diagonals. Any first move outside the center is statistically suboptimal.",
+      "strategy_stealth": ["Column 4 = only correct first move", "Center connects in all 4 directions", "Non-center first moves are suboptimal"],
+      "tags": ["TLDR", "Economy"],
+      "context": "first-mover"
+    },
+    {
+      "phase": "Setup",
+      "category": "Counter Strategy",
+      "condition": "Opponent plays center column",
+      "strategy_detailed": "Against center-opening opponent, play column 3 or 5 (one off center). This contests the diagonal and prepares a flanking threat. Playing directly under or beside the center is the correct response — never play corners or extreme edges on move 2.",
+      "strategy_stealth": ["Counter center: play col 3 or 5", "Contests diagonal + prepares flank", "Never play corners or edges on move 2"],
+      "tags": ["Defense"],
+      "context": "second-mover"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Threat Building",
+      "condition": "Building toward connect-4",
+      "strategy_detailed": "Build threats in two directions simultaneously — horizontal and diagonal from the same disc. An opponent who must block one lets you extend the other. Three in a row with both ends open is an immediate forced win — opponent can only block one end.",
+      "strategy_stealth": ["Build horizontal + diagonal together", "Three open-ended in a row = forced win", "Two threats = opponent can block one"],
+      "tags": ["TLDR", "Offense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Threat Building",
+      "condition": "Going second, behind in tempo",
+      "strategy_detailed": "The second player is permanently one move behind. Compensate by creating threats that also block: every disc you play should threaten your four AND prevent an opponent four. Pure blocking without threatening lets first player dictate tempo indefinitely.",
+      "strategy_stealth": ["Every move: threaten AND block", "Pure blocking loses — you fall behind", "Force dual-purpose disc placements"],
+      "tags": ["Defense"],
+      "context": "second-mover"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Forcing Moves",
+      "condition": "Opponent must respond to your threat",
+      "strategy_detailed": "A forced response (opponent must block or lose) lets you build elsewhere. Chain forced responses: after they block, create a new threat in a different area. Three consecutive forced responses often result in a position where you have two simultaneous winning moves.",
+      "strategy_stealth": ["Chain forced blocks in different areas", "3 chains = 2 simultaneous win threats", "Forced moves = free development elsewhere"],
+      "tags": ["Offense"],
+      "context": "first-mover"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Odd-Even Strategy",
+      "condition": "Evaluating column threat heights",
+      "strategy_detailed": "The first player wins with threats on odd rows; second player wins on even rows. Plan your winning four-in-a-row to land on the right parity row for your position. A threat on row 3 (odd) benefits the first player; row 4 (even) benefits second. Count your planned winning row.",
+      "strategy_stealth": ["First player wins on odd rows (1,3,5)", "Second player wins on even rows (2,4,6)", "Count your winning row parity"],
+      "tags": ["Memory"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Zugzwang",
+      "condition": "Board filling with no winner yet",
+      "strategy_detailed": "On a filling board, zugzwang (any move you make loses) becomes a real threat. Avoid building columns where your own disc creates a winning row for the opponent above it. Before each move, check: does this disc set up opponent's winning position one row above?",
+      "strategy_stealth": ["Check: does this disc set up their win above?", "Full board zugzwang loses instantly", "Avoid columns with opponent win above"],
+      "tags": ["Defense"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Winning Sequence",
+      "condition": "Two simultaneous four-in-a-row threats",
+      "strategy_detailed": "Two simultaneous threats (a 'double threat') guarantee a win — opponent can block only one. Create a double threat by building a single disc that completes two different potential four-in-a-rows. If your opponent cannot block both, play the double threat move immediately.",
+      "strategy_stealth": ["Double threat = guaranteed win", "One disc completing two different fours", "Play it the moment it appears"],
+      "tags": ["TLDR", "Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Forced Win",
+      "condition": "Board nearly full, you hold tempo",
+      "strategy_detailed": "With 6-8 slots remaining and tempo advantage, count the forced sequence. If your forced win requires opponent to fill a specific column in a specific order, verify they have no alternative that blocks your win along the way. Calculate 3 moves deep before committing.",
+      "strategy_stealth": ["Count forced sequence 3 moves deep", "Verify opponent has no blocking alternative", "Calculate before committing — not by feel"],
+      "tags": ["Closing", "Memory"],
+      "context": "first-mover"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Drawing Defense",
+      "condition": "Going second, board nearly full",
+      "strategy_detailed": "When first player has tempo advantage and a forced win line, a draw (full board, no winner) is your best achievable outcome. Force the board toward columns that deny their winning parity. A draw is a victory for the second player in a theoretically losing position.",
+      "strategy_stealth": ["Draw = victory for second player", "Force board to deny their parity row", "Full board with no winner = success"],
+      "tags": ["Defense", "Closing"],
+      "context": "second-mover"
+    }
+  ]
+}

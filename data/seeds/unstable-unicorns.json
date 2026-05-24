@@ -1,0 +1,103 @@
+{
+  "game_id": "unstable-unicorns",
+  "game_name": "Unstable Unicorns",
+  "game_description": "Build a unicorn army of 7 to win while sabotaging your rivals.",
+  "filter_1_label": "Leading on unicorn count?",
+  "filter_1_yes_context": "leading",
+  "filter_1_no_context": "trailing",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Starting Hand",
+      "condition": "Evaluating your opening hand",
+      "strategy_detailed": "Keep Neigh cards and Magic cards that destroy or steal. Discard pure unicorn cards with no effects — Baby Unicorn is your free starting piece anyway. An opening hand with 2 Neighs lets you block two key plays and is worth keeping even without unicorns.",
+      "strategy_stealth": ["Keep Neighs and destructive Magic", "Discard plain unicorn cards", "2 Neighs opening = strong hand"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Win Condition",
+      "condition": "Planning your unicorn strategy",
+      "strategy_detailed": "Know your deck's win path: combo-heavy builds (Narwhals, Unicorn Lasso chains) need protection cards; pure speed builds need cheap unicorns and skip-sabotage cards. Don't mix strategies — a half-combo half-speed hand does neither well.",
+      "strategy_stealth": ["Pick combo OR speed — don't mix", "Combo builds need protection cards", "Speed builds need cheap unicorns"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Neigh Timing",
+      "condition": "When to play a Neigh card",
+      "strategy_detailed": "Save Neighs for Unicorn Lasso, targeted destroy spells, and Unicorn Poison — not for basic unicorn plays. A Neigh used to stop a basic unicorn play is a 1-for-1 exchange at best. Used against Lasso or destroy, it prevents a 2-for-1 swing against you.",
+      "strategy_stealth": ["Neigh: save for Lasso and Destroy", "Don't Neigh basic unicorn plays", "Prevent 2-for-1 swings against you"],
+      "tags": ["TLDR", "Defense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Target Selection",
+      "condition": "Choosing who to disrupt",
+      "strategy_detailed": "In multi-player games, target the player closest to 7 unicorns, not the weakest. Pile-on effects that punish the leader keep the game competitive. Targeting a player who's already behind just accelerates their elimination and concentrates power elsewhere.",
+      "strategy_stealth": ["Target the leader, not the weakest", "Pile-on keeps game balanced", "Weak eliminated = more threats hit leader"],
+      "tags": ["Defense"],
+      "context": "trailing"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Protection",
+      "condition": "Leading on unicorn count",
+      "strategy_detailed": "When you're ahead, play at least one protection upgrade (Rainbow Mane, Glitter Bomb trigger, Barbed Wire) before the table turns against you. Leading by 2+ unicorns will attract every Lasso and destroy card at the table next turn.",
+      "strategy_stealth": ["Play protection before table targets you", "2+ ahead = everyone's target", "Barbed Wire punishes attackers"],
+      "tags": ["Defense"],
+      "context": "leading"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Upgrade Strategy",
+      "condition": "Choosing between unicorn or upgrade",
+      "strategy_detailed": "An upgrade that doubles your unicorn production (Unicorn Shrimpandium, Rainbow Mane) is often worth more than adding one unicorn manually. Each subsequent turn it generates value. Play upgrades early; they compound. Save direct unicorns for your final push to 7.",
+      "strategy_stealth": ["Upgrades compound over turns", "Play upgrades early — they stack", "Direct unicorns for final push to 7"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Downgrade Usage",
+      "condition": "Targeting opponent with downgrade",
+      "strategy_detailed": "Downgrades that prevent drawing cards (Pandamonium) or block playing cards (Slowdown) are stronger than downgrades that just remove unicorns. Removal can be Neigh'd; a Slowdown that lasts 3 turns effectively removes 3 of their actions.",
+      "strategy_stealth": ["Draw/play blockers > removal downgrades", "Removal gets Neigh'd; Slowdown doesn't", "3-turn Slowdown = -3 actions"],
+      "tags": ["Offense"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Neigh Timing",
+      "condition": "Opponent playing a Neigh on you",
+      "strategy_detailed": "If you have a Super Neigh (Neigh everything including Neighs), save it for your win attempt play, not for mid-game protection. Super Neigh is your insurance card for the final unicorn that wins the game — an opponent Neigh on that play loses you the game.",
+      "strategy_stealth": ["Super Neigh: save for win attempt", "Don't use it mid-game on protection", "Opponent Neigh on win play = game loss"],
+      "tags": ["Closing"],
+      "context": "leading"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Win Attempt",
+      "condition": "One unicorn away from winning",
+      "strategy_detailed": "Before playing your 7th unicorn, clear defenses: play any card that discards opponent's hand or forces discards first if possible. Then play your 7th with Super Neigh in hand if available. If no protection, play fast on the turn after an opponent burned their last Neigh.",
+      "strategy_stealth": ["Clear hands before playing 7th unicorn", "Play 7th after opponent's last Neigh spent", "Super Neigh in hand = safe win attempt"],
+      "tags": ["TLDR", "Closing"],
+      "context": "leading"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Blocking Wins",
+      "condition": "Opponent one unicorn from winning",
+      "strategy_detailed": "When an opponent is at 6 unicorns, hold your Neigh specifically for their 7th. Don't burn it the turn before on a downgrade or steal attempt. If you lack a Neigh, coordinate with other players to ensure someone has one — the whole table loses if they succeed.",
+      "strategy_stealth": ["Hold Neigh for their 7th unicorn only", "Don't burn it the turn before", "Coordinate with table — everyone loses if they win"],
+      "tags": ["Defense", "Closing"],
+      "context": "trailing"
+    }
+  ]
+}

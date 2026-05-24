@@ -1,0 +1,103 @@
+{
+  "game_id": "farkle",
+  "game_name": "Farkle",
+  "game_description": "Roll dice for points — but farkle (score nothing) and you lose your turn.",
+  "filter_1_label": "Is an opponent above 8000 points?",
+  "filter_1_yes_context": "pressure",
+  "filter_1_no_context": "no-pressure",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Entry Threshold",
+      "condition": "Getting on the scoreboard (500 pts)",
+      "strategy_detailed": "You must score 500+ in a single turn to get on the board. Don't bank with 350 hoping to add next turn — it resets. Push through low scores (200-400) to reach 500. Once on the board, conservative play becomes viable.",
+      "strategy_stealth": ["Must reach 500 in one turn to enter", "Don't bank below 500 — resets", "Push through 200-400 to get in"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Risk Calibration",
+      "condition": "Deciding whether to roll again",
+      "strategy_detailed": "With 3+ dice remaining, rolling again is statistically favorable — farkle probability is low enough that expected value favors rolling. With 2 dice, farkle risk jumps to ~44%. With 1 die, only a 1 or 5 scores; farkle risk is 67%. One die = almost always bank.",
+      "strategy_stealth": ["3+ dice: expected value favors rolling", "2 dice: 44% farkle risk — caution", "1 die: 67% farkle risk — bank it"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Hot Dice",
+      "condition": "All 6 dice score (hot dice)",
+      "strategy_detailed": "Hot dice let you reroll all 6 with your accumulated score safe. Always reroll on hot dice — the math strongly favors it. A hot dice roll from 600 points to 600+ adds expected value of 300-400 per reroll. Passing on hot dice is the most common Farkle mistake.",
+      "strategy_stealth": ["Always reroll on hot dice", "Hot dice EV: +300-400 per reroll", "Passing hot dice = most common mistake"],
+      "tags": ["Offense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Score Targets",
+      "condition": "Deciding turn target score",
+      "strategy_detailed": "Target 750-1000 per turn in early rounds with no pressure. Below 750, you're giving up expected value by banking too soon. Above 1000, each additional roll risks a meaningful accumulated score. Calibrate your stop point to the round's risk context.",
+      "strategy_stealth": ["Target 750-1000 per turn (no pressure)", "Below 750: banking too conservative", "Above 1000: risk becomes meaningful"],
+      "tags": ["Economy"],
+      "context": "no-pressure"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Risk Calibration",
+      "condition": "Opponent near winning threshold",
+      "strategy_detailed": "When an opponent is above 8000, play aggressively — bank nothing under 1000. You need big turns to catch up. Accept farkle risk; a safe 600-point turn when you need 2000 to catch up is effectively a wasted turn. Swing big or fall behind permanently.",
+      "strategy_stealth": ["Opponent at 8000+: bank nothing under 1000", "Safe small turns = falling behind", "Accept farkle risk to swing big"],
+      "tags": ["TLDR", "Offense"],
+      "context": "pressure"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Triplet Strategy",
+      "condition": "Rolling triplets on first roll",
+      "strategy_detailed": "Triplets on the first roll are high-value sets (1s = 1000, 2s = 200, 3s = 300, etc.). Bank all 6 dice as a triplet pair when possible — that's 1000+ points. After banking a triplet, reroll remaining dice only if 3+ dice remain. Triplets are your primary scoring engine.",
+      "strategy_stealth": ["Triplet pair on first roll = 1000+ pts", "Reroll remaining only if 3+ dice left", "Triplets are primary scoring engine"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Score Targets",
+      "condition": "Comfortable lead over all opponents",
+      "strategy_detailed": "With a lead of 2000+, shift to conservative play. Bank at 750 and protect your position. The goal isn't maximum points — it's not farkling while maintaining the lead. A farkle from 9500 to 9500 (no progress) while opponents gain 1000 each is a momentum shift.",
+      "strategy_stealth": ["Lead 2000+: bank at 750, protect it", "Goal: don't farkle, hold lead", "Farkle with big lead = momentum lost"],
+      "tags": ["Defense"],
+      "context": "no-pressure"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Final Round",
+      "condition": "Someone has reached 10000+",
+      "strategy_detailed": "Once a player hits 10000, everyone gets one final turn. You must beat their score to win. If 500 behind, play conservatively — likely still reachable. If 1500+ behind, roll aggressively until you either pass them or farkle out. There's no second final turn.",
+      "strategy_stealth": ["Everyone gets 1 more turn at 10000", "Within 500: conservative approach fine", "1500+ behind: roll until pass or farkle"],
+      "tags": ["TLDR", "Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Final Round",
+      "condition": "You reached 10000 first",
+      "strategy_detailed": "Maximize your final score before banking. Opponents get one turn each after you. A score of 10400 is much safer than 10050 — every extra 100 points increases the chance your score holds. If hot dice fire, keep rolling until farkle risk on 2 dice or you hit a comfortable lead.",
+      "strategy_stealth": ["Maximize score — opponents get 1 turn", "10400+ much safer than 10050", "Stop at 2 dice farkle risk"],
+      "tags": ["Closing"],
+      "context": "pressure"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Risk Calibration",
+      "condition": "Trailing by exactly 1000 points",
+      "strategy_detailed": "1000-point deficit in the final round requires exactly one high-scoring turn. Start with aggressive rerolls until you pass their score. Once you've cleared their total, bank immediately — no need to pad further. One more roll risks losing a lead you already earned.",
+      "strategy_stealth": ["Reroll aggressively until you pass them", "Bank immediately once you clear their score", "One more roll after leads = unnecessary risk"],
+      "tags": ["Closing"],
+      "context": "pressure"
+    }
+  ]
+}

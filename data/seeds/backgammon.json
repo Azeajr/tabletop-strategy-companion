@@ -1,0 +1,103 @@
+{
+  "game_id": "backgammon",
+  "game_name": "Backgammon",
+  "game_description": "Race your checkers home and bear them off before your opponent, 2 players.",
+  "filter_1_label": "Ahead in pip count (closer to home)?",
+  "filter_1_yes_context": "pip-lead",
+  "filter_1_no_context": "pip-trail",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Opening Rolls",
+      "condition": "Best opening roll to play",
+      "strategy_detailed": "The strongest opening rolls: 3-1 (make the 5-point), 4-2 (make the 4-point), 6-1 (make the bar-point). All three make a home or near-home point immediately, building your prime. 5-3 splits to 3-point and bar-point. Avoid leaving blots on exposed high points.",
+      "strategy_stealth": ["3-1: make your 5-point immediately", "6-1: make your bar-point", "Avoid blots on high exposed points"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Game Plan",
+      "condition": "Choosing running vs blocking game",
+      "strategy_detailed": "If your pip count is lower after the opening, play a running game — race for home, avoid contact. If behind in pips, play a blocking game — make points, build a prime, hit opponent blots to slow them. Pip count after the first exchange determines your strategy.",
+      "strategy_stealth": ["Pip lead = run, avoid contact", "Pip deficit = block and hit", "Decide after first exchange pip count"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Anchor Building",
+      "condition": "Building an anchor in opponent home",
+      "strategy_detailed": "An anchor (two checkers on the same point) in the opponent's home board is a powerful defensive asset. The 20-point (opponent's 5-point) is the golden anchor — from there you can re-enter quickly after being hit and threaten to hit opponent blots during their bear-off.",
+      "strategy_stealth": ["Anchor on opponent's 5-point (20-pt)", "Anchor = fast re-entry + late threat", "Golden anchor survives late attacks"],
+      "tags": ["TLDR", "Defense"],
+      "context": "pip-trail"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Hitting",
+      "condition": "Opportunity to hit an opponent blot",
+      "strategy_detailed": "Hit blots when doing so doesn't leave your own checker exposed. A hit sends opponent to the bar and costs them an entire turn to re-enter. Always hit a blot in your home board — they must re-enter through your points. Hitting on open boards with no priming intent is riskier.",
+      "strategy_stealth": ["Hit when you won't be exposed", "Home board hits cost opponent full turn", "Hitting open = risk without reward"],
+      "tags": ["Offense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Priming",
+      "condition": "Building a prime (4+ consecutive points)",
+      "strategy_detailed": "A 6-prime (6 consecutive points) is unpassable — opponent checkers behind it are trapped. Build your prime from the 6-point backwards. Even a 4-prime significantly reduces opponent mobility. Maintain the prime while advancing your back checkers past it.",
+      "strategy_stealth": ["6-prime = opponent is completely trapped", "Build prime from 6-point backward", "Advance back checkers past the prime"],
+      "tags": ["Offense"],
+      "context": "pip-trail"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Running Game",
+      "condition": "Pip lead and clear board",
+      "strategy_detailed": "In a clear running game, minimize wastage — avoid stacking too many checkers on low points. Spread checkers across your home board (2 per point ideally) for smooth bearing off. Each excess checker on the 6-point when you need it elsewhere is wasted pips.",
+      "strategy_stealth": ["Spread home board 2 per point", "Stack on 6-point = wasted pips", "Smooth distribution beats clusters"],
+      "tags": ["Economy"],
+      "context": "pip-lead"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Doubling Cube",
+      "condition": "Offering or accepting a double",
+      "strategy_detailed": "Offer the double when your winning probability is above 70%. Accept a double when your winning probability is above 25% — below that it's a pass. The cube multiplies stakes: doubling too early gives opponent free leverage; doubling too late gives away equity.",
+      "strategy_stealth": ["Double at 70%+ win probability", "Accept at 25%+ win probability", "Late doubling loses equity"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Blitz",
+      "condition": "Opponent has 2+ checkers on bar",
+      "strategy_detailed": "A blitz attacks relentlessly while opponent is on the bar. Close your home board points one by one — the more points closed, the harder for opponent to re-enter. A closed 6-point home board with opponent on bar is nearly an automatic win. Abandon a blitz only if you can't maintain the attack.",
+      "strategy_stealth": ["Close home points while they're on bar", "6 closed home points = near-win", "Abandon blitz if attack stalls"],
+      "tags": ["Offense"],
+      "context": "pip-trail"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Bearing Off",
+      "condition": "Bearing off with all checkers home",
+      "strategy_detailed": "Bear off efficiently: use high rolls to remove checkers from high points, lower rolls to fill gaps. If a point is empty, move a checker down from the highest occupied point — never waste a roll. Avoid leaving single checkers on high points late; they're the last to bear off.",
+      "strategy_stealth": ["High roll = bear off high point", "Low roll = fill gaps or move down", "Avoid lone checkers on high points"],
+      "tags": ["TLDR", "Closing"],
+      "context": "pip-lead"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Gammon Prevention",
+      "condition": "At risk of being gammoned",
+      "strategy_detailed": "A gammon (opponent bears all off before you bear any) doubles the loss. If you haven't borne off any checkers and opponent is nearly done, focus entirely on bearing at least one piece off. Prioritize bearing over positioning — even one checker off prevents the gammon.",
+      "strategy_stealth": ["1 checker off prevents gammon", "Bear over positioning if gammon risk", "Gammon = double the loss — avoid it"],
+      "tags": ["Defense", "Closing"],
+      "context": "pip-trail"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "game_id": "codenames",
+  "game_name": "Codenames",
+  "game_description": "Give one-word clues to help teammates identify secret agent cards.",
+  "filter_1_label": "Are you the Spymaster this round?",
+  "filter_1_yes_context": "spymaster",
+  "filter_1_no_context": "operative",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Board Analysis",
+      "condition": "Spymaster reading the board",
+      "strategy_detailed": "Before giving any clue, map all your cards into clusters by theme. Identify which cards share 2-3 strong associations. Also note which of your cards sit dangerously close in meaning to the assassin or opponent cards — avoid those clusters entirely.",
+      "strategy_stealth": ["Map cards into theme clusters first", "Find 2-3 card strong associations", "Flag cards near assassin — avoid them"],
+      "tags": ["TLDR", "Memory"],
+      "context": "spymaster"
+    },
+    {
+      "phase": "Setup",
+      "category": "Clue Safety",
+      "condition": "First clue of the game",
+      "strategy_detailed": "Your first clue should be your safest high-number clue — 2 or 3 cards with minimal risk of hitting the assassin or opponent cards. Opening with a risky 4-card clue that backfires often costs the game. Establish momentum, then take bigger swings.",
+      "strategy_stealth": ["First clue: safe 2-3 card clue", "No risky high-number openers", "Momentum > ambition early"],
+      "tags": ["Economy"],
+      "context": "spymaster"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Operative Guessing",
+      "condition": "Parsing a multi-word clue",
+      "strategy_detailed": "Guess the most obvious match first. If wrong, stop — don't guess more. When your spymaster gives a 3-clue, pick the 2 you're most confident about, then discuss the third. Never guess all 3 without discussion unless you're certain all connections.",
+      "strategy_stealth": ["Most obvious match first", "Stop if first guess is wrong", "Discuss before risky 3rd guess"],
+      "tags": ["TLDR", "Economy"],
+      "context": "operative"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Clue Strategy",
+      "condition": "Risky card near assassin",
+      "strategy_detailed": "If one of your cards shares strong associations with the assassin, clue your other cards around it first. Then give that risky card its own isolated clue with a distinct angle the assassin doesn't share. Never bundle it with other cards in a multi-word clue.",
+      "strategy_stealth": ["Clue risky card last, isolated", "Give it a distinct angle only", "Never bundle near-assassin cards"],
+      "tags": ["Defense"],
+      "context": "spymaster"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Operative Guessing",
+      "condition": "Unsure about a guess",
+      "strategy_detailed": "When unsure, say so aloud. Your spymaster can only confirm with facial expressions — read them carefully. A subtle reaction often signals you're on the right track. If genuinely uncertain between two cards, pick the one that doesn't connect to opponent colors at all.",
+      "strategy_stealth": ["Say unsure aloud — read SM's face", "Pick card not near opponent colors", "Uncertainty = stop after first guess"],
+      "tags": ["Memory"],
+      "context": "operative"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Clue Strategy",
+      "condition": "Opponent one clue from winning",
+      "strategy_detailed": "When opponent is one card away from winning, prioritize a clue that covers 2+ cards even if one connection is weaker than ideal. Speed beats elegance. A slightly risky 2-card clue that wins this turn is better than a perfect 1-card clue that arrives too late.",
+      "strategy_stealth": ["2-card clue beats perfect 1-card", "Speed > elegance when opponent close", "Risky connection OK to finish fast"],
+      "tags": ["Offense", "Closing"],
+      "context": "spymaster"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Operative Guessing",
+      "condition": "Leftover guess from previous turn",
+      "strategy_detailed": "Using a leftover guess on a card you missed from a previous clue is almost always correct. Your spymaster's prior clue still points to that card. Use the extra guess on any card you have strong confidence in — never guess randomly to use it.",
+      "strategy_stealth": ["Leftover guess = previous missed card", "Prior clue still valid — use it", "Never guess randomly on extra turn"],
+      "tags": ["Economy"],
+      "context": "operative"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Clue Strategy",
+      "condition": "Team is misinterpreting your clues",
+      "strategy_detailed": "If operatives consistently miss your intended connections, simplify. Give 1-word clues that are unambiguous even if they only cover 1 card. Rebuilding trust through safe clues restores momentum better than doubling down on a complex approach that keeps failing.",
+      "strategy_stealth": ["Simplify after consecutive misses", "1-card unambiguous clues rebuild trust", "Don't repeat a failing clue style"],
+      "tags": ["Pivot"],
+      "context": "spymaster"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Clue Strategy",
+      "condition": "One card left to guess",
+      "strategy_detailed": "Final card clue should be hyper-specific — a clue that only connects to that exact card with no ambiguity. If you have two cards left, give a 2-clue that connects them tightly. Never give a 1-clue when 2 remain unless one is genuinely isolated.",
+      "strategy_stealth": ["Final clue = hyper-specific connection", "2 cards left: give a 2-clue", "No ambiguity on last card"],
+      "tags": ["TLDR", "Closing"],
+      "context": "spymaster"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Operative Guessing",
+      "condition": "One card left, must guess correctly",
+      "strategy_detailed": "Discuss as a team before guessing the final card. Enumerate which remaining cards the clue could mean. Eliminate any that connect to opponent colors. If two equally valid options remain, pick the one that's semantically closer to the clue word itself — not the most obvious surface match.",
+      "strategy_stealth": ["Enumerate all valid options aloud", "Eliminate cards near opponent colors", "Pick semantically closest to clue word"],
+      "tags": ["Closing", "Memory"],
+      "context": "operative"
+    }
+  ]
+}

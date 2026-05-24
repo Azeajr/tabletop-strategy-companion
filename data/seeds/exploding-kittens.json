@@ -1,0 +1,103 @@
+{
+  "game_id": "exploding-kittens",
+  "game_name": "Exploding Kittens",
+  "game_description": "Avoid drawing the Exploding Kitten card — last player alive wins.",
+  "filter_1_label": "Down to last 2 players?",
+  "filter_1_yes_context": "heads-up",
+  "filter_1_no_context": "multi-player",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Hand Assessment",
+      "condition": "Evaluating your starting hand",
+      "strategy_detailed": "Count your Skips, Attacks, and Nopes immediately. A hand with 2+ Skips is strong — you can avoid drawing for multiple turns. A Defuse without any skip/attack cards means you must draw often and can defuse only once. Plan your aggression level accordingly.",
+      "strategy_stealth": ["2+ Skips = strong safe hand", "Defuse without skips = high risk", "Count skip/attack/nope upfront"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Skip and Attack",
+      "condition": "Deciding whether to play Skip",
+      "strategy_detailed": "Play Skip when the deck is large and unshuffled — drawing is low risk anyway. Save Skips for when the deck is thin or you've seen (via Peek) that an Exploding Kitten is near the top. Early Skips are mostly wasted; mid-to-late Skips save lives.",
+      "strategy_stealth": ["Early Skips = low value, save them", "Play Skip when deck is thin or peeked", "Skip is defensive — time it"],
+      "tags": ["Defense"],
+      "context": "multi-player"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Nope Timing",
+      "condition": "Opponent plays a powerful card",
+      "strategy_detailed": "Nope is most valuable against Attack and Shuffle cards. Using a Nope to cancel a Skip wastes it. Save Nopes for when an opponent uses an Attack that would stack onto you, or cancels a Shuffle that would reset a known-dangerous deck.",
+      "strategy_stealth": ["Nope: best against Attack + Shuffle", "Don't Nope a Skip — wasted", "Save Nopes for stack Attacks"],
+      "tags": ["Defense"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Shuffle Usage",
+      "condition": "Deck position is known or dangerous",
+      "strategy_detailed": "Shuffle resets knowledge of deck order — use it when you know an Exploding Kitten is near the top and you lack a Defuse. In multi-player, shuffling benefits everyone; do it only when you need it, not to 'help' the table.",
+      "strategy_stealth": ["Shuffle when kitten is near top", "Shuffle benefits everyone equally", "Only shuffle when you need it"],
+      "tags": ["Pivot"],
+      "context": "multi-player"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Targeting",
+      "condition": "Choosing who to Attack",
+      "strategy_detailed": "Attack the player who is strongest or most likely to survive long. In multi-player, attacking the weakest target is often a waste — they'll die soon anyway. Attack forces the target to draw twice; aim this at players with known-empty defenses.",
+      "strategy_stealth": ["Attack the strongest player", "Weak players die anyway — skip them", "Target players with no Defuse"],
+      "tags": ["TLDR", "Offense"],
+      "context": "multi-player"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Defuse Management",
+      "condition": "You have only one Defuse left",
+      "strategy_detailed": "With one Defuse, protect it at all costs. Play Skips and Attacks aggressively to avoid drawing. When you do draw and survive without using the Defuse, that's ideal. If forced to draw, bury the Exploding Kitten near the bottom to buy time for others to shuffle.",
+      "strategy_stealth": ["One Defuse: avoid drawing at all costs", "Bury kitten near bottom if used", "Aggressive Skips protect last Defuse"],
+      "tags": ["Defense"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Peek Usage",
+      "condition": "Using a See the Future card",
+      "strategy_detailed": "Peek gives you the top 3 cards' order. Note if an Exploding Kitten appears and its position. Keep this information private — don't react visibly. Use it to decide: Skip if kitten is top 3, draw normally if safe. Share with allies only if it benefits you.",
+      "strategy_stealth": ["Peek: don't react visibly", "Skip if kitten in top 3", "Share peek only if it benefits you"],
+      "tags": ["Memory", "Bluff"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Heads-Up Play",
+      "condition": "Last 2 players remaining",
+      "strategy_detailed": "In heads-up, Attacks are doubled draws. Play Attack only if you're confident the opponent lacks a Defuse. Nope your opponent's Skips to force them to draw. The player with more Defuse cards almost always wins — count what cards were played to estimate their hand.",
+      "strategy_stealth": ["Nope opponent Skips to force draws", "Attack only if opponent Defuse-less", "Count Defuses played to estimate theirs"],
+      "tags": ["TLDR", "Offense"],
+      "context": "heads-up"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Kitten Placement",
+      "condition": "Defusing an Exploding Kitten",
+      "strategy_detailed": "In heads-up, place the Exploding Kitten as the second card from the top — not the very top (obvious) and not the bottom (too safe for them). Second from top forces opponent to draw it on their next turn unless they Peek or Skip. They rarely expect second position.",
+      "strategy_stealth": ["Place kitten 2nd from top", "Top is obvious — avoid it", "2nd from top catches them next draw"],
+      "tags": ["Bluff", "Closing"],
+      "context": "heads-up"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Card Conservation",
+      "condition": "Running low on action cards",
+      "strategy_detailed": "When you have 1-2 action cards left, evaluate each play carefully. A Nope used to cancel a trivial card leaves you defenseless against a future Attack. Conserve your last Skip for when you've peeked and confirmed the kitten is top 3.",
+      "strategy_stealth": ["Last Nope: save for Attacks", "Last Skip: save for confirmed danger", "Each card = irreplaceable at end"],
+      "tags": ["Closing", "Economy"],
+      "context": null
+    }
+  ]
+}

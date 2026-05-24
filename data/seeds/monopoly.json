@@ -1,0 +1,103 @@
+{
+  "game_id": "monopoly",
+  "game_name": "Monopoly",
+  "game_description": "Buy properties, build houses, and bankrupt your opponents.",
+  "filter_1_label": "Do you have the most cash?",
+  "filter_1_yes_context": "cash-rich",
+  "filter_1_no_context": "cash-poor",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Property Priority",
+      "condition": "Deciding what to buy early",
+      "strategy_detailed": "Orange and red color sets have the highest return on investment — they're landed on most often due to jail proximity. Buy every property you land on in the first lap unless doing so leaves you below $150 in cash.",
+      "strategy_stealth": ["Orange/red = highest ROI", "Buy everything first lap", "Keep $150+ cash reserve"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Railroad Strategy",
+      "condition": "Railroads available to buy",
+      "strategy_detailed": "Railroads generate reliable income without building costs. All four pay $200/hit — better than most undeveloped color sets. Buy them opportunistically but don't overpay in trades; they have no monopoly bonus.",
+      "strategy_stealth": ["All 4 railroads = $200/hit each", "No building cost = safe income", "Don't overpay in trades for RRs"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Trading",
+      "condition": "Opponent has one of your color group",
+      "strategy_detailed": "Complete your color sets through trading before anyone builds. Offer cash plus a property you don't need. Never give an opponent their monopoly unless you receive one in return — even partial color sets become worthless once you fall behind in building.",
+      "strategy_stealth": ["Trade before building starts", "Cash + unwanted prop = good offer", "Never give monopoly without getting one"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Jail Strategy",
+      "condition": "Sent to jail in early game",
+      "strategy_detailed": "In early game, pay $50 to leave jail immediately — you want to keep landing on and buying properties. Later in the game, stay in jail as long as possible; collecting rent from safety is better than traversing a developed board.",
+      "strategy_stealth": ["Early: pay to leave jail fast", "Late: stay in jail — collect safe", "Pivot strategy at jail mid-game"],
+      "tags": ["Pivot"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Cash Management",
+      "condition": "Low on cash after buying properties",
+      "strategy_detailed": "Mortgage low-yield properties (utilities, purple group) to fund development on better color sets. A mortgaged Mediterranean costs nothing to maintain and frees cash for 3 orange houses, which earn far more.",
+      "strategy_stealth": ["Mortgage utilities and purple group", "Free cash for high-yield houses", "Mortgaged = $0 cost, buys development"],
+      "tags": ["Economy"],
+      "context": "cash-poor"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Building Strategy",
+      "condition": "First to build on a color set",
+      "strategy_detailed": "Build to 3 houses per property, not hotels. Three houses returns the best rent-per-dollar spent. Hotels tie up all 4 house tokens and block opponents from building. The house shortage is a strategic weapon — reach it before others can build.",
+      "strategy_stealth": ["3 houses = best rent-per-dollar", "Hotels cause house shortage", "Race to 3 houses per property"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Trading",
+      "condition": "Holding cash advantage over opponents",
+      "strategy_detailed": "Cash advantage means you can offer sweetheart deals that others can't match. Force two opponents to trade with each other for monopolies — then outbuild both. Never let a cash-poor player get a monopoly cheaply; they'll develop slowly while you race ahead.",
+      "strategy_stealth": ["Force opponents to trade each other", "Outbuild cash-poor opponents", "Cash = speed advantage in building"],
+      "tags": ["Offense"],
+      "context": "cash-rich"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Jail Strategy",
+      "condition": "Board heavily developed by opponents",
+      "strategy_detailed": "Once opponents have hotels, staying in jail for 3 turns is almost always correct. Use the turn in jail to observe board traffic. Pay out only if you need cash from rent you'd miss collecting, or if the board clears enough to move safely.",
+      "strategy_stealth": ["Stay in jail 3 turns on developed board", "Observe traffic from safety", "Pay out only for missed rent"],
+      "tags": ["Defense"],
+      "context": "cash-poor"
+    },
+    {
+      "phase": "End-Game",
+      "category": "Liquidation",
+      "condition": "Opponent near bankruptcy",
+      "strategy_detailed": "When an opponent is nearly broke, refuse trades that would save them. Accept only trades that give you their monopoly outright for cash at a discount. A struggling player is worth more bankrupt than as a weakened competitor who recovers.",
+      "strategy_stealth": ["Refuse rescue trades", "Buy monopoly at discount only", "Bankruptcy beats weak competitor"],
+      "tags": ["Offense", "Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Survival",
+      "condition": "You are cash-poor, opponents developed",
+      "strategy_detailed": "Mortgage everything except your most-landed-on properties. Make targeted deals: give a competitor something that hurts their rival more than it helps them. Survive long enough for opponents to hit each other. One lucky bankruptcy can reset the whole game.",
+      "strategy_stealth": ["Mortgage all but best properties", "Make deals that hurt the leader", "Survive until opponents hit each other"],
+      "tags": ["Defense", "Closing"],
+      "context": "cash-poor"
+    }
+  ]
+}
