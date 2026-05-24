@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Forced Jumps",
       "condition": "Opponent setting up a forced jump",
-      "strategy_detailed": "When facing a forced jump that costs material, check if you can make a different move that removes the threat. Avoid mandatory jumps that give opponent a double take unless your position improves. Piece deficit is very hard to recover from in checkers.",
-      "strategy_stealth": ["Find alternative moves to avoid bad jumps", "Mandatory jumps can be refused by retreat", "Piece deficit rarely recovers"],
+      "strategy_detailed": "Jumps are mandatory in American checkers — you cannot refuse one once offered. Defense means preventing the setup: look 2-3 moves ahead and avoid moves that let opponent force a jump. If multiple jump sequences are legal, pick the one leaving the best resulting position.",
+      "strategy_stealth": ["Jumps mandatory — can't refuse", "Prevent setup 2-3 moves ahead", "Pick best jump if multiple legal"],
       "tags": ["Defense"],
       "context": "behind"
     },
@@ -85,8 +85,8 @@
       "phase": "End-Game",
       "category": "King Endgame",
       "condition": "Kings only remain on board",
-      "strategy_detailed": "Equal kings always draw with correct play — per the solved game database. To win you need 2 kings vs 1. Force the lone king to a corner diagonally: limit its moves using opposition. A cornered king can be captured or stalemated.",
-      "strategy_stealth": ["Equal kings = draw with correct play", "2 kings vs 1 needed to win", "Force lone king to corner diagonally"],
+      "strategy_detailed": "Per Chinook's database: equal kings always draw. 2 kings vs 1 is a forced win — drive the lone king off the long diagonal toward the single corner using opposition. 3 vs 2 also wins with correct technique. Material advantage without technique can still drift to a draw.",
+      "strategy_stealth": ["Equal kings = draw (Chinook)", "2v1 or 3v2 = forced win", "Drive lone king off long diagonal"],
       "tags": ["TLDR", "Closing"],
       "context": "ahead"
     },
