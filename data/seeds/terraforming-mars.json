@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Corporation Selection",
       "condition": "Choosing a starting corporation",
-      "strategy_detailed": "Corporations define your engine. Ecoline, Inventrix, and Teractor are strong general-purpose picks. Avoid corporations that depend on specific project card combos unless you're experienced — their power spikes are hard to set up under time pressure.",
-      "strategy_stealth": ["Ecoline/Inventrix/Teractor are safe picks", "Avoid combo-dependent corps early", "Corp defines your engine"],
+      "strategy_detailed": "Top general-purpose corps: Helion (heat = MC, strong economy), Tharsis Republic (city bonus), Inventrix (Gen 1 extra cards + parameter slop), Teractor (-3 MC on Earth tags). Ecoline rewards plant-heavy hands; needs combo support. Avoid Phobolog/CrediCor early — they require specific card combos.",
+      "strategy_stealth": ["Top: Helion, Tharsis, Inventrix", "Teractor (-3 Earth), Ecoline (plants)", "Avoid combo-dependent corps early"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Production Engine",
       "condition": "Building resource production",
-      "strategy_detailed": "Prioritize cards that increase steel, titanium, or energy production in generation 1-3. Steel and titanium discount building and space projects respectively — a 5-production boost saves 5+ MC per turn. Compound production gains over energy or heat.",
-      "strategy_stealth": ["Steel/titanium first, then energy", "Production gains compound each turn", "5 production = 5+ MC saved per gen"],
+      "strategy_detailed": "Steel discounts Building-tag projects at 2 MC/unit; titanium discounts Space-tag projects at 3 MC/unit. So 5 steel production saves up to 10 MC per turn on building projects; 5 titanium up to 15 MC on space. Energy doesn't discount — only feeds projects directly. Compound gains in Gen 1-3.",
+      "strategy_stealth": ["Steel: $2/unit on Building tags", "Titanium: $3/unit on Space tags", "Energy: no discount, feeds projects"],
       "tags": ["Economy"],
       "context": "leading-tr"
     },
@@ -112,8 +112,8 @@
       "phase": "End-Game",
       "category": "VP Calculation",
       "condition": "Evaluating projects vs TR in final gen",
-      "strategy_detailed": "In the last generation, each MC is worth exactly (VP per MC) of its best use. Compare: 1 greenery = 1 TR + 1 potential VP adjacency. A 12 MC project giving 3 VP = 0.25 VP/MC. Standard greenery is often the highest VP-per-MC play in the final generation.",
-      "strategy_stealth": ["Final gen: greenery = TR + adjacency VP", "Compare VP per MC for each action", "Greenery often highest VP/MC ratio"],
+      "strategy_detailed": "If you have 8+ stocked plants, converting them to a greenery is the highest VP/MC play (effectively free MC cost): 1 VP tile + 1 TR + adjacency. Without stocked plants, compare VP yield per MC: a 12 MC card for 3 VP = 0.25 VP/MC. Standard plant-purchase rate is 8 MC/plant — terrible from scratch.",
+      "strategy_stealth": ["8+ plants → greenery = ~free VP", "Without plants: compare VP/MC ratios", "Greenery = 1 VP tile + 1 TR + adj"],
       "tags": ["Closing", "Memory"],
       "context": "leading-tr"
     }
