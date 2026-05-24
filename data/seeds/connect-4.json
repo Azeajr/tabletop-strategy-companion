@@ -22,8 +22,8 @@
       "phase": "Setup",
       "category": "Counter Strategy",
       "condition": "Opponent plays center column",
-      "strategy_detailed": "P2 cannot win against perfect play — draw is the ceiling when P1 opens center. Solver-confirmed drawing replies: columns 3, 4, or 5 (stack center or play adjacent). Avoid corners (cols 1 or 7) — Pons' database scores them as a 15-ply losing line. Aim for the draw, not a comeback.",
-      "strategy_stealth": ["P2 ceiling = draw, not win", "Reply: column 3, 4, or 5", "Corners (1, 7) lose by 15 plies"],
+      "strategy_detailed": "P2 cannot win against perfect play — draw is the ceiling once P1 opens center. Solver-confirmed drawing replies: stack center (col 4) or play adjacent (cols 3 or 5). Cols 1, 2, 6, 7 all lose against perfect P1 follow-up. Play for the draw; no comeback line exists.",
+      "strategy_stealth": ["P2 ceiling = draw, not win", "Reply: stack col 4, or cols 3/5", "Cols 1/2/6/7 lose to perfect play"],
       "tags": ["Defense"],
       "context": "second-mover"
     },
@@ -31,8 +31,8 @@
       "phase": "Early Game",
       "category": "Threat Building",
       "condition": "Building toward connect-4",
-      "strategy_detailed": "Build threats in two directions simultaneously — horizontal and diagonal from the same disc. An opponent who must block one lets you extend the other. Three in a row with both ends open is an immediate forced win — opponent can only block one end.",
-      "strategy_stealth": ["Build horizontal + diagonal together", "Three open-ended in a row = forced win", "Two threats = opponent can block one"],
+      "strategy_detailed": "Build threats in two directions from a shared disc — horizontal and diagonal. Threats must be playable: both extension cells need support underneath (gravity rule). Three in a row with two playable extensions is a forced win — opponent can only block one end.",
+      "strategy_stealth": ["Horizontal + diagonal from shared disc", "Threats need playable extensions", "Two playable extensions = forced win"],
       "tags": ["TLDR", "Offense"],
       "context": null
     },
@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Threat Building",
       "condition": "Going second, behind in tempo",
-      "strategy_detailed": "Second player cannot win against perfect play — a draw is P2's ceiling. Every disc must both threaten your four AND block opponent's four. Pure blocking without counter-threat cedes tempo to P1 and accelerates the forced loss.",
-      "strategy_stealth": ["P2 ceiling = draw, not a win", "Every move: threaten AND block", "Pure blocking = cede tempo, accelerate loss"],
+      "strategy_detailed": "P2's path to draw is claim-even: occupy threats on even-numbered rows. Every disc should advance an even-row threat or block P1's odd-row threat. Pure blocking without parity progress cedes tempo to P1 and accelerates the forced loss.",
+      "strategy_stealth": ["Claim-even: target even-row threats", "Each move: threaten OR block", "Pure blocking accelerates loss"],
       "tags": ["Defense"],
       "context": "second-mover"
     },
@@ -58,8 +58,8 @@
       "phase": "Mid-Game",
       "category": "Odd-Even Strategy",
       "condition": "Evaluating column threat heights",
-      "strategy_detailed": "The first player wins with threats on odd rows; second player wins on even rows. Plan your winning four-in-a-row to land on the right parity row for your position. A threat on row 3 (odd) benefits the first player; row 4 (even) benefits second. Count your planned winning row.",
-      "strategy_stealth": ["First player wins on odd rows (1,3,5)", "Second player wins on even rows (2,4,6)", "Count your winning row parity"],
+      "strategy_detailed": "Claim-even rule (Allis): in zugzwang endgames, P1 wins threats on odd rows (1, 3, 5); P2 wins threats on even rows (2, 4, 6). When forcing players to fill columns, the threat sitting on your parity row triggers; opponent's sitting on theirs does not. Plan your winning row to match your parity.",
+      "strategy_stealth": ["P1: odd rows (1,3,5) win threats", "P2: even rows (2,4,6) win threats", "Late-game parity decides the race"],
       "tags": ["Memory"],
       "context": null
     },
@@ -94,8 +94,8 @@
       "phase": "End-Game",
       "category": "Drawing Defense",
       "condition": "Going second, board nearly full",
-      "strategy_detailed": "When first player has tempo advantage and a forced win line, a draw (full board, no winner) is your best achievable outcome. Force the board toward columns that deny their winning parity. A draw is a victory for the second player in a theoretically losing position.",
-      "strategy_stealth": ["Draw = victory for second player", "Force board to deny their parity row", "Full board with no winner = success"],
+      "strategy_detailed": "Once P1 has a forced win line, a drawn full board is your ceiling. Apply claim-even: play to fill even rows yourself (your parity) and force P1's threats onto even rows (their wrong parity). A drawn final board (no four-in-a-row anywhere) is P2's win condition.",
+      "strategy_stealth": ["Apply claim-even as P2", "Force P1 threats to even rows", "Drawn board = P2 victory"],
       "tags": ["Defense", "Closing"],
       "context": "second-mover"
     }
