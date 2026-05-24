@@ -29,11 +29,11 @@
     },
     {
       "phase": "Setup",
-      "category": "Decoy Placement",
-      "condition": "Placing small ships (sub, destroyer)",
-      "strategy_detailed": "Small ships (2-3 squares) can be placed near edges to bait early sweeps. Sacrificing a Destroyer early costs your opponent multiple turns following up on a 2-square ship while your Carrier and Battleship remain undiscovered.",
-      "strategy_stealth": ["Small ships near edges as bait", "Bait wastes opponent follow-up turns", "Sacrifice Destroyer to protect Carrier"],
-      "tags": ["Bluff"],
+      "category": "No-Touch Rule",
+      "condition": "Placing remaining ships",
+      "strategy_detailed": "Never let two ships touch — not even diagonally. A hit on one leaks info: if opponent shoots adjacent and misses, they prune fewer cells when ships are isolated. Random placement with a 1-cell buffer around every ship is near-optimal against probability-density opponents.",
+      "strategy_stealth": ["No ships touching, even diagonal", "1-cell buffer around each ship", "Beats decoys vs PDF opponents"],
+      "tags": ["Defense"],
       "context": null
     },
     {
@@ -58,8 +58,8 @@
       "phase": "Early Game",
       "category": "Defense",
       "condition": "Opponent gets a hit on your ship",
-      "strategy_detailed": "Opponents in hunt mode will shoot adjacent squares to find ship orientation. If your ship runs north-south, their east-west shots will miss and cost them tempo. Ships touching grid walls on one side limit their hunt directions by half.",
-      "strategy_stealth": ["Wall-adjacent ships limit hunt directions", "Perpendicular shots miss = lost tempo", "Orientation determines hunt cost"],
+      "strategy_detailed": "Once hit, opponent shoots orthogonally adjacent next turn. Wall-adjacent ships cut hunt directions by half (1 wall) or three-quarters (corner). Trade-off: walls get shot earlier in opening sweeps, but if survived they're cheaper to defend during hunt. Net effect roughly neutral.",
+      "strategy_stealth": ["Wall ships: half hunt directions", "Corner ships: 3/4 directions cut", "Shot earlier, defended cheaper"],
       "tags": ["Defense"],
       "context": "exposed"
     },
@@ -85,8 +85,8 @@
       "phase": "Mid-Game",
       "category": "Probability",
       "condition": "Multiple ships unsunk, no active hunt",
-      "strategy_detailed": "After sinking a ship, update your mental probability map. Remaining ships must fit in contiguous unshotopen squares. High-density areas — where the most ship sizes still fit — are highest priority targets. Never shoot squares where no remaining ship fits.",
-      "strategy_stealth": ["Update probability map after each sink", "Target highest-density unsunk squares", "Skip squares no ship fits into"],
+      "strategy_detailed": "Optimal Battleship is a probability density map: for each unshot cell, count how many valid placements of unsunk ships pass through it. Shoot the highest-count cell, recompute after every shot. This is what top bots use — it beats parity and intuition long-term.",
+      "strategy_stealth": ["Count valid placements per cell", "Shoot highest-count cell", "Recompute after every shot"],
       "tags": ["Memory", "Economy"],
       "context": null
     },
