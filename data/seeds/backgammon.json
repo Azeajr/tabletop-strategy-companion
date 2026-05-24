@@ -49,8 +49,8 @@
       "phase": "Early Game",
       "category": "Priming",
       "condition": "Building a prime (4+ consecutive points)",
-      "strategy_detailed": "A full 6-prime traps opponent checkers behind it — they cannot escape with any roll. Build from the 5/6-point backward to the bar-point and 4-point. A 5-prime with the gap on your 2-point is nearly as effective. Maintain prime integrity as you bring back checkers around it.",
-      "strategy_stealth": ["6-prime = checkers fully trapped", "Build 5,6 → bar → 4-point", "Maintain prime while escaping back"],
+      "strategy_detailed": "A full 6-prime (six consecutive closed points) traps opponent checkers completely — no roll escapes. Build from the 5/6-point backward toward the bar-point (7) and 4-point. A 5-prime is strong but escapable on the gap-matching roll: opponent must roll the exact gap number to jump. Maintain prime integrity while bringing back checkers around it.",
+      "strategy_stealth": ["6-prime: opponent fully trapped", "Build 5,6 → bar (7) → 4-point", "5-prime: escapable on gap-roll only"],
       "tags": ["Offense"],
       "context": "pip-trail"
     },
@@ -76,8 +76,8 @@
       "phase": "Mid-Game",
       "category": "Blitz",
       "condition": "Opponent has checker(s) on bar",
-      "strategy_detailed": "While opponent dances, race to close home-board points. A 5-point board dances 11/36 rolls; closeout (6 points) is automatic. Slot and cover aggressively — hits while building are usually correct since opponent already lost tempo. Abandon only if the attack stalls.",
-      "strategy_stealth": ["5-point board = 11/36 dance", "Closeout = automatic dance", "Slot and cover aggressively"],
+      "strategy_detailed": "While opponent dances on the bar, race to close home points. With 5 of 6 home points closed (1 open), opponent dances 25/36 rolls (enters only on the 11/36 with a matching die). Closeout (all 6 closed) is automatic dance. Slot and cover aggressively — hits while building are usually correct since opponent already lost tempo.",
+      "strategy_stealth": ["5 closed: opponent dances 25/36", "Closeout = automatic dance", "Slot and cover aggressively"],
       "tags": ["Offense"],
       "context": "pip-trail"
     },
