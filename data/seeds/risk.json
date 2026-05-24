@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Defense",
       "condition": "Protecting a continent entry gate",
-      "strategy_detailed": "Stack 5+ armies at your continent's gate to deter attackers. A 5-army territory is statistically unlikely to fall to fewer than 8 attackers — making the attack unprofitable. Refresh the gate each turn if combat thinned it below 4.",
-      "strategy_stealth": ["5+ armies at gate deters attacks", "Refresh to 4+ after combat", "Below 4 = attackable profitably"],
+      "strategy_detailed": "Stack 5+ armies at your continent's gate to deter attackers. Per dice tables: 5 defenders vs 6 attackers ≈ 42% attacker wins; vs 7 ≈ 55%; vs 8 ≈ 65%. Attackers need ~9-10 armies to win reliably (75%+). Refresh gate to 4+ after combat — below 4 makes the attack reliably profitable.",
+      "strategy_stealth": ["5 def vs 6 att = 42% att wins", "5 def vs 8 att = 65% att wins", "Refresh gate to 4+ post-combat"],
       "tags": ["Defense"],
       "context": "bonus"
     },
@@ -80,8 +80,8 @@
       "phase": "Mid-Game",
       "category": "Card Strategy",
       "condition": "Card set ready to cash",
-      "strategy_detailed": "Cash card sets when the value exceeds what you'd gain from waiting AND you can immediately place armies in a contested area. Late-game card sets skyrocket in value (every 5 cards adds more armies). Holding sets too long lets others cash first and snowball.",
-      "strategy_stealth": ["Cash when armies needed urgently", "Late sets worth more — don't cash early", "Opponents cashing first = snowball"],
+      "strategy_detailed": "Cash sets when armies are needed and can be deployed in a contested area. Hasbro escalating values: sets 1-6 give 4, 6, 8, 10, 12, 15 armies; each subsequent set adds +5 (20, 25, 30...). Late sets skyrocket. Holding too long lets opponents cash first and snowball ahead with sudden armies.",
+      "strategy_stealth": ["Set values: 4/6/8/10/12/15/+5", "Late sets worth far more", "Hold too long = opponent snowballs"],
       "tags": ["Economy"],
       "context": null
     },
