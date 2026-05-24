@@ -1,0 +1,121 @@
+{
+  "game_id": "battleship",
+  "game_name": "Battleship",
+  "game_description": "Hunt and sink your opponent's fleet on a hidden grid, 2 players.",
+  "filter_1_label": "Has opponent found one of your ships?",
+  "filter_1_yes_context": "exposed",
+  "filter_1_no_context": "hidden",
+  "filter_2_label": null,
+  "filter_2_yes_context": null,
+  "filter_2_no_context": null,
+  "strategies": [
+    {
+      "phase": "Setup",
+      "category": "Ship Placement",
+      "condition": "Placing ships at game start",
+      "strategy_detailed": "Avoid edges and corners — opponents often open there. Spread ships so they don't share adjacent squares; a hit on one ship won't reveal neighbors. Never place ships in straight lines parallel to the board edge.",
+      "strategy_stealth": ["Avoid edges and corners", "No adjacent ships", "Don't align with board edge"],
+      "tags": ["TLDR", "Defense"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Ship Placement",
+      "condition": "Placing the Carrier (5-square)",
+      "strategy_detailed": "The Carrier is the hardest to hide and will be found eventually. Place it diagonally off-center — not touching edges, not parallel to grid axes if possible. Opponents often sweep edges first; a center-biased Carrier survives longer.",
+      "strategy_stealth": ["Center-biased placement survives longer", "Diagonal orientation off-center", "Edges get swept first"],
+      "tags": ["Defense"],
+      "context": null
+    },
+    {
+      "phase": "Setup",
+      "category": "Decoy Placement",
+      "condition": "Placing small ships (sub, destroyer)",
+      "strategy_detailed": "Small ships (2-3 squares) can be placed near edges to bait early sweeps. Sacrificing a Destroyer early costs your opponent multiple turns following up on a 2-square ship while your Carrier and Battleship remain undiscovered.",
+      "strategy_stealth": ["Small ships near edges as bait", "Bait wastes opponent follow-up turns", "Sacrifice Destroyer to protect Carrier"],
+      "tags": ["Bluff"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Targeting",
+      "condition": "Opening moves with no hits yet",
+      "strategy_detailed": "Use a checkerboard (parity) pattern — shoot only squares of one color on a mental chessboard overlay. The smallest ship is 2 squares, so every ship must occupy at least one 'white' square. Parity halves the search space without losing information.",
+      "strategy_stealth": ["Checkerboard pattern cuts search space", "Every ship hits at least one color", "Parity is optimal before any hits"],
+      "tags": ["TLDR", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Targeting",
+      "condition": "Opponent opening moves reveal a pattern",
+      "strategy_detailed": "If an opponent sweeps edges or corners in their first 5 moves, they're using a common heuristic. Adapt: if you have ships near edges, move mentally to whether they'll finish the edge sweep or pivot inward after finding nothing.",
+      "strategy_stealth": ["Edge-sweepers pivot inward after nothing", "Anticipate their next sweep row", "Adapt placement reads to their style"],
+      "tags": ["Memory"],
+      "context": null
+    },
+    {
+      "phase": "Early Game",
+      "category": "Defense",
+      "condition": "Opponent gets a hit on your ship",
+      "strategy_detailed": "Opponents in hunt mode will shoot adjacent squares to find ship orientation. If your ship runs north-south, their east-west shots will miss and cost them tempo. Ships touching grid walls on one side limit their hunt directions by half.",
+      "strategy_stealth": ["Wall-adjacent ships limit hunt directions", "Perpendicular shots miss = lost tempo", "Orientation determines hunt cost"],
+      "tags": ["Defense"],
+      "context": "exposed"
+    },
+    {
+      "phase": "Early Game",
+      "category": "Defense",
+      "condition": "All ships still undiscovered",
+      "strategy_detailed": "Undiscovered ships let you play offensively without psychological pressure. Continue parity shooting without bias — don't cluster shots near your own ships' locations out of anxiety. Your placement is already set; trust it.",
+      "strategy_stealth": ["Stay on parity pattern", "Don't bias shots near own ships", "Trust placement — play offense"],
+      "tags": ["Defense"],
+      "context": "hidden"
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Hunt Mode",
+      "condition": "Hit confirmed, ship not yet sunk",
+      "strategy_detailed": "After a hit, shoot orthogonally adjacent squares next turn. Once you confirm orientation (second hit), extend along that axis. Only deviate from the axis when you've missed both ends — then the ship occupies the middle segment.",
+      "strategy_stealth": ["Adjacent squares after first hit", "Confirm orientation on second hit", "Missed both ends = ship in middle"],
+      "tags": ["TLDR", "Offense"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Probability",
+      "condition": "Multiple ships unsunk, no active hunt",
+      "strategy_detailed": "After sinking a ship, update your mental probability map. Remaining ships must fit in contiguous unshotopen squares. High-density areas — where the most ship sizes still fit — are highest priority targets. Never shoot squares where no remaining ship fits.",
+      "strategy_stealth": ["Update probability map after each sink", "Target highest-density unsunk squares", "Skip squares no ship fits into"],
+      "tags": ["Memory", "Economy"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Sink Priority",
+      "condition": "Two ships partially located",
+      "strategy_detailed": "Finish sinking a found ship before switching to the other. Leaving two active hunts splits your attention and wastes shots testing wrong orientations. One complete sink narrows the remaining fleet and updates your probability map more cleanly.",
+      "strategy_stealth": ["Finish one sink before starting another", "Two hunts = split attention", "Complete sink = cleaner probability update"],
+      "tags": ["Economy"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Final Fleet",
+      "condition": "One or two ships remaining",
+      "strategy_detailed": "With 1-2 ships left, calculate exactly where they can fit given all misses. Eliminate impossible squares mentally. The final ship is often in the quadrant with the fewest shots — a common unconscious placement bias. Check that area first.",
+      "strategy_stealth": ["Calculate exact fit zones from misses", "Check least-shot quadrant first", "Placement bias = cluster in unused area"],
+      "tags": ["Memory", "Closing"],
+      "context": null
+    },
+    {
+      "phase": "End-Game",
+      "category": "Final Fleet",
+      "condition": "Opponent down to last ship",
+      "strategy_detailed": "When opponent's last ship is unknown, revert to parity if no active hit. Don't waste shots in already-eliminated zones. If you've cleared 80%+ of the board, the remaining ship must be in a specific cluster — list all valid positions and shoot the center of the densest.",
+      "strategy_stealth": ["Revert to parity without active hit", "List all valid remaining positions", "Shoot center of densest valid cluster"],
+      "tags": ["Closing", "Memory"],
+      "context": null
+    }
+  ]
+}
