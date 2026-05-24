@@ -34,6 +34,8 @@ jobs:
       - run: npm install --prefer-offline --no-audit --no-fund
       - run: npm audit signatures
 
+      - run: npm test
+
       - run: npm run build
 
       - name: Deploy to Cloudflare Pages

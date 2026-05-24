@@ -22,6 +22,7 @@ export interface Game {
 }
 
 export interface Strategy {
+  id?: number
   game_id: string
   phase: Phase
   category: string

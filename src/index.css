@@ -2,25 +2,22 @@
 
 @theme {
   /* Study Mode (📖) */
-  --color-study-bg: #F8F7F4;
-  --color-study-surface: #FFFFFF;
-  --color-study-text: #1A1A1A;
-  --color-study-muted: #6B7280;
-  --color-study-accent: #2563EB;
+  --color-study-bg:       #F8F7F4;
+  --color-study-surface:  #FFFFFF;
+  --color-study-text:     #1A1A1A;
+  --color-study-muted:    #6B7280;
+  --color-study-accent:   #2563EB;
 
   /* Stealth Mode (🥷) */
-  --color-stealth-bg: #0D0B08;
+  --color-stealth-bg:     #0D0B08;
   --color-stealth-surface: #1A1714;
-  --color-stealth-text: #B8860B;
-  --color-stealth-muted: #5C4A1E;
+  --color-stealth-text:   #B8860B;
+  --color-stealth-muted:  #5C4A1E;
   --color-stealth-accent: #D4A017;
 
   /* Shared */
-  --radius-card: 12px;
-  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
-
-  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: ui-monospace, Consolas, monospace;
+  --radius-card:    12px;
+  --font-sans:      system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
 *,
@@ -38,15 +35,27 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Mode-driven theming via data-mode attribute on <body> */
+/* Active-mode token aliases — components use --bg, --surface, --text, --muted, --accent */
 body[data-mode="study"] {
   background-color: var(--color-study-bg);
   color: var(--color-study-text);
+  --bg:          var(--color-study-bg);
+  --surface:     var(--color-study-surface);
+  --text:        var(--color-study-text);
+  --muted:       var(--color-study-muted);
+  --accent:      var(--color-study-accent);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 body[data-mode="stealth"] {
   background-color: var(--color-stealth-bg);
   color: var(--color-stealth-text);
+  --bg:          var(--color-stealth-bg);
+  --surface:     var(--color-stealth-surface);
+  --text:        var(--color-stealth-text);
+  --muted:       var(--color-stealth-muted);
+  --accent:      var(--color-stealth-accent);
+  --shadow-card: none;
 }
 
 #root {
