@@ -31,8 +31,8 @@
       "phase": "Setup",
       "category": "Card Draw Strategy",
       "condition": "Wild card visible at game start",
-      "strategy_detailed": "Take the face-up wild card on turn 1 if available. Wilds are worth 2 draws in card value and give maximum route flexibility. This advantage compounds over the entire game.",
-      "strategy_stealth": ["Take wild on turn 1", "Wild = 2-card value", "Provides route flexibility"],
+      "strategy_detailed": "Face-up locomotives cost your entire turn — you take 1 card instead of 2. The wild's value is flexibility: required for gray routes, usable for any color. Worth it turn 1 if no urgent route is contested. Skip if a 4-5 car route needs claiming before opponents draw the same colors.",
+      "strategy_stealth": ["Wild costs entire turn (1 card)", "Worth turn 1 — flexibility compounds", "Skip if racing contested route"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -58,8 +58,8 @@
       "phase": "Early Game",
       "category": "Card Collection",
       "condition": "Choosing face-up vs blind draw",
-      "strategy_detailed": "Take face-up cards when they match a color you need 3+ of. Take blind when you need wild cards or when face-up cards don't match any active route. Never take two face-up non-wilds in one turn unless both match the same route.",
-      "strategy_stealth": ["Face-up if color needed 3+", "Blind draw for wilds", "Avoid mismatched face-up pairs"],
+      "strategy_detailed": "Take face-up cards only when they match colors you need. If two different needed colors appear face-up, take both — multi-route flexibility wins. Don't grab useless face-ups; blind draw has ~10% wild chance and usually beats a junk colored card. Refresh: 3 visible locomotives reshuffle all 5 face-ups.",
+      "strategy_stealth": ["Face-up only if color needed", "Different needed colors: take both", "Blind draw = ~10% wild chance"],
       "tags": [],
       "context": null
     },
