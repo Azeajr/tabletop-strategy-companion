@@ -31,8 +31,8 @@
       "phase": "Early Game",
       "category": "Nope Timing",
       "condition": "Opponent plays a powerful card",
-      "strategy_detailed": "Nope is most valuable against Attack and Shuffle cards. Using a Nope to cancel a Skip wastes it. Save Nopes for when an opponent uses an Attack that would stack onto you, or cancels a Shuffle that would reset a known-dangerous deck.",
-      "strategy_stealth": ["Nope: best against Attack + Shuffle", "Don't Nope a Skip — wasted", "Save Nopes for stack Attacks"],
+      "strategy_detailed": "Nope's highest value: cancel an Attack onto you (prevents 2-turn stack) or a Shuffle that erases your Peek info. In multi-player, Noping a Skip just delays the player one turn — usually wasted. In heads-up, Noping their Skip forces a draw and can kill them outright.",
+      "strategy_stealth": ["Best vs Attack and Shuffle", "Multi-player: don't Nope a Skip", "Heads-up: Skip-Nope can kill"],
       "tags": ["Defense"],
       "context": null
     },
@@ -85,8 +85,8 @@
       "phase": "End-Game",
       "category": "Kitten Placement",
       "condition": "Defusing an Exploding Kitten",
-      "strategy_detailed": "In heads-up, place the Exploding Kitten as the second card from the top — not the very top (obvious) and not the bottom (too safe for them). Second from top forces opponent to draw it on their next turn unless they Peek or Skip. They rarely expect second position.",
-      "strategy_stealth": ["Place kitten 2nd from top", "Top is obvious — avoid it", "2nd from top catches them next draw"],
+      "strategy_detailed": "Heads-up placement depends on opponent's cards. Top: forces their next draw (if they lack Skip/Attack). Position 2: catches them only if they Skip (else YOU draw it). Position 3: catches them if they Attack you. Bottom is safe but lets them stack cards across many turns.",
+      "strategy_stealth": ["Top: forces their next draw", "Pos 2: catches Skip; pos 3: catches Attack", "Bottom safe but lets them stack"],
       "tags": ["Bluff", "Closing"],
       "context": "heads-up"
     },
