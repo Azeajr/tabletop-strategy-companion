@@ -218,10 +218,10 @@ describe('orderBy()', () => {
     expect(names).toEqual(['Alpha', 'Zebra'])
   })
 
-  it('sorts descending when desc=true via toCollection()', async () => {
+  it('sorts descending when desc=true', async () => {
     await games.put(makeGame({ game_id: 'g1', game_name: 'Alpha' }))
     await games.put(makeGame({ game_id: 'g2', game_name: 'Zebra' }))
-    const names = (await games.toCollection().orderBy('game_name', true).toArray()).map((g) => g.game_name)
+    const names = (await games.orderBy('game_name', true).toArray()).map((g) => g.game_name)
     expect(names).toEqual(['Zebra', 'Alpha'])
   })
 })
@@ -267,7 +267,7 @@ describe('Query.first()', () => {
 
 describe('Query.last()', () => {
   it('throws without orderBy', async () => {
-    await expect(games.toCollection().last()).rejects.toThrow('orderBy')
+    await expect(games.where('game_id').equals('g1').last()).rejects.toThrow('orderBy')
   })
 
   it('returns last row by sort field', async () => {

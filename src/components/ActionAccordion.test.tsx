@@ -18,13 +18,13 @@ const makeStrategy = (overrides: Partial<Strategy> = {}): Strategy => ({
 
 describe('ActionAccordion', () => {
   it('renders nothing when strategies are empty', () => {
-    render(() => <ActionAccordion strategies={[]} activeContexts={[]} />)
+    render(() => <ActionAccordion strategies={[]} />)
     expect(screen.getByText(/no strategies/i)).toBeInTheDocument()
   })
 
   it('renders strategy conditions', () => {
     const strategies = [makeStrategy({ condition: 'When alpha fires' })]
-    render(() => <ActionAccordion strategies={strategies} activeContexts={[]} />)
+    render(() => <ActionAccordion strategies={strategies} />)
     expect(screen.getByText('When alpha fires')).toBeInTheDocument()
   })
 
@@ -34,20 +34,20 @@ describe('ActionAccordion', () => {
       makeStrategy({ category: 'Beta', condition: 'Condition Beta one' }),
       makeStrategy({ category: 'Alpha', condition: 'Condition Alpha 2' }),
     ]
-    render(() => <ActionAccordion strategies={strategies} activeContexts={[]} />)
+    render(() => <ActionAccordion strategies={strategies} />)
     const headings = screen.getAllByText(/Alpha|Beta/)
     expect(headings.some((el) => el.textContent === 'Alpha')).toBe(true)
     expect(headings.some((el) => el.textContent === 'Beta')).toBe(true)
   })
 
-  it('filters strategies by active context', () => {
-    const strategies = [
+  it('renders only pre-filtered strategies', () => {
+    // Context filtering happens upstream (LiveCompanion); ActionAccordion displays what it receives.
+    const all = [
       makeStrategy({ condition: 'Visible condition here', context: null }),
       makeStrategy({ condition: 'Hidden context condition', context: 'hidden' }),
     ]
-    render(() => (
-      <ActionAccordion strategies={strategies} activeContexts={['visible']} />
-    ))
+    const filtered = all.filter((s) => s.context === null || ['visible'].includes(s.context))
+    render(() => <ActionAccordion strategies={filtered} />)
     expect(screen.getByText('Visible condition here')).toBeInTheDocument()
     expect(screen.queryByText('Hidden context condition')).not.toBeInTheDocument()
   })
@@ -56,7 +56,7 @@ describe('ActionAccordion', () => {
     const strategies = [
       makeStrategy({ condition: 'Clickable condition text' }),
     ]
-    render(() => <ActionAccordion strategies={strategies} activeContexts={[]} />)
+    render(() => <ActionAccordion strategies={strategies} />)
     const btn = screen.getByRole('button', { name: /clickable condition text/i })
     expect(btn).toHaveAttribute('aria-expanded', 'false')
     fireEvent.click(btn)
@@ -65,7 +65,7 @@ describe('ActionAccordion', () => {
 
   it('collapses on second click', async () => {
     const strategies = [makeStrategy({ condition: 'Toggle condition here' })]
-    render(() => <ActionAccordion strategies={strategies} activeContexts={[]} />)
+    render(() => <ActionAccordion strategies={strategies} />)
     const btn = screen.getByRole('button', { name: /toggle condition here/i })
     fireEvent.click(btn)
     fireEvent.click(btn)
@@ -77,7 +77,7 @@ describe('ActionAccordion', () => {
       makeStrategy({ condition: 'First condition here ok' }),
       makeStrategy({ condition: 'Second condition here ok' }),
     ]
-    render(() => <ActionAccordion strategies={strategies} activeContexts={[]} />)
+    render(() => <ActionAccordion strategies={strategies} />)
     const [btn1, btn2] = screen.getAllByRole('button')
     fireEvent.click(btn1)
     expect(btn1).toHaveAttribute('aria-expanded', 'true')

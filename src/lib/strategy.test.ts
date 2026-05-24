@@ -83,14 +83,16 @@ describe('prepareStrategies', () => {
       makeStrategy({ category: 'Apple', condition: 'A cond' }),
       makeStrategy({ category: 'Mango', condition: 'M cond' }),
     ]
-    const result = prepareStrategies(strats, [])
+    const result = prepareStrategies(strats)
     expect([...result.keys()]).toEqual(['Apple', 'Mango', 'Zebra'])
   })
 
-  it('filters out non-matching contexts', () => {
+  it('displays only what it receives — context filtering is caller responsibility', () => {
     const leading = makeStrategy({ context: 'leading', category: 'X' })
     const always = makeStrategy({ context: null, category: 'X' })
-    const result = prepareStrategies([leading, always], ['trailing'])
+    // Caller pre-filters via filterByContext; only the null-context strategy is passed
+    const preFiltered = filterByContext([leading, always], ['trailing'])
+    const result = prepareStrategies(preFiltered)
     expect(result.get('X')).toHaveLength(1)
     expect(result.get('X')![0].context).toBeNull()
   })
@@ -98,7 +100,7 @@ describe('prepareStrategies', () => {
   it('TLDR hoisted within category', () => {
     const normal = makeStrategy({ category: 'X', condition: 'B', tags: [] })
     const tldr = makeStrategy({ category: 'X', condition: 'A', tags: ['TLDR'] })
-    const result = prepareStrategies([normal, tldr], [])
+    const result = prepareStrategies([normal, tldr])
     const items = result.get('X')!
     expect(items[0].tags).toContain('TLDR')
   })

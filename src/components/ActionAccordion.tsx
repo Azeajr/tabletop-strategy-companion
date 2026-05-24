@@ -6,14 +6,13 @@ import type { Strategy } from '../types/domain'
 
 interface Props {
   strategies: Strategy[]
-  activeContexts: (string | null)[]
 }
 
 export default function ActionAccordion(props: Props) {
   const [openId, setOpenId] = createSignal<string | null>(null)
   const mode = useAppMode()
 
-  const grouped = () => prepareStrategies(props.strategies, props.activeContexts)
+  const grouped = () => prepareStrategies(props.strategies)
 
   const toggle = (id: string) =>
     setOpenId((prev) => (prev === id ? null : id))

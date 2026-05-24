@@ -10,6 +10,7 @@ import {
 import { useNavigate, useParams } from '@solidjs/router'
 import { db } from '../db'
 import { seedsReady } from '../db/seed'
+import { filterByContext } from '../lib/strategy'
 import { useAppMode } from '../store/appState'
 import StickyTopBar from '../components/StickyTopBar'
 import ModeToggle from '../components/ModeToggle'
@@ -89,8 +90,9 @@ export default function LiveCompanion() {
   const phaseStrategies = createMemo(() => {
     const q = searchQuery().toLowerCase().trim()
     const byPhase = (allStrategies() ?? []).filter((s) => s.phase === currentPhase())
-    if (!q) return byPhase
-    return byPhase.filter((s) => s.condition.toLowerCase().includes(q))
+    const byContext = filterByContext(byPhase, activeContexts())
+    if (!q) return byContext
+    return byContext.filter((s) => s.condition.toLowerCase().includes(q))
   })
 
   return (
@@ -153,10 +155,7 @@ export default function LiveCompanion() {
                   mode() === 'stealth' ? 'overflow-hidden' : 'overflow-y-auto'
                 } pb-4`}
               >
-                <ActionAccordion
-                  strategies={phaseStrategies()}
-                  activeContexts={activeContexts()}
-                />
+                <ActionAccordion strategies={phaseStrategies()} />
               </main>
             </>
           )}

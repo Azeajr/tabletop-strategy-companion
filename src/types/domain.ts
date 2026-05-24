@@ -1,8 +1,6 @@
 // Canonical runtime entity types — mirrors src/db/schema.ts Zod types
 // but expressed as plain TypeScript interfaces for use throughout the app.
 
-export type AppMode = 'study' | 'stealth'
-
 export type Phase = 'Setup' | 'Early Game' | 'Mid-Game' | 'End-Game'
 
 export type Tag =

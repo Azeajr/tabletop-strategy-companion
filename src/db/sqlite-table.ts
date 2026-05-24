@@ -121,10 +121,6 @@ class Query<T> {
     return rows[0]
   }
 
-  sortBy(field: string): Promise<T[]> {
-    return this.orderBy(field).toArray()
-  }
-
   async delete(): Promise<void> {
     if (this.filterFn) {
       const rows = await this.toArray()
@@ -173,12 +169,8 @@ export class SQLiteTable<T> {
     return new WhereClause<T>(this, field)
   }
 
-  orderBy(field: string): Query<T> {
-    return new Query<T>(this).orderBy(field)
-  }
-
-  toCollection(): Query<T> {
-    return new Query<T>(this)
+  orderBy(field: string, desc = false): Query<T> {
+    return new Query<T>(this).orderBy(field, desc)
   }
 
   filter(fn: (row: T) => boolean): Query<T> {
