@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Center Control",
       "condition": "Choosing your first move",
-      "strategy_detailed": "Connect 4 is solved — first player wins with perfect play. The center column (column 4) is the only correct opening move; it participates in more four-in-a-row lines than any other column. Any other first move is a provably losing choice against optimal play.",
-      "strategy_stealth": ["Connect 4 solved: P1 wins with perfect play", "Column 4 = only correct first move", "Non-center opening = provable loss"],
+      "strategy_detailed": "Connect 4 is solved (Allis 1988) — P1 wins only by opening column 4 (center). Per solver databases: cols 3 or 5 draw with perfect P2 play; cols 1, 2, 6, or 7 lose to perfect P2. Center participates in more four-in-a-row lines than any other column.",
+      "strategy_stealth": ["Column 4 = only winning opener", "Cols 3 or 5 = draw, not win", "Cols 1/2/6/7 = provable loss"],
       "tags": ["TLDR", "Economy"],
       "context": "first-mover"
     },
@@ -22,8 +22,8 @@
       "phase": "Setup",
       "category": "Counter Strategy",
       "condition": "Opponent plays center column",
-      "strategy_detailed": "Connect 4 is solved: second player cannot win against perfect play — draw is P2's best achievable outcome. Against center-opening opponent, play column 3 or 5 to contest the diagonal. Never play corners or extreme edges on move 2.",
-      "strategy_stealth": ["P2 cannot win against perfect play", "Draw is P2's best achievable result", "Counter center: play col 3 or 5"],
+      "strategy_detailed": "P2 cannot win against perfect play — draw is the ceiling when P1 opens center. Solver-confirmed drawing replies: columns 3, 4, or 5 (stack center or play adjacent). Avoid corners (cols 1 or 7) — Pons' database scores them as a 15-ply losing line. Aim for the draw, not a comeback.",
+      "strategy_stealth": ["P2 ceiling = draw, not win", "Reply: column 3, 4, or 5", "Corners (1, 7) lose by 15 plies"],
       "tags": ["Defense"],
       "context": "second-mover"
     },
