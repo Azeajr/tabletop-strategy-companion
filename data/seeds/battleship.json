@@ -13,7 +13,7 @@
       "phase": "Setup",
       "category": "Ship Placement",
       "condition": "Placing ships at game start",
-      "strategy_detailed": "Avoid edges and corners — opponents often open there. Spread ships so they don't share adjacent squares; a hit on one ship won't reveal neighbors. Never place ships in straight lines parallel to the board edge.",
+      "strategy_detailed": "Avoid edges and corners — opponents often open there. Spread ships so they don't share adjacent squares; a hit on one ship won't reveal neighbors. Don't place ships in the outermost row or column.",
       "strategy_stealth": ["Avoid edges and corners", "No adjacent ships", "Don't align with board edge"],
       "tags": ["TLDR", "Defense"],
       "context": null
@@ -22,8 +22,8 @@
       "phase": "Setup",
       "category": "Ship Placement",
       "condition": "Placing the Carrier (5-square)",
-      "strategy_detailed": "The Carrier is the hardest to hide and will be found eventually. Place it diagonally off-center — not touching edges, not parallel to grid axes if possible. Opponents often sweep edges first; a center-biased Carrier survives longer.",
-      "strategy_stealth": ["Center-biased placement survives longer", "Diagonal orientation off-center", "Edges get swept first"],
+      "strategy_detailed": "The Carrier is the hardest to hide and will be found eventually. Place it off-center, away from edges, oriented horizontally or vertically toward the board interior. Opponents often sweep edges first; a center-biased Carrier survives longer.",
+      "strategy_stealth": ["Center-biased placement survives longer", "Orient toward board interior, away from edges", "Edges get swept first"],
       "tags": ["Defense"],
       "context": null
     },
