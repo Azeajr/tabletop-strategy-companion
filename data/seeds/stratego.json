@@ -31,8 +31,8 @@
       "phase": "Setup",
       "category": "Scout Deployment",
       "condition": "Placing Scouts (rank 2)",
-      "strategy_detailed": "Scatter 2-3 Scouts near the front but keep them movable — they're your primary information gatherers. One Scout at a lake gap can probe quickly across the board. Never cluster all Scouts: a single opponent Sergeant (3) defeats them all if grouped.",
-      "strategy_stealth": ["Scatter scouts at lake gaps", "Scouts = primary information", "Never cluster all scouts"],
+      "strategy_detailed": "Scatter 2-3 Scouts (rank 2) near the front but keep them movable — they're your primary information gatherers. One Scout at a lake gap can probe across the board. Never cluster all Scouts: any rank 3+ piece (Miner, Sergeant, anything higher) picks clustered Scouts off one by one.",
+      "strategy_stealth": ["Scatter scouts at lake gaps", "Scouts = primary information", "Never cluster — any rank 3+ kills"],
       "tags": ["Economy"],
       "context": null
     },
@@ -58,7 +58,7 @@
       "phase": "Early Game",
       "category": "Marshal Pressure",
       "condition": "Opponent knows your Marshal's location",
-      "strategy_detailed": "If your Marshal is identified, use it as a known threat rather than a surprise weapon. Push it forward to control key corridors while Spies (rank 1) flank the enemy. Your General and Colonel become your flanking surprise — opponent fixates on your Marshal.",
+      "strategy_detailed": "If your Marshal is identified, use it as a known threat rather than a surprise weapon. Push it forward to control corridors while your Spy (only 1 per side) flanks toward the enemy's likely Marshal. Your General and Colonel become the true surprise — opponent fixates on the visible Marshal.",
       "strategy_stealth": ["Marshal as known corridor threat", "Spy flanks while Marshal distracts", "General becomes your true surprise"],
       "tags": ["Bluff"],
       "context": "marshal-known"
@@ -85,8 +85,8 @@
       "phase": "Mid-Game",
       "category": "Spy Usage",
       "condition": "Opponent's Marshal is exposed",
-      "strategy_detailed": "The Spy (rank 1) beats the Marshal but loses to everything else. Only advance your Spy toward the Marshal when the path is clear of all other opponent pieces. A Spy caught by a Scout (rank 2) is wasted. Scout the path clean before the strike.",
-      "strategy_stealth": ["Spy beats Marshal, loses to all else", "Clear path of all pieces first", "Scout kills Spy — path must be clear"],
+      "strategy_detailed": "The Spy beats the Marshal ONLY when Spy attacks first — if Marshal attacks your Spy, Marshal wins. So move Spy adjacent then strike, never let it sit defensively next to the Marshal. Any Scout (rank 2) or higher that intercepts kills the Spy outright. Clear the corridor first.",
+      "strategy_stealth": ["Spy beats Marshal ONLY on attack", "Marshal attacks Spy = Spy dies", "Clear corridor before Spy advances"],
       "tags": ["Offense"],
       "context": "marshal-hidden"
     },
