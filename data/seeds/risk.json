@@ -58,9 +58,22 @@
       "phase": "Mid-Game",
       "category": "Army Concentration",
       "condition": "Considering a large offensive",
-      "strategy_detailed": "Mass a minimum 3:1 ratio before attacking a fortified territory. Dice variance means 2:1 attacks lose roughly 40% of the time. A 3:1 attack expects to advance while retaining 60%+ of your forces. Never split your attack force between two fronts simultaneously.",
-      "strategy_stealth": ["Attack at 3:1 minimum ratio", "2:1 attacks lose 40% of time", "Never split attack across two fronts"],
+      "strategy_detailed": "Mass a minimum 3:1 ratio before attacking. In a standard 3v2 exchange, the attacker is favored — expected to lose 0.92 armies while defender loses 1.08. Avoid 1v1 confrontations: defender wins ties, so attacker wins only ~42% of 1v1 rolls. Never split across two fronts.",
+      "strategy_stealth": ["3v2 favors attacker (lose 0.92 vs 1.08)", "1v1: defender wins ties = attacker ~42%", "Never split attack across two fronts"],
       "tags": ["TLDR", "Offense"],
+      "context": null
+    },
+    {
+      "phase": "Mid-Game",
+      "category": "Combat Odds",
+      "condition": "Deciding how many dice to commit",
+      "strategy_detailed": "Always roll maximum dice. Defender wins ties — so in 1v1, defender wins ~58%. In 3v2, attacker expects to gain: loses 0.92 per exchange, defender loses 1.08. Rolling fewer attack dice to 'play it safe' flips the odds against you. More dice always favors the attacker.",
+      "strategy_stealth": [
+        "Always roll max dice — fewer = worse odds",
+        "Defender wins ties: 1v1 = attacker loses 58%",
+        "3v2 = attacker favorable every exchange"
+      ],
+      "tags": ["Offense", "Economy"],
       "context": null
     },
     {
