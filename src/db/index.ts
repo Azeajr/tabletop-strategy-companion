@@ -2,8 +2,6 @@ import { SQLiteTable } from './sqlite-table'
 import { dbReady, sqliteClient } from './sqlite-client'
 import type { Game, Strategy } from '../types/domain'
 
-export type { SQLiteTable } from './sqlite-table'
-
 interface MetaRow {
   key: string
   value: string

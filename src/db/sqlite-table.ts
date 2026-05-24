@@ -122,15 +122,6 @@ class Query<T> {
   }
 
   async delete(): Promise<void> {
-    if (this.filterFn) {
-      const rows = await this.toArray()
-      const ids = rows.map(r => (r as Record<string, unknown>).id as number)
-      if (ids.length > 0) {
-        const ph = ids.map(() => '?').join(',')
-        await sqliteClient.run(`DELETE FROM "${this.table.tableName}" WHERE id IN (${ph})`, ids)
-      }
-      return
-    }
     const whereClause = this.whereSql ? ` WHERE ${this.whereSql}` : ''
     await sqliteClient.run(`DELETE FROM "${this.table.tableName}"${whereClause}`, this.whereParams)
   }
@@ -186,25 +177,26 @@ export class SQLiteTable<T> {
     return rows[0]
   }
 
-  async add(obj: Omit<T, 'id'> | T): Promise<number> {
-    const row = toSqlRow(obj as Record<string, unknown>, this.schema)
-    if (row.id == null) delete row.id
+  private buildInsert(row: Record<string, unknown>, orReplace: boolean): { sql: string; values: unknown[] } {
     const cols = Object.keys(row).filter((k) => row[k] !== undefined).map(assertIdent)
     const values = cols.map((k) => row[k])
     const placeholders = cols.map(() => '?').join(',')
-    const sql = `INSERT INTO "${this.tableName}" (${cols.map((c) => `"${c}"`).join(',')}) VALUES (${placeholders})`
-    const result = await sqliteClient.run(sql, values)
-    return result.lastInsertRowid
+    const verb = orReplace ? 'INSERT OR REPLACE' : 'INSERT'
+    const sql = `${verb} INTO "${this.tableName}" (${cols.map((c) => `"${c}"`).join(',')}) VALUES (${placeholders})`
+    return { sql, values }
+  }
+
+  async add(obj: Omit<T, 'id'> | T): Promise<number> {
+    const row = toSqlRow(obj as Record<string, unknown>, this.schema)
+    if (row.id == null) delete row.id
+    const { sql, values } = this.buildInsert(row, false)
+    return (await sqliteClient.run(sql, values)).lastInsertRowid
   }
 
   async put(obj: T): Promise<number> {
     const row = toSqlRow(obj as Record<string, unknown>, this.schema)
-    const cols = Object.keys(row).filter((k) => row[k] !== undefined).map(assertIdent)
-    const values = cols.map((k) => row[k])
-    const placeholders = cols.map(() => '?').join(',')
-    const sql = `INSERT OR REPLACE INTO "${this.tableName}" (${cols.map((c) => `"${c}"`).join(',')}) VALUES (${placeholders})`
-    const result = await sqliteClient.run(sql, values)
-    return result.lastInsertRowid
+    const { sql, values } = this.buildInsert(row, true)
+    return (await sqliteClient.run(sql, values)).lastInsertRowid
   }
 
   async update(id: number, changes: Partial<T>): Promise<number> {

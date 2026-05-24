@@ -1,10 +1,14 @@
-import { ErrorBoundary } from 'solid-js'
+import { createEffect, ErrorBoundary } from 'solid-js'
 import { Router, Route } from '@solidjs/router'
+import { useAppMode } from './store/appState'
 import GameLibrary from './views/GameLibrary'
 import PreGameDashboard from './views/PreGameDashboard'
 import LiveCompanion from './views/LiveCompanion'
 
 export default function App() {
+  const mode = useAppMode()
+  createEffect(() => document.body.setAttribute('data-mode', mode()))
+
   return (
     <ErrorBoundary
       fallback={(err, reset) => (
