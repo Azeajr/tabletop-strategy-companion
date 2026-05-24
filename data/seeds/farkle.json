@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Entry Threshold",
       "condition": "Getting on the scoreboard (500 pts)",
-      "strategy_detailed": "You must score 500+ in a single turn to get on the board. Don't bank with 350 hoping to add next turn — it resets. Push through low scores (200-400) to reach 500. Once on the board, conservative play becomes viable.",
-      "strategy_stealth": ["Must reach 500 in one turn to enter", "Don't bank below 500 — resets", "Push through 200-400 to get in"],
+      "strategy_detailed": "Qualifying rule: must reach 500+ in one turn before any points bank to your total. Stopping below 500 scores zero for that turn (same as farkling — no carryover). Push through 200-400 sequences to reach 500 even at modest farkle risk. Conservative play only becomes viable after entry.",
+      "strategy_stealth": ["Must reach 500 in one turn to enter", "Below 500 banks zero — no carryover", "Push through 200-400 to qualify"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Score Targets",
       "condition": "Deciding turn target score",
-      "strategy_detailed": "Target 750-1000 per turn in early rounds with no pressure. Below 750, you're giving up expected value by banking too soon. Above 1000, each additional roll risks a meaningful accumulated score. Calibrate your stop point to the round's risk context.",
-      "strategy_stealth": ["Target 750-1000 per turn (no pressure)", "Below 750: banking too conservative", "Above 1000: risk becomes meaningful"],
+      "strategy_detailed": "Without pressure, aim 500-800 per turn via the EV thresholds from Strategy 2. Higher banks (1000+) usually come through hot-dice chains, not by pushing rolls past the threshold. Don't chase an arbitrary target with 2-3 dice when EV says bank — accept the lower turn and start the next.",
+      "strategy_stealth": ["Aim 500-800 via EV thresholds", "1000+ comes from hot-dice chains", "Don't push past EV chasing target"],
       "tags": ["Economy"],
       "context": "no-pressure"
     },
