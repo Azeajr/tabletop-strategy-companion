@@ -8,7 +8,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test-setup.ts'],
-    exclude: ['**/node_modules/**', '**/dist/**'],
+    exclude: ['**/node_modules/**', '**/dist/**', 'tests/e2e/**'],
     alias: [
       // Swap Worker-backed SQLite client for in-process client under vitest
       { find: /\/sqlite-client$/, replacement: '/sqlite-test-client' },
