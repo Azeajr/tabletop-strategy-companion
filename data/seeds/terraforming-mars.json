@@ -67,7 +67,7 @@
       "phase": "Mid-Game",
       "category": "Awards",
       "condition": "Funding an award in mid-game",
-      "strategy_detailed": "Fund the award you're currently leading by the widest margin. Awards cost 8-24 MC depending on order — the first funder pays 8 MC for 5 VP if they win. Banker (MC production), Landlord (tiles), and Scientist (tags) are reliably contestable.",
+      "strategy_detailed": "Fund the award you're currently leading by the widest margin. Awards cost 8-20 MC depending on order — the first funder pays 8 MC for 5 VP if they win. Banker (MC production), Landlord (tiles), and Scientist (tags) are reliably contestable.",
       "strategy_stealth": ["Fund award you lead by most", "First funder pays 8 MC for 5 VP", "Banker/Landlord/Scientist easiest to lead"],
       "tags": ["Economy"],
       "context": null

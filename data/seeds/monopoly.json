@@ -58,8 +58,8 @@
       "phase": "Mid-Game",
       "category": "Building Strategy",
       "condition": "First to build on a color set",
-      "strategy_detailed": "Build to 3 houses per property, not hotels. Three houses returns the best rent-per-dollar spent. Hotels tie up all 4 house tokens and block opponents from building. The house shortage is a strategic weapon — reach it before others can build.",
-      "strategy_stealth": ["3 houses = best rent-per-dollar", "Hotels cause house shortage", "Race to 3 houses per property"],
+      "strategy_detailed": "Build to 3 houses per property, not hotels. Three houses returns the best rent-per-dollar spent. Staying at 3 holds tokens in the 32-house pool — opponents can't build when houses run out. Hotels release all 4 tokens back to the bank, enabling opponents to build. The house shortage is your weapon.",
+      "strategy_stealth": ["3 houses = best rent-per-dollar", "3 houses holds tokens, denying opponents", "Hotels release tokens — lose the shortage weapon"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },

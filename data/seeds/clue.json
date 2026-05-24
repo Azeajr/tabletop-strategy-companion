@@ -31,7 +31,7 @@
       "phase": "Early Game",
       "category": "Suggestion Order",
       "condition": "Choosing what to suggest first",
-      "strategy_detailed": "Suggest the suspect you know least about first. You already know your own cards — don't waste suggestions confirming suspects you hold. Work through the unknowns systematically: 3 suspects × 6 weapons × 9 rooms — eliminate suspects first, then weapons, then rooms.",
+      "strategy_detailed": "Suggest the suspect you know least about first. You already know your own cards — don't waste suggestions confirming suspects you hold. Work through the unknowns systematically: 6 suspects × 6 weapons × 9 rooms — eliminate suspects first, then weapons, then rooms.",
       "strategy_stealth": ["Suggest unknowns — not your own cards", "Order: suspects > weapons > rooms", "Systematic elimination over guessing"],
       "tags": ["TLDR", "Economy"],
       "context": "wide-open"

@@ -121,7 +121,7 @@
       "phase": "Mid-Game",
       "category": "Victory Points",
       "condition": "You are trailing by 2+ VP",
-      "strategy_detailed": "Look for a hidden VP card in your Dev Card pile. Hidden VPs (Cathedral, University etc.) let you win in one turn. Reach 8 VP and hold 2 VP cards to win on your next turn before opponents react.",
+      "strategy_detailed": "Look for a hidden VP card in your Dev Card pile. Hidden VPs (Chapel, Library etc.) let you win in one turn. Reach 8 VP and hold 2 VP cards to win on your next turn before opponents react.",
       "strategy_stealth": ["Collect Dev Cards for hidden VPs", "Strike when at 8 VP + 2 VP cards", "Don't show VP count early"],
       "tags": ["Pivot", "Bluff"],
       "context": "trailing"

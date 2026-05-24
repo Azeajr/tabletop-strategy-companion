@@ -40,7 +40,7 @@
       "phase": "Early Game",
       "category": "Probing",
       "condition": "Moving pieces into contact range",
-      "strategy_detailed": "Send Sergeants (3) and Lieutenants (4) on probing attacks. A known 3-rank loss reveals your probe's rank — but also reveals opponent's piece. Every revelation narrows their flag's likely location. Never probe with pieces you can't afford to lose.",
+      "strategy_detailed": "Send Sergeants (4) and Lieutenants (5) on probing attacks. A known 4-rank loss reveals your probe's rank — but also reveals opponent's piece. Every revelation narrows their flag's likely location. Never probe with pieces you can't afford to lose.",
       "strategy_stealth": ["Probe with Sgt/Lt (rank 3-4)", "Every loss reveals opponent's rank", "Never probe with Marshal/General"],
       "tags": ["TLDR", "Offense"],
       "context": null
