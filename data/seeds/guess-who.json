@@ -22,8 +22,8 @@
       "phase": "Early Game",
       "category": "Question Strategy",
       "condition": "Choosing your first question",
-      "strategy_detailed": "Optimal first questions eliminate ~50% of characters. 'Do they have brown hair?' or 'Are they male?' split the board near 50/50 in standard sets. Avoid highly specific questions (mustache, hat) early — they eliminate only 2-3 characters on a yes.",
-      "strategy_stealth": ["First question targets 50/50 split", "Male/female or hair color ideal", "Specific features = low early value"],
+      "strategy_detailed": "Best first question splits the board near 50/50. In classic Guess Who (24 cards), 'Do they have brown hair?' splits ~12/12; 'Do they have facial hair?' splits ~10/14. Gender questions are usually skewed (~19M/5F in original) — poor binary split. Quality = closeness to 50/50.",
+      "strategy_stealth": ["First Q targets 12/12 split", "Hair color splits well, gender skewed", "Specific features = low early value"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Defense",
       "condition": "Opponent asks about a feature you have",
-      "strategy_detailed": "Answer truthfully and flip down your eliminated characters immediately. Don't hesitate — hesitation tips off a yes or no before you answer. Count how many characters opponent flipped. If they flipped many, they got a yes-dominant answer and may narrow fast.",
-      "strategy_stealth": ["Answer immediately — no hesitation", "Count characters opponent flipped", "Many flipped = they got useful answer"],
+      "strategy_detailed": "Answer truthfully and instantly — hesitation telegraphs the answer before you say it. You can't see opponent's board (Hasbro design hides it), so track their narrowing via question pattern instead: broad early, specific late. Specific questions by turn 4 = they're at ~5 remaining.",
+      "strategy_stealth": ["Answer instantly — no hesitation tells", "Opponent's board is physically hidden", "Specific Q by turn 4 = ~5 left"],
       "tags": ["Bluff"],
       "context": null
     },
