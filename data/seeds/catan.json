@@ -113,7 +113,7 @@
       "category": "Robber",
       "condition": "Rolling 7 or playing Knight",
       "strategy_detailed": "Target the resource-richest hex of the player closest to winning. Steal their most important resource type. Never move robber to desert or low-probability hexes.",
-      "strategy_stealth": ["Target leader's most-rolled hex", "Steal their key bottleneck", "Never place on 2 or 12"],
+      "strategy_stealth": ["Target leader's most-rolled hex", "Steal their key bottleneck", "Avoid placing on 2 or 12"],
       "tags": ["Defense"],
       "context": null
     },
