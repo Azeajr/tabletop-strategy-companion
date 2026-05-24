@@ -49,8 +49,8 @@
       "phase": "Early Game",
       "category": "Milestones",
       "condition": "Milestone within 2 projects of reach",
-      "strategy_detailed": "Milestones give 5 VP for 8 MC — the best point-per-credit purchase in the game. Terraformer (TR 25), Gardener (5 greeneries), and Builder (8 building tags) are most achievable. If you're within 2 projects of a milestone, prioritize it over almost everything.",
-      "strategy_stealth": ["Milestone: 5 VP for 8 MC (best ratio)", "Terraformer/Gardener/Builder easiest", "Within 2 projects = claim now"],
+      "strategy_detailed": "Milestones give 5 VP for 8 MC — best point-per-credit purchase. Base game thresholds: Terraformer (TR 35), Mayor (3 cities), Gardener (3 greeneries), Builder (8 building tags), Planner (16 cards). Only 3 milestones claimed total per game — race for the one matching your engine.",
+      "strategy_stealth": ["5 VP for 8 MC = best ratio", "Mayor/Gardener = 3 cities/greeneries", "Only 3 claimed total — race"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -76,8 +76,8 @@
       "phase": "Mid-Game",
       "category": "Tile Placement",
       "condition": "Placing greenery or city tile",
-      "strategy_detailed": "Greeneries placed adjacent to your cities score 1 VP per adjacent city at game end. Plan city and greenery placements to cluster — each adjacency is worth 1 VP to you. Opponent cities adjacent to your greeneries score them 1 VP too, so block if cheap.",
-      "strategy_stealth": ["Cluster cities + greeneries for VP", "Each adjacency = 1 VP", "Block opponent adjacencies cheaply"],
+      "strategy_detailed": "Greeneries score 1 VP each (the tile itself). Cities score 1 VP per adjacent greenery — so clustering your greeneries around your own cities multiplies their value. Opponent cities adjacent to your greeneries hand them VP too — block adjacencies cheaply when possible.",
+      "strategy_stealth": ["Greenery tile = 1 VP base", "City + 1 VP per adjacent greenery", "Block opponent adjacencies cheaply"],
       "tags": ["Economy"],
       "context": null
     },
