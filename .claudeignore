@@ -1,0 +1,25 @@
+# Load only on explicit request
+.claude/completions/**
+.claude/sessions/**
+
+# Build output and deps
+node_modules/**
+dist/**
+coverage/**
+
+# Git
+.git/**
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/**
+
+# IDE / OS
+.vscode/**
+.idea/**
+.DS_Store
