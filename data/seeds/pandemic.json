@@ -129,7 +129,7 @@
     {
       "phase": "End-Game",
       "category": "Crisis Response",
-      "condition": "Outbreak track at 6, one remaining",
+      "condition": "Outbreak track at 7, one remaining",
       "strategy_detailed": "One more outbreak and the game ends. Every action by every player must either prevent an outbreak or cure a disease. Station the Quarantine Specialist adjacent to the most likely outbreak city. Eradicate a cured disease immediately if possible — it removes the outbreak threat entirely.",
       "strategy_stealth": ["QS adjacent to outbreak threat", "Eradicate cured disease now", "One outbreak = game over"],
       "tags": ["Defense", "Closing"],
