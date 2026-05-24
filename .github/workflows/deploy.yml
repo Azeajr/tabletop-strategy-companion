@@ -1,0 +1,49 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - '!src/**/*.test.*'
+      - 'public/**'
+      - 'data/seeds/**'
+      - 'index.html'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vite.config.*'
+      - 'tsconfig*'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 25
+          cache: npm
+
+      - run: npm install --prefer-offline --no-audit --no-fund
+      - run: npm audit signatures
+
+      - run: npm run build
+
+      - name: Create project if missing
+        run: npx wrangler pages project create tabletop-companion --production-branch main || true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 5141f0dec18e8fb0aa0942a9f09f982d
+
+      - name: Deploy to Cloudflare Pages
+        run: npx wrangler pages deploy dist --project-name tabletop-companion
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 5141f0dec18e8fb0aa0942a9f09f982d
