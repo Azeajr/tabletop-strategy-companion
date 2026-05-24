@@ -58,7 +58,7 @@
       "phase": "Mid-Game",
       "category": "Building Strategy",
       "condition": "First to build on a color set",
-      "strategy_detailed": "3 houses per property = best rent-per-dollar (peak marginal ROI). For max house starvation, push to 4 houses on every monopoly — this locks more of the 32 house tokens in the bank's pool, denying opponents builds. NEVER upgrade to hotels: they return 4 houses to the bank, ending your shortage weapon.",
+      "strategy_detailed": "3 houses per property = best rent-per-dollar (peak marginal ROI). For max house starvation, push to 4 houses on every monopoly — locks more of the 32 tokens, denying opponent builds. NEVER upgrade to hotels: they return 4 houses to the bank, ending your shortage weapon.",
       "strategy_stealth": ["3 houses = best ROI/dollar", "4 houses = max house starvation", "Hotels release tokens — never upgrade"],
       "tags": ["TLDR", "Economy"],
       "context": null
