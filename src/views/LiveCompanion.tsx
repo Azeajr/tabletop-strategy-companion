@@ -19,6 +19,20 @@ import InlineYesNoFilter from '../components/InlineYesNoFilter'
 import ActionAccordion from '../components/ActionAccordion'
 import type { Phase } from '../types/domain'
 
+// Returns context values to include given a filter's current state.
+// Unset (null) → include both sides so no filtering occurs.
+// Set → include only the matching side.
+function resolveFilterContexts(
+  label: string | null,
+  yesContext: string | null,
+  noContext: string | null,
+  value: 'yes' | 'no' | null,
+): (string | null)[] {
+  if (!label) return []
+  if (value === null) return [yesContext, noContext].filter((c): c is string => c !== null)
+  return [value === 'yes' ? yesContext : noContext]
+}
+
 export default function LiveCompanion() {
   const params = useParams()
   const navigate = useNavigate()
@@ -64,27 +78,10 @@ export default function LiveCompanion() {
   const activeContexts = createMemo((): (string | null)[] => {
     const g = game()
     if (!g) return []
-    const contexts: (string | null)[] = []
-    if (g.filter_1_label) {
-      const f1 = filter1()
-      if (f1 === null) {
-        // Unset: include both context values so no filtering occurs
-        if (g.filter_1_yes_context) contexts.push(g.filter_1_yes_context)
-        if (g.filter_1_no_context) contexts.push(g.filter_1_no_context)
-      } else {
-        contexts.push(f1 === 'yes' ? g.filter_1_yes_context : g.filter_1_no_context)
-      }
-    }
-    if (g.filter_2_label) {
-      const f2 = filter2()
-      if (f2 === null) {
-        if (g.filter_2_yes_context) contexts.push(g.filter_2_yes_context)
-        if (g.filter_2_no_context) contexts.push(g.filter_2_no_context)
-      } else {
-        contexts.push(f2 === 'yes' ? g.filter_2_yes_context : g.filter_2_no_context)
-      }
-    }
-    return contexts
+    return [
+      ...resolveFilterContexts(g.filter_1_label, g.filter_1_yes_context, g.filter_1_no_context, filter1()),
+      ...resolveFilterContexts(g.filter_2_label, g.filter_2_yes_context, g.filter_2_no_context, filter2()),
+    ]
   })
 
   const phaseStrategies = createMemo(() => {

@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test'
-
-const SEED_READY = { timeout: 12_000 }
+import { SEED_READY } from './helpers'
 
 // Catan has filter_1_label "Do you have the most victory points?"
 // Early Game strategies: 3 null-context + 1 leading + 1 trailing = 5 total

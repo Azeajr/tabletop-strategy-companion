@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test'
-
-const SEED_READY = { timeout: 12_000 }
+import { SEED_READY } from './helpers'
 
 test.describe('Pre-Game Dashboard', () => {
   test.beforeEach(async ({ page }) => {

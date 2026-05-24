@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test'
-
-// Generous timeout for first SQLite WASM init + seed load
-const SEED_READY = { timeout: 12_000 }
+import { SEED_READY } from './helpers'
 
 test.describe('Game Library', () => {
   test.beforeEach(async ({ page }) => {
