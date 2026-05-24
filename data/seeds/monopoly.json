@@ -58,8 +58,8 @@
       "phase": "Mid-Game",
       "category": "Building Strategy",
       "condition": "First to build on a color set",
-      "strategy_detailed": "Build to 3 houses per property, not hotels. Three houses returns the best rent-per-dollar spent. Staying at 3 holds tokens in the 32-house pool — opponents can't build when houses run out. Hotels release all 4 tokens back to the bank, enabling opponents to build. The house shortage is your weapon.",
-      "strategy_stealth": ["3 houses = best rent-per-dollar", "3 houses holds tokens, denying opponents", "Hotels release tokens — lose the shortage weapon"],
+      "strategy_detailed": "3 houses per property = best rent-per-dollar (peak marginal ROI). For max house starvation, push to 4 houses on every monopoly — this locks more of the 32 house tokens in the bank's pool, denying opponents builds. NEVER upgrade to hotels: they return 4 houses to the bank, ending your shortage weapon.",
+      "strategy_stealth": ["3 houses = best ROI/dollar", "4 houses = max house starvation", "Hotels release tokens — never upgrade"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
