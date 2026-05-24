@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Information Hiding",
       "condition": "Showing a card to another player",
-      "strategy_detailed": "Canonical rule: if you've already shown a specific card to the asker before, show it again. They learn nothing new. If no prior reveal applies, pick the card the asker is least likely to deduce via other suggestions — usually the one tied to the smallest unknown pool.",
-      "strategy_stealth": ["Repeat cards already shown to asker", "Same card = zero new information", "Else show card with smallest pool"],
+      "strategy_detailed": "If you've already shown a card to the asker before, repeat it — zero info leak. Otherwise, show from the category where the asker has the MOST remaining unknowns (suspects, weapons, or rooms). Avoid showing from categories near certainty — those leak the most info per card revealed.",
+      "strategy_stealth": ["Repeat cards already shown to asker", "Else show from MOST-unknown category", "Avoid near-certainty categories"],
       "tags": ["Bluff"],
       "context": null
     },
@@ -76,8 +76,8 @@
       "phase": "Mid-Game",
       "category": "Card Tracking",
       "condition": "Deducing a card no one has shown",
-      "strategy_detailed": "If a card has been part of 4+ suggestions and no player has shown it in response, it's almost certainly the murder card. Confirm by making one final suggestion including it with two cards you hold. If no one shows anything, that card is the solution element.",
-      "strategy_stealth": ["Unshown card after 4+ suggests = solution", "Confirm: suggest it with 2 of your cards", "No response = confirmed solution element"],
+      "strategy_detailed": "If multiple DIFFERENT players have suggested a card and no one ever shows it, the card must be in the envelope (it can't be in multiple hands at once). 3-4 distinct suggesters = highly conclusive. One player repeating doesn't qualify — they might hold it. Confirm by suggesting with 2 cards you hold.",
+      "strategy_stealth": ["Different suggesters + no shows = envelope", "Same player repeating doesn't qualify", "Confirm with 2 cards you hold"],
       "tags": ["Memory"],
       "context": "narrowed"
     },
