@@ -22,8 +22,8 @@
       "phase": "Setup",
       "category": "Railroad Strategy",
       "condition": "Railroads available to buy",
-      "strategy_detailed": "Railroads generate reliable income without building costs. All four pay $200/hit — better than most undeveloped color sets. Buy them opportunistically but don't overpay in trades; they have no monopoly bonus.",
-      "strategy_stealth": ["All 4 railroads = $200/hit each", "No building cost = safe income", "Don't overpay in trades for RRs"],
+      "strategy_detailed": "Railroads scale: 1=$25, 2=$50, 3=$100, 4=$200 per landing. Owning all 4 = 8× single-RR rent — strong without any build cost. But the ceiling caps at $200; you can't develop further to raise it. Buy opportunistically; become a high-priority trade target once you own 3.",
+      "strategy_stealth": ["RR scaling: 25/50/100/200", "All 4 = 8× rent, no build cost", "Cap at $200 — can't develop further"],
       "tags": ["Economy"],
       "context": null
     },
@@ -49,8 +49,8 @@
       "phase": "Early Game",
       "category": "Cash Management",
       "condition": "Low on cash after buying properties",
-      "strategy_detailed": "Mortgage low-yield properties (utilities, purple group) to fund development on better color sets. A mortgaged Mediterranean costs nothing to maintain and frees cash for 3 orange houses, which earn far more.",
-      "strategy_stealth": ["Mortgage utilities and purple group", "Free cash for high-yield houses", "Mortgaged = $0 cost, buys development"],
+      "strategy_detailed": "Mortgage low-yield properties (utilities, brown set — Mediterranean/Baltic) to fund houses on premium groups. Unmortgaging later costs 110% (10% interest), so plan to rebuild cash first. Freed cash → 3 houses on orange/red, where rent scales 5-7× per house added.",
+      "strategy_stealth": ["Mortgage utilities + brown set", "Unmortgage costs 10% interest", "Fund 3 houses on orange/red"],
       "tags": ["Economy"],
       "context": "cash-poor"
     },
