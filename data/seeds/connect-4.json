@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Center Control",
       "condition": "Choosing your first move",
-      "strategy_detailed": "The center column (column 4) is the only correct first move. It participates in more potential four-in-a-row combinations than any other column — horizontal, vertical, and both diagonals. Any first move outside the center is statistically suboptimal.",
-      "strategy_stealth": ["Column 4 = only correct first move", "Center connects in all 4 directions", "Non-center first moves are suboptimal"],
+      "strategy_detailed": "Connect 4 is solved — first player wins with perfect play. The center column (column 4) is the only correct opening move; it participates in more four-in-a-row lines than any other column. Any other first move is a provably losing choice against optimal play.",
+      "strategy_stealth": ["Connect 4 solved: P1 wins with perfect play", "Column 4 = only correct first move", "Non-center opening = provable loss"],
       "tags": ["TLDR", "Economy"],
       "context": "first-mover"
     },
@@ -22,8 +22,8 @@
       "phase": "Setup",
       "category": "Counter Strategy",
       "condition": "Opponent plays center column",
-      "strategy_detailed": "Against center-opening opponent, play column 3 or 5 (one off center). This contests the diagonal and prepares a flanking threat. Playing directly under or beside the center is the correct response — never play corners or extreme edges on move 2.",
-      "strategy_stealth": ["Counter center: play col 3 or 5", "Contests diagonal + prepares flank", "Never play corners or edges on move 2"],
+      "strategy_detailed": "Connect 4 is solved: second player cannot win against perfect play — draw is P2's best achievable outcome. Against center-opening opponent, play column 3 or 5 to contest the diagonal. Never play corners or extreme edges on move 2.",
+      "strategy_stealth": ["P2 cannot win against perfect play", "Draw is P2's best achievable result", "Counter center: play col 3 or 5"],
       "tags": ["Defense"],
       "context": "second-mover"
     },
@@ -40,8 +40,8 @@
       "phase": "Early Game",
       "category": "Threat Building",
       "condition": "Going second, behind in tempo",
-      "strategy_detailed": "The second player is permanently one move behind. Compensate by creating threats that also block: every disc you play should threaten your four AND prevent an opponent four. Pure blocking without threatening lets first player dictate tempo indefinitely.",
-      "strategy_stealth": ["Every move: threaten AND block", "Pure blocking loses — you fall behind", "Force dual-purpose disc placements"],
+      "strategy_detailed": "Second player cannot win against perfect play — a draw is P2's ceiling. Every disc must both threaten your four AND block opponent's four. Pure blocking without counter-threat cedes tempo to P1 and accelerates the forced loss.",
+      "strategy_stealth": ["P2 ceiling = draw, not a win", "Every move: threaten AND block", "Pure blocking = cede tempo, accelerate loss"],
       "tags": ["Defense"],
       "context": "second-mover"
     },

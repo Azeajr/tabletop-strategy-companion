@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Opening Development",
       "condition": "Choosing your first moves",
-      "strategy_detailed": "Develop center pieces first. The center four squares control the most diagonals and give your pieces maximum mobility. Pieces on the edges have fewer options and become targets. Classic openings like the Old Faithful (11-15, 23-19) contest the center immediately.",
-      "strategy_stealth": ["Develop center pieces first", "Edge pieces have fewer options", "Classic: 11-15, 23-19 openings"],
+      "strategy_detailed": "Checkers is a solved game — perfect play by both sides always draws. Develop center pieces first: the center four squares control the most diagonals and maximize mobility. Edge pieces become targets. Classic openings like Old Faithful (11-15, 23-19) contest the center immediately.",
+      "strategy_stealth": ["Checkers solved: perfect play = draw", "Develop center pieces first", "Classic: 11-15, 23-19 openings"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -85,8 +85,8 @@
       "phase": "End-Game",
       "category": "King Endgame",
       "condition": "Kings only remain on board",
-      "strategy_detailed": "King vs King endgames often draw. To win, you need 2 kings vs 1 or material advantage. Force the lone king into a corner using opposition — approach diagonally to limit its moves. A cornered king can be captured or stalemated.",
-      "strategy_stealth": ["2 kings vs 1 usually wins", "Force lone king to corner diagonally", "Cornered king = capture or stalemate"],
+      "strategy_detailed": "Equal kings always draw with correct play — per the solved game database. To win you need 2 kings vs 1. Force the lone king to a corner diagonally: limit its moves using opposition. A cornered king can be captured or stalemated.",
+      "strategy_stealth": ["Equal kings = draw with correct play", "2 kings vs 1 needed to win", "Force lone king to corner diagonally"],
       "tags": ["TLDR", "Closing"],
       "context": "ahead"
     },

@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Character Selection",
       "condition": "Choosing your character card",
-      "strategy_detailed": "Pick a character with common features — brown hair, no glasses, no hat. Common-feature characters survive opponent questions longer because broad eliminating questions won't isolate them quickly. Rare features (red hair, hat) are identified fast.",
-      "strategy_stealth": ["Common features = survive longer", "Rare features (red hair, hat) = fast ID", "Brown hair + no glasses = hardest to find"],
+      "strategy_detailed": "In standard Guess Who, your card is dealt randomly — there is no selection. In variants where you choose: prefer rare features. Rare-feature characters are harder to isolate because binary-search questions rarely target rare attributes, giving opponent fewer yes-answer reveals.",
+      "strategy_stealth": ["Standard rules: card is dealt, no choice", "Choice variant: pick rare features", "Rare features = fewer opponent yes-reveals"],
       "tags": ["TLDR", "Defense"],
       "context": null
     },
@@ -76,8 +76,8 @@
       "phase": "Mid-Game",
       "category": "Defense",
       "condition": "You have a rare-feature character",
-      "strategy_detailed": "If you're holding a rare-feature character (red hair, bald, large nose) and opponent asks that feature directly, answer honestly — stalling is obvious. Accept that your character may be found soon and focus entirely on eliminating their character faster.",
-      "strategy_stealth": ["Rare feature asked = answer honestly", "Stalling is transparent", "Pivot fully to offense when exposed"],
+      "strategy_detailed": "If you hold a rare-feature character and opponent directly asks about it, answer honestly — stalling is obvious. A direct question about your rare feature means they got lucky; most binary-search paths never hit it. Redirect fully to offense to finish before they adapt.",
+      "strategy_stealth": ["Rare feature directly asked = answer honestly", "Direct rare Q = they got lucky", "Redirect to offense — most paths miss it"],
       "tags": ["Defense"],
       "context": "opponent-wide"
     },
