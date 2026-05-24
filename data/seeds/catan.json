@@ -13,8 +13,8 @@
       "phase": "Setup",
       "category": "Initial Placement",
       "condition": "Choosing 1st settlement spot",
-      "strategy_detailed": "Prioritize Ore, Wheat, and Sheep on high-probability numbers (6, 8, 5, 9). This engine produces Cities and Dev Cards, which have the highest win rate in the mid-to-late game.",
-      "strategy_stealth": ["Target Ore/Wheat/Sheep on 6s and 8s", "Avoid Wood/Brick as 1st priority", "Seek 3:1 port proximity"],
+      "strategy_detailed": "Rate spots by total pips (dots): 6,8=5 pips; 5,9=4; 4,10=3; 3,11=2; 2,12=1. Target 10+ pips across the 3 adjacent hexes. Resource priority: Ore/Wheat/Sheep for the city + dev card engine — highest tournament win rate. Wood/Brick opening is viable but demands aggressive expansion.",
+      "strategy_stealth": ["Pip count: 6,8=5; 5,9=4; 4,10=3", "Target 10+ total pips on a spot", "OWS = dev card engine meta"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
@@ -103,8 +103,8 @@
       "phase": "Mid-Game",
       "category": "City Upgrades",
       "condition": "Have 3 Ore and 2 Wheat in hand",
-      "strategy_detailed": "Upgrade to a City immediately when you have the resources. Cities double your production on each roll and are the most efficient single-action VP gain in the game.",
-      "strategy_stealth": ["Build City now — don't bank", "1 City = 2x that hex production", "Cities before extra settlements"],
+      "strategy_detailed": "Build the city now. Cities give +1 VP plus double the settlement's production. Production scaling (not raw VP) is the real value — concentrated Ore/Wheat compounds. Banking risks robber loss and wastes the rare turn you actually have all 5 resources together.",
+      "strategy_stealth": ["Build now — don't bank resources", "+1 VP + double production", "Scaling > VP is real city value"],
       "tags": ["TLDR", "Economy"],
       "context": null
     },
