@@ -1,18 +1,16 @@
-import { createResource, createSignal, For, Show, Suspense } from 'solid-js'
+import { createEffect, createResource, createSignal, For, Show, Suspense } from 'solid-js'
 import { useNavigate, useParams } from '@solidjs/router'
 import { db } from '../db'
 import { seedsReady } from '../db/seed'
 import { useAppMode } from '../store/appState'
-import { PHASES } from '../lib/strategy'
 import StickyTopBar from '../components/StickyTopBar'
 import ModeToggle from '../components/ModeToggle'
-import type { Phase } from '../types/domain'
 
 export default function PreGameDashboard() {
   const params = useParams()
   const navigate = useNavigate()
   const mode = useAppMode()
-  const [activeTab, setActiveTab] = createSignal<Phase>('Setup')
+  const [activeTab, setActiveTab] = createSignal<string>('')
 
   const [game] = createResource(
     () => params.id,
@@ -29,6 +27,11 @@ export default function PreGameDashboard() {
       return db.getStrategies(id)
     },
   )
+
+  createEffect(() => {
+    const g = game()
+    if (g && !activeTab()) setActiveTab(g.phases[0] ?? '')
+  })
 
   const tldr = () =>
     (strategies() ?? []).filter((s) => s.tags.includes('TLDR'))
@@ -133,7 +136,7 @@ export default function PreGameDashboard() {
               {/* Deep Dive phase tabs */}
               <section class="flex-1 border-t border-[var(--muted)]/20">
                 <div class="flex">
-                  <For each={PHASES}>
+                  <For each={g().phases}>
                     {(phase) => (
                       <button
                         onClick={() => setActiveTab(phase)}

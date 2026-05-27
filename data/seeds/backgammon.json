@@ -2,6 +2,12 @@
   "game_id": "backgammon",
   "game_name": "Backgammon",
   "game_description": "Race your checkers home and bear them off before your opponent, 2 players.",
+  "phases": [
+    "Setup",
+    "Early Game",
+    "Mid-Game",
+    "End-Game"
+  ],
   "filter_1_label": "Ahead in pip count (closer to home)?",
   "filter_1_yes_context": "pip-lead",
   "filter_1_no_context": "pip-trail",
@@ -14,8 +20,15 @@
       "category": "Opening Rolls",
       "condition": "Best opening roll to play",
       "strategy_detailed": "Bot-confirmed best plays: 3-1 makes the 5-point (8/5, 6/5), 4-2 makes the 4-point (8/4, 6/4), 6-1 makes the bar-point (13/7, 8/7), 5-3 makes the 3-point (8/3, 6/3). 6-5 runs a back checker (24/13, lover's leap). Pointing beats splitting on these rolls — XG agrees unanimously.",
-      "strategy_stealth": ["3-1, 4-2, 6-1: make a point", "5-3: make 3-point (8/3, 6/3)", "6-5: lover's leap 24/13"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "3-1, 4-2, 6-1: make a point",
+        "5-3: make 3-point (8/3, 6/3)",
+        "6-5: lover's leap 24/13"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -23,8 +36,14 @@
       "category": "Game Plan",
       "condition": "Choosing running vs blocking game",
       "strategy_detailed": "After the opening exchange, compute pip counts. Lead by 8%+ and clear of contact → race. Roughly even with contact → priming/holding game. Far behind with deep anchors → back game. Pip count is the single most important metric for plan selection — recompute every few rolls.",
-      "strategy_stealth": ["+8% pips, no contact = race", "Even + contact = prime or hold", "Recompute pip count every few rolls"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "+8% pips, no contact = race",
+        "Even + contact = prime or hold",
+        "Recompute pip count every few rolls"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -32,8 +51,15 @@
       "category": "Anchor Building",
       "condition": "Building an anchor in opponent home",
       "strategy_detailed": "The 20-point (opponent's 5-point) is the golden anchor — high enough to re-enter fast, deep enough to threaten hits during opponent's bear-off. The 21-point (bar anchor) is second best. Avoid sticking on the 24-point: it dies to a 6-prime and you lose initiative.",
-      "strategy_stealth": ["20-point = golden anchor", "21-point bar anchor = second best", "Don't camp on the 24-point"],
-      "tags": ["TLDR", "Defense"],
+      "strategy_stealth": [
+        "20-point = golden anchor",
+        "21-point bar anchor = second best",
+        "Don't camp on the 24-point"
+      ],
+      "tags": [
+        "TLDR",
+        "Defense"
+      ],
       "context": "pip-trail"
     },
     {
@@ -41,8 +67,14 @@
       "category": "Hitting",
       "condition": "Opportunity to hit an opponent blot",
       "strategy_detailed": "Hit when you don't leave a return shot you can't cover. Home-board hits are nearly always correct — opponent loses tempo plus risks closeout. Outer-board hits need a follow-up plan (build a point next turn, or hit again). Pure-tempo hits with no positional gain are usually wrong.",
-      "strategy_stealth": ["Hit if no uncovered return shot", "Home-board hits almost always right", "Tempo-only hits usually wrong"],
-      "tags": ["Offense"],
+      "strategy_stealth": [
+        "Hit if no uncovered return shot",
+        "Home-board hits almost always right",
+        "Tempo-only hits usually wrong"
+      ],
+      "tags": [
+        "Offense"
+      ],
       "context": null
     },
     {
@@ -50,8 +82,14 @@
       "category": "Priming",
       "condition": "Building a prime (4+ consecutive points)",
       "strategy_detailed": "A 6-prime (six consecutive closed points) traps opponent checkers — no roll escapes. Build from the 5/6-point backward to the bar (7) and 4-point. A 5-prime is strong but escapable on the exact gap-matching roll. Maintain prime integrity while bringing back checkers around it.",
-      "strategy_stealth": ["6-prime: opponent fully trapped", "Build 5,6 → bar (7) → 4-point", "5-prime: escapable on gap-roll only"],
-      "tags": ["Offense"],
+      "strategy_stealth": [
+        "6-prime: opponent fully trapped",
+        "Build 5,6 → bar (7) → 4-point",
+        "5-prime: escapable on gap-roll only"
+      ],
+      "tags": [
+        "Offense"
+      ],
       "context": "pip-trail"
     },
     {
@@ -59,8 +97,14 @@
       "category": "Running Game",
       "condition": "Pip lead and clear board",
       "strategy_detailed": "In a pure race, minimize wastage: aim for 2 checkers per home-board point. Excess checkers on the 6-point waste pips when smaller rolls bear off. With no contact, smooth distribution can be worth 4-8 pips versus heavy stacking — often the margin between win and loss.",
-      "strategy_stealth": ["2 per point = smooth bear-off", "Heavy 6-point = wasted pips", "Distribution worth 4-8 pips"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "2 per point = smooth bear-off",
+        "Heavy 6-point = wasted pips",
+        "Distribution worth 4-8 pips"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": "pip-lead"
     },
     {
@@ -68,8 +112,15 @@
       "category": "Doubling Cube",
       "condition": "Offering or accepting a double",
       "strategy_detailed": "Cube theory: take point ~25% (accept if you win 25%+ for money play). Initial double window opens at ~50% in volatile positions, ~65-70% in races. Above ~80% you're 'too good' — play on for gammon. Match play shifts these thresholds; consult a match equity table.",
-      "strategy_stealth": ["Take if winning 25%+", "Too good at ~80%+", "Volatile = double earlier than race"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "Take if winning 25%+",
+        "Too good at ~80%+",
+        "Volatile = double earlier than race"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -77,8 +128,14 @@
       "category": "Blitz",
       "condition": "Opponent has checker(s) on bar",
       "strategy_detailed": "While opponent dances on the bar, race to close home points. With 5 of 6 home points closed, opponent dances 25/36 rolls (enters only on the 11/36 with a matching die). Closeout = automatic dance. Slot and cover aggressively — hits while building are usually correct.",
-      "strategy_stealth": ["5 closed: opponent dances 25/36", "Closeout = automatic dance", "Slot and cover aggressively"],
-      "tags": ["Offense"],
+      "strategy_stealth": [
+        "5 closed: opponent dances 25/36",
+        "Closeout = automatic dance",
+        "Slot and cover aggressively"
+      ],
+      "tags": [
+        "Offense"
+      ],
       "context": "pip-trail"
     },
     {
@@ -86,8 +143,14 @@
       "category": "Back Game",
       "condition": "Behind in pips with 2+ deep anchors",
       "strategy_detailed": "Best back-game anchors: 2 and 3-point, or 1 and 3-point. Wait for opponent to leave shots during bear-off and hit into your closed inner board. Critical: manage timing — keep mid-board checkers active so you don't crunch (forced to break anchors) before the shot appears.",
-      "strategy_stealth": ["Ideal anchors: 2-3 or 1-3", "Wait for bear-off shots", "Manage timing — avoid crunch"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Ideal anchors: 2-3 or 1-3",
+        "Wait for bear-off shots",
+        "Manage timing — avoid crunch"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "pip-trail"
     },
     {
@@ -95,8 +158,15 @@
       "category": "Bearing Off",
       "condition": "Bearing off with all checkers home",
       "strategy_detailed": "If opponent holds a deep anchor, bear off safely: never leave a direct shot to their anchor unless forced. With no contact, use high rolls on high points, lower rolls to fill gaps or move down. Single checkers on 5/6-points late are blot risks if opponent breaks anchor to attack.",
-      "strategy_stealth": ["Safe bear-off vs anchor", "High roll → high point", "Avoid lone 5/6 checkers late"],
-      "tags": ["TLDR", "Closing"],
+      "strategy_stealth": [
+        "Safe bear-off vs anchor",
+        "High roll → high point",
+        "Avoid lone 5/6 checkers late"
+      ],
+      "tags": [
+        "TLDR",
+        "Closing"
+      ],
       "context": "pip-lead"
     },
     {
@@ -104,8 +174,15 @@
       "category": "Gammon Prevention",
       "condition": "At risk of being gammoned",
       "strategy_detailed": "A gammon doubles the loss (backgammon triples). If you haven't borne any off and opponent is mid-bear-off, prioritize getting one checker off over positioning. Break anchors only if doing so gives you a real shot or speeds bear-off — premature breaks cost gammons, not save them.",
-      "strategy_stealth": ["1 checker off prevents gammon", "Backgammon = triple loss", "Don't break anchor prematurely"],
-      "tags": ["Defense", "Closing"],
+      "strategy_stealth": [
+        "1 checker off prevents gammon",
+        "Backgammon = triple loss",
+        "Don't break anchor prematurely"
+      ],
+      "tags": [
+        "Defense",
+        "Closing"
+      ],
       "context": "pip-trail"
     }
   ]

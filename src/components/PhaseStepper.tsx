@@ -1,11 +1,10 @@
 import { For } from 'solid-js'
 import { useAppMode } from '../store/appState'
-import { PHASES } from '../lib/strategy'
-import type { Phase } from '../types/domain'
 
 interface Props {
-  currentPhase: Phase
-  onPhaseChange: (phase: Phase) => void
+  phases: string[]
+  currentPhase: string
+  onPhaseChange: (phase: string) => void
 }
 
 export default function PhaseStepper(props: Props) {
@@ -19,9 +18,9 @@ export default function PhaseStepper(props: Props) {
   const handleTouchEnd = (e: TouchEvent) => {
     const dx = e.changedTouches[0].clientX - touchStartX
     if (Math.abs(dx) < 50) return
-    const i = PHASES.indexOf(props.currentPhase)
-    if (dx < 0 && i < PHASES.length - 1) props.onPhaseChange(PHASES[i + 1])
-    if (dx > 0 && i > 0) props.onPhaseChange(PHASES[i - 1])
+    const i = props.phases.indexOf(props.currentPhase)
+    if (dx < 0 && i < props.phases.length - 1) props.onPhaseChange(props.phases[i + 1])
+    if (dx > 0 && i > 0) props.onPhaseChange(props.phases[i - 1])
   }
 
   return (
@@ -33,7 +32,7 @@ export default function PhaseStepper(props: Props) {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <For each={PHASES}>
+      <For each={props.phases}>
         {(phase) => (
           <button
             onClick={() => props.onPhaseChange(phase)}

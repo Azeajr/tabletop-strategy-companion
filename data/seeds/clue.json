@@ -2,6 +2,12 @@
   "game_id": "clue",
   "game_name": "Clue",
   "game_description": "Deduce the murderer, weapon, and room through elimination, 3-6 players.",
+  "phases": [
+    "Setup",
+    "Early Game",
+    "Mid-Game",
+    "End-Game"
+  ],
   "filter_1_label": "Eliminated 2+ suspects already?",
   "filter_1_yes_context": "narrowed",
   "filter_1_no_context": "wide-open",
@@ -14,8 +20,15 @@
       "category": "Card Tracking",
       "condition": "Setting up your deduction sheet",
       "strategy_detailed": "Mark your own cards first — those are eliminated from suspicion. Then use a column per player on your sheet. When a player shows you a card, mark it. When a player shows nothing on your suggestion, mark them as lacking all three of those cards. Missing marks are as valuable as direct reveals.",
-      "strategy_stealth": ["Mark own cards first — they're cleared", "Column per player on your sheet", "No-show = lacks all 3 of your cards"],
-      "tags": ["TLDR", "Memory"],
+      "strategy_stealth": [
+        "Mark own cards first — they're cleared",
+        "Column per player on your sheet",
+        "No-show = lacks all 3 of your cards"
+      ],
+      "tags": [
+        "TLDR",
+        "Memory"
+      ],
       "context": null
     },
     {
@@ -23,8 +36,14 @@
       "category": "Starting Position",
       "condition": "Choosing your first room target",
       "strategy_detailed": "Move toward rooms adjacent to your starting position you don't hold. Use the diagonal secret passages (Lounge↔Conservatory, Kitchen↔Study) to swap corners in one turn — free travel that ignores dice. Players stranded in hallways while others gather information fall badly behind.",
-      "strategy_stealth": ["Adjacent rooms first; suggest each round", "Secret passages link corner rooms", "Hallway turns = wasted information"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "Adjacent rooms first; suggest each round",
+        "Secret passages link corner rooms",
+        "Hallway turns = wasted information"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -32,8 +51,15 @@
       "category": "Suggestion Order",
       "condition": "Choosing what to suggest first",
       "strategy_detailed": "Suggest the suspect you know least about first. You already know your own cards — don't waste suggestions confirming suspects you hold. Work through the unknowns systematically: 6 suspects × 6 weapons × 9 rooms — eliminate suspects first, then weapons, then rooms.",
-      "strategy_stealth": ["Suggest unknowns — not your own cards", "Order: suspects > weapons > rooms", "Systematic elimination over guessing"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "Suggest unknowns — not your own cards",
+        "Order: suspects > weapons > rooms",
+        "Systematic elimination over guessing"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": "wide-open"
     },
     {
@@ -41,8 +67,14 @@
       "category": "Information Hiding",
       "condition": "Showing a card to another player",
       "strategy_detailed": "If you've already shown a card to the asker before, repeat it — zero info leak. Otherwise, show from the category where the asker has the MOST remaining unknowns (suspects, weapons, or rooms). Avoid showing from categories near certainty — those leak the most info per card revealed.",
-      "strategy_stealth": ["Repeat cards already shown to asker", "Else show from MOST-unknown category", "Avoid near-certainty categories"],
-      "tags": ["Bluff"],
+      "strategy_stealth": [
+        "Repeat cards already shown to asker",
+        "Else show from MOST-unknown category",
+        "Avoid near-certainty categories"
+      ],
+      "tags": [
+        "Bluff"
+      ],
       "context": null
     },
     {
@@ -50,8 +82,14 @@
       "category": "Inference",
       "condition": "Player passes without showing",
       "strategy_detailed": "A no-show means the passing player holds none of the three cards you suggested. Mark all three as 'not held' by that player. If 2 players pass on the same suggestion, you've eliminated 6 cards from two players' hands — often enough to deduce ownership of specific cards.",
-      "strategy_stealth": ["No-show = lacks all 3 cards", "2 players pass = 6 eliminations", "Cross-reference passes for deductions"],
-      "tags": ["Memory"],
+      "strategy_stealth": [
+        "No-show = lacks all 3 cards",
+        "2 players pass = 6 eliminations",
+        "Cross-reference passes for deductions"
+      ],
+      "tags": [
+        "Memory"
+      ],
       "context": null
     },
     {
@@ -59,8 +97,15 @@
       "category": "Narrowing Suspects",
       "condition": "Two suspects remaining",
       "strategy_detailed": "When two suspects remain unknown, suggest one specifically with a weapon and room you know are in players' hands. If someone shows you the weapon or room, you know the suspect was the mystery card — you've deduced the murderer without them showing the suspect directly.",
-      "strategy_stealth": ["Suggest known weapon/room + unknown suspect", "Showing weapon/room = suspect is the murderer", "Indirect deduction avoids tipping others"],
-      "tags": ["TLDR", "Memory"],
+      "strategy_stealth": [
+        "Suggest known weapon/room + unknown suspect",
+        "Showing weapon/room = suspect is the murderer",
+        "Indirect deduction avoids tipping others"
+      ],
+      "tags": [
+        "TLDR",
+        "Memory"
+      ],
       "context": "narrowed"
     },
     {
@@ -68,8 +113,14 @@
       "category": "Blocking",
       "condition": "Opponent appears close to solving",
       "strategy_detailed": "If an opponent is making very specific suggestions (only one unknown in each set), they're close to the solution. Move into rooms they haven't visited to force them to suggest you there — their suggestion will reveal what they're testing. Use the information to update your own sheet.",
-      "strategy_stealth": ["Specific suggestions = opponent near solved", "Move into their unvisited rooms", "Their suggestion to you reveals target card"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Specific suggestions = opponent near solved",
+        "Move into their unvisited rooms",
+        "Their suggestion to you reveals target card"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "narrowed"
     },
     {
@@ -77,8 +128,14 @@
       "category": "Card Tracking",
       "condition": "Deducing a card no one has shown",
       "strategy_detailed": "If multiple DIFFERENT players have suggested a card and no one ever shows it, the card must be in the envelope (it can't be in multiple hands at once). 3-4 distinct suggesters = highly conclusive. One player repeating doesn't qualify — they might hold it. Confirm by suggesting with 2 cards you hold.",
-      "strategy_stealth": ["Different suggesters + no shows = envelope", "Same player repeating doesn't qualify", "Confirm with 2 cards you hold"],
-      "tags": ["Memory"],
+      "strategy_stealth": [
+        "Different suggesters + no shows = envelope",
+        "Same player repeating doesn't qualify",
+        "Confirm with 2 cards you hold"
+      ],
+      "tags": [
+        "Memory"
+      ],
       "context": "narrowed"
     },
     {
@@ -86,8 +143,15 @@
       "category": "Accusation Timing",
       "condition": "Ready to make a final accusation",
       "strategy_detailed": "Accusations don't require being in a room — only suggestions do. So once certain, accuse on your turn from wherever you stand. Don't telegraph readiness; opponents will race to accuse first. If 2 elements are certain and 1 is 50/50, guess — being pre-empted is worse than a coin-flip wrong call.",
-      "strategy_stealth": ["Accuse from anywhere — not a room", "Don't telegraph readiness", "50/50 guess beats being pre-empted"],
-      "tags": ["TLDR", "Closing"],
+      "strategy_stealth": [
+        "Accuse from anywhere — not a room",
+        "Don't telegraph readiness",
+        "50/50 guess beats being pre-empted"
+      ],
+      "tags": [
+        "TLDR",
+        "Closing"
+      ],
       "context": null
     },
     {
@@ -95,8 +159,14 @@
       "category": "Accusation Timing",
       "condition": "Opponent about to accuse correctly",
       "strategy_detailed": "You cannot stop a correct accusation. Accuse first if you have a reasonable guess. A wrong accusation eliminates you but keeps the game alive — sometimes a wrong guess by the leader saves everyone else from losing to their correct one.",
-      "strategy_stealth": ["You can't block a correct accusation", "Accuse first if you have reasonable guess", "Wrong accusation = you're out but game continues"],
-      "tags": ["Closing"],
+      "strategy_stealth": [
+        "You can't block a correct accusation",
+        "Accuse first if you have reasonable guess",
+        "Wrong accusation = you're out but game continues"
+      ],
+      "tags": [
+        "Closing"
+      ],
       "context": "wide-open"
     }
   ]

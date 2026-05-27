@@ -8,7 +8,7 @@ interface MetaRow {
 }
 
 class TabletopDB {
-  games = new SQLiteTable<Game>('games')
+  games = new SQLiteTable<Game>('games', { jsonFields: ['phases'] })
   strategies = new SQLiteTable<Strategy>('strategies', {
     jsonFields: ['strategy_stealth', 'tags'],
   })

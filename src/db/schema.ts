@@ -1,8 +1,5 @@
 import { z } from 'zod'
 
-export const PhaseEnum = z.enum(['Setup', 'Early Game', 'Mid-Game', 'End-Game'])
-export type Phase = z.infer<typeof PhaseEnum>
-
 export const TagEnum = z.enum([
   'TLDR', 'Offense', 'Defense', 'Economy',
   'Pivot', 'Memory', 'Bluff', 'Transition', 'Closing',
@@ -10,7 +7,7 @@ export const TagEnum = z.enum([
 export type Tag = z.infer<typeof TagEnum>
 
 export const StrategySchema = z.object({
-  phase: PhaseEnum,
+  phase: z.string().min(2).max(32),
   category: z.string().min(3).max(24),
   condition: z.string().min(5).max(45),
   strategy_detailed: z.string().min(20).max(300),
@@ -24,6 +21,7 @@ export const GameSeedSchema = z.object({
   game_id: z.string().min(2).max(32).regex(/^[a-z0-9-]+$/),
   game_name: z.string().min(2).max(32),
   game_description: z.string().min(10).max(80),
+  phases: z.array(z.string().min(2).max(32)).min(1).max(8),
   filter_1_label: z.string().nullable(),
   filter_1_yes_context: z.string().nullable(),
   filter_1_no_context: z.string().nullable(),

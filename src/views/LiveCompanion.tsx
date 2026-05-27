@@ -1,4 +1,5 @@
 import {
+  createEffect,
   createMemo,
   createResource,
   createSignal,
@@ -17,7 +18,6 @@ import ModeToggle from '../components/ModeToggle'
 import PhaseStepper from '../components/PhaseStepper'
 import InlineYesNoFilter from '../components/InlineYesNoFilter'
 import ActionAccordion from '../components/ActionAccordion'
-import type { Phase } from '../types/domain'
 
 // Returns context values to include given a filter's current state.
 // Unset (null) → include both sides so no filtering occurs.
@@ -38,7 +38,7 @@ export default function LiveCompanion() {
   const navigate = useNavigate()
   const mode = useAppMode()
 
-  const [currentPhase, setCurrentPhase] = createSignal<Phase>('Setup')
+  const [currentPhase, setCurrentPhase] = createSignal<string>('')
   const [filter1, setFilter1] = createSignal<'yes' | 'no' | null>(null)
   const [filter2, setFilter2] = createSignal<'yes' | 'no' | null>(null)
   const [searchQuery, setSearchQuery] = createSignal('')
@@ -66,6 +66,11 @@ export default function LiveCompanion() {
       return db.getGame(id)
     },
   )
+
+  createEffect(() => {
+    const g = game()
+    if (g && !currentPhase()) setCurrentPhase(g.phases[0] ?? '')
+  })
 
   const [allStrategies] = createResource(
     () => params.id,
@@ -122,6 +127,7 @@ export default function LiveCompanion() {
           {(g) => (
             <>
               <PhaseStepper
+                phases={g().phases}
                 currentPhase={currentPhase()}
                 onPhaseChange={setCurrentPhase}
               />

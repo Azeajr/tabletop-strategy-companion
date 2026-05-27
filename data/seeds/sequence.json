@@ -2,6 +2,12 @@
   "game_id": "sequence",
   "game_name": "Sequence",
   "game_description": "Play cards to place chips and complete rows of five, 2-3 teams.",
+  "phases": [
+    "Setup",
+    "Early Game",
+    "Mid-Game",
+    "End-Game"
+  ],
   "filter_1_label": "Playing 2-player (or 2-team)?",
   "filter_1_yes_context": "two-player",
   "filter_1_no_context": "three-player",
@@ -14,8 +20,15 @@
       "category": "Seat Selection",
       "condition": "Choosing your seat at the table",
       "strategy_detailed": "In 3-team games, sit opposite your partner so your combined chip placements cover opposite corners of the board. Corner positions are free chips — both teams should access at least one corner early. In 2-player, corners are contested and worth fighting for.",
-      "strategy_stealth": ["3-team: sit opposite partner", "Corner = free chip, claim early", "2-player: corners are contested"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "3-team: sit opposite partner",
+        "Corner = free chip, claim early",
+        "2-player: corners are contested"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -23,8 +36,15 @@
       "category": "Sequence Building",
       "condition": "Starting your first sequence attempt",
       "strategy_detailed": "Begin a sequence in the row or column that has the fewest opponent cards played adjacent to it. A sequence that goes through a corner requires only 4 cards — always start there in 2-player games. Build in parallel directions so opponents can't block both simultaneously.",
-      "strategy_stealth": ["Start where opponents are sparse", "Corner sequence needs only 4 cards", "Build 2 parallel sequences"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Start where opponents are sparse",
+        "Corner sequence needs only 4 cards",
+        "Build 2 parallel sequences"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": null
     },
     {
@@ -32,8 +52,14 @@
       "category": "Jack Usage",
       "condition": "Holding a One-Eyed Jack",
       "strategy_detailed": "One-Eyed Jacks remove opponent chips — save them for a chip blocking a nearly-complete sequence. Wasting a One-Eyed Jack on an isolated chip is rarely worth it. In 3-team games, coordinate jack usage with your partner to break two-chip gaps in opponent sequences.",
-      "strategy_stealth": ["Save OEJ for near-complete sequence blocks", "Don't waste on isolated chips", "Coordinate with partner in 3-team"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Save OEJ for near-complete sequence blocks",
+        "Don't waste on isolated chips",
+        "Coordinate with partner in 3-team"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -41,8 +67,14 @@
       "category": "Card Management",
       "condition": "Multiple dead cards in hand",
       "strategy_detailed": "A dead card is one whose board positions are all occupied by opponents. In 2-player, discard dead cards using a Two-Eyed Jack to refresh. In 3-player, save Two-Eyed Jacks as wildcards for sequence completion. Never hold 2+ dead cards — discard one immediately.",
-      "strategy_stealth": ["Dead card = occupied position", "2-player: TEJ to refresh hand", "3-player: TEJ = wildcard for sequence"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "Dead card = occupied position",
+        "2-player: TEJ to refresh hand",
+        "3-player: TEJ = wildcard for sequence"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -50,8 +82,14 @@
       "category": "Blocking",
       "condition": "Opponent building a sequence",
       "strategy_detailed": "Block opponent at 3 in a row if you hold the 5th-cell card. At 4 chips, blocking options: play your own chip on the open 5th cell (matching card or TEJ) OR remove one of their chips with OEJ. Both require specific cards or jacks — don't delay; every turn they extend further.",
-      "strategy_stealth": ["Block at 3-chip with matching card", "4-chip: block 5th cell OR OEJ removal", "3-player: let opponents block each other"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Block at 3-chip with matching card",
+        "4-chip: block 5th cell OR OEJ removal",
+        "3-player: let opponents block each other"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "two-player"
     },
     {
@@ -59,8 +97,14 @@
       "category": "Coalition Play",
       "condition": "Deciding which opponent to block",
       "strategy_detailed": "In 3-team games, always block the team that is ahead, not your immediate left. Blocking a trailing team while the leader extends is the classic losing mistake. Coordinate with the other non-leading team implicitly — both will benefit from slowing the leader.",
-      "strategy_stealth": ["Block the leader, not the trailer", "Implicit coalition with 3rd team", "Coordinate to slow the leader"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Block the leader, not the trailer",
+        "Implicit coalition with 3rd team",
+        "Coordinate to slow the leader"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "three-player"
     },
     {
@@ -68,8 +112,15 @@
       "category": "Sequence Building",
       "condition": "4-chip sequence with one card needed",
       "strategy_detailed": "When you're one chip away from a sequence, hold the completing card if you already have it. If not, dedicate the next 2 turns to drawing or trading toward it. Alert your partner (in team play) to protect the 4-chip row with defensive chip placement adjacent to it.",
-      "strategy_stealth": ["Hold completing card if in hand", "Partner protects 4-chip row", "2 turns max to finish or pivot"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Hold completing card if in hand",
+        "Partner protects 4-chip row",
+        "2 turns max to finish or pivot"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": null
     },
     {
@@ -77,8 +128,14 @@
       "category": "Jack Usage",
       "condition": "Holding Two-Eyed Jack with blocked hand",
       "strategy_detailed": "Two-Eyed Jacks are wildcards — they can place on any open space. Use them for sequence completion, not just for filling a convenient open spot. A TEJ played as a non-sequence chip wastes its potential. Save at least one TEJ per team for the closing sequence.",
-      "strategy_stealth": ["TEJ = wildcard for sequence only", "Don't waste on non-sequence spots", "Save 1 TEJ per team for close"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "TEJ = wildcard for sequence only",
+        "Don't waste on non-sequence spots",
+        "Save 1 TEJ per team for close"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -86,8 +143,14 @@
       "category": "Board Control",
       "condition": "Controlling the center of the board",
       "strategy_detailed": "The center of the board intersects more possible sequences than the edges. Chips near the center block opponent sequences in multiple directions simultaneously. If both sequences you need can pass through the center, prioritize center control early.",
-      "strategy_stealth": ["Center blocks multiple directions", "Center chips = multidirectional block", "Prioritize center for 2nd sequence"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Center blocks multiple directions",
+        "Center chips = multidirectional block",
+        "Prioritize center for 2nd sequence"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "two-player"
     },
     {
@@ -95,8 +158,15 @@
       "category": "Sequence Completion",
       "condition": "One sequence complete, one needed",
       "strategy_detailed": "Per rules, chips in a completed sequence are locked — opponents cannot OEJ them. Position your second sequence to share one chip with the first (allowed: one shared chip per cross). That shared chip is locked, giving your second sequence an unbreakable anchor and effectively a head start.",
-      "strategy_stealth": ["Completed sequence chips are locked", "Share 1 chip across both sequences", "Locked chip = unbreakable anchor"],
-      "tags": ["TLDR", "Closing"],
+      "strategy_stealth": [
+        "Completed sequence chips are locked",
+        "Share 1 chip across both sequences",
+        "Locked chip = unbreakable anchor"
+      ],
+      "tags": [
+        "TLDR",
+        "Closing"
+      ],
       "context": "two-player"
     },
     {
@@ -104,8 +174,15 @@
       "category": "Jack Usage",
       "condition": "Opponent one chip from winning",
       "strategy_detailed": "Use OEJ to remove any chip from their 4-chip line — they'll need to refill plus extend, minimum 2 plays to recover. Pick the chip that sits on the most potential future sequences (often a central one in multi-line positions). Time the OEJ to coincide with your own winning move when possible.",
-      "strategy_stealth": ["OEJ removes chip = 2 plays to recover", "Pick chip in most potential sequences", "Time OEJ to your winning turn"],
-      "tags": ["Closing", "Defense"],
+      "strategy_stealth": [
+        "OEJ removes chip = 2 plays to recover",
+        "Pick chip in most potential sequences",
+        "Time OEJ to your winning turn"
+      ],
+      "tags": [
+        "Closing",
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -113,8 +190,15 @@
       "category": "Coalition Play",
       "condition": "Leader near winning in 3-team game",
       "strategy_detailed": "3-team rule: only 1 sequence needed to win. When leader has 4 chips toward their first sequence, both other teams must immediately OEJ-remove or block the 5th cell. Coordinate which team handles the block. Pause your own sequence attempts — leader's first completion wins outright.",
-      "strategy_stealth": ["1 sequence wins in 3-team", "Coordinate OEJ to break leader's 4th", "Pause own attempts to block leader"],
-      "tags": ["Closing", "Defense"],
+      "strategy_stealth": [
+        "1 sequence wins in 3-team",
+        "Coordinate OEJ to break leader's 4th",
+        "Pause own attempts to block leader"
+      ],
+      "tags": [
+        "Closing",
+        "Defense"
+      ],
       "context": "three-player"
     }
   ]

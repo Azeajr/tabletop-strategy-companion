@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import {
-  PHASE_ORDER,
-  comparePhase,
   filterByContext,
   groupByCategory,
   hoistTLDR,
@@ -23,22 +21,6 @@ function makeStrategy(overrides: Partial<Strategy> = {}): Strategy {
     ...overrides,
   }
 }
-
-describe('PHASE_ORDER', () => {
-  it('Setup < Early Game < Mid-Game < End-Game', () => {
-    expect(PHASE_ORDER['Setup']).toBeLessThan(PHASE_ORDER['Early Game'])
-    expect(PHASE_ORDER['Early Game']).toBeLessThan(PHASE_ORDER['Mid-Game'])
-    expect(PHASE_ORDER['Mid-Game']).toBeLessThan(PHASE_ORDER['End-Game'])
-  })
-})
-
-describe('comparePhase', () => {
-  it('sorts phases chronologically', () => {
-    const phases = ['End-Game', 'Setup', 'Mid-Game', 'Early Game'] as const
-    const sorted = [...phases].sort(comparePhase)
-    expect(sorted).toEqual(['Setup', 'Early Game', 'Mid-Game', 'End-Game'])
-  })
-})
 
 describe('filterByContext', () => {
   it('always includes context=null strategies', () => {

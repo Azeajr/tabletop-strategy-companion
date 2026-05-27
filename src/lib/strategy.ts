@@ -1,18 +1,4 @@
-import type { Phase, Strategy, Tag } from '../types/domain'
-
-// Phase display order per spec — never alphabetical.
-export const PHASE_ORDER: Record<Phase, number> = {
-  'Setup': 0,
-  'Early Game': 1,
-  'Mid-Game': 2,
-  'End-Game': 3,
-}
-
-export const PHASES: Phase[] = ['Setup', 'Early Game', 'Mid-Game', 'End-Game']
-
-export function comparePhase(a: Phase, b: Phase): number {
-  return PHASE_ORDER[a] - PHASE_ORDER[b]
-}
+import type { Strategy, Tag } from '../types/domain'
 
 // A strategy with context=null is always visible.
 // A strategy with a context value is visible only if that value is in activeContexts.

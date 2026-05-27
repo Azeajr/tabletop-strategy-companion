@@ -2,6 +2,12 @@
   "game_id": "exploding-kittens",
   "game_name": "Exploding Kittens",
   "game_description": "Avoid drawing the Exploding Kitten card — last player alive wins.",
+  "phases": [
+    "Setup",
+    "Early Game",
+    "Mid-Game",
+    "End-Game"
+  ],
   "filter_1_label": "Down to last 2 players?",
   "filter_1_yes_context": "heads-up",
   "filter_1_no_context": "multi-player",
@@ -14,8 +20,15 @@
       "category": "Hand Assessment",
       "condition": "Evaluating your starting hand",
       "strategy_detailed": "Count your Skips, Attacks, and Nopes immediately. A hand with 2+ Skips is strong — you can avoid drawing for multiple turns. A Defuse without any skip/attack cards means you must draw often and can defuse only once. Plan your aggression level accordingly.",
-      "strategy_stealth": ["2+ Skips = strong safe hand", "Defuse without skips = high risk", "Count skip/attack/nope upfront"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "2+ Skips = strong safe hand",
+        "Defuse without skips = high risk",
+        "Count skip/attack/nope upfront"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -23,8 +36,14 @@
       "category": "Skip and Attack",
       "condition": "Deciding whether to play Skip",
       "strategy_detailed": "Play Skip when the deck is large and unshuffled — drawing is low risk anyway. Save Skips for when the deck is thin or you've seen (via Peek) that an Exploding Kitten is near the top. Early Skips are mostly wasted; mid-to-late Skips save lives.",
-      "strategy_stealth": ["Early Skips = low value, save them", "Play Skip when deck is thin or peeked", "Skip is defensive — time it"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Early Skips = low value, save them",
+        "Play Skip when deck is thin or peeked",
+        "Skip is defensive — time it"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "multi-player"
     },
     {
@@ -32,8 +51,14 @@
       "category": "Nope Timing",
       "condition": "Opponent plays a powerful card",
       "strategy_detailed": "Nope's highest value: cancel an Attack onto you (prevents 2-turn stack) or a Shuffle that erases your Peek info. In multi-player, Noping a Skip just delays the player one turn — usually wasted. In heads-up, Noping their Skip forces a draw and can kill them outright.",
-      "strategy_stealth": ["Best vs Attack and Shuffle", "Multi-player: don't Nope a Skip", "Heads-up: Skip-Nope can kill"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Best vs Attack and Shuffle",
+        "Multi-player: don't Nope a Skip",
+        "Heads-up: Skip-Nope can kill"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -41,8 +66,14 @@
       "category": "Shuffle Usage",
       "condition": "Deck position is known or dangerous",
       "strategy_detailed": "Shuffle resets knowledge of deck order — use it when you know an Exploding Kitten is near the top and you lack a Defuse. In multi-player, shuffling benefits everyone; do it only when you need it, not to 'help' the table.",
-      "strategy_stealth": ["Shuffle when kitten is near top", "Shuffle benefits everyone equally", "Only shuffle when you need it"],
-      "tags": ["Pivot"],
+      "strategy_stealth": [
+        "Shuffle when kitten is near top",
+        "Shuffle benefits everyone equally",
+        "Only shuffle when you need it"
+      ],
+      "tags": [
+        "Pivot"
+      ],
       "context": "multi-player"
     },
     {
@@ -50,8 +81,15 @@
       "category": "Targeting",
       "condition": "Choosing who to Attack",
       "strategy_detailed": "Attack the player who is strongest or most likely to survive long. In multi-player, attacking the weakest target is often a waste — they'll die soon anyway. Attack forces the target to draw twice; aim this at players with known-empty defenses.",
-      "strategy_stealth": ["Attack the strongest player", "Weak players die anyway — skip them", "Target players with no Defuse"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Attack the strongest player",
+        "Weak players die anyway — skip them",
+        "Target players with no Defuse"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": "multi-player"
     },
     {
@@ -59,8 +97,14 @@
       "category": "Defuse Management",
       "condition": "You have only one Defuse left",
       "strategy_detailed": "With one Defuse, protect it: play Skips and Attacks aggressively to avoid drawing. If forced to draw and defuse the EK, place it near the bottom of the deck — statistically you'll be the last to encounter it again. Burning your last Defuse means the next EK draw eliminates you.",
-      "strategy_stealth": ["Last Defuse: avoid all drawing", "Bury defused EK near bottom", "Next EK = elimination after"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Last Defuse: avoid all drawing",
+        "Bury defused EK near bottom",
+        "Next EK = elimination after"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -68,8 +112,15 @@
       "category": "Peek Usage",
       "condition": "Using a See the Future card",
       "strategy_detailed": "Peek shows the top 3 cards' order. EK at position 1: Skip immediately (you'd draw it). EK at position 2 or 3: drawing normally is safer for you — the EK passes downstream. Watch for opponent Skips/Attacks that could bounce it back to you. Keep peeked info private; don't react visibly.",
-      "strategy_stealth": ["Position 1 EK: Skip immediately", "Pos 2-3: draw, EK passes downstream", "Hide reaction; watch for bounces"],
-      "tags": ["Memory", "Bluff"],
+      "strategy_stealth": [
+        "Position 1 EK: Skip immediately",
+        "Pos 2-3: draw, EK passes downstream",
+        "Hide reaction; watch for bounces"
+      ],
+      "tags": [
+        "Memory",
+        "Bluff"
+      ],
       "context": null
     },
     {
@@ -77,8 +128,15 @@
       "category": "Heads-Up Play",
       "condition": "Last 2 players remaining",
       "strategy_detailed": "In heads-up, Attacks are doubled draws. Play Attack only if you're confident the opponent lacks a Defuse. Nope your opponent's Skips to force them to draw. The player with more Defuse cards almost always wins — count what cards were played to estimate their hand.",
-      "strategy_stealth": ["Nope opponent Skips to force draws", "Attack only if opponent Defuse-less", "Count Defuses played to estimate theirs"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Nope opponent Skips to force draws",
+        "Attack only if opponent Defuse-less",
+        "Count Defuses played to estimate theirs"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": "heads-up"
     },
     {
@@ -86,8 +144,15 @@
       "category": "Kitten Placement",
       "condition": "Defusing an Exploding Kitten",
       "strategy_detailed": "Heads-up placement depends on opponent's cards. Top: forces their next draw (if they lack Skip/Attack). Position 2: catches them only if they Skip (else YOU draw it). Position 3: catches them if they Attack you. Bottom is safe but lets them stack cards across many turns.",
-      "strategy_stealth": ["Top: forces their next draw", "Pos 2: catches Skip; pos 3: catches Attack", "Bottom safe but lets them stack"],
-      "tags": ["Bluff", "Closing"],
+      "strategy_stealth": [
+        "Top: forces their next draw",
+        "Pos 2: catches Skip; pos 3: catches Attack",
+        "Bottom safe but lets them stack"
+      ],
+      "tags": [
+        "Bluff",
+        "Closing"
+      ],
       "context": "heads-up"
     },
     {
@@ -95,8 +160,15 @@
       "category": "Card Conservation",
       "condition": "Running low on action cards",
       "strategy_detailed": "When you have 1-2 action cards left, evaluate each play carefully. A Nope used to cancel a trivial card leaves you defenseless against a future Attack. Conserve your last Skip for when you've peeked and confirmed the kitten is top 3.",
-      "strategy_stealth": ["Last Nope: save for Attacks", "Last Skip: save for confirmed danger", "Each card = irreplaceable at end"],
-      "tags": ["Closing", "Economy"],
+      "strategy_stealth": [
+        "Last Nope: save for Attacks",
+        "Last Skip: save for confirmed danger",
+        "Each card = irreplaceable at end"
+      ],
+      "tags": [
+        "Closing",
+        "Economy"
+      ],
       "context": null
     }
   ]

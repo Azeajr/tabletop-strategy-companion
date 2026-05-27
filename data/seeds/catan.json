@@ -2,6 +2,7 @@
   "game_id": "catan",
   "game_name": "Catan",
   "game_description": "Resource trading and area control, 3-4 players.",
+  "phases": ["Setup", "Early Game", "Mid-Game", "End-Game"],
   "filter_1_label": "Do you have the most victory points?",
   "filter_1_yes_context": "leading",
   "filter_1_no_context": "trailing",

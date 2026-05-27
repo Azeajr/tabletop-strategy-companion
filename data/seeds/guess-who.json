@@ -2,6 +2,12 @@
   "game_id": "guess-who",
   "game_name": "Guess Who?",
   "game_description": "Eliminate characters by asking yes/no questions to find your opponent's pick.",
+  "phases": [
+    "Setup",
+    "Early Game",
+    "Mid-Game",
+    "End-Game"
+  ],
   "filter_1_label": "Opponent down to 5 or fewer characters?",
   "filter_1_yes_context": "opponent-narrow",
   "filter_1_no_context": "opponent-wide",
@@ -14,8 +20,15 @@
       "category": "Character Selection",
       "condition": "Choosing your character card",
       "strategy_detailed": "In standard Guess Who, your card is dealt randomly — there is no selection. In variants where you choose: prefer rare features. Rare-feature characters are harder to isolate because binary-search questions rarely target rare attributes, giving opponent fewer yes-answer reveals.",
-      "strategy_stealth": ["Standard rules: card is dealt, no choice", "Choice variant: pick rare features", "Rare features = fewer opponent yes-reveals"],
-      "tags": ["TLDR", "Defense"],
+      "strategy_stealth": [
+        "Standard rules: card is dealt, no choice",
+        "Choice variant: pick rare features",
+        "Rare features = fewer opponent yes-reveals"
+      ],
+      "tags": [
+        "TLDR",
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -23,8 +36,15 @@
       "category": "Question Strategy",
       "condition": "Choosing your first question",
       "strategy_detailed": "Best first question splits the board near 12/12 (optimal binary search). In classic Guess Who, hair-related questions usually split well; gender questions are skewed (~19M/5F in the 1979 original — only ~8 elims/question). Avoid specific features early (mustache, hat) — they eliminate 2-3 only.",
-      "strategy_stealth": ["First Q targets 12/12 split", "Hair color usually near balanced", "Gender often skewed; specific = poor"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "First Q targets 12/12 split",
+        "Hair color usually near balanced",
+        "Gender often skewed; specific = poor"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -32,8 +52,14 @@
       "category": "Question Strategy",
       "condition": "Opponent answered yes to broad question",
       "strategy_detailed": "A 'yes' that leaves 10+ characters is still a good result if it eliminated 10+ others. Immediately follow with another 50/50 split of the remaining group. Never ask two consecutive questions about the same feature category — cover different attributes each turn.",
-      "strategy_stealth": ["Yes on broad Q = still eliminates half", "Next Q: 50/50 of remaining group", "Vary attribute categories each turn"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "Yes on broad Q = still eliminates half",
+        "Next Q: 50/50 of remaining group",
+        "Vary attribute categories each turn"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -41,8 +67,14 @@
       "category": "Defense",
       "condition": "Opponent asks about a feature you have",
       "strategy_detailed": "Answer truthfully and instantly — hesitation telegraphs the answer before you say it. You can't see opponent's board (Hasbro design hides it), so track their narrowing via question pattern instead: broad early, specific late. Specific questions by turn 4 = they're at ~5 remaining.",
-      "strategy_stealth": ["Answer instantly — no hesitation tells", "Opponent's board is physically hidden", "Specific Q by turn 4 = ~5 left"],
-      "tags": ["Bluff"],
+      "strategy_stealth": [
+        "Answer instantly — no hesitation tells",
+        "Opponent's board is physically hidden",
+        "Specific Q by turn 4 = ~5 left"
+      ],
+      "tags": [
+        "Bluff"
+      ],
       "context": null
     },
     {
@@ -50,8 +82,14 @@
       "category": "Defense",
       "condition": "Opponent narrowing quickly toward you",
       "strategy_detailed": "If opponent is asking highly specific questions by turn 3, they've likely narrowed to a small group or are guessing. Accelerate your own elimination pace — ask a 50/50 now even if you planned to wait. First correct guess wins regardless of turn count.",
-      "strategy_stealth": ["Specific Q by turn 3 = they're close", "Accelerate: ask 50/50 this turn", "First correct guess wins — race matters"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Specific Q by turn 3 = they're close",
+        "Accelerate: ask 50/50 this turn",
+        "First correct guess wins — race matters"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "opponent-narrow"
     },
     {
@@ -59,8 +97,14 @@
       "category": "Question Strategy",
       "condition": "Down to 8-12 characters remaining",
       "strategy_detailed": "At 8-12 characters, start asking about specific facial features: glasses, facial hair, teeth visible. These eliminate 2-5 characters per question but are now worth more since the group is smaller. Continue targeting the split closest to 50% of your remaining count.",
-      "strategy_stealth": ["Glasses/facial hair good at 8-12 left", "Target closest to 50% of remaining", "Specific features now worth more"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "Glasses/facial hair good at 8-12 left",
+        "Target closest to 50% of remaining",
+        "Specific features now worth more"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -68,8 +112,15 @@
       "category": "Guess Timing",
       "condition": "Down to 3-4 characters remaining",
       "strategy_detailed": "Asking one more question then guessing wins ~75% (narrow to 1-2, then guess). Guessing now wins 33% at 3 chars, 25% at 4. Only race-guess when opponent is also at 3-4 and might guess first this round. Without that pressure, always ask — the odds favor patience by 2-3×.",
-      "strategy_stealth": ["Ask first wins ~75% if unpressured", "Guess race only if opponent at 3-4", "Guess odds: 33% (3 left), 25% (4 left)"],
-      "tags": ["TLDR", "Closing"],
+      "strategy_stealth": [
+        "Ask first wins ~75% if unpressured",
+        "Guess race only if opponent at 3-4",
+        "Guess odds: 33% (3 left), 25% (4 left)"
+      ],
+      "tags": [
+        "TLDR",
+        "Closing"
+      ],
       "context": null
     },
     {
@@ -77,8 +128,14 @@
       "category": "Defense",
       "condition": "You have a rare-feature character",
       "strategy_detailed": "If you hold a rare-feature character and opponent directly asks about it, answer honestly — stalling is obvious. A direct question about your rare feature means they got lucky; most binary-search paths never hit it. Redirect fully to offense to finish before they adapt.",
-      "strategy_stealth": ["Rare feature directly asked = answer honestly", "Direct rare Q = they got lucky", "Redirect to offense — most paths miss it"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Rare feature directly asked = answer honestly",
+        "Direct rare Q = they got lucky",
+        "Redirect to offense — most paths miss it"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "opponent-wide"
     },
     {
@@ -86,8 +143,14 @@
       "category": "Guess Timing",
       "condition": "Two characters remain on your board",
       "strategy_detailed": "With 2 characters left, ask one more question only if you genuinely can't distinguish them yet. If you know which features separate them, ask the distinguishing question rather than guessing — a wrong guess hands the win to your opponent immediately.",
-      "strategy_stealth": ["Ask if 2 chars are distinguishable", "One question to differentiate them", "Wrong guess = immediate loss"],
-      "tags": ["Closing"],
+      "strategy_stealth": [
+        "Ask if 2 chars are distinguishable",
+        "One question to differentiate them",
+        "Wrong guess = immediate loss"
+      ],
+      "tags": [
+        "Closing"
+      ],
       "context": null
     },
     {
@@ -95,8 +158,15 @@
       "category": "Guess Timing",
       "condition": "One character remains on your board",
       "strategy_detailed": "Guess immediately. Do not ask another question — asking costs a turn and your opponent might guess first. Say the name confidently. If you arrived here correctly, you win. If you made an error earlier, an extra question won't save you.",
-      "strategy_stealth": ["Guess immediately at 1 remaining", "Extra question wastes your turn", "Confidence matters — say the name"],
-      "tags": ["TLDR", "Closing"],
+      "strategy_stealth": [
+        "Guess immediately at 1 remaining",
+        "Extra question wastes your turn",
+        "Confidence matters — say the name"
+      ],
+      "tags": [
+        "TLDR",
+        "Closing"
+      ],
       "context": null
     },
     {
@@ -104,8 +174,14 @@
       "category": "Defense",
       "condition": "Opponent about to guess correctly",
       "strategy_detailed": "You can't prevent a correct guess — focus on making yours first. If opponent is at 2-3 characters and you're at 5+, they likely win unless you guess now. Take a calculated guess on the most probable candidate rather than playing perfectly and losing.",
-      "strategy_stealth": ["Can't prevent correct guess — beat them", "Calculated guess at 5 if they're at 2", "Perfect play loses if you're too slow"],
-      "tags": ["Closing"],
+      "strategy_stealth": [
+        "Can't prevent correct guess — beat them",
+        "Calculated guess at 5 if they're at 2",
+        "Perfect play loses if you're too slow"
+      ],
+      "tags": [
+        "Closing"
+      ],
       "context": "opponent-narrow"
     }
   ]

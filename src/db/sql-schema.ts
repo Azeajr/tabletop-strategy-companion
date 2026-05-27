@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS games (
   game_id TEXT PRIMARY KEY,
   game_name TEXT NOT NULL,
   game_description TEXT NOT NULL,
+  phases TEXT NOT NULL DEFAULT '[]',
   filter_1_label TEXT,
   filter_1_yes_context TEXT,
   filter_1_no_context TEXT,
@@ -31,6 +32,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_strategies_upsert
   ON strategies(game_id, phase, category, condition);
 `
 
-export const ADDITIVE_MIGRATIONS: readonly string[] = []
+export const ADDITIVE_MIGRATIONS: readonly string[] = [
+  "ALTER TABLE games ADD COLUMN phases TEXT NOT NULL DEFAULT '[]'",
+]
 
 export const ALL_TABLES = ['games', 'strategies', 'meta'] as const

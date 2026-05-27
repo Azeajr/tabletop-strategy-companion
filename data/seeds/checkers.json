@@ -2,6 +2,12 @@
   "game_id": "checkers",
   "game_name": "Checkers",
   "game_description": "Capture all opponent pieces or block them from moving, 2 players.",
+  "phases": [
+    "Setup",
+    "Early Game",
+    "Mid-Game",
+    "End-Game"
+  ],
   "filter_1_label": "Equal or ahead on piece count?",
   "filter_1_yes_context": "ahead",
   "filter_1_no_context": "behind",
@@ -14,8 +20,15 @@
       "category": "Opening Development",
       "condition": "Choosing your first moves",
       "strategy_detailed": "Checkers is solved — perfect play always draws (Chinook). Develop toward the center squares (14, 15, 18, 19) for maximum diagonal control. Edge pieces have fewer attack lanes and become easy targets. The opening 11-15 contests the center on move 1 and is the most-played tournament line.",
-      "strategy_stealth": ["Solved: perfect play = draw", "Develop center (squares 14/15/18/19)", "11-15 opens center immediately"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "Solved: perfect play = draw",
+        "Develop center (squares 14/15/18/19)",
+        "11-15 opens center immediately"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -23,8 +36,14 @@
       "category": "King Row Defense",
       "condition": "Protecting your back row",
       "strategy_detailed": "Keep at least 2 pieces on your king row for the first 4-5 moves. Surrendering the king row lets opponent pieces pass unchallenged into kings. A piece that reaches king row changes game tempo dramatically — delay that at low cost.",
-      "strategy_stealth": ["Keep 2 back-row pieces early", "Undefended king row = free kings", "Delay king row breach cheaply"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Keep 2 back-row pieces early",
+        "Undefended king row = free kings",
+        "Delay king row breach cheaply"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -32,8 +51,15 @@
       "category": "Forced Jumps",
       "condition": "You can set up a forced jump",
       "strategy_detailed": "Offer a piece as bait where taking it exposes the capturing piece to a counter-jump. Double jumps are powerful — sacrifice one piece to capture two. The exchange is favorable if the second capture leaves you with a better position or piece advantage.",
-      "strategy_stealth": ["Bait capture to enable counter-jump", "1-for-2 exchange = material gain", "Position after capture matters more"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Bait capture to enable counter-jump",
+        "1-for-2 exchange = material gain",
+        "Position after capture matters more"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": "ahead"
     },
     {
@@ -41,8 +67,14 @@
       "category": "Forced Jumps",
       "condition": "Opponent setting up a forced jump",
       "strategy_detailed": "Jumps are mandatory in American checkers — you cannot refuse one once offered. Defense means preventing the setup: look 2-3 moves ahead and avoid moves that let opponent force a jump. If multiple jump sequences are legal, pick the one leaving the best resulting position.",
-      "strategy_stealth": ["Jumps mandatory — can't refuse", "Prevent setup 2-3 moves ahead", "Pick best jump if multiple legal"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Jumps mandatory — can't refuse",
+        "Prevent setup 2-3 moves ahead",
+        "Pick best jump if multiple legal"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "behind"
     },
     {
@@ -50,8 +82,14 @@
       "category": "Piece Mobility",
       "condition": "Pieces becoming cramped or blocked",
       "strategy_detailed": "Blocked pieces are effectively removed from the game. Keep your pieces spread across 2-3 diagonals so they can support each other and retreat if attacked. A cluster of 3 adjacent pieces is easily isolated and captured in sequence.",
-      "strategy_stealth": ["Spread across 2-3 diagonals", "Clustered pieces = easy targets", "Each piece needs a retreat square"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "Spread across 2-3 diagonals",
+        "Clustered pieces = easy targets",
+        "Each piece needs a retreat square"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -59,8 +97,15 @@
       "category": "King Promotion",
       "condition": "Opportunity to promote a piece",
       "strategy_detailed": "Kings move in both directions and are worth roughly 1.5 regular pieces. Race to king when promotion doesn't cost material. Avoid promoting pieces that immediately get captured — wait for a safe lane. First player to king usually controls tempo.",
-      "strategy_stealth": ["King = 1.5× regular piece value", "Race to king without losing material", "First king usually controls tempo"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "King = 1.5× regular piece value",
+        "Race to king without losing material",
+        "First king usually controls tempo"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -68,8 +113,14 @@
       "category": "Exchange Strategy",
       "condition": "Even material, trading pieces",
       "strategy_detailed": "When even on pieces, avoid exchanges unless they improve your position. Trade pieces that are blocked or poorly placed for opponent pieces that are active. Force exchanges only when they result in a passed piece or a king promotion threat.",
-      "strategy_stealth": ["Trade weak pieces for opponent's active", "Even trades favor better position", "Force trade only for promotion threat"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "Trade weak pieces for opponent's active",
+        "Even trades favor better position",
+        "Force trade only for promotion threat"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": "ahead"
     },
     {
@@ -77,8 +128,14 @@
       "category": "Defense",
       "condition": "Down 2+ pieces, avoiding loss",
       "strategy_detailed": "Down material, retreat to mutually-protecting formations. Head for the double-corner area — your back-row corner where two diagonals exit gives extra retreat options. Aim for a fortress where every piece defends another and the attacker can't break in. Draw is the win condition when behind.",
-      "strategy_stealth": ["Mutual protection of all pieces", "Retreat to double-corner area", "Draw is good when behind"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Mutual protection of all pieces",
+        "Retreat to double-corner area",
+        "Draw is good when behind"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "behind"
     },
     {
@@ -86,8 +143,15 @@
       "category": "King Endgame",
       "condition": "Kings only remain on board",
       "strategy_detailed": "Per Chinook's database: equal kings always draw. 2 kings vs 1 is a forced win — drive the lone king off the long diagonal toward the single corner using opposition. 3 vs 2 also wins with correct technique. Material advantage without technique can still drift to a draw.",
-      "strategy_stealth": ["Equal kings = draw (Chinook)", "2v1 or 3v2 = forced win", "Drive lone king off long diagonal"],
-      "tags": ["TLDR", "Closing"],
+      "strategy_stealth": [
+        "Equal kings = draw (Chinook)",
+        "2v1 or 3v2 = forced win",
+        "Drive lone king off long diagonal"
+      ],
+      "tags": [
+        "TLDR",
+        "Closing"
+      ],
       "context": "ahead"
     },
     {
@@ -95,8 +159,15 @@
       "category": "King Endgame",
       "condition": "You are the lone king vs two",
       "strategy_detailed": "Stay on the long diagonal — the 8-square corner-to-corner line is the hardest place to be cornered. If attackers break opposition, slide back toward center. Avoid the single-corner area at all costs (only one exit). Force the chasers to maintain perfect opposition for many moves; one slip = draw.",
-      "strategy_stealth": ["Stay on the long diagonal", "Avoid the single corner", "Slide to center if attackers slip"],
-      "tags": ["Defense", "Closing"],
+      "strategy_stealth": [
+        "Stay on the long diagonal",
+        "Avoid the single corner",
+        "Slide to center if attackers slip"
+      ],
+      "tags": [
+        "Defense",
+        "Closing"
+      ],
       "context": "behind"
     }
   ]

@@ -2,6 +2,12 @@
   "game_id": "stratego",
   "game_name": "Stratego",
   "game_description": "Capture the enemy flag through deduction and deception, 2 players.",
+  "phases": [
+    "Setup",
+    "Early Game",
+    "Mid-Game",
+    "End-Game"
+  ],
   "filter_1_label": "Has opponent identified your Marshal?",
   "filter_1_yes_context": "marshal-known",
   "filter_1_no_context": "marshal-hidden",
@@ -14,8 +20,15 @@
       "category": "Flag Placement",
       "condition": "Placing your flag at game start",
       "strategy_detailed": "Place your flag in a corner with 2-3 Bombs directly adjacent. Surround it with at least one Miner adjacent (to trap opponent Miners you send back). The classic back-corner trap is well-known — consider placing the flag one row off the back edge with bombs behind it for surprise.",
-      "strategy_stealth": ["Corner flag + 2-3 adjacent bombs", "1 Miner near flag as reverse trap", "Off-edge placement surprises"],
-      "tags": ["TLDR", "Defense"],
+      "strategy_stealth": [
+        "Corner flag + 2-3 adjacent bombs",
+        "1 Miner near flag as reverse trap",
+        "Off-edge placement surprises"
+      ],
+      "tags": [
+        "TLDR",
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -23,8 +36,14 @@
       "category": "Piece Distribution",
       "condition": "Placing high-rank pieces",
       "strategy_detailed": "Keep your Marshal (10) and General (9) away from the front line initially. Use Colonels (8) and Majors (7) as your front-line probers. Your Marshal is a one-time-use weapon — deploy it only to eliminate opponent's identified Marshal or General, not to probe.",
-      "strategy_stealth": ["Marshal behind the lines initially", "Colonels/Majors for probing", "Marshal = surgical strike only"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Marshal behind the lines initially",
+        "Colonels/Majors for probing",
+        "Marshal = surgical strike only"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -32,8 +51,14 @@
       "category": "Scout Deployment",
       "condition": "Placing Scouts (rank 2)",
       "strategy_detailed": "Scatter 2-3 Scouts (rank 2) near the front but keep them movable — they're your primary information gatherers. One Scout at a lake gap can probe across the board. Never cluster all Scouts: any rank 3+ piece (Miner, Sergeant, anything higher) picks clustered Scouts off one by one.",
-      "strategy_stealth": ["Scatter scouts at lake gaps", "Scouts = primary information", "Never cluster — any rank 3+ kills"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "Scatter scouts at lake gaps",
+        "Scouts = primary information",
+        "Never cluster — any rank 3+ kills"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -41,8 +66,15 @@
       "category": "Probing",
       "condition": "Moving pieces into contact range",
       "strategy_detailed": "Probe with Sergeants (4) and Lieutenants (5) — affordable losses with high info gain. Each combat reveals BOTH ranks (your probe AND opponent's piece). Even losing narrows their flag's location. Never probe with Marshal (10) or General (9) — revealing them gives away your decisive pieces.",
-      "strategy_stealth": ["Probe with Sgt/Lt (rank 4-5)", "Each combat reveals both ranks", "Never probe with Marshal/General"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Probe with Sgt/Lt (rank 4-5)",
+        "Each combat reveals both ranks",
+        "Never probe with Marshal/General"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": null
     },
     {
@@ -50,8 +82,14 @@
       "category": "Marshal Concealment",
       "condition": "Marshal's location still unknown",
       "strategy_detailed": "Keep your Marshal stationary behind your lines for the first 5-7 moves. An early-moving powerful piece advertises itself. Once your opponent has committed their Marshal to the front, reveal yours for the decisive strike.",
-      "strategy_stealth": ["Marshal stationary for 5-7 moves", "Moving early = advertising rank", "Reveal only after opponent commits theirs"],
-      "tags": ["Bluff"],
+      "strategy_stealth": [
+        "Marshal stationary for 5-7 moves",
+        "Moving early = advertising rank",
+        "Reveal only after opponent commits theirs"
+      ],
+      "tags": [
+        "Bluff"
+      ],
       "context": "marshal-hidden"
     },
     {
@@ -59,8 +97,14 @@
       "category": "Marshal Pressure",
       "condition": "Opponent knows your Marshal's location",
       "strategy_detailed": "If your Marshal is identified, use it as a known threat rather than a surprise weapon. Push it forward to control corridors while your Spy (only 1 per side) flanks toward the enemy's likely Marshal. Your General and Colonel become the true surprise — opponent fixates on the visible Marshal.",
-      "strategy_stealth": ["Marshal as known corridor threat", "Spy flanks while Marshal distracts", "General becomes your true surprise"],
-      "tags": ["Bluff"],
+      "strategy_stealth": [
+        "Marshal as known corridor threat",
+        "Spy flanks while Marshal distracts",
+        "General becomes your true surprise"
+      ],
+      "tags": [
+        "Bluff"
+      ],
       "context": "marshal-known"
     },
     {
@@ -68,8 +112,15 @@
       "category": "Miner Deployment",
       "condition": "Enemy flag area identified",
       "strategy_detailed": "When you've narrowed the flag to a 2-3 square area surrounded by bombs, send Miners directly. Route Miners through your most protected corridor. Keep 2 Miners in reserve — one to reach the flag area, one to absorb a potential decoy bomb.",
-      "strategy_stealth": ["Send Miners when flag zone identified", "Keep 2 Miners in reserve", "Route through protected corridor"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Send Miners when flag zone identified",
+        "Keep 2 Miners in reserve",
+        "Route through protected corridor"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": null
     },
     {
@@ -77,8 +128,14 @@
       "category": "Tracking",
       "condition": "Piece movements revealing pattern",
       "strategy_detailed": "Stationary pieces are Bombs or the Flag. Mark all pieces that have never moved — these are your target set. Among those, the ones with adjacent bomb-like stationary pieces are highest-probability flag locations. Mentally update this map every turn.",
-      "strategy_stealth": ["Stationary = Bomb or Flag", "Map non-movers each turn", "Adjacent stationary pairs = flag zone"],
-      "tags": ["Memory"],
+      "strategy_stealth": [
+        "Stationary = Bomb or Flag",
+        "Map non-movers each turn",
+        "Adjacent stationary pairs = flag zone"
+      ],
+      "tags": [
+        "Memory"
+      ],
       "context": null
     },
     {
@@ -86,8 +143,14 @@
       "category": "Spy Usage",
       "condition": "Opponent's Marshal is exposed",
       "strategy_detailed": "The Spy beats the Marshal ONLY when Spy attacks first — if Marshal attacks your Spy, Marshal wins. So move Spy adjacent then strike, never let it sit defensively next to the Marshal. Any Scout (rank 2) or higher that intercepts kills the Spy outright. Clear the corridor first.",
-      "strategy_stealth": ["Spy beats Marshal ONLY on attack", "Marshal attacks Spy = Spy dies", "Clear corridor before Spy advances"],
-      "tags": ["Offense"],
+      "strategy_stealth": [
+        "Spy beats Marshal ONLY on attack",
+        "Marshal attacks Spy = Spy dies",
+        "Clear corridor before Spy advances"
+      ],
+      "tags": [
+        "Offense"
+      ],
       "context": "marshal-hidden"
     },
     {
@@ -95,8 +158,15 @@
       "category": "Miner Deployment",
       "condition": "Opponent's back row nearly unreachable",
       "strategy_detailed": "In endgame with a locked opponent back row, Miners are your only winning pieces. Protect remaining Miners aggressively. If you have 2+ Miners and opponent has 4+ bombs, use one Miner as bait toward a decoy area while routing the real strike from the opposite flank.",
-      "strategy_stealth": ["Miners = only pieces that win now", "Bait Miner toward decoy zone", "Real strike from opposite flank"],
-      "tags": ["TLDR", "Closing"],
+      "strategy_stealth": [
+        "Miners = only pieces that win now",
+        "Bait Miner toward decoy zone",
+        "Real strike from opposite flank"
+      ],
+      "tags": [
+        "TLDR",
+        "Closing"
+      ],
       "context": null
     },
     {
@@ -104,8 +174,15 @@
       "category": "Tracking",
       "condition": "Few pieces remaining on each side",
       "strategy_detailed": "With fewer than 8 pieces per side, reconstruct the full board state from memory. You likely know the rank of every remaining opponent piece through previous battles. Use this knowledge to route your Miners around high-rank pieces and funnel them into bombs.",
-      "strategy_stealth": ["Reconstruct full board state now", "All ranks should be known by end", "Route Miners around high ranks"],
-      "tags": ["Memory", "Closing"],
+      "strategy_stealth": [
+        "Reconstruct full board state now",
+        "All ranks should be known by end",
+        "Route Miners around high ranks"
+      ],
+      "tags": [
+        "Memory",
+        "Closing"
+      ],
       "context": null
     },
     {
@@ -113,8 +190,15 @@
       "category": "Marshal Concealment",
       "condition": "Endgame with Marshal still hidden",
       "strategy_detailed": "A still-hidden Marshal in endgame is your most powerful asset. Reveal it only to eliminate the opponent's last meaningful threat. Use it to clear a corridor for your Miners — that's its final purpose. Don't waste it on low-rank pieces when Miners need a path.",
-      "strategy_stealth": ["Hidden Marshal = endgame trump card", "Reveal to clear Miner corridor", "Don't waste on low-rank pieces"],
-      "tags": ["Closing", "Bluff"],
+      "strategy_stealth": [
+        "Hidden Marshal = endgame trump card",
+        "Reveal to clear Miner corridor",
+        "Don't waste on low-rank pieces"
+      ],
+      "tags": [
+        "Closing",
+        "Bluff"
+      ],
       "context": "marshal-hidden"
     }
   ]
