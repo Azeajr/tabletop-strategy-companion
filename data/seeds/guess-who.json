@@ -69,7 +69,6 @@
       "strategy_detailed": "Answer truthfully and instantly — hesitation telegraphs the answer before you say it. You can't see opponent's board (Hasbro design hides it), so track their narrowing via question pattern instead: broad early, specific late. Specific questions by turn 4 = they're at ~5 remaining.",
       "strategy_stealth": [
         "Answer instantly — no hesitation tells",
-        "Opponent's board is physically hidden",
         "Specific Q by turn 4 = ~5 left"
       ],
       "tags": [

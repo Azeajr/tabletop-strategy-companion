@@ -217,7 +217,7 @@
       "strategy_detailed": "Trigger end game (go to 2 or 0 trains) only when all your tickets are complete or you cannot complete remaining tickets regardless. Triggering early robs opponents of turns but also limits your own options.",
       "strategy_stealth": [
         "Trigger only when tickets done",
-        "2-0 trains = end trigger",
+        "≤2 trains left = end trigger",
         "Early trigger limits your turns"
       ],
       "tags": [

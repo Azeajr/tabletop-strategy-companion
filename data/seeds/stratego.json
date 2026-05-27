@@ -23,7 +23,7 @@
       "strategy_stealth": [
         "Corner flag + 2-3 adjacent bombs",
         "1 Miner near flag as reverse trap",
-        "Off-edge placement surprises"
+        "Flag 1 row off back edge, bombs behind = surprise"
       ],
       "tags": [
         "TLDR",

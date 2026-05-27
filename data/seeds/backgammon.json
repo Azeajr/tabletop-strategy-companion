@@ -3,7 +3,7 @@
   "game_name": "Backgammon",
   "game_description": "Race your checkers home and bear them off before your opponent, 2 players.",
   "phases": [
-    "Setup",
+    "Opening",
     "Early Game",
     "Mid-Game",
     "End-Game"
@@ -16,7 +16,7 @@
   "filter_2_no_context": null,
   "strategies": [
     {
-      "phase": "Setup",
+      "phase": "Opening",
       "category": "Opening Rolls",
       "condition": "Best opening roll to play",
       "strategy_detailed": "Bot-confirmed best plays: 3-1 makes the 5-point (8/5, 6/5), 4-2 makes the 4-point (8/4, 6/4), 6-1 makes the bar-point (13/7, 8/7), 5-3 makes the 3-point (8/3, 6/3). 6-5 runs a back checker (24/13, lover's leap). Pointing beats splitting on these rolls — XG agrees unanimously.",
@@ -32,12 +32,12 @@
       "context": null
     },
     {
-      "phase": "Setup",
+      "phase": "Opening",
       "category": "Game Plan",
       "condition": "Choosing running vs blocking game",
       "strategy_detailed": "After the opening exchange, compute pip counts. Lead by 8%+ and clear of contact → race. Roughly even with contact → priming/holding game. Far behind with deep anchors → back game. Pip count is the single most important metric for plan selection — recompute every few rolls.",
       "strategy_stealth": [
-        "+8% pips, no contact = race",
+        "+8 pips lead, no contact = race",
         "Even + contact = prime or hold",
         "Recompute pip count every few rolls"
       ],
@@ -159,7 +159,7 @@
       "condition": "Bearing off with all checkers home",
       "strategy_detailed": "If opponent holds a deep anchor, bear off safely: never leave a direct shot to their anchor unless forced. With no contact, use high rolls on high points, lower rolls to fill gaps or move down. Single checkers on 5/6-points late are blot risks if opponent breaks anchor to attack.",
       "strategy_stealth": [
-        "Safe bear-off vs anchor",
+        "Play safe bear-off; opponent holds anchor",
         "High roll → high point",
         "Avoid lone 5/6 checkers late"
       ],

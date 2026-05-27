@@ -70,7 +70,7 @@
       "strategy_stealth": [
         "Dead card = occupied position",
         "2-player: TEJ to refresh hand",
-        "3-player: TEJ = wildcard for sequence"
+        "3-team: TEJ = wildcard for sequence"
       ],
       "tags": [
         "Economy"

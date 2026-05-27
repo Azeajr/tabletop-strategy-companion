@@ -3,7 +3,7 @@
   "game_name": "Connect 4",
   "game_description": "Drop discs to connect four in a row before your opponent, 2 players.",
   "phases": [
-    "Setup",
+    "Opening",
     "Early Game",
     "Mid-Game",
     "End-Game"
@@ -16,7 +16,7 @@
   "filter_2_no_context": null,
   "strategies": [
     {
-      "phase": "Setup",
+      "phase": "Opening",
       "category": "Center Control",
       "condition": "Choosing your first move",
       "strategy_detailed": "Connect 4 is solved (Allis 1988) — P1 wins only by opening column 4 (center). Per solver databases: cols 3 or 5 draw with perfect P2 play; cols 1, 2, 6, or 7 lose to perfect P2. Center participates in more four-in-a-row lines than any other column.",
@@ -32,7 +32,7 @@
       "context": "first-mover"
     },
     {
-      "phase": "Setup",
+      "phase": "Opening",
       "category": "Counter Strategy",
       "condition": "Opponent plays center column",
       "strategy_detailed": "P2 cannot win against perfect play — draw is the ceiling once P1 opens center. Solver-confirmed drawing replies: stack center (col 4) or play adjacent (cols 3 or 5). Cols 1, 2, 6, 7 all lose against perfect P1 follow-up. Play for the draw; no comeback line exists.",

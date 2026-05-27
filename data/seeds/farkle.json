@@ -3,7 +3,7 @@
   "game_name": "Farkle",
   "game_description": "Roll dice for points — but farkle (score nothing) and you lose your turn.",
   "phases": [
-    "Setup",
+    "Opening",
     "Early Game",
     "Mid-Game",
     "End-Game"
@@ -16,7 +16,7 @@
   "filter_2_no_context": null,
   "strategies": [
     {
-      "phase": "Setup",
+      "phase": "Opening",
       "category": "Entry Threshold",
       "condition": "Getting on the scoreboard (500 pts)",
       "strategy_detailed": "Qualifying rule: must reach 500+ in one turn before any points bank to your total. Stopping below 500 scores zero for that turn (same as farkling — no carryover). Push through 200-400 sequences to reach 500 even at modest farkle risk. Conservative play only becomes viable after entry.",
@@ -116,7 +116,7 @@
       "strategy_stealth": [
         "Lead 2000+: bank at 750, protect it",
         "Goal: don't farkle, hold lead",
-        "Farkle with big lead = momentum lost"
+        "Farkle with big lead = hands opponents a swing"
       ],
       "tags": [
         "Defense"

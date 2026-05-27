@@ -3,7 +3,7 @@
   "game_name": "Checkers",
   "game_description": "Capture all opponent pieces or block them from moving, 2 players.",
   "phases": [
-    "Setup",
+    "Opening",
     "Early Game",
     "Mid-Game",
     "End-Game"
@@ -16,7 +16,7 @@
   "filter_2_no_context": null,
   "strategies": [
     {
-      "phase": "Setup",
+      "phase": "Opening",
       "category": "Opening Development",
       "condition": "Choosing your first moves",
       "strategy_detailed": "Checkers is solved — perfect play always draws (Chinook). Develop toward the center squares (14, 15, 18, 19) for maximum diagonal control. Edge pieces have fewer attack lanes and become easy targets. The opening 11-15 contests the center on move 1 and is the most-played tournament line.",
@@ -32,7 +32,7 @@
       "context": null
     },
     {
-      "phase": "Setup",
+      "phase": "Opening",
       "category": "King Row Defense",
       "condition": "Protecting your back row",
       "strategy_detailed": "Keep at least 2 pieces on your king row for the first 4-5 moves. Surrendering the king row lets opponent pieces pass unchallenged into kings. A piece that reaches king row changes game tempo dramatically — delay that at low cost.",

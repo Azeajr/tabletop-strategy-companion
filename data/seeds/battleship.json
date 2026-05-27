@@ -23,7 +23,7 @@
       "strategy_stealth": [
         "Avoid edges and corners",
         "No adjacent ships",
-        "Interior placement, not outer rows/columns"
+        "Edges swept first — interior survives longer"
       ],
       "tags": [
         "TLDR",
@@ -54,7 +54,7 @@
       "strategy_stealth": [
         "No ships touching, even diagonal",
         "1-cell buffer around each ship",
-        "Decoy clusters don't fool PDF opponents"
+        "Isolated ships are harder to probability-map"
       ],
       "tags": [
         "Defense"
@@ -98,9 +98,9 @@
       "condition": "Opponent gets a hit on your ship",
       "strategy_detailed": "Once hit, opponent shoots orthogonally adjacent next turn. Wall-adjacent ships cut hunt directions by half (1 wall) or three-quarters (corner). Trade-off: walls get shot earlier in opening sweeps, but if survived they're cheaper to defend during hunt. Net effect roughly neutral.",
       "strategy_stealth": [
-        "Wall ships: half hunt directions",
-        "Corner ships: 3/4 directions cut",
-        "Wall ships: found sooner, fewer attack angles"
+        "Wall hit: attacker limited to 2 of 4 directions",
+        "Corner hit: attacker limited to 1 of 4 directions",
+        "Tradeoff: found sooner but harder to hunt once hit"
       ],
       "tags": [
         "Defense"

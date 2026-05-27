@@ -2,7 +2,12 @@
   "game_id": "catan",
   "game_name": "Catan",
   "game_description": "Resource trading and area control, 3-4 players.",
-  "phases": ["Setup", "Early Game", "Mid-Game", "End-Game"],
+  "phases": [
+    "Setup",
+    "Early Game",
+    "Mid-Game",
+    "End-Game"
+  ],
   "filter_1_label": "Do you have the most victory points?",
   "filter_1_yes_context": "leading",
   "filter_1_no_context": "trailing",
@@ -15,8 +20,15 @@
       "category": "Initial Placement",
       "condition": "Choosing 1st settlement spot",
       "strategy_detailed": "Rate spots by total pips (dots): 6,8=5 pips; 5,9=4; 4,10=3; 3,11=2; 2,12=1. Target 10+ pips across the 3 adjacent hexes. Resource priority: Ore/Wheat/Sheep for the city + dev card engine — highest tournament win rate. Wood/Brick opening is viable but demands aggressive expansion.",
-      "strategy_stealth": ["Pip count: 6,8=5; 5,9=4; 4,10=3", "Target 10+ total pips on a spot", "OWS = dev card engine meta"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "Pip count: 6,8=5; 5,9=4; 4,10=3",
+        "Target 10+ total pips on a spot",
+        "Ore+Wheat+Sheep = dev card engine (meta)"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -24,8 +36,14 @@
       "category": "Initial Placement",
       "condition": "Choosing 2nd settlement spot",
       "strategy_detailed": "Fill resource gaps from your first pick. If you have production on a 6 or 8, use the second settlement to add a different resource type rather than doubling up. Port access is valuable here.",
-      "strategy_stealth": ["Fill gaps from 1st settlement", "Grab a 2:1 port if resource allows", "Avoid doubling same resource"],
-      "tags": ["Economy"],
+      "strategy_stealth": [
+        "Fill gaps from 1st settlement",
+        "Grab a 2:1 port if resource allows",
+        "Avoid doubling same resource"
+      ],
+      "tags": [
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -33,8 +51,15 @@
       "category": "Port Strategy",
       "condition": "2:1 port available near strong hex",
       "strategy_detailed": "A 2:1 port adjacent to a high-probability hex of the matching resource is among the strongest setups. Ore 2:1 + high Ore production creates a near-unlimited Dev Card engine.",
-      "strategy_stealth": ["Match 2:1 port to your best hex", "Ore 2:1 + Cities = dominant engine", "Lock this spot early"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "Match 2:1 port to your best hex",
+        "Ore 2:1 + Cities = dominant engine",
+        "Lock this spot early"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -42,8 +67,15 @@
       "category": "Expansion",
       "condition": "First 3 roads placed",
       "strategy_detailed": "Use early Wood and Brick to secure a 3rd settlement site before opponents block key intersections. Expansion speed in turns 3-6 determines long-term territory control.",
-      "strategy_stealth": ["Secure 3rd site by turn 5", "Prioritize blocking choke points", "Roads before Settlements"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Secure 3rd site by turn 5",
+        "Prioritize blocking choke points",
+        "Roads before Settlements"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": null
     },
     {
@@ -51,8 +83,14 @@
       "category": "Expansion",
       "condition": "Blocked from expansion by opponent roads",
       "strategy_detailed": "If routes are cut off, pivot to Dev Cards or trade aggressively for Ore/Wheat. City upgrades give you the same VP gain as a settlement without needing road access.",
-      "strategy_stealth": ["Pivot to City upgrades", "Dev Cards bypass roads", "Trade for Ore/Wheat"],
-      "tags": ["Pivot"],
+      "strategy_stealth": [
+        "Pivot to City upgrades",
+        "Dev Cards bypass roads",
+        "Trade for Ore/Wheat"
+      ],
+      "tags": [
+        "Pivot"
+      ],
       "context": null
     },
     {
@@ -60,8 +98,14 @@
       "category": "Trading",
       "condition": "Opponent requests a trade you don't need",
       "strategy_detailed": "Never give a resource that would help an opponent more than it helps you. Evaluate trades by what they build toward — if they're collecting Ore, don't give it.",
-      "strategy_stealth": ["Track what opponents are building", "Refuse trades that help leaders", "Bank surpluses for ports"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Track what opponents are building",
+        "Refuse trades that help leaders",
+        "Bank surpluses for ports"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -69,8 +113,14 @@
       "category": "Trading",
       "condition": "You are the leading player",
       "strategy_detailed": "As the leader, other players will trade against you. Rely on bank trades (port access) rather than player trades. Hoard Ore and Wheat to build Cities without needing help.",
-      "strategy_stealth": ["Use 2:1 or 3:1 ports only", "Hoard Ore + Wheat", "Don't signal your VP count"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Use 2:1 or 3:1 ports only",
+        "Hoard Ore + Wheat",
+        "Don't signal your VP count"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": "leading"
     },
     {
@@ -78,8 +128,14 @@
       "category": "Trading",
       "condition": "You are trailing in points",
       "strategy_detailed": "Actively trade to close the resource gap. Offer resources you have in excess and target the player most likely to trade out of self-interest. Trailing players should control pace of trades.",
-      "strategy_stealth": ["Offer surplus, request bottleneck", "Trade with players near you in VP", "Accelerate with 3:1 port"],
-      "tags": ["Offense"],
+      "strategy_stealth": [
+        "Offer surplus, request bottleneck",
+        "Trade with players near you in VP",
+        "Accelerate with 3:1 port"
+      ],
+      "tags": [
+        "Offense"
+      ],
       "context": "trailing"
     },
     {
@@ -87,8 +143,15 @@
       "category": "Development Cards",
       "condition": "Opponent close to Largest Army",
       "strategy_detailed": "Play Knights before opponents secure Largest Army (3 Knights). Largest Army is worth 2 VP and is often decisive. Move robber to your opponent's best hex to pressure their economy.",
-      "strategy_stealth": ["Play Knights before opponent gets 3", "Steal Largest Army = 2 VP swing", "Target opponent's best number"],
-      "tags": ["TLDR", "Offense"],
+      "strategy_stealth": [
+        "Play Knights before opponent gets 3",
+        "Steal Largest Army = 2 VP swing",
+        "Target opponent's best number"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
       "context": null
     },
     {
@@ -96,8 +159,14 @@
       "category": "Development Cards",
       "condition": "Road Building card available",
       "strategy_detailed": "Play Road Building to reach Longest Road (worth 2 VP) or to cut off an opponent's expansion. Best used when you need 2 roads to claim the bonus or block a critical intersection.",
-      "strategy_stealth": ["Play for Longest Road bonus", "Or block opponent expansion", "Pair with Settlement build"],
-      "tags": ["Offense"],
+      "strategy_stealth": [
+        "Play for Longest Road bonus",
+        "Or block opponent expansion",
+        "Pair with Settlement build"
+      ],
+      "tags": [
+        "Offense"
+      ],
       "context": null
     },
     {
@@ -105,8 +174,15 @@
       "category": "City Upgrades",
       "condition": "Have 3 Ore and 2 Wheat in hand",
       "strategy_detailed": "Build the city now. Cities give +1 VP plus double the settlement's production. Production scaling (not raw VP) is the real value — concentrated Ore/Wheat compounds. Banking risks robber loss and wastes the rare turn you actually have all 5 resources together.",
-      "strategy_stealth": ["Build now — don't bank resources", "+1 VP + double production", "Scaling > VP is real city value"],
-      "tags": ["TLDR", "Economy"],
+      "strategy_stealth": [
+        "Build now — don't bank resources",
+        "+1 VP + double production",
+        "Scaling > VP is real city value"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
       "context": null
     },
     {
@@ -114,8 +190,14 @@
       "category": "Robber",
       "condition": "Rolling 7 or playing Knight",
       "strategy_detailed": "Target the resource-richest hex of the player closest to winning. Steal their most important resource type. Never move robber to desert or low-probability hexes.",
-      "strategy_stealth": ["Target leader's most-rolled hex", "Steal their key bottleneck", "Avoid placing on 2 or 12"],
-      "tags": ["Defense"],
+      "strategy_stealth": [
+        "Target leader's most-rolled hex",
+        "Steal their key bottleneck",
+        "Avoid placing on 2 or 12"
+      ],
+      "tags": [
+        "Defense"
+      ],
       "context": null
     },
     {
@@ -123,8 +205,15 @@
       "category": "Victory Points",
       "condition": "You are trailing by 2+ VP",
       "strategy_detailed": "Look for a hidden VP card in your Dev Card pile. Hidden VPs (Chapel, Library etc.) let you win in one turn. Reach 8 VP and hold 2 VP cards to win on your next turn before opponents react.",
-      "strategy_stealth": ["Collect Dev Cards for hidden VPs", "Strike when at 8 VP + 2 VP cards", "Don't show VP count early"],
-      "tags": ["Pivot", "Bluff"],
+      "strategy_stealth": [
+        "Collect Dev Cards for hidden VPs",
+        "Strike when at 8 VP + 2 VP cards",
+        "Don't show VP count early"
+      ],
+      "tags": [
+        "Pivot",
+        "Bluff"
+      ],
       "context": "trailing"
     },
     {
@@ -132,8 +221,15 @@
       "category": "Closing",
       "condition": "At 9 VP, one resource short of winning",
       "strategy_detailed": "At 9 VP, any trade or production that gives you the final resource wins the game. If opponents know you're at 9, no one will trade with you. Use Dev Card VP or bank trades to close without showing your hand.",
-      "strategy_stealth": ["Win via bank trade or Dev Card", "Don't show you need 1 resource", "Hold cards until your turn"],
-      "tags": ["TLDR", "Closing"],
+      "strategy_stealth": [
+        "Win via bank trade or Dev Card",
+        "Don't show you need 1 resource",
+        "Hold cards until your turn"
+      ],
+      "tags": [
+        "TLDR",
+        "Closing"
+      ],
       "context": null
     },
     {
@@ -141,8 +237,15 @@
       "category": "Closing",
       "condition": "Opponent at 9 VP",
       "strategy_detailed": "Treat the leader at 9 VP as an existential threat. Refuse all trades, pile robber on their best hex, and coordinate with other players. Everyone at the table loses if they don't stop the leader.",
-      "strategy_stealth": ["Refuse all trades with leader", "Robber on their best hex every 7", "Negotiate others to pile on"],
-      "tags": ["Defense", "Closing"],
+      "strategy_stealth": [
+        "Refuse all trades with leader",
+        "Robber on their best hex every 7",
+        "Negotiate others to pile on"
+      ],
+      "tags": [
+        "Defense",
+        "Closing"
+      ],
       "context": null
     },
     {
@@ -150,8 +253,15 @@
       "category": "Victory Race",
       "condition": "Multiple players approaching 10 VP",
       "strategy_detailed": "Identify which VP bonuses are still unclaimed — Longest Road and Largest Army. Swapping one of these from an opponent is a 4 VP swing. Focus resources on whichever bonus is within reach.",
-      "strategy_stealth": ["Target Longest Road / Largest Army", "4 VP swing if you take + they lose", "Speed matters — act this turn"],
-      "tags": ["Transition", "Offense"],
+      "strategy_stealth": [
+        "Target Longest Road / Largest Army",
+        "4 VP swing if you take + they lose",
+        "Speed matters — act this turn"
+      ],
+      "tags": [
+        "Transition",
+        "Offense"
+      ],
       "context": null
     }
   ]

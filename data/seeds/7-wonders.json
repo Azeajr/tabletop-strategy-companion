@@ -4,9 +4,9 @@
   "game_description": "Build an ancient civilization through three ages of card drafting.",
   "phases": [
     "Setup",
-    "Early Game",
-    "Mid-Game",
-    "End-Game"
+    "Age I",
+    "Age II",
+    "Age III"
   ],
   "filter_1_label": "Left neighbor playing military?",
   "filter_1_yes_context": "strong-left",
@@ -21,7 +21,7 @@
       "condition": "Choosing which side of wonder board",
       "strategy_detailed": "Competitive top-tier wonders: Babylon B (play the normally-discarded 7th card each age), Halikarnassos B (build from discards twice — stages 1 and 3), Olympia A (free build per age, stage 2), Rhodes A (military + cheap stages). Side B isn't universally better; Olympia and Rhodes both favor Side A.",
       "strategy_stealth": [
-        "Top: Babylon B, Halikarnassos B",
+        "S-tier: Babylon B, Halikarnassos B",
         "Olympia A, Rhodes A also S-tier",
         "Side B not universally better"
       ],
@@ -47,7 +47,7 @@
       "context": null
     },
     {
-      "phase": "Early Game",
+      "phase": "Age I",
       "category": "Resource Drafting",
       "condition": "Age I — choosing first card",
       "strategy_detailed": "Lock at least one gray (manufactured) in Age I — they're scarcer and required for high-VP Age II/III cards. One gray plus one brown covers most Age II costs. Take a science card only if you'll commit fully — partial science (1-2 symbols) scores poorly versus its opportunity cost.",
@@ -63,7 +63,7 @@
       "context": null
     },
     {
-      "phase": "Early Game",
+      "phase": "Age I",
       "category": "Military",
       "condition": "Left neighbor building shields in Age I",
       "strategy_detailed": "Conflict tokens pay +1/+3/+5 per age won, −1 per age lost (per neighbor). Match left neighbor's shield count exactly each age or pivot fully to VP. Half-measures (1 shield versus their 2) waste a pick and still lose. If they show 2 shields in Age I, plan a 3-shield card in Age II.",
@@ -78,7 +78,7 @@
       "context": "strong-left"
     },
     {
-      "phase": "Early Game",
+      "phase": "Age I",
       "category": "Military",
       "condition": "Left neighbor not building military",
       "strategy_detailed": "Weak-military left neighbor is free Conflict points. Build exactly one shield per age to win the comparison (+1/+3/+5 = +9 total), then spend remaining picks on your core strategy. Over-investing past the minimum shield count wastes draft tempo on tokens you already secured.",
@@ -93,7 +93,7 @@
       "context": "weak-left"
     },
     {
-      "phase": "Early Game",
+      "phase": "Age I",
       "category": "Military",
       "condition": "Right neighbor building shields in Age I",
       "strategy_detailed": "Military scores against both neighbors every age — right side counts equally. Match right neighbor's shield count, prioritizing Age II/III where swings are larger (+3 and +5). Right is harder to read since drafts flow away from you in Ages I/III; rely on visible board.",
@@ -108,7 +108,7 @@
       "context": "strong-right"
     },
     {
-      "phase": "Early Game",
+      "phase": "Age I",
       "category": "Military",
       "condition": "Right neighbor not building military",
       "strategy_detailed": "One shield per age beats a non-military right neighbor for +9 VP across the game. Combined with a weak left, total military VP can reach +18 with just 3 shield cards — among the best VP-per-pick ratios in the game.",
@@ -123,7 +123,7 @@
       "context": "weak-right"
     },
     {
-      "phase": "Early Game",
+      "phase": "Age I",
       "category": "Science",
       "condition": "Science path viable in Age I",
       "strategy_detailed": "Science scores n² per symbol plus 7 per complete triplet. Break-even commitment is ~6 cards (2-2-2 = 12 + 7 = 19 VP). Take science yourself when committed — passing it to a neighbor who picks before you on the next rotation is the most common failure mode.",
@@ -138,7 +138,7 @@
       "context": null
     },
     {
-      "phase": "Mid-Game",
+      "phase": "Age II",
       "category": "Wonder Stages",
       "condition": "Completing a wonder stage in Age II",
       "strategy_detailed": "Wonder stages convert weak draft picks into VP, resources, or abilities that cascade into Age III. Bury a low-value card to advance when the stage yields 3+ VP or an ability. Exception: never bury a card that directly denies a neighbor's strategy — denial value often exceeds the stage's VP.",
@@ -153,7 +153,7 @@
       "context": null
     },
     {
-      "phase": "Mid-Game",
+      "phase": "Age III",
       "category": "Guild Denial",
       "condition": "Strong guild card available in Age III",
       "strategy_detailed": "Most guilds score on NEIGHBORS' achievements — assess neighbors first. Workers/Craftsmen/Traders/Philosophers/Magistrates score on neighbor color counts; Spies on neighbor defeats. Exceptions on YOUR cards: Shipowners and Scientists. Bury via wonder to deny a strong guild to downstream neighbor.",
@@ -169,7 +169,7 @@
       "context": null
     },
     {
-      "phase": "Mid-Game",
+      "phase": "Age II",
       "category": "Coin Generation",
       "condition": "Low on coins in Age II",
       "strategy_detailed": "Vineyard (1 coin/brown in row) and Bazaar (2 coins/gray in row) generate coins per row's resource cards. Trading Posts (East/West/Marketplace) cut neighbor-purchase cost from 2 to 1 coin for the matching resource. Coins matter less for endgame VP (1 per 3) than for routine trades.",
@@ -184,7 +184,7 @@
       "context": null
     },
     {
-      "phase": "End-Game",
+      "phase": "Age III",
       "category": "Final Scoring",
       "condition": "Calculating military before last picks",
       "strategy_detailed": "Before final Age III picks, count exact shields on both neighbors. A last-pick shield card swinging Age III from −1 to +5 is a 6 VP gain on one side — usually more than any single blue card. Compute the swing on both sides; sometimes one shield wins two comparisons.",
@@ -200,7 +200,7 @@
       "context": null
     },
     {
-      "phase": "End-Game",
+      "phase": "Age III",
       "category": "Final Scoring",
       "condition": "Tied on points entering final picks",
       "strategy_detailed": "Official tiebreaker is most coins (1 VP per 3 already counted; raw coin count breaks ties beyond that). Maximize coins in the final picks if scores look close. A Bazaar-style commercial card or unused Age III commercial drafted late can swing a tiebreaker without giving up VP elsewhere.",
@@ -216,7 +216,7 @@
       "context": null
     },
     {
-      "phase": "End-Game",
+      "phase": "Age III",
       "category": "Science",
       "condition": "Completing a science triplet in Age III",
       "strategy_detailed": "Completing a third symbol of any type adds 7 VP (set bonus) plus the n² jump (e.g., 2² to 3² = +5). A single triplet-completing card is worth 12+ VP — draft it over almost anything except game-deciding military shields or guilds worth 15+.",

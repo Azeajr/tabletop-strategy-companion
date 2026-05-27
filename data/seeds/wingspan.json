@@ -35,7 +35,7 @@
       "phase": "Setup",
       "category": "Starting Birds",
       "condition": "Selecting birds from initial hand",
-      "strategy_detailed": "Keep birds that cost 1-2 food total unless they have a powerful 'when played' or 'once between turns' ability. High-cost birds (4+ food) are only worth keeping if they chain directly into your bonus card or end-of-round goal.",
+      "strategy_detailed": "Keep birds that cost 1-2 food total unless they have a powerful 'when played' or 'once between turns' ability. High-cost birds (3 food) are only worth keeping if they chain directly into your bonus card or end-of-round goal.",
       "strategy_stealth": [
         "Keep 1-2 food cost birds",
         "High-cost only for bonus synergy",
