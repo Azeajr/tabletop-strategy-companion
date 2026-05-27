@@ -23,7 +23,7 @@
       "strategy_stealth": [
         "Avoid edges and corners",
         "No adjacent ships",
-        "Don't align with board edge"
+        "Interior placement, not outer rows/columns"
       ],
       "tags": [
         "TLDR",
@@ -38,7 +38,7 @@
       "strategy_detailed": "The Carrier is the hardest to hide and will be found eventually. Place it off-center, away from edges, oriented horizontally or vertically toward the board interior. Opponents often sweep edges first; a center-biased Carrier survives longer.",
       "strategy_stealth": [
         "Center-biased placement survives longer",
-        "Orient toward board interior, away from edges",
+        "Place in board interior, not on edges",
         "Edges get swept first"
       ],
       "tags": [
@@ -54,7 +54,7 @@
       "strategy_stealth": [
         "No ships touching, even diagonal",
         "1-cell buffer around each ship",
-        "Beats decoys vs PDF opponents"
+        "Decoy clusters don't fool PDF opponents"
       ],
       "tags": [
         "Defense"
@@ -68,7 +68,7 @@
       "strategy_detailed": "Use a checkerboard (parity) pattern — shoot only squares of one color on a mental chessboard overlay. The smallest ship is 2 squares, so every ship must occupy at least one 'white' square. Parity halves the search space without losing information.",
       "strategy_stealth": [
         "Checkerboard pattern cuts search space",
-        "Every ship hits at least one color",
+        "Every ship spans at least one color",
         "Parity is optimal before any hits"
       ],
       "tags": [
@@ -85,7 +85,7 @@
       "strategy_stealth": [
         "Edge-sweepers pivot inward after nothing",
         "Anticipate their next sweep row",
-        "Adapt placement reads to their style"
+        "Adjust your shots to their pattern"
       ],
       "tags": [
         "Memory"
@@ -100,7 +100,7 @@
       "strategy_stealth": [
         "Wall ships: half hunt directions",
         "Corner ships: 3/4 directions cut",
-        "Shot earlier, defended cheaper"
+        "Wall ships: found sooner, fewer attack angles"
       ],
       "tags": [
         "Defense"
@@ -142,27 +142,43 @@
       "phase": "Hunt",
       "category": "Probability",
       "condition": "Multiple ships unsunk, no active hunt",
-      "strategy_detailed": "Optimal Battleship is a probability density map: for each unshot cell, count how many valid placements of unsunk ships pass through it. Shoot the highest-count cell, recompute after every shot. This is what top bots use — it beats parity and intuition long-term.",
+      "strategy_detailed": "Probability Density Function (PDF) map: for each unshot cell, count valid placements of remaining ships through it. Shoot highest-count cell, recompute after every shot. Hunt mode: misses and sunk ships are blockers — no placement can overlap them. Beats parity long-term.",
       "strategy_stealth": [
         "Count valid placements per cell",
-        "Shoot highest-count cell",
-        "Recompute after every shot"
+        "Misses/sunk = blockers in placement count",
+        "Shoot highest-count cell, recompute every shot"
       ],
       "tags": [
-        "Memory",
+        "TLDR",
         "Economy"
       ],
       "context": null
     },
     {
       "phase": "Hunt",
-      "category": "Targeting",
-      "condition": "All 2-square ships have been sunk",
-      "strategy_detailed": "Once the 2-square ship is sunk, switch to 3-stride parity: fire only where (row + col) % 3 == 0. Coverage drops from 50% (checkerboard) to 34% of the board, but every 3+ cell ship still must span a target cell. On a 10x10 grid: 34 cells instead of 50 — 16 fewer shots with zero info lost.",
+      "category": "Probability",
+      "condition": "Active hit, ship not yet sunk",
+      "strategy_detailed": "PDF = count valid ship placements through each cell; shoot highest. On a hit, rules shift: hit squares become passable (ships can overlap them) and placements covering hits score heavily. Skip directions where no ship fits to the hit.",
       "strategy_stealth": [
-        "3-stride: (row + col) % 3 == 0",
-        "Coverage drops 50% → 34%",
-        "34 cells vs 50 — no info lost"
+        "Hit squares = passable (not blockers) in PDF",
+        "Placements through hits score heavily",
+        "Skip directions no ship can reach the hit from"
+      ],
+      "tags": [
+        "TLDR",
+        "Offense"
+      ],
+      "context": null
+    },
+    {
+      "phase": "Hunt",
+      "category": "Targeting",
+      "condition": "A ship has been sunk — adjusting hunt stride",
+      "strategy_detailed": "Stride = length of smallest surviving ship. While Destroyer (2) is alive: 2-stride (checkerboard). Destroyer sunk: 3-stride — (row+col)%3==0. Both 3-length ships sunk: 4-stride. Only Carrier left: 5-stride, 20 cells cover the board. Upgrade stride every time the minimum ship length increases.",
+      "strategy_stealth": [
+        "Stride = min surviving ship length",
+        "Destroyer sunk → 3-stride",
+        "Carrier only → 5-stride, 20 cells total"
       ],
       "tags": [
         "Economy",
@@ -182,6 +198,22 @@
       ],
       "tags": [
         "Economy"
+      ],
+      "context": null
+    },
+    {
+      "phase": "Hunt",
+      "category": "Sink Priority",
+      "condition": "Opponent announces a ship is sunk",
+      "strategy_detailed": "When SUNK is called, count hit pegs in cluster vs announced ship length. Match = resolved, return to hunt. More pegs than ship length = adjacent ship hiding there. Target extra peg's orthogonal directions. Ships can legally touch — this is an intentional deception tactic.",
+      "strategy_stealth": [
+        "Count hit pegs vs announced ship length",
+        "Mismatch = adjacent second ship in cluster",
+        "Target extra peg's orthogonal directions"
+      ],
+      "tags": [
+        "Memory",
+        "Offense"
       ],
       "context": null
     },
