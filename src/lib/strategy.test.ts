@@ -4,6 +4,7 @@ import {
   groupByCategory,
   hoistTLDR,
   prepareStrategies,
+  resolveFilterContexts,
 } from './strategy'
 import type { Strategy } from '../types/domain'
 
@@ -21,6 +22,25 @@ function makeStrategy(overrides: Partial<Strategy> = {}): Strategy {
     ...overrides,
   }
 }
+
+describe('resolveFilterContexts', () => {
+  it('returns nothing when the game has no such filter', () => {
+    expect(resolveFilterContexts(null, 'leading', 'trailing', 'yes')).toEqual([])
+  })
+
+  it('unset filter includes both sides so nothing is hidden', () => {
+    expect(resolveFilterContexts('Leading?', 'leading', 'trailing', null)).toEqual([
+      'leading',
+      'trailing',
+    ])
+  })
+
+  it('set filter includes only the matching side, dropping a null context', () => {
+    expect(resolveFilterContexts('Leading?', 'leading', 'trailing', 'yes')).toEqual(['leading'])
+    expect(resolveFilterContexts('Leading?', 'leading', 'trailing', 'no')).toEqual(['trailing'])
+    expect(resolveFilterContexts('Leading?', null, 'trailing', 'yes')).toEqual([])
+  })
+})
 
 describe('filterByContext', () => {
   it('always includes context=null strategies', () => {

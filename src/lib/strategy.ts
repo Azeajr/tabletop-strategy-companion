@@ -1,10 +1,24 @@
 import type { Strategy, Tag } from '../types/domain'
 
+// Returns the context values a filter contributes to activeContexts.
+// Filter unset (value=null) → both sides included, so nothing is hidden.
+// Filter set → only the matching side's context.
+export function resolveFilterContexts(
+  label: string | null,
+  yesContext: string | null,
+  noContext: string | null,
+  value: 'yes' | 'no' | null,
+): string[] {
+  if (!label) return []
+  const sides = value === null ? [yesContext, noContext] : [value === 'yes' ? yesContext : noContext]
+  return sides.filter((c): c is string => c !== null)
+}
+
 // A strategy with context=null is always visible.
 // A strategy with a context value is visible only if that value is in activeContexts.
 export function filterByContext(
   strategies: Strategy[],
-  activeContexts: (string | null)[],
+  activeContexts: readonly string[],
 ): Strategy[] {
   return strategies.filter(
     (s) => s.context === null || activeContexts.includes(s.context),

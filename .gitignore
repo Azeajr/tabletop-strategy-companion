@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Test output
+coverage
+playwright-report
+test-results
+
 # SQLite OPFS (local browser storage — not committed)
 *.sqlite
 *.sqlite-wal

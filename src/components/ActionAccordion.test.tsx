@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@solidjs/testing-library'
+import { createSignal } from 'solid-js'
 import { describe, it, expect } from 'vitest'
 import ActionAccordion from './ActionAccordion'
 import type { Strategy } from '../types/domain'
@@ -70,6 +71,20 @@ describe('ActionAccordion', () => {
     fireEvent.click(btn)
     fireEvent.click(btn)
     expect(btn).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('an open item does not carry over to the same category/condition in another phase', () => {
+    const [strategies, setStrategies] = createSignal([
+      makeStrategy({ phase: 'Setup', category: 'Alpha', condition: 'Shared condition text' }),
+    ])
+    render(() => <ActionAccordion strategies={strategies()} />)
+    fireEvent.click(screen.getByRole('button', { name: /shared condition text/i }))
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true')
+    // Same category + condition, different phase — must render collapsed
+    setStrategies([
+      makeStrategy({ phase: 'Mid-Game', category: 'Alpha', condition: 'Shared condition text' }),
+    ])
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false')
   })
 
   it('only one condition open at a time', async () => {

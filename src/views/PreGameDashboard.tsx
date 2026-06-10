@@ -140,7 +140,7 @@ export default function PreGameDashboard() {
                     {(phase) => (
                       <button
                         onClick={() => setActiveTab(phase)}
-                        class={`flex-1 h-[44px] text-xs font-medium border-b-2 transition-colors truncate px-1 ${
+                        class={`flex-1 min-h-[44px] text-xs font-medium border-b-2 transition-colors leading-tight px-1 ${
                           activeTab() === phase
                             ? 'text-[var(--accent)] border-[var(--accent)]'
                             : 'text-[var(--muted)] border-transparent'

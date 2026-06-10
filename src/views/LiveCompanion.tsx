@@ -11,7 +11,7 @@ import {
 import { useNavigate, useParams } from '@solidjs/router'
 import { db } from '../db'
 import { seedsReady } from '../db/seed'
-import { filterByContext } from '../lib/strategy'
+import { filterByContext, resolveFilterContexts } from '../lib/strategy'
 import { useAppMode } from '../store/appState'
 import StickyTopBar from '../components/StickyTopBar'
 import ModeToggle from '../components/ModeToggle'
@@ -19,18 +19,13 @@ import PhaseStepper from '../components/PhaseStepper'
 import InlineYesNoFilter from '../components/InlineYesNoFilter'
 import ActionAccordion from '../components/ActionAccordion'
 
-// Returns context values to include given a filter's current state.
-// Unset (null) → include both sides so no filtering occurs.
-// Set → include only the matching side.
-function resolveFilterContexts(
-  label: string | null,
-  yesContext: string | null,
-  noContext: string | null,
-  value: 'yes' | 'no' | null,
-): (string | null)[] {
-  if (!label) return []
-  if (value === null) return [yesContext, noContext].filter((c): c is string => c !== null)
-  return [value === 'yes' ? yesContext : noContext]
+// Post to the registration's active worker, not serviceWorker.controller —
+// after a hard reload the page is uncontrolled and controller is null even
+// though an active SW (and possibly a waiting update) exists.
+function postToServiceWorker(type: 'SESSION_ACTIVE' | 'SESSION_ENDED') {
+  void navigator.serviceWorker
+    ?.getRegistration()
+    .then((reg) => reg?.active?.postMessage({ type }))
 }
 
 export default function LiveCompanion() {
@@ -50,13 +45,13 @@ export default function LiveCompanion() {
       wakeLock = (await navigator.wakeLock?.request('screen')) ?? null
     } catch { /* unsupported or page hidden — non-fatal */ }
 
-    navigator.serviceWorker?.controller?.postMessage({ type: 'SESSION_ACTIVE' })
+    postToServiceWorker('SESSION_ACTIVE')
   })
 
   onCleanup(() => {
     wakeLock?.release().catch(() => {})
     wakeLock = null
-    navigator.serviceWorker?.controller?.postMessage({ type: 'SESSION_ENDED' })
+    postToServiceWorker('SESSION_ENDED')
   })
 
   const [game] = createResource(
@@ -80,7 +75,7 @@ export default function LiveCompanion() {
     },
   )
 
-  const activeContexts = createMemo((): (string | null)[] => {
+  const activeContexts = createMemo((): string[] => {
     const g = game()
     if (!g) return []
     return [

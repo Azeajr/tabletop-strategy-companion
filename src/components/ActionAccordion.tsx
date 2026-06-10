@@ -1,4 +1,4 @@
-import { createSignal, For, Show } from 'solid-js'
+import { createMemo, createSignal, For, Show } from 'solid-js'
 import { useAppMode } from '../store/appState'
 import { prepareStrategies } from '../lib/strategy'
 import ConditionToggle from './ConditionToggle'
@@ -12,7 +12,7 @@ export default function ActionAccordion(props: Props) {
   const [openId, setOpenId] = createSignal<string | null>(null)
   const mode = useAppMode()
 
-  const grouped = () => prepareStrategies(props.strategies)
+  const groups = createMemo(() => [...prepareStrategies(props.strategies).entries()])
 
   const toggle = (id: string) =>
     setOpenId((prev) => (prev === id ? null : id))
@@ -20,14 +20,14 @@ export default function ActionAccordion(props: Props) {
   return (
     <div>
       <Show
-        when={[...grouped().entries()].length > 0}
+        when={groups().length > 0}
         fallback={
           <p class="px-4 py-8 text-sm text-[var(--muted)] text-center">
             No strategies for this phase and filter.
           </p>
         }
       >
-        <For each={[...grouped().entries()]}>
+        <For each={groups()}>
           {([category, strategies]) => (
             <section class="mb-2">
               <div class="px-4 pt-3 pb-1 text-xs font-semibold uppercase tracking-widest text-[var(--muted)]">
@@ -35,7 +35,11 @@ export default function ActionAccordion(props: Props) {
               </div>
               <For each={strategies}>
                 {(strategy) => {
-                  const id = `${category}::${strategy.condition}`
+                  // Unique per the DB index (game_id, phase, category, condition).
+                  // Phase is included so an item opened in one phase does not
+                  // render pre-expanded when the same category/condition pair
+                  // exists in the phase the user switches to.
+                  const id = `${strategy.phase}::${category}::${strategy.condition}`
                   return (
                     <ConditionToggle
                       condition={strategy.condition}

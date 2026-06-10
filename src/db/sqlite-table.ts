@@ -46,78 +46,37 @@ function fromSqlRow<T>(row: Record<string, unknown>, schema: TableSchema): T {
 
 class Query<T> {
   private readonly table: SQLiteTable<T>
-  private whereSql: string | null = null
-  private whereParams: unknown[] = []
+  private readonly whereSql: string | null
+  private readonly whereParams: unknown[]
   private orderField: string | null = null
   private orderDesc = false
-  private filterFn: ((row: T) => boolean) | null = null
-  private limitN: number | null = null
 
-  constructor(table: SQLiteTable<T>) {
+  constructor(table: SQLiteTable<T>, whereSql: string | null = null, whereParams: unknown[] = []) {
     this.table = table
+    this.whereSql = whereSql
+    this.whereParams = whereParams
   }
 
-  _setWhere(clause: string, params: unknown[]): this {
-    this.whereSql = clause
-    this.whereParams = params
+  orderBy(field: string, desc = false): this {
+    this.orderField = assertIdent(field)
+    this.orderDesc = desc
     return this
   }
 
-  private clone(): Query<T> {
-    const q = new Query<T>(this.table)
-    q.whereSql = this.whereSql
-    q.whereParams = this.whereParams
-    q.orderField = this.orderField
-    q.orderDesc = this.orderDesc
-    q.filterFn = this.filterFn
-    q.limitN = this.limitN
-    return q
-  }
-
-  filter(fn: (row: T) => boolean): Query<T> {
-    const next = this.clone()
-    const prev = this.filterFn
-    next.filterFn = prev ? (r: T) => prev(r) && fn(r) : fn
-    return next
-  }
-
-  orderBy(field: string, desc = false): Query<T> {
-    const next = this.clone()
-    next.orderField = assertIdent(field)
-    next.orderDesc = desc
-    return next
-  }
-
-  private buildSelect(): string {
+  private buildSelect(limit?: number): string {
     let sql = `SELECT * FROM "${this.table.tableName}"`
     if (this.whereSql) sql += ` WHERE ${this.whereSql}`
     if (this.orderField) sql += ` ORDER BY "${this.orderField}"${this.orderDesc ? ' DESC' : ''}`
-    if (this.limitN != null) sql += ` LIMIT ${this.limitN}`
+    if (limit != null) sql += ` LIMIT ${limit}`
     return sql
   }
 
-  async toArray(): Promise<T[]> {
-    const rows = await this.table._query(this.buildSelect(), this.whereParams)
-    return this.filterFn ? rows.filter(this.filterFn) : rows
+  toArray(): Promise<T[]> {
+    return this.table._query(this.buildSelect(), this.whereParams)
   }
 
   async first(): Promise<T | undefined> {
-    if (this.filterFn) {
-      const rows = await this.toArray()
-      return rows[0]
-    }
-    const q = this.clone()
-    q.limitN = 1
-    const rows = await this.table._query(q.buildSelect(), q.whereParams)
-    return rows[0]
-  }
-
-  async last(): Promise<T | undefined> {
-    if (!this.orderField) throw new Error('Query.last() requires orderBy()')
-    const q = this.clone()
-    q.orderDesc = !q.orderDesc
-    q.limitN = 1
-    const rows = await this.table._query(q.buildSelect(), q.whereParams)
+    const rows = await this.table._query(this.buildSelect(1), this.whereParams)
     return rows[0]
   }
 
@@ -137,13 +96,7 @@ class WhereClause<T> {
   }
 
   equals(value: unknown): Query<T> {
-    return new Query<T>(this.table)._setWhere(`"${this.field}" = ?`, [value])
-  }
-
-  anyOf(values: unknown[]): Query<T> {
-    if (values.length === 0) return new Query<T>(this.table)._setWhere('1 = 0', [])
-    const placeholders = values.map(() => '?').join(',')
-    return new Query<T>(this.table)._setWhere(`"${this.field}" IN (${placeholders})`, values)
+    return new Query<T>(this.table, `"${this.field}" = ?`, [value])
   }
 }
 
@@ -162,10 +115,6 @@ export class SQLiteTable<T> {
 
   orderBy(field: string, desc = false): Query<T> {
     return new Query<T>(this).orderBy(field, desc)
-  }
-
-  filter(fn: (row: T) => boolean): Query<T> {
-    return new Query<T>(this).filter(fn)
   }
 
   async toArray(): Promise<T[]> {
@@ -197,19 +146,6 @@ export class SQLiteTable<T> {
     const row = toSqlRow(obj as Record<string, unknown>, this.schema)
     const { sql, values } = this.buildInsert(row, true)
     return (await sqliteClient.run(sql, values)).lastInsertRowid
-  }
-
-  async update(id: number, changes: Partial<T>): Promise<number> {
-    const row = toSqlRow(changes as Record<string, unknown>, this.schema)
-    const cols = Object.keys(row).filter((k) => row[k] !== undefined && k !== 'id').map(assertIdent)
-    if (cols.length === 0) return 0
-    const setClauses = cols.map((k) => `"${k}" = ?`).join(', ')
-    const values = cols.map((k) => row[k])
-    const result = await sqliteClient.run(
-      `UPDATE "${this.tableName}" SET ${setClauses} WHERE id = ?`,
-      [...values, id],
-    )
-    return result.changes
   }
 
   async delete(id: number): Promise<void> {

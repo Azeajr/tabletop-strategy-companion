@@ -31,7 +31,7 @@ src/
 │   └── use-confirmation.ts  # Promise-based context confirmation dialog
 │
 ├── lib/
-│   ├── strategy.ts       # Pure logic: PHASE_ORDER, filterByContext, groupByCategory, hoistTLDR, prepareStrategies
+│   ├── strategy.ts       # Pure logic: resolveFilterContexts, filterByContext, groupByCategory, hoistTLDR, prepareStrategies
 │   └── strategy.test.ts  # Unit tests for all lib/strategy functions
 │
 ├── db/
@@ -40,10 +40,9 @@ src/
 │   ├── sql-schema.ts     # SQL DDL: games, strategies, meta tables + indexes + ADDITIVE_MIGRATIONS
 │   ├── index.ts          # TabletopDB class — SQLiteTable instances + query helpers + dbReady export
 │   ├── seed.ts           # import.meta.glob seed loader — djb2 version hash, skip if unchanged
-│   ├── queries.ts        # Thin re-export from ./index (backwards compat)
 │   ├── sqlite-client.ts  # PROD: Worker RPC client — 10s timeout, reentrant transactions
 │   ├── sqlite-test-client.ts # TEST: in-process sqlite-wasm (no Worker, no OPFS)
-│   ├── sqlite-table.ts   # Generic SQLiteTable<T> ORM — where/orderBy/add/put/update/delete/count
+│   ├── sqlite-table.ts   # Generic SQLiteTable<T> ORM — where/orderBy/add/put/delete/count
 │   └── sqlite.worker.ts  # Web Worker — OPFS SAH pool with 10-retry fallback to in-memory
 │
 └── types/
@@ -117,7 +116,7 @@ Coverage threshold: 80% on `src/lib/**`, `src/views/**`, `src/store/**`.
 
 - `.wasm` → CacheFirst, 1-year TTL
 - `data/seeds/*.json` → StaleWhileRevalidate
-- Session lock: `LiveCompanion` posts `SESSION_ACTIVE` / `SESSION_ENDED` to SW controller
+- Session lock: `LiveCompanion` posts `SESSION_ACTIVE` / `SESSION_ENDED` to the registration's active SW; the SW persists the flag in Cache Storage (`session-lock`) because the waiting SW — which receives `SKIP_WAITING` — is a separate instance, and idle SWs are killed mid-game. Stale locks expire after 8h and are cleared on activate.
 - `navigator.wakeLock.request('screen')` on LiveCompanion mount, released on cleanup
 
 ## Key Invariants
@@ -133,4 +132,4 @@ Coverage threshold: 80% on `src/lib/**`, `src/views/**`, `src/store/**`.
 
 ---
 
-**Last Updated**: 2026-05-23
+**Last Updated**: 2026-06-10

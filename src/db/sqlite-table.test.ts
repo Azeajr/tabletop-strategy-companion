@@ -95,30 +95,6 @@ describe('put()', () => {
   })
 })
 
-// ── update() ───────────────────────────────────────────────────────────────
-
-describe('update()', () => {
-  it('updates specified fields and leaves others unchanged', async () => {
-    await games.put(makeGame())
-    const id = await strategies.add(makeStrategy({ category: 'OldCat', phase: 'Setup' }))
-    const changes = await strategies.update(id, { category: 'NewCat' })
-    expect(changes).toBe(1)
-    const row = await strategies.get(id)
-    expect(row?.category).toBe('NewCat')
-    expect(row?.phase).toBe('Setup')
-  })
-
-  it('returns 0 for nonexistent id', async () => {
-    expect(await strategies.update(99999, { category: 'Ghost' })).toBe(0)
-  })
-
-  it('returns 0 for empty changes object', async () => {
-    await games.put(makeGame())
-    const id = await strategies.add(makeStrategy())
-    expect(await strategies.update(id, {})).toBe(0)
-  })
-})
-
 // ── delete(id) ─────────────────────────────────────────────────────────────
 
 describe('delete(id)', () => {
@@ -190,24 +166,6 @@ describe('where().equals()', () => {
   })
 })
 
-// ── where().anyOf() ────────────────────────────────────────────────────────
-
-describe('where().anyOf()', () => {
-  it('returns rows matching any of the values', async () => {
-    await games.put(makeGame({ game_id: 'g1', game_name: 'A' }))
-    await games.put(makeGame({ game_id: 'g2', game_name: 'B' }))
-    await games.put(makeGame({ game_id: 'g3', game_name: 'C' }))
-    const result = await games.where('game_id').anyOf(['g1', 'g3']).toArray()
-    expect(result.map((r) => r.game_id).sort()).toEqual(['g1', 'g3'])
-  })
-
-  it('empty values array returns no rows without SQL error', async () => {
-    await games.put(makeGame())
-    const result = await games.where('game_id').anyOf([]).toArray()
-    expect(result).toEqual([])
-  })
-})
-
 // ── orderBy() ──────────────────────────────────────────────────────────────
 
 describe('orderBy()', () => {
@@ -226,31 +184,7 @@ describe('orderBy()', () => {
   })
 })
 
-// ── filter() ───────────────────────────────────────────────────────────────
-
-describe('filter() — JS-level predicate', () => {
-  it('applies predicate to all rows', async () => {
-    await games.put(makeGame({ game_id: 'g1', game_name: 'Keep This One' }))
-    await games.put(makeGame({ game_id: 'g2', game_name: 'Drop This One' }))
-    const result = await games.filter((g) => g.game_name.startsWith('Keep')).toArray()
-    expect(result).toHaveLength(1)
-    expect(result[0].game_id).toBe('g1')
-  })
-
-  it('composed filters use AND semantics', async () => {
-    await games.put(makeGame({ game_id: 'g1', game_name: 'Keep Pass' }))
-    await games.put(makeGame({ game_id: 'g2', game_name: 'Keep Fail' }))
-    await games.put(makeGame({ game_id: 'g3', game_name: 'Drop Pass' }))
-    const result = await games
-      .filter((g) => g.game_name.startsWith('Keep'))
-      .filter((g) => g.game_name.endsWith('Pass'))
-      .toArray()
-    expect(result).toHaveLength(1)
-    expect(result[0].game_id).toBe('g1')
-  })
-})
-
-// ── first() / last() ───────────────────────────────────────────────────────
+// ── first() ────────────────────────────────────────────────────────────────
 
 describe('Query.first()', () => {
   it('returns first matching row', async () => {
@@ -262,19 +196,6 @@ describe('Query.first()', () => {
 
   it('returns undefined when no match', async () => {
     expect(await games.where('game_id').equals('ghost').first()).toBeUndefined()
-  })
-})
-
-describe('Query.last()', () => {
-  it('throws without orderBy', async () => {
-    await expect(games.where('game_id').equals('g1').last()).rejects.toThrow('orderBy')
-  })
-
-  it('returns last row by sort field', async () => {
-    await games.put(makeGame({ game_id: 'g1', game_name: 'Alpha' }))
-    await games.put(makeGame({ game_id: 'g2', game_name: 'Zebra' }))
-    const row = await games.orderBy('game_name').last()
-    expect(row?.game_name).toBe('Zebra')
   })
 })
 
