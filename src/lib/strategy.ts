@@ -1,4 +1,4 @@
-import type { Strategy, Tag } from '../types/domain'
+import type { Strategy } from '../types/domain'
 
 // Returns the context values a filter contributes to activeContexts.
 // Filter unset (value=null) → both sides included, so nothing is hidden.
@@ -37,8 +37,8 @@ export function groupByCategory(strategies: Strategy[]): Map<string, Strategy[]>
 
 // Hoist TLDR-tagged entries to the top; preserve relative order within each tier.
 export function hoistTLDR(strategies: Strategy[]): Strategy[] {
-  const tldr = strategies.filter((s) => (s.tags as Tag[]).includes('TLDR'))
-  const rest = strategies.filter((s) => !(s.tags as Tag[]).includes('TLDR'))
+  const tldr = strategies.filter((s) => s.tags.includes('TLDR'))
+  const rest = strategies.filter((s) => !s.tags.includes('TLDR'))
   return [...tldr, ...rest]
 }
 

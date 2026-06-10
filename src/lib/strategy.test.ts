@@ -106,4 +106,15 @@ describe('prepareStrategies', () => {
     const items = result.get('X')!
     expect(items[0].tags).toContain('TLDR')
   })
+
+  it('hoist preserves alphabetical condition order within each tier', () => {
+    const strats = [
+      makeStrategy({ category: 'X', condition: 'D plain', tags: [] }),
+      makeStrategy({ category: 'X', condition: 'C hoisted', tags: ['TLDR'] }),
+      makeStrategy({ category: 'X', condition: 'B plain', tags: [] }),
+      makeStrategy({ category: 'X', condition: 'A hoisted', tags: ['TLDR'] }),
+    ]
+    const conditions = prepareStrategies(strats).get('X')!.map((s) => s.condition)
+    expect(conditions).toEqual(['A hoisted', 'C hoisted', 'B plain', 'D plain'])
+  })
 })

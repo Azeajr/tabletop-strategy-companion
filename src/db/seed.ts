@@ -1,4 +1,4 @@
-import { GameSeedSchema } from './schema'
+import { GameSeedSchema, type GameSeed } from './schema'
 import { db, dbReady } from './index'
 import type { TabletopDBType } from './index'
 
@@ -10,10 +10,8 @@ const seedModules = import.meta.glob('/data/seeds/*.json', {
 })
 
 // djb2 hash — deterministic version string from seed content
-function computeVersion(seeds: unknown[]): string {
-  const sorted = [...seeds as { game_id: string }[]].sort((a, b) =>
-    a.game_id.localeCompare(b.game_id),
-  )
+function computeVersion(seeds: GameSeed[]): string {
+  const sorted = [...seeds].sort((a, b) => a.game_id.localeCompare(b.game_id))
   const str = JSON.stringify(sorted)
   let hash = 5381
   for (let i = 0; i < str.length; i++) {
@@ -61,6 +59,13 @@ export async function runSeedInit(database: TabletopDBType): Promise<void> {
           context: s.context,
         })),
       )
+    }
+    // A game whose seed file was deleted or renamed must not linger in the DB.
+    const seedIds = new Set(seeds.map((s) => s.game_id))
+    for (const g of await database.games.toArray()) {
+      if (seedIds.has(g.game_id)) continue
+      await database.strategies.where('game_id').equals(g.game_id).delete()
+      await database.games.where('game_id').equals(g.game_id).delete()
     }
     await database.meta.put({ key: 'seed_version', value: version })
   })

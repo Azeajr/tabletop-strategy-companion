@@ -50,3 +50,21 @@ test('every strategy references a declared phase and filter context', () => {
     }
   }
 })
+
+// The strategies table has a UNIQUE index on (game_id, phase, category,
+// condition). A duplicate in a seed file passes Zod but makes runSeedInit
+// throw at boot — which breaks EVERY game, not just the bad seed.
+test('no seed contains duplicate (phase, category, condition) strategies', () => {
+  const seedDir = join(process.cwd(), 'data/seeds')
+  if (!existsSync(seedDir)) return
+
+  for (const file of readdirSync(seedDir).filter((f) => f.endsWith('.json'))) {
+    const seed = GameSeedSchema.parse(JSON.parse(readFileSync(join(seedDir, file), 'utf8')))
+    const seen = new Set<string>()
+    for (const s of seed.strategies) {
+      const key = `${s.phase}|${s.category}|${s.condition}`
+      expect(seen.has(key), `${file}: duplicate strategy "${key}"`).toBe(false)
+      seen.add(key)
+    }
+  }
+})

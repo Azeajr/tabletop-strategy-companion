@@ -102,4 +102,40 @@ describe('runSeedInit()', () => {
     const restoredCount = (await db.getStrategies(firstGame.game_id)).length
     expect(restoredCount).toBe(initialCount)
   })
+
+  // ── removed seed file cleanup ─────────────────────────────────────────────
+
+  it('removes a game (and its strategies) whose seed file no longer exists', async () => {
+    await runSeedInit(db)
+
+    // Simulate a game seeded by a since-deleted seed file
+    await db.upsertGame({
+      game_id: 'ghost-game',
+      game_name: 'Ghost Game',
+      game_description: 'Left behind by a deleted seed file',
+      phases: ['Setup'],
+      filter_1_label: null,
+      filter_1_yes_context: null,
+      filter_1_no_context: null,
+      filter_2_label: null,
+      filter_2_yes_context: null,
+      filter_2_no_context: null,
+    })
+    await db.strategies.add({
+      game_id: 'ghost-game',
+      phase: 'Setup',
+      category: 'Opening',
+      condition: 'Ghost strategy that must be cleaned up on re-seed',
+      strategy_detailed: 'This strategy belongs to a game with no seed file anymore.',
+      strategy_stealth: [],
+      tags: [],
+      context: null,
+    })
+    await db.meta.put({ key: 'seed_version', value: 'stale-version-xyz' })
+
+    await runSeedInit(db) // version mismatch → re-seed + cleanup
+
+    expect(await db.getGame('ghost-game')).toBeNull()
+    expect(await db.getStrategies('ghost-game')).toEqual([])
+  })
 })

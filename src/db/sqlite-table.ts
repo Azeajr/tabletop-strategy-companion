@@ -1,8 +1,6 @@
 import { sqliteClient } from './sqlite-client'
 
 export interface TableSchema {
-  dateFields?: string[]
-  boolFields?: string[]
   jsonFields?: string[]
 }
 
@@ -18,12 +16,6 @@ function assertIdent(name: string): string {
 
 function toSqlRow(obj: Record<string, unknown>, schema: TableSchema): Record<string, unknown> {
   const row = { ...obj }
-  for (const f of schema.dateFields ?? []) {
-    if (f in row && row[f] instanceof Date) row[f] = (row[f] as Date).toISOString()
-  }
-  for (const f of schema.boolFields ?? []) {
-    if (f in row && row[f] != null) row[f] = row[f] ? 1 : 0
-  }
   for (const f of schema.jsonFields ?? []) {
     if (f in row && row[f] != null) row[f] = JSON.stringify(row[f])
   }
@@ -32,12 +24,6 @@ function toSqlRow(obj: Record<string, unknown>, schema: TableSchema): Record<str
 
 function fromSqlRow<T>(row: Record<string, unknown>, schema: TableSchema): T {
   const result = { ...row }
-  for (const f of schema.dateFields ?? []) {
-    if (result[f] != null) result[f] = new Date(result[f] as string)
-  }
-  for (const f of schema.boolFields ?? []) {
-    if (result[f] != null) result[f] = Boolean(result[f])
-  }
   for (const f of schema.jsonFields ?? []) {
     if (result[f] != null) result[f] = JSON.parse(result[f] as string)
   }

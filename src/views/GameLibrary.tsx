@@ -37,9 +37,11 @@ export default function GameLibrary() {
         right={<ModeToggle />}
       />
 
-      {/* PWA update banner — only shown on library page, never mid-game */}
+      {/* PWA update banner — only shown on library page, never mid-game.
+          Not sticky: the search bar below pins at the same 56px offset and
+          would be covered by a pinned banner once the page scrolls. */}
       <Show when={needRefresh()}>
-        <div class="sticky top-[56px] z-50 flex items-center justify-between gap-4 px-4 py-2 bg-[var(--accent)] text-white text-sm">
+        <div class="flex items-center justify-between gap-4 px-4 py-2 bg-[var(--accent)] text-white text-sm">
           <span>Update available</span>
           <button
             onClick={() => updateServiceWorker(true)}

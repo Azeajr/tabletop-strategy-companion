@@ -20,7 +20,7 @@
 
 ```bash
 npm run dev          # dev server (Vite, port 5173)
-npm test             # unit tests (Vitest — 10 tests)
+npm test             # unit tests (Vitest)
 npm run check        # build + test
 npm run build        # tsc + vite build
 npm run lint         # ESLint
@@ -45,11 +45,11 @@ App is fully implemented and deployed.
 - All 3 views live: GameLibrary, PreGameDashboard, LiveCompanion
 - SQLite layer complete: ORM, Worker client, test client (Vite alias), seed loader
 - Study ↔ Stealth mode toggle wired end-to-end
-- Catan seed data bundled (16 strategies, 4 phases, context filters)
-- 10 tests passing, build clean
+- 20 game seeds bundled (`data/seeds/*.json`), Zod-validated in CI
+- Unit suite green (lib + components + db + views), build clean
 
 To add a new game: drop `data/seeds/<game-id>.json`, run `npm test`, commit.
 
 ---
 
-**Last Updated**: 2026-05-23
+**Last Updated**: 2026-06-10

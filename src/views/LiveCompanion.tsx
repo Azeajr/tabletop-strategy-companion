@@ -75,14 +75,34 @@ export default function LiveCompanion() {
     },
   )
 
-  const activeContexts = createMemo((): string[] => {
+  // The game's declared filters (those with a label), each paired with its
+  // local yes/no signal. Drives both the filter UI and activeContexts.
+  const filters = createMemo(() => {
     const g = game()
     if (!g) return []
     return [
-      ...resolveFilterContexts(g.filter_1_label, g.filter_1_yes_context, g.filter_1_no_context, filter1()),
-      ...resolveFilterContexts(g.filter_2_label, g.filter_2_yes_context, g.filter_2_no_context, filter2()),
-    ]
+      {
+        label: g.filter_1_label,
+        yesContext: g.filter_1_yes_context,
+        noContext: g.filter_1_no_context,
+        value: filter1,
+        onChange: setFilter1,
+      },
+      {
+        label: g.filter_2_label,
+        yesContext: g.filter_2_yes_context,
+        noContext: g.filter_2_no_context,
+        value: filter2,
+        onChange: setFilter2,
+      },
+    ].filter((f): f is typeof f & { label: string } => f.label !== null)
   })
+
+  const activeContexts = createMemo((): string[] =>
+    filters().flatMap((f) =>
+      resolveFilterContexts(f.label, f.yesContext, f.noContext, f.value()),
+    ),
+  )
 
   const phaseStrategies = createMemo(() => {
     const q = searchQuery().toLowerCase().trim()
@@ -118,7 +138,22 @@ export default function LiveCompanion() {
           </p>
         }
       >
-        <Show when={game()}>
+        <Show
+          when={game()}
+          fallback={
+            <Show when={!game.loading}>
+              <div class="px-4 py-16 text-center flex flex-col items-center gap-4">
+                <p class="text-[var(--text)] font-semibold">Game not found</p>
+                <button
+                  onClick={() => navigate('/')}
+                  class="text-[var(--accent)] text-sm"
+                >
+                  ← Back to library
+                </button>
+              </div>
+            </Show>
+          }
+        >
           {(g) => (
             <>
               <PhaseStepper
@@ -127,15 +162,8 @@ export default function LiveCompanion() {
                 onPhaseChange={setCurrentPhase}
               />
 
-              <Show when={g().filter_1_label}>
-                <InlineYesNoFilter
-                  filter1Label={g().filter_1_label!}
-                  filter1Value={filter1()}
-                  onFilter1Change={setFilter1}
-                  filter2Label={g().filter_2_label ?? undefined}
-                  filter2Value={filter2()}
-                  onFilter2Change={setFilter2}
-                />
+              <Show when={filters().length > 0}>
+                <InlineYesNoFilter filters={filters()} />
               </Show>
 
               <div class="px-4 pt-2 pb-1">

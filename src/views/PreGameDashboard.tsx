@@ -2,6 +2,7 @@ import { createEffect, createResource, createSignal, For, Show, Suspense } from 
 import { useNavigate, useParams } from '@solidjs/router'
 import { db } from '../db'
 import { seedsReady } from '../db/seed'
+import { prepareStrategies } from '../lib/strategy'
 import { useAppMode } from '../store/appState'
 import StickyTopBar from '../components/StickyTopBar'
 import ModeToggle from '../components/ModeToggle'
@@ -36,14 +37,12 @@ export default function PreGameDashboard() {
   const tldr = () =>
     (strategies() ?? []).filter((s) => s.tags.includes('TLDR'))
 
-  const forTab = () =>
-    (strategies() ?? [])
-      .filter((s) => s.phase === activeTab())
-      .sort(
-        (a, b) =>
-          a.category.localeCompare(b.category) ||
-          a.condition.localeCompare(b.condition),
-      )
+  // Same ordering pipeline as the live accordion: category alphabetical,
+  // condition alphabetical, TLDR hoisted to the top of its category.
+  const forTab = () => {
+    const inPhase = (strategies() ?? []).filter((s) => s.phase === activeTab())
+    return [...prepareStrategies(inPhase).values()].flat()
+  }
 
   return (
     <div class="flex flex-col min-h-svh pt-[56px]">

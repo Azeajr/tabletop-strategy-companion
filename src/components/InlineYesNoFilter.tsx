@@ -1,19 +1,19 @@
-import { Show } from 'solid-js'
+import { For } from 'solid-js'
 
-interface Props {
-  filter1Label: string
-  filter1Value: 'yes' | 'no' | null
-  onFilter1Change: (v: 'yes' | 'no' | null) => void
-  filter2Label?: string
-  filter2Value: 'yes' | 'no' | null
-  onFilter2Change: (v: 'yes' | 'no' | null) => void
+// `value` is an accessor (not a snapshot) so the parent's filters array stays
+// referentially stable across toggles — <For> then patches the row in place
+// instead of recreating it, which would drop focus from the tapped button.
+export interface FilterControl {
+  label: string
+  value: () => 'yes' | 'no' | null
+  onChange: (v: 'yes' | 'no' | null) => void
 }
 
-function FilterRow(props: {
-  label: string
-  value: 'yes' | 'no' | null
-  onChange: (v: 'yes' | 'no' | null) => void
-}) {
+interface Props {
+  filters: FilterControl[]
+}
+
+function FilterRow(props: FilterControl) {
   return (
     <div class="flex items-center justify-between gap-4 min-h-[44px]">
       <span class="text-sm text-[var(--text)] flex-1 leading-snug">{props.label}</span>
@@ -22,24 +22,24 @@ function FilterRow(props: {
         role="group"
       >
         <button
-          onClick={() => props.onChange(props.value === 'yes' ? null : 'yes')}
+          onClick={() => props.onChange(props.value() === 'yes' ? null : 'yes')}
           class={`px-4 h-[36px] min-w-[44px] text-sm transition-colors ${
-            props.value === 'yes'
+            props.value() === 'yes'
               ? 'bg-[var(--accent)] text-white font-semibold'
               : 'text-[var(--muted)]'
           }`}
-          aria-pressed={props.value === 'yes'}
+          aria-pressed={props.value() === 'yes'}
         >
           Yes
         </button>
         <button
-          onClick={() => props.onChange(props.value === 'no' ? null : 'no')}
+          onClick={() => props.onChange(props.value() === 'no' ? null : 'no')}
           class={`px-4 h-[36px] min-w-[44px] text-sm transition-colors ${
-            props.value === 'no'
+            props.value() === 'no'
               ? 'bg-[var(--accent)] text-white font-semibold'
               : 'text-[var(--muted)]'
           }`}
-          aria-pressed={props.value === 'no'}
+          aria-pressed={props.value() === 'no'}
         >
           No
         </button>
@@ -51,18 +51,9 @@ function FilterRow(props: {
 export default function InlineYesNoFilter(props: Props) {
   return (
     <div class="px-4 py-2 space-y-1 border-b border-[var(--muted)]/20">
-      <FilterRow
-        label={props.filter1Label}
-        value={props.filter1Value}
-        onChange={props.onFilter1Change}
-      />
-      <Show when={props.filter2Label}>
-        <FilterRow
-          label={props.filter2Label!}
-          value={props.filter2Value}
-          onChange={props.onFilter2Change}
-        />
-      </Show>
+      <For each={props.filters}>
+        {(f) => <FilterRow label={f.label} value={f.value} onChange={f.onChange} />}
+      </For>
     </div>
   )
 }
