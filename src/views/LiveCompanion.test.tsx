@@ -104,4 +104,23 @@ describe('LiveCompanion', () => {
     renderView()
     expect(await screen.findByText('Game not found')).toBeInTheDocument()
   })
+
+  it('reacquires the wake lock when the page becomes visible again', async () => {
+    // The platform auto-releases the lock on hide; LiveCompanion must
+    // re-request it on visibilitychange so the screen stays awake mid-game.
+    const request = vi.fn().mockResolvedValue({ release: vi.fn().mockResolvedValue(undefined) })
+    Object.defineProperty(navigator, 'wakeLock', { value: { request }, configurable: true })
+    try {
+      getGame.mockResolvedValue(makeGame())
+      getStrategies.mockResolvedValue([])
+      renderView()
+      expect(request).toHaveBeenCalledTimes(1)
+
+      // jsdom's visibilityState is always 'visible', so the handler reacquires
+      document.dispatchEvent(new Event('visibilitychange'))
+      expect(request).toHaveBeenCalledTimes(2)
+    } finally {
+      delete (navigator as { wakeLock?: unknown }).wakeLock
+    }
+  })
 })

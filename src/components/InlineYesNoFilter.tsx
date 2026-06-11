@@ -23,7 +23,7 @@ function FilterRow(props: FilterControl) {
       >
         <button
           onClick={() => props.onChange(props.value() === 'yes' ? null : 'yes')}
-          class={`px-4 h-[36px] min-w-[44px] text-sm transition-colors ${
+          class={`px-4 h-[44px] min-w-[44px] text-sm transition-colors ${
             props.value() === 'yes'
               ? 'bg-[var(--accent)] text-white font-semibold'
               : 'text-[var(--muted)]'
@@ -34,7 +34,7 @@ function FilterRow(props: FilterControl) {
         </button>
         <button
           onClick={() => props.onChange(props.value() === 'no' ? null : 'no')}
-          class={`px-4 h-[36px] min-w-[44px] text-sm transition-colors ${
+          class={`px-4 h-[44px] min-w-[44px] text-sm transition-colors ${
             props.value() === 'no'
               ? 'bg-[var(--accent)] text-white font-semibold'
               : 'text-[var(--muted)]'

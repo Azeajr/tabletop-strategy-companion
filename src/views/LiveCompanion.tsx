@@ -40,15 +40,27 @@ export default function LiveCompanion() {
 
   let wakeLock: WakeLockSentinel | null = null
 
-  onMount(async () => {
+  const acquireWakeLock = async () => {
     try {
       wakeLock = (await navigator.wakeLock?.request('screen')) ?? null
     } catch { /* unsupported or page hidden — non-fatal */ }
+  }
 
+  // The platform auto-releases the wake lock whenever the page is hidden
+  // (app switch, notification shade); reacquire on return so the screen
+  // keeps staying awake for the rest of the game.
+  const reacquireOnVisible = () => {
+    if (document.visibilityState === 'visible') void acquireWakeLock()
+  }
+
+  onMount(() => {
+    void acquireWakeLock()
+    document.addEventListener('visibilitychange', reacquireOnVisible)
     postToServiceWorker('SESSION_ACTIVE')
   })
 
   onCleanup(() => {
+    document.removeEventListener('visibilitychange', reacquireOnVisible)
     wakeLock?.release().catch(() => {})
     wakeLock = null
     postToServiceWorker('SESSION_ENDED')
@@ -172,7 +184,7 @@ export default function LiveCompanion() {
                   placeholder="Filter strategies…"
                   value={searchQuery()}
                   onInput={(e) => setSearchQuery(e.currentTarget.value)}
-                  class="w-full h-[40px] px-3 rounded-[8px] bg-[var(--surface)] text-[var(--text)] border border-[var(--muted)]/30 outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)] text-sm"
+                  class="w-full h-[44px] px-3 rounded-[8px] bg-[var(--surface)] text-[var(--text)] border border-[var(--muted)]/30 outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)] text-sm"
                 />
               </div>
 
