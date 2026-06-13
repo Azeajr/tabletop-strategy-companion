@@ -35,6 +35,15 @@ Tracks what's built, what's spec-required but incomplete, and what's deferred to
 - **8 new seed files** — Ticket to Ride, Pandemic, Wingspan, 7 Wonders, Terraforming Mars, Risk, Stratego, Sequence
 - **Component tests** — ActionAccordion (6 tests), InlineYesNoFilter (7 tests); 24 tests total passing
 
+## ✅ Shipped (v1.2)
+
+- **Strategy & UX Validation loop (Pass 5)** — `ENGINEERING_PASSES.md` §5 + `retro/` (see `retro/README.md`, `retro/TEMPLATE.md`). Per-game (or cross-cutting) audit across three axes — strategic optimality, prose/delivery, decomposition-model fit. Writes a dated retro, ships bounded in-seed fixes, opens issues for model changes. **All 20 seeds audited** (`retro/2026-06-13-*.md`).
+- **Loop-game nav** — `nav_style: 'arc' | 'modes'` on the seed; `PhaseStepper` renders free-select mode tabs (no progression affordance) for loop games. Battleship remodeled into Searching / Targeting / Defense modes.
+- **Tag badges** — the 8 non-TLDR tags render as inline chips (`TagBadges`) on conditions; TLDR stays hoist-only.
+- **Explicit strategy order** — optional `order` field; `prepareStrategies` sorts by `order` then condition-alphabetical, categories by min member order. Legacy seeds (order 0) render unchanged.
+- **Stealth one-screen guarantee** — each phase collapses to its TLDR strategies by default with a "show all" toggle that scrolls; a ≤8 collapsed-row budget is enforced in `schema.test`.
+- **Test growth** — 101 tests (added `order`, tag-render, PhaseStepper arc/modes, stealth glanceability + row-budget guards).
+
 ---
 
 ## 📋 Nice-to-Have (v1.x)
@@ -47,7 +56,11 @@ High-value targets not yet added:
 - Power Grid
 - Puerto Rico
 
-Use the AI ingestion prompt in spec §10.4 to generate.
+Use the AI ingestion prompt in spec §10.4 to generate. After authoring, run **Pass 5** (`ENGINEERING_PASSES.md` §5) to validate the new seed and drop its retro in `retro/`.
+
+### Re-audit & deferred UX
+- Re-run **Pass 5** per game as the competitive meta shifts or after a seed edit; retros are append-only — supersede an old one with a new dated file (`retro/YYYY-MM-DD-<game-id>.md`).
+- Stealth density: if a 7–8 row phase plus an open toggle still feels tight on a small phone, add per-mode TLDR-only collapse in stealth (deferred from the #7 row-budget fix).
 
 ### E2E Tests (Playwright)
 No e2e tests exist. Golden path to cover:
@@ -73,4 +86,4 @@ Per spec §11 — do not implement in v1:
 
 ---
 
-**Last Updated**: 2026-05-24
+**Last Updated**: 2026-06-13

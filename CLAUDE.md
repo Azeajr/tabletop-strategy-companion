@@ -35,6 +35,8 @@ npm run lint         # ESLint
 - **Common Mistakes**: `.claude/COMMON_MISTAKES.md` ⚠️
 - **Architecture**: `.claude/ARCHITECTURE_MAP.md`
 - **Quick Start**: `.claude/QUICK_START.md`
+- **Engineering Passes**: `ENGINEERING_PASSES.md` — reusable autonomous-agent prompts (structural refactor, security, testing, seed authoring, strategy + UX validation)
+- **Retros**: `retro/` — dated strategy/UX validation records (Pass 5 output); start at `retro/README.md`
 
 ---
 
@@ -45,11 +47,15 @@ App is fully implemented and deployed.
 - All 3 views live: GameLibrary, PreGameDashboard, LiveCompanion
 - SQLite layer complete: ORM, Worker client, test client (Vite alias), seed loader
 - Study ↔ Stealth mode toggle wired end-to-end
-- 20 game seeds bundled (`data/seeds/*.json`), Zod-validated in CI
-- Unit suite green (lib + components + db + views), build clean
+- 20 game seeds bundled (`data/seeds/*.json`), Zod-validated in CI; all 20 audited via Pass 5 (`retro/`)
+- Phase nav: `arc` stepper (default) or `nav_style: 'modes'` free-select tabs for loop games (e.g. battleship's search↔target)
+- Non-TLDR tags render as badges; optional per-strategy `order` sort key; stealth collapses each phase to TLDR-only with a "show all" toggle and a ≤8 collapsed-row budget (enforced in `schema.test`)
+- Unit suite green (101 tests: lib + components + db + views + seed/glanceability/budget guards), build clean
 
-To add a new game: drop `data/seeds/<game-id>.json`, run `npm test`, commit.
+To **add a new game**: drop `data/seeds/<game-id>.json`, run `npm test`, commit. Full loop: ENGINEERING_PASSES.md §4.
+
+To **validate a game's strategy + UX**: run ENGINEERING_PASSES.md §5 (Pass 5) — audits three axes (strategic optimality, prose/delivery, model fit), writes a dated retro to `retro/`, ships bounded seed fixes, opens issues for model-level changes.
 
 ---
 
-**Last Updated**: 2026-06-10
+**Last Updated**: 2026-06-13
