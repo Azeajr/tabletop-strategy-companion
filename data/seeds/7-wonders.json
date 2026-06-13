@@ -155,6 +155,22 @@
       "context": null
     },
     {
+      "phase": "Age II",
+      "category": "Military",
+      "condition": "Neighbor gaining shields in Age II",
+      "strategy_detailed": "Age II conflict tokens pay +3 (win) versus −1 (loss) — triple Age I's stakes. Recount both neighbors' shields and play a shield card only to flip a loss to a win or hold the lead. Don't chase a neighbor already far ahead; bank the −1 and spend the pick on VP.",
+      "strategy_stealth": [
+        "Age II tokens: +3 win / −1 loss",
+        "Add shields only to flip a result",
+        "Don't chase a runaway neighbor"
+      ],
+      "tags": [
+        "TLDR",
+        "Defense"
+      ],
+      "context": null
+    },
+    {
       "phase": "Age III",
       "category": "Guild Denial",
       "condition": "Strong guild card available in Age III",
