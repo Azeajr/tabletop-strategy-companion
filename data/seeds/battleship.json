@@ -19,11 +19,11 @@
       "phase": "Fleet Placement",
       "category": "Ship Placement",
       "condition": "Placing ships at game start",
-      "strategy_detailed": "Avoid edges and corners — opponents often open there. Spread ships so they don't share adjacent squares; a hit on one ship won't reveal neighbors. Don't place ships in the outermost row or column.",
+      "strategy_detailed": "A skilled opponent's heat map peaks at the center, so the middle is hit first. Bias ships toward the lower-probability edges, never cluster them — keep a 1-cell gap so one hit can't expose a neighbor — and vary your layout each game to stay unpredictable.",
       "strategy_stealth": [
-        "Avoid edges and corners",
-        "No adjacent ships",
-        "Edges swept first — interior survives longer"
+        "Center is the hottest target — bias to edges",
+        "Never cluster — keep a 1-cell gap",
+        "Vary your layout each game"
       ],
       "tags": [
         "TLDR",
@@ -35,11 +35,11 @@
       "phase": "Fleet Placement",
       "category": "Ship Placement",
       "condition": "Placing the Carrier (5-square)",
-      "strategy_detailed": "The Carrier is the hardest to hide and will be found eventually. Place it off-center, away from edges, oriented horizontally or vertically toward the board interior. Opponents often sweep edges first; a center-biased Carrier survives longer.",
+      "strategy_detailed": "The 5-square Carrier can't truly hide — it covers so many cells the probability map finds it eventually. Don't speed that up: keep it off the center (where a strong opponent fires first) and clear of your other ships. Edge-leaning cells are lower-density, so the Carrier lasts longer there.",
       "strategy_stealth": [
-        "Center-biased placement survives longer",
-        "Place in board interior, not on edges",
-        "Edges get swept first"
+        "Carrier can't hide — keep it off-center",
+        "Edge-leaning = lower density = lasts longer",
+        "Keep it clear of your other ships"
       ],
       "tags": [
         "Defense"
@@ -96,11 +96,11 @@
       "phase": "Search",
       "category": "Defense",
       "condition": "Opponent gets a hit on your ship",
-      "strategy_detailed": "Once hit, opponent shoots orthogonally adjacent next turn. Wall-adjacent ships cut hunt directions by half (1 wall) or three-quarters (corner). Trade-off: walls get shot earlier in opening sweeps, but if survived they're cheaper to defend during hunt. Net effect roughly neutral.",
+      "strategy_detailed": "Once hit, the attacker probes the orthogonally adjacent cells. A ship against a wall leaves only 2 of those directions; a corner leaves 1 — so rim ships are harder to finish. Combined with edges being lower-density (a probability player shoots them later), the rim hides well.",
       "strategy_stealth": [
-        "Wall hit: attacker limited to 2 of 4 directions",
-        "Corner hit: attacker limited to 1 of 4 directions",
-        "Tradeoff: found sooner but harder to hunt once hit"
+        "Hit on a wall: 2 hunt directions, not 4",
+        "Hit in a corner: only 1 direction",
+        "Rim ships are lower-density AND hard to finish"
       ],
       "tags": [
         "Defense"
@@ -157,12 +157,12 @@
     {
       "phase": "Hunt",
       "category": "Probability",
-      "condition": "Active hit, ship not yet sunk",
+      "condition": "Active hit, refining the probability map",
       "strategy_detailed": "PDF = count valid ship placements through each cell; shoot highest. On a hit, rules shift: hit squares become passable (ships can overlap them) and placements covering hits score heavily. Skip directions where no ship fits to the hit.",
       "strategy_stealth": [
-        "Hit squares = passable (not blockers) in PDF",
-        "Placements through hits score heavily",
-        "Skip directions no ship can reach the hit from"
+        "After a hit, score placements through it",
+        "Hit cells become passable, not blockers",
+        "Skip directions no ship can reach it"
       ],
       "tags": [
         "TLDR",
