@@ -53,6 +53,13 @@
 
 ---
 
+### 8. A phase/mode that holds no decision
+
+**Symptom**: A seed declares a phase (or `nav_style: 'modes'` tab) the player can't *act* from — an orphan bucket for leftover strategies, a mislabeled phase (battleship's old "Defense" held offense + placement notes, but Battleship has no in-game defense), or a trivial Setup (guess-who's — your card is dealt randomly, nothing to choose).
+**Fix**: Every phase must hold ≥1 real decision the player makes *while in it*. Before shipping a new seed or remodeling a game into `modes`, run the **phase-fit test**: for each phase, name the decision. If you can't, fold its strategies into a phase where they belong and drop the phase. A `mode` must be a state you act *from* (battleship: Searching, Targeting). A Setup phase is justified only by a real setup choice (draft / placement / seat), not a random or trivial start. See `retro/2026-06-13-phase-fit-audit.md`.
+
+---
+
 **Update when**: bug took >1h, could cause data loss, or repeated across sessions.
 
 **Last Updated**: 2026-06-13
