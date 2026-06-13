@@ -3,7 +3,6 @@
   "game_name": "Guess Who?",
   "game_description": "Eliminate characters by asking yes/no questions to find your opponent's pick.",
   "phases": [
-    "Setup",
     "Early Game",
     "Mid-Game",
     "End-Game"
@@ -15,22 +14,6 @@
   "filter_2_yes_context": null,
   "filter_2_no_context": null,
   "strategies": [
-    {
-      "phase": "Setup",
-      "category": "Character Selection",
-      "condition": "Choosing your character card",
-      "strategy_detailed": "In standard Guess Who, your card is dealt randomly — there is no selection. In variants where you choose: prefer rare features. Rare-feature characters are harder to isolate because binary-search questions rarely target rare attributes, giving opponent fewer yes-answer reveals.",
-      "strategy_stealth": [
-        "Standard rules: card is dealt, no choice",
-        "Choice variant: pick rare features",
-        "Rare features = fewer opponent yes-reveals"
-      ],
-      "tags": [
-        "TLDR",
-        "Defense"
-      ],
-      "context": null
-    },
     {
       "phase": "Early Game",
       "category": "Question Strategy",

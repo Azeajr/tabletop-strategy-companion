@@ -7,7 +7,6 @@
     "Fleet Placement",
     "Searching",
     "Targeting",
-    "Defense",
     "Endgame"
   ],
   "filter_1_label": null,
@@ -201,36 +200,20 @@
       "order": 3
     },
     {
-      "phase": "Defense",
-      "category": "Your Fleet",
-      "condition": "All your ships still undiscovered",
-      "strategy_detailed": "Undiscovered ships let you play offensively without psychological pressure. Continue parity shooting without bias — don't cluster shots near your own ships' locations out of anxiety. Your placement is already set; trust it.",
+      "phase": "Fleet Placement",
+      "category": "Ship Placement",
+      "condition": "Placing against a wall or corner",
+      "strategy_detailed": "A ship against a wall can only be probed from 2 directions once hit; a corner just 1 — so rim ships are harder to finish. Edges are also lower-density, so a probability player shoots them later. The rim hides well — place there, just vary it so you're not predictable.",
       "strategy_stealth": [
-        "Stay on parity pattern",
-        "Don't bias shots near own ships",
-        "Trust placement — play offense"
+        "Wall ship: attacker probes 2 sides, not 4",
+        "Corner ship: only 1 direction",
+        "Rim = lower density AND hard to finish"
       ],
       "tags": [
         "Defense"
       ],
       "context": null,
-      "order": 0
-    },
-    {
-      "phase": "Defense",
-      "category": "Your Fleet",
-      "condition": "Opponent gets a hit on your ship",
-      "strategy_detailed": "Once hit, the attacker probes the orthogonally adjacent cells. A ship against a wall leaves only 2 of those directions; a corner leaves 1 — so rim ships are harder to finish. Combined with edges being lower-density (a probability player shoots them later), the rim hides well.",
-      "strategy_stealth": [
-        "Hit on a wall: 2 hunt directions, not 4",
-        "Hit in a corner: only 1 direction",
-        "Rim ships are lower-density AND hard to finish"
-      ],
-      "tags": [
-        "Defense"
-      ],
-      "context": null,
-      "order": 1
+      "order": 3
     },
     {
       "phase": "Endgame",
