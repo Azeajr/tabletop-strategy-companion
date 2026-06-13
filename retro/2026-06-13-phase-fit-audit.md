@@ -37,6 +37,14 @@ A phase earns its place only if the player has **at least one real decision to m
 
 None. No other game declares a phase that fails the actionable-decision test.
 
+## Modes-lever evaluation (clue, guess-who)
+
+Re-ran the test asking specifically whether `nav_style: 'modes'` fits the two weakest arc-fit games:
+
+- **Neither switches to modes.** Battleship earned `modes` because it *oscillates* — a hit puts you in Targeting, a sink returns you to Searching, both reachable on any turn. Clue and guess-who are **monotonic**: deduction/elimination only moves forward (you never un-know a card or un-eliminate a candidate). Their phases are a real (if soft) narrowing arc — `modes` would falsely imply free non-linear switching between states you can't actually return to.
+- **Phase-fit passes for both as arcs**: guess-who Early/Mid/End = broad-split questions / specific-feature questions / guess-timing; clue Setup/Early/Mid/End = sheet setup / what to suggest / narrow + read opponents / accusation timing. Each phase carries a real decision.
+- **Verdict: both stay `arc`. No change.** The discriminator: oscillating → `modes`, monotonic → `arc`.
+
 ## Notes
 
 - This is the failure mode the original parallel fan-out **missed** for battleship — each agent audited its own game in isolation and accepted "Defense" / "Setup" at face value. Catching it needed (a) a user's sanity check and (b) a central cross-game sweep. Worth repeating the phase-fit test as a quick gate whenever a new seed is authored or a game is remodeled into `modes`.
