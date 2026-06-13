@@ -31,6 +31,9 @@ Repo shape the prompts assume:
   `lib`/`views`/`store`. `tests/e2e/` holds Playwright specs.
 - Design invariants live in `.claude/ARCHITECTURE_MAP.md` § Key Invariants and `.claude/COMMON_MISTAKES.md`;
   the full product spec is at `/home/spark343/github/tabletop-strategy-companion-spec.md`.
+- `retro/` — dated strategy/UX validation records (Pass 5): one markdown file per audited game or
+  cross-cutting theme (`retro/YYYY-MM-DD-<game-id>.md`), authored from `retro/TEMPLATE.md`. Append-only;
+  see `retro/README.md`. This is where Pass 5 writes its analysis and its model/UX recommendations.
 
 ## Quick pick
 
@@ -40,6 +43,7 @@ Repo shape the prompts assume:
 | [2. Security Mitigation](#2-security-mitigation) | Concrete, local hardening against this PWA's real threat model — not security theater. |
 | [3. High-Signal Testing](#3-high-signal-testing) | Coverage is thin or vanity; you want behavior tests that make refactoring safe. |
 | [4. Seed Authoring Loop](#4-seed-authoring-loop) | Add a new game's strategy seed, validate it against the Zod contract, exercise it through the views, document. Repeat to grow the library. |
+| [5. Strategy & UX Validation](#5-strategy--ux-validation-retro) | A game already ships — audit whether its strategy is optimal, its prose/delivery is understandable at the table, and the decomposition model fits. Writes a dated retro; ships bounded seed fixes, opens issues for model/UX changes. |
 
 Verification commands referenced by every pass (this repo):
 
@@ -216,4 +220,78 @@ GUARDRAILS
 - Never break the 20 existing seeds: any schema change must keep them all passing schema.test.ts.
 - One game per run keeps the diff reviewable and the content focused — resist adding two.
 - Author real strategy, not filler — a seed of generic advice is worse than no seed. If you don't know the game well enough to give glanceable, phase-specific guidance, pick a different <game-id>.
+```
+
+---
+
+## 5. Strategy & UX Validation (Retro)
+
+This pass AUDITS strategy content that already ships — it does not author new games (that is Pass 4). Each
+run takes ONE game (or ONE cross-cutting theme) and answers three independent questions: is the strategy
+optimal, does the delivery make it understandable at the table, and is the decomposition model the right fit
+for this game. The deliverable is a dated retro in `retro/`; bounded in-seed fixes ship in the same PR, while
+model/UX changes are written up and opened as issues. Run it repeatedly to keep the shipped library honest.
+
+```text
+Act as a board-game strategist AND a product/UX writer working on tabletop-strategy-companion, a SolidJS + SQLite-Wasm local-first PWA that surfaces glanceable board-game strategy at the physical table. Your job is to VALIDATE the strategy content of ONE game that already ships in data/seeds/ — not to author a new one (that is Pass 4). Set <game-id> to a seed that exists in data/seeds/ (20 ship today). Alternatively, set the scope to ONE cross-cutting theme across all seeds (e.g. "stealth-mode glanceability", "context-filter fit", "TLDR-selection quality") — pick the single most valuable target and go deep; do not audit two games in one run.
+
+The deliverable is a dated retro at retro/YYYY-MM-DD-<game-id>.md (or retro/YYYY-MM-DD-<scope>.md), following retro/TEMPLATE.md. Read retro/README.md first for the format and the Shipped-vs-Recommended split.
+
+THE MODEL YOU ARE VALIDATING (read the code, don't trust this summary blindly):
+- A seed decomposes a game as Phase -> Category -> Condition -> Strategy (src/db/schema.ts is the contract). `condition` (5-45 chars) is the board-matchable TRIGGER; `category` (3-24 chars) is its bucket within a phase; `phase` is one of the game's declared `phases`.
+- Every strategy carries TWO delivery registers: `strategy_detailed` (study mode, 20-300 chars of prose) and `strategy_stealth` (stealth mode, an array of <=3 lines, each <=50 chars). Same advice, two registers.
+- `tags` (<=2, from TagEnum): only TLDR has a rendered effect (it hoists to the top of its category group). The other 8 tags (Offense/Defense/Economy/Pivot/Memory/Bluff/Transition/Closing) are authored into seeds but RENDERED NOWHERE in either view today — confirm this still holds (grep the views for tag usage) before relying on it.
+- `context` (nullable) ties a strategy to a binary filter: filter_1/filter_2 each define a yes/no context (Catan: leading/trailing). context=null = universally visible; a non-null context shows ONLY when that filter side is active. Two filters max per game.
+
+HOW IT IS DELIVERED (read src/views/PreGameDashboard.tsx, src/views/LiveCompanion.tsx, src/components/ActionAccordion.tsx, src/lib/strategy.ts):
+- PreGameDashboard (/#/game/:id) — the prep surface. A "Key Strategies" TLDR list (study shows `strategy_detailed`; stealth shows ONLY `strategy_stealth[0]` — the first line carries everything), then Deep-Dive phase tabs showing every strategy for the active tab.
+- LiveCompanion (/#/game/:id/play) — the at-table surface. PhaseStepper + the binary InlineYesNoFilter + a search box + the ActionAccordion (exclusive expansion: one ConditionToggle open at a time). CRITICAL CONSTRAINT: in STEALTH the page is `h-svh overflow-hidden` — content that exceeds one screen is CLIPPED, not scrollable. A too-tall phase, or a too-long open toggle, silently loses information at the table.
+- prepareStrategies (src/lib/strategy.ts): within a phase, categories sort ALPHABETICALLY; within a category, conditions sort ALPHABETICALLY, then TLDR hoists. So any sequence the player reads top-to-bottom (1st move -> 2nd move) only survives if its conditions happen to sort that way — check whether this game's reading order is scrambled.
+- The search box filters on `condition` text ONLY — body text is not searchable. A trigger the player would search for must live in the condition.
+
+EVALUATE ALONG THREE INDEPENDENT AXES (a game can ace one and fail another — score them separately):
+
+AXIS A — STRATEGIC OPTIMALITY. Is each strategy the strongest, most current line for its condition?
+- Correctness: rules, numbers, probabilities (e.g. Catan pip counts), named bonuses. A confidently-wrong number is the worst failure — it actively misleads at the table.
+- Optimality: the established competitive line, not folk wisdom or stale meta. Where it matters, ground the claim in the known consensus and say so in the retro.
+- Fit: is the advice filed under the phase/category/condition where the player actually faces that decision? Does context advice (leading vs trailing) point the right way?
+- Coverage: is a dominant, table-defining strategy MISSING for a phase the game clearly has?
+
+AXIS B — PROSE & DELIVERY (the UX of comprehension). Optimal advice the player can't parse fast is wasted.
+- `condition`: a precise trigger the player matches to the live board in under ~2s, or vague / overlapping with a sibling condition? Is it searchable (the term they'd actually type)?
+- `strategy_detailed`: a crisp paragraph that LEADS with the action, or a wall that buries the verb? Within register? Jargon/acronyms expanded on first use? Reading level fit for a glance, not a textbook.
+- `strategy_stealth`: does each of the <=3 lines STAND ALONE and survive a half-second glance? Does the set degrade gracefully — especially the dashboard TLDR list, which shows ONLY line 0, so line 0 must carry the headline? Will the open toggle fit the stealth one-screen clip?
+- Register parity: do detailed and stealth say the SAME thing? A stealth line that omits or contradicts the detailed advice is a bug.
+- Aggregate density: in stealth, does the whole phase fit one screen, or will the accordion overflow and clip?
+
+AXIS C — MODEL FIT. Is Phase -> Category -> Condition -> Strategy (+ two registers, binary filters, the tag vocab) the right way to break THIS game down — or is the game forced into a shape that hides its real decision structure?
+- Phases: do the declared `phases` track how the game actually flows? Any phase empty, forced, or missing?
+- Categories: meaningful and roughly MECE, or arbitrary? Does alphabetical category order ever mislead?
+- Conditions: do they partition the decision space cleanly, or overlap / leave gaps? Does alphabetical condition order scatter a sequence the player reads in order?
+- Context filters: does the binary yes/no model fit the game's real branching state (leading/trailing, your-turn/not, key-resource present/absent), or is it forced — or absent where the game badly needs one? Does the game want MORE than two filters?
+- Tags: did this game want a communication channel the 8 unrendered tags would provide (e.g. an Offense/Defense glyph)? Note it for the cross-cutting backlog even though rendering them is out of scope here.
+
+CLASSIFY EVERY FINDING — this controls what you change vs. what you only recommend:
+- SHIP IN THIS PASS (all true): the fix lives ENTIRELY inside the seed's content — a wrong number, a rewritten/retightened body, an over-long or non-standalone stealth line, a mis-tagged or missing TLDR, a vague condition, a context value pointing the wrong way. It does not touch the schema, the sort rules, the filter model, or any component. It stays within every Zod bound (game_id, the 45/24/300/50-char caps, <=3 stealth lines, <=2 tags, the closed PhaseEnum/TagEnum). The Zod test + a view spot-check verify it.
+- RECOMMEND ONLY — write up in the retro and open a GitHub issue (problem / proposal / acceptance criteria; `gh issue list` first to avoid dupes): anything that changes the MODEL — a schema field or bound, the alphabetical sort, the binary context-filter shape, rendering the unused tags, a new view/component, a phase the enum lacks, or a reading-order fix that needs a code change rather than reworded conditions. These are behavior/contract changes (Pass 1 and Pass 4 scope guards apply) — do not implement them here.
+
+SCOPE GUARDS:
+- Do NOT relax or extend the Zod schema, change the phase/category/condition sort, or alter the context-filter model in this pass. Those are the model — RECOMMEND-ONLY findings, not pass work. (Schema changes belong to a deliberate migration; the 20 existing seeds must keep validating.)
+- Do NOT rewrite advice you merely disagree with stylistically — change content only where it is wrong, misleading, outdated, or fails the glanceability bar. Preserve the author's correct calls.
+- One game (or one theme) per run. Resist auditing a second — depth over breadth; the retro is only valuable if it is deep.
+- The retro is ALWAYS written, even if zero fixes ship — the analysis and the recommendations ARE the deliverable.
+
+EXECUTION WORKFLOW (run in order; do not stop until green):
+1. Read the model + delivery code listed above and the seed under audit. Run the app (`npm run dev`) or `npm run test:e2e` and walk the real flow in BOTH modes: GameLibrary -> PreGameDashboard (TLDR list + every deep-dive tab) -> LiveCompanion (step every phase, toggle every filter, open conditions). Watch for clipping in stealth and scrambled reading order. The retro must reflect the RENDERED reality, not just the JSON.
+2. Write retro/YYYY-MM-DD-<game-id>.md from retro/TEMPLATE.md: fill all three axes with concrete, located findings (phase > category > condition), score each axis, and split findings into Shipped vs Recommended.
+3. Apply the SHIP-IN-THIS-PASS fixes to data/seeds/<game-id>.json. For each RECOMMEND-ONLY finding, `gh issue create` and record the number in the retro.
+4. Verify: `npm test` (Zod re-validates the edited seed — a fix that breaks a bound fails here), `npm run build` (bundle + 15 MB cap), `npm run lint`. If a seed edit fails Zod, fix the edit to fit the bound — never relax the schema.
+5. Commit the retro + any seed fixes + issue references in one commit. Message `docs(retro): validate <game-id> strategy + UX` (or lead with `fix(<game-id>):` if the seed fixes are the headline). No Co-Authored-By trailer.
+6. Push `git push origin main`, then confirm CI green (`gh run watch ... --exit-status`) — CI re-validates all seeds, builds, and enforces the bundle cap.
+
+GUARDRAILS:
+- Never ship a strategy you cannot stand behind as correct — when unsure of the optimal line, say so in the retro and open an issue rather than guessing into the seed.
+- Never relax a Zod bound to fit a reworded body — tighten the body to fit the bound (that constraint IS the glanceability discipline).
+- Keep retros append-only — supersede an old one with a new dated file, do not rewrite history.
+- A seed fix must improve correctness or comprehension, not just churn prose — if you cannot name which axis it serves, do not make it.
 ```
