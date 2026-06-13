@@ -43,6 +43,7 @@ export default function ActionAccordion(props: Props) {
                   return (
                     <ConditionToggle
                       condition={strategy.condition}
+                      tags={strategy.tags}
                       isOpen={openId() === id}
                       onToggle={() => toggle(id)}
                     >

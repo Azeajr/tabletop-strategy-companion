@@ -2,15 +2,17 @@
   "game_id": "battleship",
   "game_name": "Battleship",
   "game_description": "Hunt and sink your opponent's fleet on a hidden grid, 2 players.",
+  "nav_style": "modes",
   "phases": [
     "Fleet Placement",
-    "Search",
-    "Hunt",
+    "Searching",
+    "Targeting",
+    "Defense",
     "Endgame"
   ],
-  "filter_1_label": "Has opponent found one of your ships?",
-  "filter_1_yes_context": "exposed",
-  "filter_1_no_context": "hidden",
+  "filter_1_label": null,
+  "filter_1_yes_context": null,
+  "filter_1_no_context": null,
   "filter_2_label": null,
   "filter_2_yes_context": null,
   "filter_2_no_context": null,
@@ -29,7 +31,8 @@
         "TLDR",
         "Defense"
       ],
-      "context": null
+      "context": null,
+      "order": 0
     },
     {
       "phase": "Fleet Placement",
@@ -44,7 +47,8 @@
       "tags": [
         "Defense"
       ],
-      "context": null
+      "context": null,
+      "order": 1
     },
     {
       "phase": "Fleet Placement",
@@ -59,11 +63,12 @@
       "tags": [
         "Defense"
       ],
-      "context": null
+      "context": null,
+      "order": 2
     },
     {
-      "phase": "Search",
-      "category": "Targeting",
+      "phase": "Searching",
+      "category": "Search Pattern",
       "condition": "Opening moves with no hits yet",
       "strategy_detailed": "Use a checkerboard (parity) pattern — shoot only squares of one color on a mental chessboard overlay. The smallest ship is 2 squares, so every ship must occupy at least one 'white' square. Parity halves the search space without losing information.",
       "strategy_stealth": [
@@ -75,11 +80,46 @@
         "TLDR",
         "Economy"
       ],
-      "context": null
+      "context": null,
+      "order": 0
     },
     {
-      "phase": "Search",
-      "category": "Targeting",
+      "phase": "Searching",
+      "category": "Probability Map",
+      "condition": "Multiple ships unsunk, no active hunt",
+      "strategy_detailed": "Probability Density Function (PDF) map: for each unshot cell, count valid placements of remaining ships through it. Shoot highest-count cell, recompute after every shot. Hunt mode: misses and sunk ships are blockers — no placement can overlap them. Beats parity long-term.",
+      "strategy_stealth": [
+        "Count valid placements per cell",
+        "Misses/sunk = blockers in placement count",
+        "Shoot highest-count cell, recompute every shot"
+      ],
+      "tags": [
+        "TLDR",
+        "Economy"
+      ],
+      "context": null,
+      "order": 1
+    },
+    {
+      "phase": "Searching",
+      "category": "Search Pattern",
+      "condition": "A ship has been sunk — adjusting stride",
+      "strategy_detailed": "Stride = length of smallest surviving ship. While Destroyer (2) is alive: 2-stride (checkerboard). Destroyer sunk: 3-stride — (row+col)%3==0. Both 3-length ships sunk: 4-stride. Only Carrier left: 5-stride, 20 cells cover the board. Upgrade stride every time the minimum ship length increases.",
+      "strategy_stealth": [
+        "Stride = min surviving ship length",
+        "Destroyer sunk → 3-stride",
+        "Carrier only → 5-stride, 20 cells total"
+      ],
+      "tags": [
+        "Economy",
+        "Offense"
+      ],
+      "context": null,
+      "order": 2
+    },
+    {
+      "phase": "Searching",
+      "category": "Reading the Opponent",
       "condition": "Opponent opening moves reveal a pattern",
       "strategy_detailed": "If an opponent sweeps edges or corners in their first 5 moves, they're using a common heuristic. Adapt: if you have ships near edges, move mentally to whether they'll finish the edge sweep or pivot inward after finding nothing.",
       "strategy_stealth": [
@@ -90,40 +130,11 @@
       "tags": [
         "Memory"
       ],
-      "context": null
+      "context": null,
+      "order": 3
     },
     {
-      "phase": "Search",
-      "category": "Defense",
-      "condition": "Opponent gets a hit on your ship",
-      "strategy_detailed": "Once hit, the attacker probes the orthogonally adjacent cells. A ship against a wall leaves only 2 of those directions; a corner leaves 1 — so rim ships are harder to finish. Combined with edges being lower-density (a probability player shoots them later), the rim hides well.",
-      "strategy_stealth": [
-        "Hit on a wall: 2 hunt directions, not 4",
-        "Hit in a corner: only 1 direction",
-        "Rim ships are lower-density AND hard to finish"
-      ],
-      "tags": [
-        "Defense"
-      ],
-      "context": "exposed"
-    },
-    {
-      "phase": "Search",
-      "category": "Defense",
-      "condition": "All ships still undiscovered",
-      "strategy_detailed": "Undiscovered ships let you play offensively without psychological pressure. Continue parity shooting without bias — don't cluster shots near your own ships' locations out of anxiety. Your placement is already set; trust it.",
-      "strategy_stealth": [
-        "Stay on parity pattern",
-        "Don't bias shots near own ships",
-        "Trust placement — play offense"
-      ],
-      "tags": [
-        "Defense"
-      ],
-      "context": "hidden"
-    },
-    {
-      "phase": "Hunt",
+      "phase": "Targeting",
       "category": "Hunt Mode",
       "condition": "Hit confirmed, ship not yet sunk",
       "strategy_detailed": "After a hit, shoot orthogonally adjacent squares next turn. Once you confirm orientation (second hit), extend along that axis. Only deviate from the axis when you've missed both ends — then the ship occupies the middle segment.",
@@ -136,27 +147,12 @@
         "TLDR",
         "Offense"
       ],
-      "context": null
+      "context": null,
+      "order": 0
     },
     {
-      "phase": "Hunt",
-      "category": "Probability",
-      "condition": "Multiple ships unsunk, no active hunt",
-      "strategy_detailed": "Probability Density Function (PDF) map: for each unshot cell, count valid placements of remaining ships through it. Shoot highest-count cell, recompute after every shot. Hunt mode: misses and sunk ships are blockers — no placement can overlap them. Beats parity long-term.",
-      "strategy_stealth": [
-        "Count valid placements per cell",
-        "Misses/sunk = blockers in placement count",
-        "Shoot highest-count cell, recompute every shot"
-      ],
-      "tags": [
-        "TLDR",
-        "Economy"
-      ],
-      "context": null
-    },
-    {
-      "phase": "Hunt",
-      "category": "Probability",
+      "phase": "Targeting",
+      "category": "Probability Map",
       "condition": "Active hit, refining the probability map",
       "strategy_detailed": "PDF = count valid ship placements through each cell; shoot highest. On a hit, rules shift: hit squares become passable (ships can overlap them) and placements covering hits score heavily. Skip directions where no ship fits to the hit.",
       "strategy_stealth": [
@@ -168,26 +164,11 @@
         "TLDR",
         "Offense"
       ],
-      "context": null
+      "context": null,
+      "order": 1
     },
     {
-      "phase": "Hunt",
-      "category": "Targeting",
-      "condition": "A ship has been sunk — adjusting hunt stride",
-      "strategy_detailed": "Stride = length of smallest surviving ship. While Destroyer (2) is alive: 2-stride (checkerboard). Destroyer sunk: 3-stride — (row+col)%3==0. Both 3-length ships sunk: 4-stride. Only Carrier left: 5-stride, 20 cells cover the board. Upgrade stride every time the minimum ship length increases.",
-      "strategy_stealth": [
-        "Stride = min surviving ship length",
-        "Destroyer sunk → 3-stride",
-        "Carrier only → 5-stride, 20 cells total"
-      ],
-      "tags": [
-        "Economy",
-        "Offense"
-      ],
-      "context": null
-    },
-    {
-      "phase": "Hunt",
+      "phase": "Targeting",
       "category": "Sink Priority",
       "condition": "Two ships partially located",
       "strategy_detailed": "Finish sinking a found ship before switching to the other. Leaving two active hunts splits your attention and wastes shots testing wrong orientations. One complete sink narrows the remaining fleet and updates your probability map more cleanly.",
@@ -199,10 +180,11 @@
       "tags": [
         "Economy"
       ],
-      "context": null
+      "context": null,
+      "order": 2
     },
     {
-      "phase": "Hunt",
+      "phase": "Targeting",
       "category": "Sink Priority",
       "condition": "Opponent announces a ship is sunk",
       "strategy_detailed": "When SUNK is called, count hit pegs in cluster vs announced ship length. Match = resolved, return to hunt. More pegs than ship length = adjacent ship hiding there. Target extra peg's orthogonal directions. Ships can legally touch — this is an intentional deception tactic.",
@@ -215,7 +197,40 @@
         "Memory",
         "Offense"
       ],
-      "context": null
+      "context": null,
+      "order": 3
+    },
+    {
+      "phase": "Defense",
+      "category": "Your Fleet",
+      "condition": "All your ships still undiscovered",
+      "strategy_detailed": "Undiscovered ships let you play offensively without psychological pressure. Continue parity shooting without bias — don't cluster shots near your own ships' locations out of anxiety. Your placement is already set; trust it.",
+      "strategy_stealth": [
+        "Stay on parity pattern",
+        "Don't bias shots near own ships",
+        "Trust placement — play offense"
+      ],
+      "tags": [
+        "Defense"
+      ],
+      "context": null,
+      "order": 0
+    },
+    {
+      "phase": "Defense",
+      "category": "Your Fleet",
+      "condition": "Opponent gets a hit on your ship",
+      "strategy_detailed": "Once hit, the attacker probes the orthogonally adjacent cells. A ship against a wall leaves only 2 of those directions; a corner leaves 1 — so rim ships are harder to finish. Combined with edges being lower-density (a probability player shoots them later), the rim hides well.",
+      "strategy_stealth": [
+        "Hit on a wall: 2 hunt directions, not 4",
+        "Hit in a corner: only 1 direction",
+        "Rim ships are lower-density AND hard to finish"
+      ],
+      "tags": [
+        "Defense"
+      ],
+      "context": null,
+      "order": 1
     },
     {
       "phase": "Endgame",
@@ -231,7 +246,8 @@
         "Memory",
         "Closing"
       ],
-      "context": null
+      "context": null,
+      "order": 0
     },
     {
       "phase": "Endgame",
@@ -247,7 +263,8 @@
         "Closing",
         "Memory"
       ],
-      "context": null
+      "context": null,
+      "order": 1
     }
   ]
 }

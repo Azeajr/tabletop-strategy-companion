@@ -12,6 +12,9 @@ export interface Game {
   game_name: string
   game_description: string
   phases: string[]
+  // 'arc' (default) renders phases as a linear stepper; 'modes' renders them as
+  // non-linear, free-select mode tabs (loop games). Optional: absent = 'arc'.
+  nav_style?: 'arc' | 'modes'
   filter_1_label: string | null
   filter_1_yes_context: string | null
   filter_1_no_context: string | null
@@ -30,4 +33,7 @@ export interface Strategy {
   strategy_stealth: string[]
   tags: Tag[]
   context: string | null
+  // Explicit reading order within a phase (lower first; ties → condition
+  // alphabetical). Optional: absent = 0 = unordered.
+  order?: number
 }

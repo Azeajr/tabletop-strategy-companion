@@ -126,9 +126,11 @@ Coverage threshold: 80% on `src/lib/**`, `src/views/**`, `src/store/**`.
 - Every interactive element: min `44px × 44px` tap target
 - Phase sort: Setup(0) → Early Game(1) → Mid-Game(2) → End-Game(3) — never alphabetical
 - TLDR-tagged strategies always hoisted to top of their category group
-- Category order alphabetical within a phase
-- Condition order alphabetical within a category (after TLDR hoist)
-- Total app footprint must stay under 15 MB (currently ~1.4 MB precache)
+- Condition order: by explicit `order` (lower first), then condition alphabetical as the tiebreak; TLDR hoisted above both
+- Category order: by the smallest `order` among its members, then alphabetical. Every legacy seed omits `order` (defaults 0), so the rule collapses to the historical "category + condition alphabetical" — only seeds that set `order` reorder
+- Game `nav_style`: `arc` (default) ⇒ phases are a linear progression, rendered as a stepper (aria-current="step"); `modes` ⇒ phases are non-linear states the player freely switches between (a loop game — e.g. battleship's Searching ↔ Targeting), rendered as free-select pill tabs. Both styles read the same `phases` array; only PhaseStepper's presentation differs
+- Non-TLDR tags render as inline badges on each condition (`TagBadges`); TLDR is conveyed by hoist + the dashboard Key Strategies list, never a badge
+- Total app footprint must stay under 15 MB (currently ~1.6 MB precache)
 
 ---
 

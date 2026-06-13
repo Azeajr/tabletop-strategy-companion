@@ -172,6 +172,7 @@ export default function LiveCompanion() {
                 phases={g().phases}
                 currentPhase={currentPhase()}
                 onPhaseChange={setCurrentPhase}
+                navStyle={g().nav_style}
               />
 
               <Show when={filters().length > 0}>

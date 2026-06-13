@@ -117,4 +117,40 @@ describe('prepareStrategies', () => {
     const conditions = prepareStrategies(strats).get('X')!.map((s) => s.condition)
     expect(conditions).toEqual(['A hoisted', 'C hoisted', 'B plain', 'D plain'])
   })
+
+  it('explicit order overrides condition alphabetical within a category', () => {
+    const strats = [
+      makeStrategy({ category: 'X', condition: 'A second', order: 1, tags: [] }),
+      makeStrategy({ category: 'X', condition: 'B first', order: 0, tags: [] }),
+    ]
+    const conditions = prepareStrategies(strats).get('X')!.map((s) => s.condition)
+    // Alphabetical would put 'A second' first; order 0 wins.
+    expect(conditions).toEqual(['B first', 'A second'])
+  })
+
+  it('orders categories by their smallest member order, not alphabetically', () => {
+    const strats = [
+      makeStrategy({ category: 'Zebra', condition: 'Z cond', order: 0 }),
+      makeStrategy({ category: 'Apple', condition: 'A cond', order: 5 }),
+    ]
+    // Alphabetical would put 'Apple' first; Zebra holds order 0 so it leads.
+    expect([...prepareStrategies(strats).keys()]).toEqual(['Zebra', 'Apple'])
+  })
+
+  it('TLDR still hoists above a lower-order non-TLDR within a category', () => {
+    const strats = [
+      makeStrategy({ category: 'X', condition: 'Plain early', order: 0, tags: [] }),
+      makeStrategy({ category: 'X', condition: 'Key late', order: 9, tags: ['TLDR'] }),
+    ]
+    const items = prepareStrategies(strats).get('X')!
+    expect(items[0].tags).toContain('TLDR')
+  })
+
+  it('absent order defaults to 0 — legacy seeds stay alphabetical', () => {
+    const strats = [
+      makeStrategy({ category: 'Zebra', condition: 'Z cond' }),
+      makeStrategy({ category: 'Apple', condition: 'A cond' }),
+    ]
+    expect([...prepareStrategies(strats).keys()]).toEqual(['Apple', 'Zebra'])
+  })
 })

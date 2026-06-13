@@ -1,10 +1,13 @@
 import type { JSX } from 'solid-js'
+import type { Tag } from '../types/domain'
+import TagBadges from './TagBadges'
 
 interface Props {
   condition: string
   isOpen: boolean
   onToggle: () => void
   children: JSX.Element
+  tags?: Tag[]
 }
 
 export default function ConditionToggle(props: Props) {
@@ -30,7 +33,10 @@ export default function ConditionToggle(props: Props) {
         class="w-full text-left min-h-[44px] py-3 px-4 text-[var(--text)] flex justify-between items-start gap-3"
         aria-expanded={props.isOpen}
       >
-        <span class="flex-1 text-sm leading-snug">{props.condition}</span>
+        <span class="flex-1 text-sm leading-snug">
+          {props.condition}
+          <TagBadges tags={props.tags ?? []} />
+        </span>
         <span
           class={`mt-0.5 shrink-0 text-[var(--muted)] text-xs transition-transform duration-150 ${
             props.isOpen ? 'rotate-180' : ''

@@ -42,14 +42,29 @@ export function hoistTLDR(strategies: Strategy[]): Strategy[] {
   return [...tldr, ...rest]
 }
 
-// Group and sort already-filtered strategies: by category (alphabetical) →
-// within each group: sort alphabetically by condition → hoist TLDR.
+// Explicit reading order; absent (every legacy seed) = 0 = unordered.
+const orderOf = (s: Strategy): number => s.order ?? 0
+
+// Group and sort already-filtered strategies. Within a category: sort by explicit
+// `order`, then condition alphabetical as the tiebreak, then hoist TLDR. Category
+// order: by the smallest `order` among a category's members, then alphabetical.
+// With every order at its 0 default this collapses to the historical "category
+// alphabetical, condition alphabetical" behavior — legacy seeds are unaffected.
 // Callers are responsible for context filtering before calling this.
 export function prepareStrategies(strategies: Strategy[]): Map<string, Strategy[]> {
-  const byCond = [...strategies].sort((a, b) => a.condition.localeCompare(b.condition))
-  const grouped = groupByCategory(byCond)
+  const sorted = [...strategies].sort(
+    (a, b) => orderOf(a) - orderOf(b) || a.condition.localeCompare(b.condition),
+  )
+  const grouped = groupByCategory(sorted)
+  const catMinOrder = new Map<string, number>()
+  for (const [cat, items] of grouped) {
+    catMinOrder.set(cat, Math.min(...items.map(orderOf)))
+  }
   const result = new Map<string, Strategy[]>()
-  for (const key of [...grouped.keys()].sort((a, b) => a.localeCompare(b))) {
+  const keys = [...grouped.keys()].sort(
+    (a, b) => catMinOrder.get(a)! - catMinOrder.get(b)! || a.localeCompare(b),
+  )
+  for (const key of keys) {
     result.set(key, hoistTLDR(grouped.get(key)!))
   }
   return result

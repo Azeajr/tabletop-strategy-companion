@@ -38,6 +38,7 @@ export async function runSeedInit(database: TabletopDBType): Promise<void> {
         game_name: seed.game_name,
         game_description: seed.game_description,
         phases: seed.phases,
+        nav_style: seed.nav_style,
         filter_1_label: seed.filter_1_label,
         filter_1_yes_context: seed.filter_1_yes_context,
         filter_1_no_context: seed.filter_1_no_context,
@@ -57,6 +58,7 @@ export async function runSeedInit(database: TabletopDBType): Promise<void> {
           strategy_stealth: s.strategy_stealth,
           tags: s.tags,
           context: s.context,
+          order: s.order,
         })),
       )
     }

@@ -5,10 +5,16 @@ interface Props {
   phases: string[]
   currentPhase: string
   onPhaseChange: (phase: string) => void
+  // 'arc' (default): phases are a linear progression — rendered as a stepper
+  // (bottom-border tabs, aria-current="step"). 'modes': phases are non-linear
+  // states the player freely switches between (a loop game) — rendered as
+  // free-select pills with no progression affordance.
+  navStyle?: 'arc' | 'modes'
 }
 
 export default function PhaseStepper(props: Props) {
   const mode = useAppMode()
+  const isModes = () => props.navStyle === 'modes'
   let touchStartX = 0
 
   const handleTouchStart = (e: TouchEvent) => {
@@ -25,27 +31,38 @@ export default function PhaseStepper(props: Props) {
 
   return (
     <nav
-      class={`flex w-full bg-[var(--bg)] ${
+      class={`flex w-full bg-[var(--bg)] ${isModes() ? 'gap-1 px-2 py-2' : ''} ${
         mode() === 'stealth' ? 'sticky top-[56px] z-40' : ''
       }`}
-      aria-label="Game phases"
+      aria-label={isModes() ? 'Game modes' : 'Game phases'}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       <For each={props.phases}>
-        {(phase) => (
-          <button
-            onClick={() => props.onPhaseChange(phase)}
-            class={`flex-1 min-h-[44px] text-xs font-medium border-b-2 transition-colors leading-tight px-1 ${
-              props.currentPhase === phase
-                ? 'text-[var(--accent)] border-[var(--accent)]'
-                : 'text-[var(--muted)] border-transparent'
-            }`}
-            aria-current={props.currentPhase === phase ? 'step' : undefined}
-          >
-            {phase}
-          </button>
-        )}
+        {(phase) => {
+          const active = () => props.currentPhase === phase
+          return (
+            <button
+              onClick={() => props.onPhaseChange(phase)}
+              class={
+                isModes()
+                  ? `flex-1 min-h-[44px] rounded-full px-2 text-xs font-medium leading-tight transition-colors ${
+                      active()
+                        ? 'bg-[var(--accent)] text-white'
+                        : 'bg-[var(--surface)] text-[var(--muted)]'
+                    }`
+                  : `flex-1 min-h-[44px] text-xs font-medium border-b-2 transition-colors leading-tight px-1 ${
+                      active()
+                        ? 'text-[var(--accent)] border-[var(--accent)]'
+                        : 'text-[var(--muted)] border-transparent'
+                    }`
+              }
+              aria-current={active() ? (isModes() ? 'true' : 'step') : undefined}
+            >
+              {phase}
+            </button>
+          )
+        }}
       </For>
     </nav>
   )

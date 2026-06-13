@@ -6,6 +6,7 @@ import { prepareStrategies } from '../lib/strategy'
 import { useAppMode } from '../store/appState'
 import StickyTopBar from '../components/StickyTopBar'
 import ModeToggle from '../components/ModeToggle'
+import TagBadges from '../components/TagBadges'
 
 export default function PreGameDashboard() {
   const params = useParams()
@@ -169,6 +170,7 @@ export default function PreGameDashboard() {
                           </div>
                           <div class="font-medium text-[var(--text)]">
                             {s.condition}
+                            <TagBadges tags={s.tags} />
                           </div>
                           <Show
                             when={mode() === 'study'}

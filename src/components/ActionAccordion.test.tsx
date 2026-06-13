@@ -87,6 +87,15 @@ describe('ActionAccordion', () => {
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false')
   })
 
+  it('renders non-TLDR tags as badges and never the TLDR tag', () => {
+    const strategies = [
+      makeStrategy({ condition: 'Tagged condition row here', tags: ['Offense', 'TLDR'] }),
+    ]
+    render(() => <ActionAccordion strategies={strategies} />)
+    expect(screen.getByText('Offense')).toBeInTheDocument()
+    expect(screen.queryByText('TLDR')).not.toBeInTheDocument()
+  })
+
   it('only one condition open at a time', async () => {
     const strategies = [
       makeStrategy({ condition: 'First condition here ok' }),
