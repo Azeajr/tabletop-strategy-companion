@@ -69,8 +69,8 @@
       "strategy_detailed": "In early game, pay $50 to leave jail immediately — you want to keep landing on and buying properties. Later in the game, stay in jail as long as possible; collecting rent from safety is better than traversing a developed board.",
       "strategy_stealth": [
         "Early: pay to leave jail fast",
-        "Late: stay in jail — collect safe",
-        "Pivot strategy at jail mid-game"
+        "Late: stay in jail, collect rent safely",
+        "Pivot point: switch mid-game"
       ],
       "tags": [
         "Pivot"
@@ -84,7 +84,7 @@
       "strategy_detailed": "Mortgage low-yield properties (utilities, brown set — Mediterranean/Baltic) to fund houses on premium groups. Unmortgaging later costs 110% (10% interest), so plan to rebuild cash first. Freed cash → 3 houses on orange/red, where rent scales 5-7× per house added.",
       "strategy_stealth": [
         "Mortgage utilities + brown set",
-        "Unmortgage costs 10% interest",
+        "Redeem later: costs 10% interest",
         "Fund 3 houses on orange/red"
       ],
       "tags": [
@@ -100,7 +100,7 @@
       "strategy_stealth": [
         "3 houses = best ROI/dollar",
         "4 houses = max house starvation",
-        "Hotels free up houses — stay at 4 houses"
+        "Never convert to hotel; stay at 4 houses"
       ],
       "tags": [
         "TLDR",

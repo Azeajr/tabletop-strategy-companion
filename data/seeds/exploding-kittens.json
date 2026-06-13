@@ -50,7 +50,7 @@
       "phase": "Early Game",
       "category": "Nope Timing",
       "condition": "Opponent plays a powerful card",
-      "strategy_detailed": "Nope's highest value: cancel an Attack onto you (prevents 2-turn stack) or a Shuffle that erases your Peek info. In multi-player, Noping a Skip just delays the player one turn — usually wasted. In heads-up, Noping their Skip forces a draw and can kill them outright.",
+      "strategy_detailed": "Nope's highest value is canceling Attack (prevents 2-turn draw stack) or Shuffle (erases Peek info). In multi-player, avoid wasting it on Skips — let them pass. In heads-up, Noping a Skip forces them to draw; count played Defuses to assess kill odds.",
       "strategy_stealth": [
         "Best vs Attack and Shuffle",
         "Multi-player: don't Nope a Skip",

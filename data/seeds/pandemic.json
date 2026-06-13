@@ -106,7 +106,7 @@
       "tags": [
         "Defense"
       ],
-      "context": "stable"
+      "context": null
     },
     {
       "phase": "Early Game",
@@ -214,7 +214,7 @@
       "tags": [
         "Closing"
       ],
-      "context": "stable"
+      "context": null
     },
     {
       "phase": "End-Game",

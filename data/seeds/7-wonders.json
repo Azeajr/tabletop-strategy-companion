@@ -18,7 +18,7 @@
     {
       "phase": "Setup",
       "category": "Wonder Selection",
-      "condition": "Choosing which side of wonder board",
+      "condition": "Selecting wonder side A or B",
       "strategy_detailed": "Competitive top-tier wonders: Babylon B (play the normally-discarded 7th card each age), Halikarnassos B (build from discards twice — stages 1 and 3), Olympia A (free build per age, stage 2), Rhodes A (military + cheap stages). Side B isn't universally better; Olympia and Rhodes both favor Side A.",
       "strategy_stealth": [
         "S-tier: Babylon B, Halikarnassos B",
@@ -29,12 +29,13 @@
         "TLDR",
         "Economy"
       ],
-      "context": null
+      "context": null,
+      "order": 0
     },
     {
       "phase": "Setup",
       "category": "Resource Planning",
-      "condition": "Evaluating starting resource access",
+      "condition": "Starting resources: gray vs brown",
       "strategy_detailed": "Manufactured goods (gray: glass, papyrus, textile) are scarcer than raw (brown) and gate the most valuable Age II/III cards. Audit your wonder's resources, then plan to draft the gray you lack in Age I. Self-sufficient bases eliminate coin tax on neighbors and immunize you from price gouging.",
       "strategy_stealth": [
         "Gray scarcer than brown — prioritize",
@@ -44,7 +45,8 @@
       "tags": [
         "Economy"
       ],
-      "context": null
+      "context": null,
+      "order": 1
     },
     {
       "phase": "Age I",

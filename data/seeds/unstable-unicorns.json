@@ -70,7 +70,7 @@
       "strategy_stealth": [
         "Target the leader, not the weakest",
         "Pile-on keeps game balanced",
-        "Weak eliminated = more threats hit leader"
+        "Weak players alive = leader targeted more"
       ],
       "tags": [
         "Defense"
@@ -111,11 +111,11 @@
       "phase": "Mid-Game",
       "category": "Downgrade Usage",
       "condition": "Targeting opponent with downgrade",
-      "strategy_detailed": "Downgrades that prevent drawing cards (Pandamonium) or block playing cards (Slowdown) are stronger than downgrades that just remove unicorns. Removal can be Neigh'd; a Slowdown that lasts 3 turns effectively removes 3 of their actions.",
+      "strategy_detailed": "Downgrades that prevent drawing cards (Pandamonium) or block playing cards (Slowdown) are stronger than downgrades that just remove unicorns. Removal can be Neigh'd; a 1-turn Slowdown blocks a full turn of plays without a Neigh escape.",
       "strategy_stealth": [
         "Draw/play blockers > removal downgrades",
         "Removal gets Neigh'd; Slowdown doesn't",
-        "3-turn Slowdown = -3 actions"
+        "Slowdown locks one full turn of plays"
       ],
       "tags": [
         "Offense"
