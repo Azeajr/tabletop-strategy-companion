@@ -162,7 +162,7 @@
       "strategy_stealth": [
         "You can't block a correct accusation",
         "Accuse first if you have reasonable guess",
-        "Wrong accusation = you're out but game continues"
+        "Wrong accusation = out; others play on"
       ],
       "tags": [
         "Closing"

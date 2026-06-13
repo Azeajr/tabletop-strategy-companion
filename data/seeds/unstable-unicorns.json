@@ -143,8 +143,8 @@
       "condition": "One unicorn away from winning",
       "strategy_detailed": "Before playing your 7th unicorn, clear defenses: play any card that discards opponent's hand or forces discards first if possible. Then play your 7th with Super Neigh in hand if available. If no protection, play fast on the turn after an opponent burned their last Neigh.",
       "strategy_stealth": [
-        "Wait until opponents exhaust Neighs, then play 7th",
-        "Play 7th after opponent's last Neigh spent",
+        "Clear defenses, then play your 7th",
+        "Play after their last Neigh is spent",
         "Super Neigh in hand = safe win attempt"
       ],
       "tags": [
@@ -161,7 +161,7 @@
       "strategy_stealth": [
         "Hold Neigh for their 7th unicorn only",
         "Don't burn it the turn before",
-        "Coordinate with table — everyone loses if they win"
+        "Get the table to block their win"
       ],
       "tags": [
         "Defense",

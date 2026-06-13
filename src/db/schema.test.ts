@@ -68,3 +68,29 @@ test('no seed contains duplicate (phase, category, condition) strategies', () =>
     }
   }
 })
+
+// Stealth mode (LiveCompanion, one-screen overflow-hidden) renders ONLY
+// strategy_stealth, and the dashboard "Key Strategies" list shows ONLY a TLDR's
+// FIRST stealth line. Zod allows an empty array, but a strategy with no stealth
+// lines renders blank in stealth and a TLDR with an empty first line shows a
+// blank headline — pin the glanceability floor the schema can't express.
+test('every strategy is glanceable in stealth mode', () => {
+  const seedDir = join(process.cwd(), 'data/seeds')
+  if (!existsSync(seedDir)) return
+
+  for (const file of readdirSync(seedDir).filter((f) => f.endsWith('.json'))) {
+    const seed = GameSeedSchema.parse(JSON.parse(readFileSync(join(seedDir, file), 'utf8')))
+    for (const s of seed.strategies) {
+      expect(
+        s.strategy_stealth.length,
+        `${file}: "${s.condition}" has no stealth lines — renders blank in stealth`,
+      ).toBeGreaterThan(0)
+      if (s.tags.includes('TLDR')) {
+        expect(
+          s.strategy_stealth[0]?.trim().length ?? 0,
+          `${file}: TLDR "${s.condition}" has an empty first stealth line — blank dashboard headline`,
+        ).toBeGreaterThan(0)
+      }
+    }
+  }
+})
