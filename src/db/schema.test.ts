@@ -94,3 +94,30 @@ test('every strategy is glanceable in stealth mode', () => {
     }
   }
 })
+
+// Stealth's default view must fit one screen — LiveCompanion is overflow-hidden
+// until the player taps "show all". ActionAccordion collapses a phase to its
+// TLDR strategies in stealth (falling back to all strategies when a phase has
+// none). Assert that collapsed view stays within a safe row budget (category
+// headers + condition rows). A dense phase must earn its place with a TLDR
+// (which collapses it) or by being small — otherwise it clips silently.
+const STEALTH_ROW_BUDGET = 8
+test('every phase fits the stealth row budget when collapsed', () => {
+  const seedDir = join(process.cwd(), 'data/seeds')
+  if (!existsSync(seedDir)) return
+
+  for (const file of readdirSync(seedDir).filter((f) => f.endsWith('.json'))) {
+    const seed = GameSeedSchema.parse(JSON.parse(readFileSync(join(seedDir, file), 'utf8')))
+    for (const phase of seed.phases) {
+      const inPhase = seed.strategies.filter((s) => s.phase === phase)
+      if (inPhase.length === 0) continue
+      const tldr = inPhase.filter((s) => s.tags.includes('TLDR'))
+      const shown = tldr.length > 0 ? tldr : inPhase
+      const rows = new Set(shown.map((s) => s.category)).size + shown.length
+      expect(
+        rows,
+        `${file}: phase "${phase}" collapses to ${rows} stealth rows (budget ${STEALTH_ROW_BUDGET}) — add a TLDR or split the phase`,
+      ).toBeLessThanOrEqual(STEALTH_ROW_BUDGET)
+    }
+  }
+})

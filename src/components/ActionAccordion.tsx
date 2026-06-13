@@ -6,13 +6,28 @@ import type { Strategy } from '../types/domain'
 
 interface Props {
   strategies: Strategy[]
+  // Stealth-only. When false (default), a phase that has TLDR strategies
+  // collapses to just those so the glance fits one screen (LiveCompanion is
+  // overflow-hidden when collapsed); the show-all toggle reveals the rest with
+  // scroll. A phase with no TLDRs falls back to showing all (it's within the
+  // stealth row budget — see schema.test). No effect in study mode.
+  showAll?: boolean
+  onToggleShowAll?: () => void
 }
 
 export default function ActionAccordion(props: Props) {
   const [openId, setOpenId] = createSignal<string | null>(null)
   const mode = useAppMode()
 
-  const groups = createMemo(() => [...prepareStrategies(props.strategies).entries()])
+  const tldrOnly = () => props.strategies.filter((s) => s.tags.includes('TLDR'))
+  const collapsed = () =>
+    mode() === 'stealth' && !props.showAll && tldrOnly().length > 0
+  const visible = () => (collapsed() ? tldrOnly() : props.strategies)
+  const hiddenCount = () => props.strategies.length - tldrOnly().length
+  const canToggle = () =>
+    mode() === 'stealth' && tldrOnly().length > 0 && hiddenCount() > 0
+
+  const groups = createMemo(() => [...prepareStrategies(visible()).entries()])
 
   const toggle = (id: string) =>
     setOpenId((prev) => (prev === id ? null : id))
@@ -71,6 +86,15 @@ export default function ActionAccordion(props: Props) {
             </section>
           )}
         </For>
+      </Show>
+
+      <Show when={canToggle()}>
+        <button
+          onClick={() => props.onToggleShowAll?.()}
+          class="w-full min-h-[44px] py-2 text-xs font-semibold text-[var(--accent)]"
+        >
+          {props.showAll ? 'Show key only' : `Show all (${hiddenCount()} more)`}
+        </button>
       </Show>
     </div>
   )

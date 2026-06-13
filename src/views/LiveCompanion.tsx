@@ -37,6 +37,9 @@ export default function LiveCompanion() {
   const [filter1, setFilter1] = createSignal<'yes' | 'no' | null>(null)
   const [filter2, setFilter2] = createSignal<'yes' | 'no' | null>(null)
   const [searchQuery, setSearchQuery] = createSignal('')
+  // Stealth: collapse a phase to its TLDR strategies so the glance fits one
+  // screen; this reveals the full set (with scroll). Reset on phase change.
+  const [showAll, setShowAll] = createSignal(false)
 
   let wakeLock: WakeLockSentinel | null = null
 
@@ -77,6 +80,12 @@ export default function LiveCompanion() {
   createEffect(() => {
     const g = game()
     if (g && !currentPhase()) setCurrentPhase(g.phases[0] ?? '')
+  })
+
+  // Collapse back to the TLDR glance whenever the player switches phase.
+  createEffect(() => {
+    currentPhase()
+    setShowAll(false)
   })
 
   const [allStrategies] = createResource(
@@ -190,11 +199,19 @@ export default function LiveCompanion() {
               </div>
 
               <main
-                class={`flex-1 ${
-                  mode() === 'stealth' ? 'overflow-hidden' : 'overflow-y-auto'
-                } pb-4`}
+                class={`flex-1 min-h-0 pb-4 ${
+                  mode() === 'stealth'
+                    ? showAll()
+                      ? 'overflow-y-auto'
+                      : 'overflow-hidden'
+                    : 'overflow-y-auto'
+                }`}
               >
-                <ActionAccordion strategies={phaseStrategies()} />
+                <ActionAccordion
+                  strategies={phaseStrategies()}
+                  showAll={showAll()}
+                  onToggleShowAll={() => setShowAll((v) => !v)}
+                />
               </main>
             </>
           )}

@@ -130,6 +130,8 @@ Coverage threshold: 80% on `src/lib/**`, `src/views/**`, `src/store/**`.
 - Category order: by the smallest `order` among its members, then alphabetical. Every legacy seed omits `order` (defaults 0), so the rule collapses to the historical "category + condition alphabetical" — only seeds that set `order` reorder
 - Game `nav_style`: `arc` (default) ⇒ phases are a linear progression, rendered as a stepper (aria-current="step"); `modes` ⇒ phases are non-linear states the player freely switches between (a loop game — e.g. battleship's Searching ↔ Targeting), rendered as free-select pill tabs. Both styles read the same `phases` array; only PhaseStepper's presentation differs
 - Non-TLDR tags render as inline badges on each condition (`TagBadges`); TLDR is conveyed by hoist + the dashboard Key Strategies list, never a badge
+- Stealth collapses each phase to its TLDR strategies by default (`ActionAccordion`); a "show all (N)" toggle reveals the rest and switches `LiveCompanion`'s `<main>` to scroll (collapsed stays `overflow-hidden`). `showAll` lives in `LiveCompanion` and resets on phase change. A phase with no TLDRs shows all. Study mode is unaffected (always shows all)
+- Stealth row budget: a phase's collapsed view (category headers + condition rows) must be ≤ 8 — enforced by `schema.test`. A dense phase earns its place via a TLDR (which collapses it) or by being small/split
 - Total app footprint must stay under 15 MB (currently ~1.6 MB precache)
 
 ---

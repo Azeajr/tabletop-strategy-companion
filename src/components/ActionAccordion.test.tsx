@@ -1,8 +1,15 @@
 import { render, screen, fireEvent } from '@solidjs/testing-library'
 import { createSignal } from 'solid-js'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import ActionAccordion from './ActionAccordion'
+import { useAppMode, toggleAppMode } from '../store/appState'
 import type { Strategy } from '../types/domain'
+
+// appMode is a module singleton — any test that flips to stealth must leave it
+// back on study so the study-default tests above/below stay correct.
+afterEach(() => {
+  if (useAppMode()() === 'stealth') toggleAppMode()
+})
 
 const makeStrategy = (overrides: Partial<Strategy> = {}): Strategy => ({
   id: 1,
@@ -85,6 +92,33 @@ describe('ActionAccordion', () => {
       makeStrategy({ phase: 'Mid-Game', category: 'Alpha', condition: 'Shared condition text' }),
     ])
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('stealth collapses a phase to its TLDR strategies by default', () => {
+    toggleAppMode() // study → stealth
+    const strategies = [
+      makeStrategy({ category: 'Alpha', condition: 'Key move right now', tags: ['TLDR'] }),
+      makeStrategy({ category: 'Beta', condition: 'Minor detail here ok', tags: [] }),
+    ]
+    render(() => (
+      <ActionAccordion strategies={strategies} showAll={false} onToggleShowAll={() => {}} />
+    ))
+    expect(screen.getByText('Key move right now')).toBeInTheDocument()
+    expect(screen.queryByText('Minor detail here ok')).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /show all \(1 more\)/i })).toBeInTheDocument()
+  })
+
+  it('stealth show-all reveals the non-TLDR strategies', () => {
+    toggleAppMode() // study → stealth
+    const strategies = [
+      makeStrategy({ category: 'Alpha', condition: 'Key move right now', tags: ['TLDR'] }),
+      makeStrategy({ category: 'Beta', condition: 'Minor detail here ok', tags: [] }),
+    ]
+    render(() => (
+      <ActionAccordion strategies={strategies} showAll={true} onToggleShowAll={() => {}} />
+    ))
+    expect(screen.getByText('Minor detail here ok')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /show key only/i })).toBeInTheDocument()
   })
 
   it('renders non-TLDR tags as badges and never the TLDR tag', () => {
