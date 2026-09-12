@@ -32,3 +32,6 @@ test-results
 *.njsproj
 *.sln
 *.sw?
+
+# Hermes agent worktrees — worker checkouts, never committed
+.worktrees/
