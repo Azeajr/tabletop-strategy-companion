@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 25
+          cache: npm
+
+      # ci, not install: a dependabot PR that ships a lockfile out of step with
+      # package.json should fail here rather than resolve to something else.
+      - run: npm ci
+
+      - run: npm run lint
+      # build && test — the same pair deploy.yml runs, before it can reach prod.
+      - run: npm run check
