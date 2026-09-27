@@ -10,7 +10,14 @@
 
 **Tech Stack**: SolidJS, TypeScript, Vite, Tailwind CSS 4, `@sqlite.org/sqlite-wasm` (Worker + OPFS), Zod, `vite-plugin-pwa` (workbox), `@solidjs/router`
 
-**Deployment**: Cloudflare Pages — https://tabletop-companion.pages.dev
+**Deployment**: Cloudflare Pages — https://tabletop-companion.pages.dev — from the `deploy` job in
+`.github/workflows/ci.yml`, which ships the exact `dist/` that `checks` built and `smoke` proved.
+`verdict` is the one required status check.
+
+**Agent harness**: `harness.config.mjs` + [web-harness](https://github.com/Azeajr/web-harness).
+`npm run harness -- start` gives an owned dev server and an iPhone 13 Mini WebKit session in Docker;
+`run FILE` batches a journey, `state` reads `src/dev/harness.ts` (dev-only, read-only). E2E uses the
+same fault policy (`tests/e2e/fixtures.ts`): a console error fails a passing test.
 
 **Full product spec**: `/home/spark343/github/tabletop-strategy-companion-spec.md`
 
@@ -21,7 +28,10 @@
 ```bash
 npm run dev          # dev server (Vite, port 5173)
 npm test             # unit tests (Vitest)
+npm run test:e2e     # Playwright, production build
+npm run smoke        # production smoke (needs dist/)
 npm run check        # build + test
+npm run check:ci     # lint + coverage + build (CI's checks job)
 npm run build        # tsc + vite build
 npm run lint         # ESLint
 ```

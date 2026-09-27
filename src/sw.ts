@@ -1,5 +1,5 @@
-import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching'
-import { registerRoute } from 'workbox-routing'
+import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching'
+import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 
@@ -7,6 +7,13 @@ declare const self: ServiceWorkerGlobalScope
 
 precacheAndRoute(self.__WB_MANIFEST)
 cleanupOutdatedCaches()
+
+// Every navigation gets the precached app shell, so opening or reloading the
+// app with no network still works — the seeds are bundled and the database is
+// in OPFS, so the shell is the only thing a cold offline start was missing.
+// Without this a reload offline was a browser error page (found by the
+// production smoke). Needs index.html in the precache: see vite.config.ts.
+registerRoute(new NavigationRoute(createHandlerBoundToURL('index.html')))
 
 // Session lock — must be persisted, not held in memory:
 // 1. SESSION_ACTIVE/ENDED arrive at the *active* SW, but workbox-window sends

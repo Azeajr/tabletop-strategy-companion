@@ -1,5 +1,10 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from './fixtures'
 import { SEED_READY } from './helpers'
+import catan from '../../data/seeds/catan.json' with { type: 'json' }
+
+const FIRST_TLDR_STEALTH = catan.strategies.find(
+  (strategy) => strategy.phase === 'Setup' && strategy.tags.includes('TLDR'),
+)!.strategy_stealth[0]
 
 test.describe('Pre-Game Dashboard', () => {
   test.beforeEach(async ({ page }) => {
@@ -46,9 +51,11 @@ test.describe('Pre-Game Dashboard', () => {
   test('stealth mode shows bullet points in TLDR list', async ({ page }) => {
     await page.getByRole('button', { name: /stealth/i }).click()
     await expect(page.locator('body')).toHaveAttribute('data-mode', 'stealth')
-    // strategy_stealth[0] for first TLDR strategy
+    // strategy_stealth[0] of the first TLDR strategy, read from the seed itself:
+    // a hardcoded copy went stale when the Catan meta was rewritten (73f3369)
+    // and nothing noticed, because this suite was not in CI.
     const keyStrategies = page.getByText('Key Strategies').locator('..')
-    await expect(keyStrategies.getByText('Target Ore/Wheat/Sheep on 6s and 8s')).toBeVisible()
+    await expect(keyStrategies.getByText(FIRST_TLDR_STEALTH, { exact: true })).toBeVisible()
   })
 
   test('Start Game button navigates to live companion', async ({ page }) => {

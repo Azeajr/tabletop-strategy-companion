@@ -1,9 +1,10 @@
 import { defineConfig, devices } from '@playwright/test'
+import { productionServer } from '@azeajr/web-harness/playwright'
 
 export default defineConfig({
   testDir: './tests/e2e',
-  // Sequential: each test gets its own BrowserContext with isolated SQLite (in-memory
-  // fallback) and localStorage — no cross-test state to worry about.
+  // Sequential: each test gets its own BrowserContext with isolated SQLite and
+  // localStorage — no cross-test state to worry about.
   fullyParallel: false,
   workers: 1,
   forbidOnly: !!process.env.CI,
@@ -13,7 +14,9 @@ export default defineConfig({
     ['list'],
   ],
   use: {
-    baseURL: 'http://localhost:5173',
+    // 127.0.0.1, not localhost: the server binds IPv4 only, and the fault
+    // policy judges "external" against exactly this origin.
+    baseURL: 'http://127.0.0.1:5176',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -31,10 +34,9 @@ export default defineConfig({
       use: { ...devices['Pixel 5'] },
     },
   ],
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-    timeout: 30_000,
-  },
+  // The production build served the way Cloudflare Pages serves it (public/
+  // _headers as real headers, SPA fallback), never `npm run dev`: the dev
+  // server registers no service worker and sends none of the production
+  // headers. Never reuses a listening server, so a stale build is never tested.
+  webServer: productionServer({ port: 5176, build: 'npm run build' }),
 })

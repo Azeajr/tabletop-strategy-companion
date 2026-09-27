@@ -1,33 +1,177 @@
 name: CI
 
+# One workflow proves a change and ships it (web-harness CI shape):
+#
+#   scope → checks (lint, coverage, build → dist artifact) → e2e ∥ smoke → verdict
+#                                                          └→ deploy (main only: checks + smoke)
+#
+# No paths filter on the triggers: `verdict` is the required status check and
+# must always report, even for a README-only change. `scope` decides inside the
+# workflow what a change needs; anything not on the prose skip-list is code.
+#
+# Deploy ships the exact bytes `checks` built and `smoke` proved (digest-checked),
+# never a second build. It waits for the smoke, not for E2E: a flaky browser
+# test must not block shipping, and E2E is already required to merge.
 on:
   pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  scope:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      code: ${{ steps.scope.outputs.code }}
+      deploy: ${{ steps.scope.outputs.deploy }}
+    steps:
+      - id: scope
+        uses: Azeajr/web-harness/.github/actions/scope@v0.1.2
+        with:
+          # Only prose that no test reads belongs here.
+          skip: '^(README\.md|ROADMAP\.md|CLAUDE\.md|ENGINEERING_PASSES\.md|retro/[^/]+\.md|\.claude/.+\.md|\.agents/.+\.md)$'
+          deploy-include: '^(src/|public/|data/seeds/|index\.html$|package\.json$|package-lock\.json$|vite\.config\.|tsconfig)'
+          deploy-exclude: '\.test\.|^src/test-setup\.ts$'
+
   checks:
+    needs: scope
+    if: needs.scope.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      digest: ${{ steps.digest.outputs.digest }}
+    steps:
+      # `npm ci`: a lockfile out of step with package.json fails here rather
+      # than resolving to something else.
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.1.2
+        with:
+          node-version: 25
+      # Supply-chain gate before anything runs installed code.
+      - run: npm audit signatures
+      # lint + coverage (its thresholds are enforced here and nowhere else) + tsc + build
+      - run: npm run check:ci
+      # Every critical journey maps to a test that exists, or says why not.
+      - run: npx web-harness scenarios
+      - name: Bundle size (15 MB cap)
+        run: |
+          node -e "
+            const {readdirSync, statSync} = require('fs');
+            const walk = d => readdirSync(d, {withFileTypes:true})
+              .flatMap(f => f.isDirectory() ? walk(d+'/'+f.name) : [d+'/'+f.name]);
+            const bytes = walk('dist').reduce((s,f) => s + statSync(f).size, 0);
+            console.log('Bundle size:', (bytes / 1_000_000).toFixed(2) + ' MB');
+            if (bytes > 15_000_000) { console.error('Exceeds 15 MB cap'); process.exit(1); }
+          "
+      - id: digest
+        run: echo "digest=$(npx web-harness digest dist)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist-${{ github.sha }}
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+
+  e2e:
+    needs: [scope, checks]
+    if: needs.scope.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.1.2
+        with:
+          node-version: 25
+          browsers: chromium
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist-${{ github.sha }}
+          path: dist
+      - run: npx web-harness digest dist --expect "$DIGEST"
+        env:
+          DIGEST: ${{ needs.checks.outputs.digest }}
+      # The suite serves the artifact instead of rebuilding it.
+      - run: npx playwright test --reporter=list,json
+        env:
+          WEB_HARNESS_PREBUILT: '1'
+          PLAYWRIGHT_JSON_OUTPUT_NAME: e2e-results.json
+      - run: npx web-harness scenarios --results e2e-results.json
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  smoke:
+    needs: [scope, checks]
+    if: needs.scope.outputs.code == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-
-      - uses: actions/setup-node@v7
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.1.2
         with:
           node-version: 25
-          cache: npm
+          browsers: chromium
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist-${{ github.sha }}
+          path: dist
+      - run: npx web-harness digest dist --expect "$DIGEST"
+        env:
+          DIGEST: ${{ needs.checks.outputs.digest }}
+      - run: npm run smoke
+      - if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: smoke-report
+          path: .web-harness/smoke/
+          include-hidden-files: true
+          retention-days: 7
 
-      # ci, not install: a dependabot PR that ships a lockfile out of step with
-      # package.json should fail here rather than resolve to something else.
-      - run: npm ci
+  # THE required status check.
+  verdict:
+    needs: [scope, checks, e2e, smoke]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: Azeajr/web-harness/.github/actions/verdict@v0.1.2
+        with:
+          needs: ${{ toJSON(needs) }}
+          code: ${{ needs.scope.outputs.code }}
+          required: checks e2e smoke
 
-      - run: npm run lint
-      # build && test — the same pair deploy.yml runs, before it can reach prod.
-      - run: npm run check
+  deploy:
+    needs: [scope, checks, smoke]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.scope.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    steps:
+      # Installs the lockfile-pinned, signature-audited wrangler; nothing is rebuilt.
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.1.2
+        with:
+          node-version: 25
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist-${{ github.sha }}
+          path: dist
+      - run: npx web-harness digest dist --expect "$DIGEST"
+        env:
+          DIGEST: ${{ needs.checks.outputs.digest }}
+      - name: Deploy to Cloudflare Pages
+        run: npx --no-install wrangler pages deploy dist --project-name tabletop-companion
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 5141f0dec18e8fb0aa0942a9f09f982d

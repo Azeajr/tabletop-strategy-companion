@@ -35,3 +35,6 @@ test-results
 
 # Hermes agent worktrees — worker checkouts, never committed
 .worktrees/
+
+# Agent harness sessions and smoke reports
+.web-harness/

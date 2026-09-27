@@ -5,11 +5,15 @@
 ```bash
 npm run dev              # Vite dev server (hot reload, port 5173)
 npm run build            # tsc + vite build
-npm run preview          # preview production build (port 5175)
+npm run preview          # serve dist/ like Pages does (public/_headers applied, port 5176)
 npm run lint             # ESLint
-npm test                 # Vitest unit tests (10 tests)
-npm run test:coverage    # Vitest with v8 coverage report (80% threshold)
+npm test                 # Vitest unit tests
+npm run test:coverage    # Vitest with v8 coverage (ratchet thresholds in vite.config.ts)
+npm run test:e2e         # Playwright against the production build
+npm run smoke            # production smoke: headers, SW, persistence, offline (needs dist/)
 npm run check            # build + test (pre-push gate)
+npm run check:ci         # lint + coverage + build — what CI's `checks` job runs
+npm run harness -- start # agent session: owned server + iPhone 13 Mini WebKit (see harness.config.mjs)
 ```
 
 ## Routes (hash-based)
