@@ -48,8 +48,12 @@
 
 ### 7. Polling CI after a docs-only push
 
-**Symptom**: `gh run watch` hangs or no run ever appears after committing only Markdown / `.claude/` files — waiting on a deploy that never starts.
-**Fix**: `.github/workflows/deploy.yml` has a `paths` filter — it triggers only on `src/**` (excluding `src/**/*.test.*`), `public/**`, `data/seeds/**`, `index.html`, `package.json`, `package-lock.json`, `vite.config.*`, `tsconfig*`. A commit touching only root docs (`CLAUDE.md`, `ROADMAP.md`, `ENGINEERING_PASSES.md`), `retro/**`, or `.claude/**` does NOT run CI — don't poll for it. Seed edits (`data/seeds/**`) DO trigger it.
+**Symptom**: Waiting on a full suite or a deploy after committing only Markdown.
+**Fix**: `.github/workflows/ci.yml` ALWAYS runs and always reports `verdict` (the required check), but its
+`scope` job skips the suites for prose on its skip-list (root docs, `retro/**`, `.claude/**`, `.agents/**`
+Markdown) — the run finishes in seconds and nothing deploys. `deploy` runs only on `main` when deployable
+paths changed (`src/**` except tests, `public/**`, `data/seeds/**`, `index.html`, `package*.json`,
+`vite.config.*`, `tsconfig*`). Seed edits DO run everything and deploy.
 
 ---
 

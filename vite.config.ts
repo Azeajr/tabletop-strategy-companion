@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config'
 import solid from 'vite-plugin-solid'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import { webHarness } from '@azeajr/web-harness/vite'
 
 export default defineConfig({
   test: {
@@ -16,32 +17,45 @@ export default defineConfig({
     coverage: {
       provider: 'v8' as const,
       reporter: ['text', 'html', 'lcov'],
-      include: ['src/lib/**/*.ts', 'src/views/**/*.tsx', 'src/store/**/*.ts', 'src/db/**/*.ts'],
-      exclude: ['**/*.test.*'],
-      thresholds: { statements: 80, branches: 80, functions: 80, lines: 80 },
+      // Everything under src/, with named exclusions — not four hand-picked
+      // directories, which left components and the service worker unmeasured.
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        '**/*.test.*',
+        'src/test-setup.ts',
+        'src/vite-env.d.ts',
+        'src/types/**',
+        // The vitest alias swaps this in for the worker client; it is the harness, not the app.
+        'src/db/sqlite-test-client.ts',
+        // Run only in a real browser (Worker / ServiceWorker globals); proven by E2E and the smoke.
+        'src/db/sqlite.worker.ts',
+        'src/db/sqlite-client.ts',
+        'src/sw.ts',
+        'src/index.tsx',
+      ],
+      // A ratchet at the measured floor (2026-09-27), now enforced in CI. The
+      // old 80% gate measured a narrower scope and was failing unseen — at
+      // 67.5/57.7/71.6/69.8 — because coverage never ran in any workflow.
+      // Raise these as tests land; never lower them.
+      thresholds: { statements: 80, branches: 69, functions: 79, lines: 83 },
     },
   },
   optimizeDeps: {
     exclude: ['@sqlite.org/sqlite-wasm'],
   },
-  preview: {
-    port: 5175,
-    headers: {
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'",
-      'X-Content-Type-Options': 'nosniff',
-      'Referrer-Policy': 'no-referrer',
-    },
-  },
   plugins: [
     tailwindcss(),
     solid(),
+    // Dev-server identity for the agent harness; serve-only, never in a build.
+    webHarness(),
     VitePWA({
       registerType: 'prompt',
       strategies: 'injectManifest',
       srcDir: 'src',
       filename: 'sw.ts',
       injectManifest: {
-        globPatterns: ['**/*.{js,css,ico,png,svg,wasm}'],
+        // html: the navigation route in src/sw.ts serves the precached shell.
+        globPatterns: ['**/*.{html,js,css,ico,png,svg,wasm}'],
       },
       manifest: {
         name: 'Tabletop Strategy Companion',

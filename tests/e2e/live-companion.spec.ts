@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from './fixtures'
 import { SEED_READY } from './helpers'
 
 // Catan has filter_1_label "Do you have the most victory points?"

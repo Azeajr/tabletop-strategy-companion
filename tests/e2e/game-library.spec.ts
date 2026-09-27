@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from './fixtures'
 import { SEED_READY } from './helpers'
 
 test.describe('Game Library', () => {
