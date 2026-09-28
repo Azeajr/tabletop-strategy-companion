@@ -18,6 +18,8 @@
 `npm run harness -- start` gives an owned dev server and an iPhone 13 Mini WebKit session in Docker;
 `run FILE` batches a journey, `state` reads `src/dev/harness.ts` (dev-only, read-only). E2E uses the
 same fault policy (`tests/e2e/fixtures.ts`): a console error fails a passing test.
+The `web-harness` skill (`.agents/skills/web-harness`, linked from `.claude/skills`) is the shared
+how-to; after bumping web-harness, reinstall it with `npm run harness -- skill install --dir .agents/skills`.
 
 **Full product spec**: `/home/spark343/github/tabletop-strategy-companion-spec.md`
 
@@ -68,4 +70,4 @@ To **validate a game's strategy + UX**: run ENGINEERING_PASSES.md ยง5 (Pass 5) โ
 
 ---
 
-**Last Updated**: 2026-06-13
+**Last Updated**: 2026-09-28
