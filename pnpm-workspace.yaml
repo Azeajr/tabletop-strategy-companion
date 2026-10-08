@@ -1,0 +1,6 @@
+# wrangler's native helpers: `pages deploy` needs neither build script (the
+# esbuild binary ships in its platform package; workerd is only for `dev`).
+# Same setting as chorequest and training-log.
+allowBuilds:
+  esbuild: false
+  workerd: false

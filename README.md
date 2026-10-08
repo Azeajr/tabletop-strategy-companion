@@ -36,12 +36,12 @@ Local-first, mobile-first PWA for glanceable board game strategy at the physical
 ## Quick Start
 
 ```bash
-npm install
-npm run dev       # http://localhost:5173
-npm test          # unit + seed validation tests
-npm run test:e2e  # Playwright against the production build
-npm run smoke     # production smoke: headers, service worker, offline
-npm run build     # production build
+pnpm install
+pnpm dev          # http://localhost:5173
+pnpm test         # unit + seed validation tests
+pnpm test:e2e     # Playwright against the production build
+pnpm smoke        # production smoke: headers, service worker, offline
+pnpm build        # production build
 ```
 
 ---
@@ -75,7 +75,7 @@ Drop a JSON file into `data/seeds/`:
 }
 ```
 
-Run `npm test` to validate, then open a PR. CI must report `verdict` green to merge; on `main`, the `deploy` job ships the validated build.
+Run `pnpm test` to validate, then open a PR. CI must report `verdict` green to merge; on `main`, the `deploy` job ships the validated build.
 
 Full schema spec: `tabletop-strategy-companion-spec.md`.
 

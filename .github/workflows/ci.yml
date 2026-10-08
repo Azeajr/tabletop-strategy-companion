@@ -34,11 +34,11 @@ jobs:
       deploy: ${{ steps.scope.outputs.deploy }}
     steps:
       - id: scope
-        uses: Azeajr/web-harness/.github/actions/scope@v0.2.3
+        uses: Azeajr/web-harness/.github/actions/scope@v0.2.4
         with:
           # Only prose that no test reads belongs here.
           skip: '^(README\.md|ROADMAP\.md|CLAUDE\.md|ENGINEERING_PASSES\.md|retro/[^/]+\.md|\.claude/.+\.md|\.agents/.+\.md)$'
-          deploy-include: '^(src/|public/|data/seeds/|index\.html$|package\.json$|package-lock\.json$|vite\.config\.|tsconfig)'
+          deploy-include: '^(src/|public/|data/seeds/|index\.html$|package\.json$|pnpm-lock\.yaml$|vite\.config\.|tsconfig)'
           deploy-exclude: '\.test\.|^src/test-setup\.ts$'
 
   checks:
@@ -49,17 +49,18 @@ jobs:
     outputs:
       digest: ${{ steps.digest.outputs.digest }}
     steps:
-      # `npm ci`: a lockfile out of step with package.json fails here rather
-      # than resolving to something else.
-      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.3
+      # A frozen-lockfile install: a lockfile out of step with package.json
+      # fails here rather than resolving to something else. pnpm comes from
+      # package.json's packageManager pin.
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.4
         with:
           node-version: 25
       # Supply-chain gate before anything runs installed code.
-      - run: npm audit signatures
+      - run: pnpm audit signatures
       # lint + coverage (its thresholds are enforced here and nowhere else) + tsc + build
-      - run: npm run check:ci
+      - run: pnpm check:ci
       # Every critical journey maps to a test that exists, or says why not.
-      - run: npx web-harness scenarios
+      - run: pnpm exec web-harness scenarios
       - name: Bundle size (15 MB cap)
         run: |
           node -e "
@@ -71,7 +72,7 @@ jobs:
             if (bytes > 15_000_000) { console.error('Exceeds 15 MB cap'); process.exit(1); }
           "
       - id: digest
-        run: echo "digest=$(npx web-harness digest dist)" >> "$GITHUB_OUTPUT"
+        run: echo "digest=$(pnpm exec web-harness digest dist)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v7
         with:
           name: dist-${{ github.sha }}
@@ -85,7 +86,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.3
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.4
         with:
           node-version: 25
           browsers: chromium
@@ -93,15 +94,15 @@ jobs:
         with:
           name: dist-${{ github.sha }}
           path: dist
-      - run: npx web-harness digest dist --expect "$DIGEST"
+      - run: pnpm exec web-harness digest dist --expect "$DIGEST"
         env:
           DIGEST: ${{ needs.checks.outputs.digest }}
       # The suite serves the artifact instead of rebuilding it.
-      - run: npx playwright test --reporter=list,json
+      - run: pnpm exec playwright test --reporter=list,json
         env:
           WEB_HARNESS_PREBUILT: '1'
           PLAYWRIGHT_JSON_OUTPUT_NAME: e2e-results.json
-      - run: npx web-harness scenarios --results e2e-results.json
+      - run: pnpm exec web-harness scenarios --results e2e-results.json
       - if: failure()
         uses: actions/upload-artifact@v7
         with:
@@ -117,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.3
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.4
         with:
           node-version: 25
           browsers: chromium
@@ -125,10 +126,10 @@ jobs:
         with:
           name: dist-${{ github.sha }}
           path: dist
-      - run: npx web-harness digest dist --expect "$DIGEST"
+      - run: pnpm exec web-harness digest dist --expect "$DIGEST"
         env:
           DIGEST: ${{ needs.checks.outputs.digest }}
-      - run: npm run smoke
+      - run: pnpm smoke
       - if: always()
         uses: actions/upload-artifact@v7
         with:
@@ -144,7 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: Azeajr/web-harness/.github/actions/verdict@v0.2.3
+      - uses: Azeajr/web-harness/.github/actions/verdict@v0.2.4
         with:
           needs: ${{ toJSON(needs) }}
           code: ${{ needs.scope.outputs.code }}
@@ -160,18 +161,18 @@ jobs:
       cancel-in-progress: false
     steps:
       # Installs the lockfile-pinned, signature-audited wrangler; nothing is rebuilt.
-      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.3
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.4
         with:
           node-version: 25
       - uses: actions/download-artifact@v8
         with:
           name: dist-${{ github.sha }}
           path: dist
-      - run: npx web-harness digest dist --expect "$DIGEST"
+      - run: pnpm exec web-harness digest dist --expect "$DIGEST"
         env:
           DIGEST: ${{ needs.checks.outputs.digest }}
       - name: Deploy to Cloudflare Pages
-        run: npx --no-install wrangler pages deploy dist --project-name tabletop-companion
+        run: pnpm exec wrangler pages deploy dist --project-name tabletop-companion
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

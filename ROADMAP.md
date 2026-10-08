@@ -72,7 +72,7 @@ No e2e tests exist. Golden path to cover:
 Training-log runs Stryker on `src/lib/**`. Add it here for `lib/strategy.ts` — logic is pure and easy to mutate-test.
 
 ```bash
-npm install --save-dev @stryker-mutator/core @stryker-mutator/vitest-runner @stryker-mutator/typescript-checker
+pnpm add -D @stryker-mutator/core @stryker-mutator/vitest-runner @stryker-mutator/typescript-checker
 ```
 
 ---
