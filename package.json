@@ -31,7 +31,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@azeajr/web-harness": "github:Azeajr/web-harness#v0.2.4",
+    "@azeajr/web-harness": "github:Azeajr/web-harness#v0.2.2",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.63.0",
     "@solidjs/testing-library": "^0.8.10",
