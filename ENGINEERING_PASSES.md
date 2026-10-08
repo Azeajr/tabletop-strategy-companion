@@ -2,7 +2,7 @@
 
 Reusable autonomous-execution prompts, **adapted to this repo** (`tabletop-strategy-companion`: a SolidJS +
 TypeScript + SQLite-Wasm local-first, mobile-first PWA that surfaces glanceable board-game strategy at the
-physical table; `npm` / `vitest` / `playwright`, Zod-validated JSON seeds, deployed static to Cloudflare Pages).
+physical table; `pnpm` / `vitest` / `playwright`, Zod-validated JSON seeds, deployed static to Cloudflare Pages).
 Each is a full loop — the agent reviews, implements, verifies through the toolchain, commits, and pushes. Pick a
 pass, paste its prompt, let it run.
 
@@ -49,21 +49,21 @@ Verification commands referenced by every pass (this repo):
 
 ```bash
 # Build = typecheck + bundle (tsc -b is the compile/type gate; no separate typecheck script)
-npm run build
+pnpm build
 
 # Lint
-npm run lint
+pnpm lint
 
 # Unit + component tests + Zod seed validation (Vitest; the seed test runs in the node env, reads data/seeds/)
-npm test
-npm run test:coverage          # enforces the ≥80% gate on lib/views/store
+pnpm test
+pnpm test:coverage             # enforces the ≥80% gate on lib/views/store
 
 # E2E (Playwright — needs the dev server or a build; the real Worker+OPFS path)
-npm run test:e2e
+pnpm test:e2e
 
 # Commit + push — Conventional Commits, NO Co-Authored-By trailer (project preference); trunk-based.
 git commit -m "..." && git push origin main
-# CI (.github/workflows/deploy.yml) runs `npm test` → `npm run build` → a 15 MB bundle-size cap →
+# CI (.github/workflows/deploy.yml) runs `pnpm test` → `pnpm build` → a 15 MB bundle-size cap →
 # deploys to Cloudflare Pages on a push to main. A pass is done only when the deploy run is green:
 gh run watch "$(gh run list -L1 --json databaseId -q '.[0].databaseId')" --exit-status
 ```
@@ -85,7 +85,7 @@ Evaluate and modify against these criteria:
 5. Explicit data flow: Remove hidden side effects and tight coupling. src/lib/strategy.ts MUST stay pure (plain arrays in, grouped Map out — no DOM, no DB); the ONLY I/O boundary (SQLite Worker + OPFS, seed UPSERT) lives in src/db — keep it there. Theming is data-mode + CSS variables, never runtime JS branching on mode inside components.
 6. Structural flattening: Replace deep nesting and complex conditionals with early returns and linear paths.
 7. Output / layout discipline: Do not regress the mobile invariants — text must WRAP (text-overflow: ellipsis is BANNED, COMMON_MISTAKES #3), every interactive element keeps a ≥44×44px tap target, and the total app footprint stays under 15 MB (CI enforces this).
-8. Test before restructuring: check coverage for the path you're about to refactor (`npm run test:coverage`). If the suite doesn't reach it, first add ≤ 3 targeted tests for its current behavior so the refactor lands verified, not hopeful.
+8. Test before restructuring: check coverage for the path you're about to refactor (`pnpm test:coverage`). If the suite doesn't reach it, first add ≤ 3 targeted tests for its current behavior so the refactor lands verified, not hopeful.
 
 SCOPE GUARDS:
 - The Zod seed schema (GameSeedSchema/StrategySchema/PhaseEnum/TagEnum) is a data contract that 20 seed files conform to — changing it is a migration, not a refactor, and is out of scope here (it belongs to Pass 4 / a deliberate schema-change task). Restructure the code that USES it, never the shape itself.
@@ -95,9 +95,9 @@ SCOPE GUARDS:
 Honor the existing invariants: strategy.ts is pure; one ConditionToggle open at a time; phases sort by enum index never alphabetical; null-context strategies are universal; all text wraps; ≥44px tap targets; <15 MB footprint; the SW must reject skipWaiting while SESSION_ACTIVE.
 
 EXECUTION WORKFLOW (run in order; do not stop until green):
-1. Build/typecheck: `npm run build`.
-2. Lint: `npm run lint`.
-3. Test: `npm test` (includes the Zod seed-validation test). If anything fails, or a bug fix broke an existing assumption, fix your implementation until it passes. Pin a corrected pipeline/invariant bug with a regression test in src/lib/strategy.test.ts. For anything touching the real Worker/OPFS or routing, spot-check with `npm run test:e2e`.
+1. Build/typecheck: `pnpm build`.
+2. Lint: `pnpm lint`.
+3. Test: `pnpm test` (includes the Zod seed-validation test). If anything fails, or a bug fix broke an existing assumption, fix your implementation until it passes. Pin a corrected pipeline/invariant bug with a regression test in src/lib/strategy.test.ts. For anything touching the real Worker/OPFS or routing, spot-check with `pnpm test:e2e`.
 4. Commit with a concise message explaining WHY the bug was fixed or the structural change was made (not what). No Co-Authored-By trailer.
 5. Push `git push origin main`, then confirm CI green (`gh run watch ... --exit-status`) — CI runs the tests, the build, and the 15 MB bundle cap before deploying.
 ```
@@ -115,14 +115,14 @@ Focus your implementation on:
 3. SQL identifier hygiene: confirm the SQLiteTable query layer never interpolates a non-literal identifier into the SQL string (table/column names come from code, not from seed content or the user). If there is no `assertIdent`-style guard on the constructor/where/orderBy/column-key paths, add one (`^[A-Za-z_][A-Za-z0-9_]*$`) so a future seed-driven or dynamic call site can't inject an identifier.
 4. Service-worker / update safety: the injectManifest SW (src/sw.ts) must keep rejecting `skipWaiting` while SESSION_ACTIVE is set, keep the user-controlled `registerType: 'prompt'` update model, and evict outdated precaches on update so a stale/tampered bundle is replaced. Confirm the .wasm CacheFirst and seed StaleWhileRevalidate routes are bounded (maxEntries) so cache growth is capped.
 5. localStorage tampering: appState reads appMode from localStorage — confirm a corrupted/unexpected value falls back safely to a default mode (not an undefined data-mode attribute or a thrown error at boot).
-6. Supply chain / deploy: the deploy workflow must stay least-privilege (`permissions: contents: read`, `persist-credentials: false`) and keep `npm audit signatures` so a tampered lockfile is caught before deploy. The 15 MB bundle cap doubles as a tripwire against an unexpected dependency bloat.
+6. Supply chain / deploy: the deploy workflow must stay least-privilege (`permissions: contents: read`, `persist-credentials: false`) and keep `pnpm audit signatures` so a tampered lockfile is caught before deploy. The 15 MB bundle cap doubles as a tripwire against an unexpected dependency bloat.
 
 Do not add authentication, encryption-at-rest, or a heavy security framework — that contradicts the no-server, single-user, offline model and would be theater. Do not weaken offline-first behavior or the seed-validation contract.
 
 EXECUTION WORKFLOW (run in order; do not stop until green):
-1. Build/typecheck: `npm run build`.
-2. Lint: `npm run lint`.
-3. Test: `npm test`, and add tests for any new/tightened guard (a deliberately-malformed seed rejected by Zod, an identifier-guard rejection, a bad localStorage mode falling back). The seed-validation precedent is src/db/schema.test.ts; the query-layer precedent is src/db/sqlite-table.test.ts. Do not compromise core functionality for security theater.
+1. Build/typecheck: `pnpm build`.
+2. Lint: `pnpm lint`.
+3. Test: `pnpm test`, and add tests for any new/tightened guard (a deliberately-malformed seed rejected by Zod, an identifier-guard rejection, a bad localStorage mode falling back). The seed-validation precedent is src/db/schema.test.ts; the query-layer precedent is src/db/sqlite-table.test.ts. Do not compromise core functionality for security theater.
 4. Commit: the message must state the EXACT vulnerability mitigated and the method used. No Co-Authored-By trailer.
 5. Push `git push origin main`, then confirm CI green (`gh run watch ... --exit-status`).
 ```
@@ -150,7 +150,7 @@ Enforce these principles:
    - category keys alphabetical; condition order alphabetical within a category (after TLDR hoist).
    - single ConditionToggle open at a time — opening a second closes the first.
    - the seed loader UPSERTs only when the djb2 hash changes (skip-if-unchanged).
-   Pick targets from evidence: `npm run test:coverage` prints per-file missing lines/branches — chase uncovered BRANCHES that encode a decision (the null-context guard, the phase-index lookup, the hoist partition), not trivial passthroughs.
+   Pick targets from evidence: `pnpm test:coverage` prints per-file missing lines/branches — chase uncovered BRANCHES that encode a decision (the null-context guard, the phase-index lookup, the hoist partition), not trivial passthroughs.
 4. Clean state hygiene: guarantee isolation — reset the in-process DB between tests; reset the appMode signal / localStorage between mode-toggle tests; render with a fresh component tree per case.
 5. Defensive boundaries: empty strategy list, a category with no TLDR, a strategy whose phase isn't in PHASE_ORDER, a game with no strategies (PreGameDashboard "game not found" / empty state), a seed that fails Zod (schema.test.ts must REJECT it, not skip it). Assert a safe/empty render, never a crash.
 6. Assert meaning, not prose: pin ordering, group membership, visibility booleans, and rendered condition text — not incidental class names or copy that's allowed to be reworded.
@@ -158,9 +158,9 @@ Enforce these principles:
 Match the existing files' style (Vitest, describe/it, synthetic Strategy fixtures built in-test, @solidjs/testing-library render+events — reuse the existing fixtures instead of inventing new ones; never seed tests from anything but synthetic data).
 
 EXECUTION WORKFLOW (run in order; do not stop until green):
-1. Build/typecheck: `npm run build`.
-2. Lint: `npm run lint`.
-3. Test: `npm test`. If new tests fail or break existing ones, debug and fix the TEST — unless you uncovered a real bug in strategy.ts / the DB layer / a view, in which case fix the source and note it in the commit. Confirm the coverage gate still holds with `npm run test:coverage`.
+1. Build/typecheck: `pnpm build`.
+2. Lint: `pnpm lint`.
+3. Test: `pnpm test`. If new tests fail or break existing ones, debug and fix the TEST — unless you uncovered a real bug in strategy.ts / the DB layer / a view, in which case fix the source and note it in the commit. Confirm the coverage gate still holds with `pnpm test:coverage`.
 4. Commit with a concise message describing the BEHAVIOR now covered. No Co-Authored-By trailer.
 5. Push `git push origin main`, then confirm CI green (`gh run watch ... --exit-status`).
 ```
@@ -191,11 +191,11 @@ PHASE 1 — AUTHOR THE SEED
 3. Author data/seeds/<game-id>.json: real, glanceable strategic advice for the game, organized by phase and category. Cover all 4 phases where the game has meaningful phase-specific play. Mark the 1–3 most important per-phase strategies with the TLDR tag (they hoist to the top). Write a stealth-mode body for each where it helps (terser, table-glanceable). If the game has a leading/trailing or similar binary state, wire a context filter and set the matching strategies' context; leave universal strategies' context null. Keep every condition string within the length cap and ensure all text is glanceable — no walls of prose (text wraps, ellipsis is banned, so long conditions just take vertical space).
 
 PHASE 2 — VALIDATE
-1. `npm test` — src/db/schema.test.ts validates the new seed against Zod automatically. If it fails, fix the seed until the schema passes. Do NOT relax the schema to fit the seed — the schema is the contract; a seed that can't conform is the seed's problem (unless Phase 4 finds a genuine schema gap).
-2. `npm run build` — confirm the bundle still builds and stays under the 15 MB cap.
+1. `pnpm test` — src/db/schema.test.ts validates the new seed against Zod automatically. If it fails, fix the seed until the schema passes. Do NOT relax the schema to fit the seed — the schema is the contract; a seed that can't conform is the seed's problem (unless Phase 4 finds a genuine schema gap).
+2. `pnpm build` — confirm the bundle still builds and stays under the 15 MB cap.
 
 PHASE 3 — EXERCISE IT
-Run the app (`npm run dev`, or `npm run test:e2e` against the new game) and walk the real flow for <game-id>:
+Run the app (`pnpm dev`, or `pnpm test:e2e` against the new game) and walk the real flow for <game-id>:
 - GameLibrary: the new game appears and is findable via search.
 - PreGameDashboard: TLDR strategies surface; the deep-dive tabs render; stealth bodies appear in stealth mode.
 - LiveCompanion: phase stepper walks Setup → Early → Mid → End in order (never alphabetical); category groups are alphabetical; TLDR hoisted; the context filter (if any) shows/hides the right strategies; only one ConditionToggle opens at a time.
@@ -209,9 +209,9 @@ OPEN ISSUE ONLY (any true): a schema change that would require migrating existin
 
 PHASE 5 — VERIFY AND SHIP
 Run in order; do not proceed past a failure:
-1. `npm run build` (typecheck + bundle + implicit 15 MB headroom).
-2. `npm run lint`.
-3. `npm test` — the Zod seed-validation test must pass with the new seed included.
+1. `pnpm build` (typecheck + bundle + implicit 15 MB headroom).
+2. `pnpm lint`.
+3. `pnpm test` — the Zod seed-validation test must pass with the new seed included.
 4. Commit: a single commit adding the seed (+ any bounded Phase-4 fix), message of the form `feat: add <game-id> strategy seed` (or leading with the fix if one landed). No Co-Authored-By trailer.
 5. Push `git push origin main`, then confirm CI green (`gh run watch ... --exit-status`) — CI re-validates all seeds, builds, and enforces the bundle cap before deploy. On next app load the djb2 hash mismatch UPSERTs the new game.
 
@@ -282,10 +282,10 @@ SCOPE GUARDS:
 - The retro is ALWAYS written, even if zero fixes ship — the analysis and the recommendations ARE the deliverable.
 
 EXECUTION WORKFLOW (run in order; do not stop until green):
-1. Read the model + delivery code listed above and the seed under audit. Run the app (`npm run dev`) or `npm run test:e2e` and walk the real flow in BOTH modes: GameLibrary -> PreGameDashboard (TLDR list + every deep-dive tab) -> LiveCompanion (step every phase, toggle every filter, open conditions, exercise the stealth TLDR-collapse + "show all"). Check each phase's collapsed view fits, `order` gives the right reading sequence, and tags read correctly. The retro must reflect the RENDERED reality, not just the JSON.
+1. Read the model + delivery code listed above and the seed under audit. Run the app (`pnpm dev`) or `pnpm test:e2e` and walk the real flow in BOTH modes: GameLibrary -> PreGameDashboard (TLDR list + every deep-dive tab) -> LiveCompanion (step every phase, toggle every filter, open conditions, exercise the stealth TLDR-collapse + "show all"). Check each phase's collapsed view fits, `order` gives the right reading sequence, and tags read correctly. The retro must reflect the RENDERED reality, not just the JSON.
 2. Write retro/YYYY-MM-DD-<game-id>.md from retro/TEMPLATE.md: fill all three axes with concrete, located findings (phase > category > condition), score each axis, and split findings into Shipped vs Recommended.
 3. Apply the SHIP-IN-THIS-PASS fixes to data/seeds/<game-id>.json. For each RECOMMEND-ONLY finding, `gh issue create` and record the number in the retro.
-4. Verify: `npm test` (Zod re-validates the edited seed — a fix that breaks a bound fails here), `npm run build` (bundle + 15 MB cap), `npm run lint`. If a seed edit fails Zod, fix the edit to fit the bound — never relax the schema.
+4. Verify: `pnpm test` (Zod re-validates the edited seed — a fix that breaks a bound fails here), `pnpm build` (bundle + 15 MB cap), `pnpm lint`. If a seed edit fails Zod, fix the edit to fit the bound — never relax the schema.
 5. Commit the retro + any seed fixes + issue references in one commit. Message `docs(retro): validate <game-id> strategy + UX` (or lead with `fix(<game-id>):` if the seed fixes are the headline). No Co-Authored-By trailer.
 6. Push `git push origin main`, then confirm CI green (`gh run watch ... --exit-status`) — CI re-validates all seeds, builds, and enforces the bundle cap.
 

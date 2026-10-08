@@ -15,11 +15,11 @@
 `verdict` is the one required status check.
 
 **Agent harness**: `harness.config.mjs` + [web-harness](https://github.com/Azeajr/web-harness).
-`npm run harness -- start` gives an owned dev server and an iPhone 13 Mini WebKit session in Docker;
+`pnpm harness start` gives an owned dev server and an iPhone 13 Mini WebKit session in Docker;
 `run FILE` batches a journey, `state` reads `src/dev/harness.ts` (dev-only, read-only). E2E uses the
 same fault policy (`tests/e2e/fixtures.ts`): a console error fails a passing test.
 The `web-harness` skill (`.agents/skills/web-harness`, linked from `.claude/skills`) is the shared
-how-to; after bumping web-harness, reinstall it with `npm run harness -- skill install --dir .agents/skills`.
+how-to; after bumping web-harness, reinstall it with `pnpm harness skill install --dir .agents/skills`.
 
 **Full product spec**: `/home/spark343/github/tabletop-strategy-companion-spec.md`
 
@@ -28,14 +28,14 @@ how-to; after bumping web-harness, reinstall it with `npm run harness -- skill i
 ## Quick Start Commands
 
 ```bash
-npm run dev          # dev server (Vite, port 5173)
-npm test             # unit tests (Vitest)
-npm run test:e2e     # Playwright, production build
-npm run smoke        # production smoke (needs dist/)
-npm run check        # build + test
-npm run check:ci     # lint + coverage + build (CI's checks job)
-npm run build        # tsc + vite build
-npm run lint         # ESLint
+pnpm dev             # dev server (Vite, port 5173)
+pnpm test            # unit tests (Vitest)
+pnpm test:e2e        # Playwright, production build
+pnpm smoke           # production smoke (needs dist/)
+pnpm check           # build + test
+pnpm check:ci        # lint + coverage + build (CI's checks job)
+pnpm build           # tsc + vite build
+pnpm lint            # ESLint
 ```
 
 **See**: `.claude/QUICK_START.md` for full reference
@@ -64,7 +64,7 @@ App is fully implemented and deployed.
 - Non-TLDR tags render as badges; optional per-strategy `order` sort key; stealth collapses each phase to TLDR-only with a "show all" toggle and a ≤8 collapsed-row budget (enforced in `schema.test`)
 - Unit suite green (101 tests: lib + components + db + views + seed/glanceability/budget guards), build clean
 
-To **add a new game**: drop `data/seeds/<game-id>.json`, run `npm test`, commit. Full loop: ENGINEERING_PASSES.md §4.
+To **add a new game**: drop `data/seeds/<game-id>.json`, run `pnpm test`, commit. Full loop: ENGINEERING_PASSES.md §4.
 
 To **validate a game's strategy + UX**: run ENGINEERING_PASSES.md §5 (Pass 5) — audits three axes (strategic optimality, prose/delivery, model fit), writes a dated retro to `retro/`, ships bounded seed fixes, opens issues for model-level changes.
 

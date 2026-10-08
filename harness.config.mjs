@@ -18,11 +18,11 @@ export default defineHarness({
   port: 5186,
   defaults: { browser: 'webkit', device: 'iPhone 13 Mini' },
   dev: {
-    command: (port) => ['npx', '--no-install', 'vite', '--host', '127.0.0.1', '--port', String(port), '--strictPort'],
+    command: (port) => ['pnpm', 'exec', 'vite', '--host', '127.0.0.1', '--port', String(port), '--strictPort'],
     marker: '/src/index.tsx',
   },
   production: {
-    build: (outDir) => ['npx', '--no-install', 'vite', 'build', '--outDir', outDir, '--emptyOutDir'],
+    build: (outDir) => ['pnpm', 'exec', 'vite', 'build', '--outDir', outDir, '--emptyOutDir'],
   },
   ready,
   fixtures: {

@@ -35,8 +35,8 @@ export default defineConfig({
     },
   ],
   // The production build served the way Cloudflare Pages serves it (public/
-  // _headers as real headers, SPA fallback), never `npm run dev`: the dev
+  // _headers as real headers, SPA fallback), never `pnpm dev`: the dev
   // server registers no service worker and sends none of the production
   // headers. Never reuses a listening server, so a stale build is never tested.
-  webServer: productionServer({ port: 5176, build: 'npm run build' }),
+  webServer: productionServer({ port: 5176, build: 'pnpm build' }),
 })

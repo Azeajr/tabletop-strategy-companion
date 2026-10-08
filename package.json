@@ -11,8 +11,8 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "check": "npm run build && npm test",
-    "check:ci": "npm run lint && npm run test:coverage && npm run build",
+    "check": "pnpm build && pnpm test",
+    "check:ci": "pnpm lint && pnpm test:coverage && pnpm build",
     "harness": "web-harness",
     "smoke": "web-harness smoke",
     "test:e2e:container": "web-harness e2e"
@@ -23,10 +23,15 @@
     "@tailwindcss/vite": "^4.3.3",
     "solid-js": "^1.9.14",
     "tailwindcss": "^4.3.0",
+    "workbox-expiration": "^7.4.1",
+    "workbox-precaching": "^7.4.1",
+    "workbox-routing": "^7.4.1",
+    "workbox-strategies": "^7.4.1",
+    "workbox-window": "^7.4.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@azeajr/web-harness": "github:Azeajr/web-harness#v0.2.3",
+    "@azeajr/web-harness": "github:Azeajr/web-harness#v0.2.4",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.63.0",
     "@solidjs/testing-library": "^0.8.10",
@@ -46,5 +51,6 @@
     "vite-plugin-solid": "^2.11.14",
     "vitest": "^4.1.7",
     "wrangler": "^4.141.0"
-  }
+  },
+  "packageManager": "pnpm@12.10.1"
 }
