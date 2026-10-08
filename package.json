@@ -18,7 +18,7 @@
     "test:e2e:container": "web-harness e2e"
   },
   "dependencies": {
-    "@solidjs/router": "^0.16.1",
+    "@solidjs/router": "^1.0.0",
     "@sqlite.org/sqlite-wasm": "^3.53.0-build1",
     "@tailwindcss/vite": "^4.3.3",
     "solid-js": "^1.9.15",
@@ -38,7 +38,7 @@
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/user-event": "^14.6.7",
-    "@types/node": "^25.9.1",
+    "@types/node": "^26.6.4",
     "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^10.12.0",
     "globals": "^17.13.0",
