@@ -5,6 +5,11 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    # web-harness upgrades also move the ci.yml action refs and reinstall the agent
+    # skill, so they stay manual. Dependabot also mis-orders its git tags: it
+    # proposed v0.2.4 -> v0.2.2.
+    ignore:
+      - dependency-name: "@azeajr/web-harness"
     groups:
       pnpm-minor-and-patch:
         update-types:
@@ -15,3 +20,6 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 3
+    # The web-harness actions move with the package pin (see the npm entry).
+    ignore:
+      - dependency-name: "Azeajr/web-harness*"
