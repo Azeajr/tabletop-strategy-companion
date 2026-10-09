@@ -34,7 +34,7 @@ jobs:
       deploy: ${{ steps.scope.outputs.deploy }}
     steps:
       - id: scope
-        uses: Azeajr/web-harness/.github/actions/scope@v0.2.4
+        uses: Azeajr/web-harness/.github/actions/scope@v0.2.5
         with:
           # Only prose that no test reads belongs here.
           skip: '^(README\.md|ROADMAP\.md|CLAUDE\.md|ENGINEERING_PASSES\.md|retro/[^/]+\.md|\.claude/.+\.md|\.agents/.+\.md)$'
@@ -52,7 +52,7 @@ jobs:
       # A frozen-lockfile install: a lockfile out of step with package.json
       # fails here rather than resolving to something else. pnpm comes from
       # package.json's packageManager pin.
-      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.4
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.5
         with:
           node-version: 25
       # Supply-chain gate before anything runs installed code.
@@ -86,7 +86,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.4
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.5
         with:
           node-version: 25
           browsers: chromium
@@ -118,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.4
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.5
         with:
           node-version: 25
           browsers: chromium
@@ -145,7 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: Azeajr/web-harness/.github/actions/verdict@v0.2.4
+      - uses: Azeajr/web-harness/.github/actions/verdict@v0.2.5
         with:
           needs: ${{ toJSON(needs) }}
           code: ${{ needs.scope.outputs.code }}
@@ -161,7 +161,7 @@ jobs:
       cancel-in-progress: false
     steps:
       # Installs the lockfile-pinned, signature-audited wrangler; nothing is rebuilt.
-      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.4
+      - uses: Azeajr/web-harness/.github/actions/setup@v0.2.5
         with:
           node-version: 25
       - uses: actions/download-artifact@v8
